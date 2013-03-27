@@ -113,6 +113,9 @@
   <ItemGroup>
     <Resource Include="GitHub\270320131730.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Server\270320131840tjark.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
