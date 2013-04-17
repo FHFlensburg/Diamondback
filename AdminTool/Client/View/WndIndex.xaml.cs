@@ -11,17 +11,30 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.Windows.Controls.Ribbon;
 
 namespace AdminTool.Client.View
 {
     /// <summary>
     /// Interaktionslogik für WndIndex.xaml
     /// </summary>
-    public partial class WndIndex : Window
+    public partial class WndIndex : RibbonWindow
     {
         public WndIndex()
         {
             InitializeComponent();
         }
+
+        private void Ribbon_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string temp2 = TabItem.IsEnabledProperty.ToString();
+            if (sender.Equals('1'))
+            {
+                MessageBox.Show("Winner"); 
+            }
+        }
+
+       
+
     }
 }

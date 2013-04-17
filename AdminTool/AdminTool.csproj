@@ -34,6 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="RibbonControlsLibrary, Version=4.0.0.11019, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Controls.Ribbon" />
@@ -58,6 +59,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Client\Controller\Test.cs" />
     <Compile Include="Client\Model\Room.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +117,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Server\270320131840tjark.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="GitHub\170420132231.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

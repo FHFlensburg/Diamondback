@@ -11,7 +11,7 @@ namespace AdminTool.Client.Controller
             ///
             ///##
             WndLogin startWindow = new WndLogin();
-            startWindow.Show();
+            //startWindow.Show();
             WndIndex secondWindow = new WndIndex();
             secondWindow.Show();
         }
