@@ -27,10 +27,15 @@ namespace AdminTool.Client.View
 
         private void Ribbon_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string temp2 = TabItem.IsEnabledProperty.ToString();
-            if (sender.Equals('1'))
+
+            
+            if (mainRibbon.SelectedIndex == 1)
             {
-                MessageBox.Show("Winner"); 
+                MessageBox.Show("Winner");
+            }
+            else
+            {
+                MessageBox.Show("Looser");
             }
         }
 

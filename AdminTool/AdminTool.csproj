@@ -64,6 +64,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client\Controller\Start.cs" />
+    <Compile Include="Client\View\WndDatagridCourse.xaml.cs">
+      <DependentUpon>WndDatagridCourse.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Client\View\WndIndex.xaml.cs">
       <DependentUpon>WndIndex.xaml</DependentUpon>
     </Compile>
@@ -97,6 +100,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Client\View\WndDatagridCourse.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Client\View\WndIndex.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -120,6 +127,14 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="GitHub\170420132231.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Client\View\Images\addParticipant.ico" />
+    <Resource Include="Client\View\Images\addRoom.ico" />
+    <Resource Include="Client\View\Images\booking.ico" />
+    <Resource Include="Client\View\Images\delete.ico" />
+    <Resource Include="Client\View\Images\help.ico" />
+    <Resource Include="Client\View\Images\new.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
