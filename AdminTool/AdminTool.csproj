@@ -64,6 +64,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client\Controller\Start.cs" />
+    <Compile Include="Client\View\WndNewCourse.xaml.cs">
+      <DependentUpon>WndNewCourse.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Client\View\WndNewRoom.xaml.cs">
+      <DependentUpon>WndNewRoom.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Client\View\WndDatagridCourse.xaml.cs">
       <DependentUpon>WndDatagridCourse.xaml</DependentUpon>
     </Compile>
@@ -72,6 +78,9 @@
     </Compile>
     <Compile Include="Client\View\WndLogin.xaml.cs">
       <DependentUpon>WndLogin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Client\View\WndNewPerson.xaml.cs">
+      <DependentUpon>WndNewPerson.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -100,6 +109,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Client\View\WndNewCourse.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Client\View\WndNewRoom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Client\View\WndDatagridCourse.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -109,6 +126,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Client\View\WndLogin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Client\View\WndNewPerson.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -135,6 +156,9 @@
     <Resource Include="Client\View\Images\delete.ico" />
     <Resource Include="Client\View\Images\help.ico" />
     <Resource Include="Client\View\Images\new.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Client\View\Images\logoPlatzhalter.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

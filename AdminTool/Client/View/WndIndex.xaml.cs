@@ -28,7 +28,10 @@ namespace AdminTool.Client.View
         private void Ribbon_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-            
+            /*
+            Auszulagern nach Controller. Test zur Unterscheidung welcher Tab ausgewählt ist
+            -> funktioniert!
+             * 
             if (mainRibbon.SelectedIndex == 1)
             {
                 MessageBox.Show("Winner");
@@ -37,6 +40,7 @@ namespace AdminTool.Client.View
             {
                 MessageBox.Show("Looser");
             }
+             */
         }
 
        
