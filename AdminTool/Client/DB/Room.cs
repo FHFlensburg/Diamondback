@@ -20,7 +20,7 @@ namespace AdminTool.Client.DB
         }
     
         public int RoomNr { get; set; }
-        public decimal Capacity { get; set; }
+        public Nullable<decimal> Capacity { get; set; }
         public string Building { get; set; }
         public string Address { get; set; }
     

@@ -52,24 +52,24 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Surname" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Forename" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Surname" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Forename" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Birthdate" Type="datetime" Nullable="true" />
-    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="MobilePhone" Type="nvarchar" Nullable="false" MaxLength="12" />
-    <Property Name="Mail" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Fax" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PrivatePhone" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Gender" Type="tinyint" Nullable="false" />
-    <Property Name="Active" Type="bit" Nullable="false" />
-    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="MobilePhone" Type="nvarchar" Nullable="true" MaxLength="12" />
+    <Property Name="Mail" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Fax" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PrivatePhone" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Gender" Type="tinyint" Nullable="true" />
+    <Property Name="Active" Type="bit" Nullable="true" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="Payments">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="IsPaid" Type="bit" Nullable="false" />
+    <Property Name="IsPaid" Type="bit" Nullable="true" />
     <Property Name="Students_Id" Type="int" Nullable="false" />
     <Property Name="Courses_CourseNr" Type="int" Nullable="false" />
   </EntityType>
@@ -78,14 +78,14 @@
       <PropertyRef Name="CourseNr" />
     </Key>
     <Property Name="CourseNr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="AmountInEuro" Type="decimal" Nullable="false" Precision="6" Scale="2" />
-    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="StartDate" Type="datetime" Nullable="false" />
-    <Property Name="EndDate" Type="datetime" Nullable="false" />
-    <Property Name="MaxMember" Type="decimal" Nullable="false" Precision="3" Scale="0" />
-    <Property Name="MinMember" Type="decimal" Nullable="false" Precision="3" Scale="0" />
-    <Property Name="ValidityInMonth" Type="decimal" Nullable="false" Precision="3" Scale="0" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="AmountInEuro" Type="decimal" Nullable="true" Precision="6" Scale="2" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="StartDate" Type="datetime" Nullable="true" />
+    <Property Name="EndDate" Type="datetime" Nullable="true" />
+    <Property Name="MaxMember" Type="decimal" Nullable="true" Precision="3" Scale="0" />
+    <Property Name="MinMember" Type="decimal" Nullable="true" Precision="3" Scale="0" />
+    <Property Name="ValidityInMonth" Type="decimal" Nullable="true" Precision="3" Scale="0" />
     <Property Name="Rooms_RoomNr" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Rooms">
@@ -93,9 +93,9 @@
       <PropertyRef Name="RoomNr" />
     </Key>
     <Property Name="RoomNr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Capacity" Type="decimal" Nullable="false" Precision="3" Scale="0" />
-    <Property Name="Building" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Capacity" Type="decimal" Nullable="true" Precision="3" Scale="0" />
+    <Property Name="Building" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="Persons_Tutor">
     <Key>
@@ -107,22 +107,22 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="IBAN" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="BIC" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Depositor" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="NameOfBank" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IBAN" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="BIC" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Depositor" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="NameOfBank" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Persons_User">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="LastLogin" Type="datetime" Nullable="false" />
-    <Property Name="RetryCount" Type="decimal" Nullable="false" Precision="2" Scale="0" />
-    <Property Name="RegistrationDate" Type="datetime" Nullable="false" />
-    <Property Name="Admin" Type="bit" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="LastLogin" Type="datetime" Nullable="true" />
+    <Property Name="RetryCount" Type="decimal" Nullable="true" Precision="2" Scale="0" />
+    <Property Name="RegistrationDate" Type="datetime" Nullable="true" />
+    <Property Name="Admin" Type="bit" Nullable="true" />
     <Property Name="Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="CourseTutor">
@@ -266,42 +266,42 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Surname" Nullable="false" FixedLength="false" />
-          <Property Type="String" Name="Forename" Nullable="false" />
+          <Property Type="String" Name="Surname" Nullable="true" FixedLength="false" />
+          <Property Type="String" Name="Forename" Nullable="true" />
           <Property Type="DateTime" Name="Birthdate" Nullable="true" />
-          <Property Type="String" Name="Address" Nullable="false" />
-          <Property Type="String" Name="MobilePhone" Nullable="false" MaxLength="12" />
-          <Property Type="String" Name="Mail" Nullable="false" />
-          <Property Type="String" Name="Fax" Nullable="false" />
-          <Property Type="String" Name="PrivatePhone" Nullable="false" />
-          <Property Type="Byte" Name="Gender" Nullable="false" />
-          <Property Type="Boolean" Name="Active" Nullable="false" />
-          <Property Type="String" Name="Title" Nullable="false" />
+          <Property Type="String" Name="Address" Nullable="true" />
+          <Property Type="String" Name="MobilePhone" Nullable="true" MaxLength="12" />
+          <Property Type="String" Name="Mail" Nullable="true" />
+          <Property Type="String" Name="Fax" Nullable="true" />
+          <Property Type="String" Name="PrivatePhone" Nullable="true" />
+          <Property Type="Byte" Name="Gender" Nullable="true" />
+          <Property Type="Boolean" Name="Active" Nullable="true" />
+          <Property Type="String" Name="Title" Nullable="true" />
         </EntityType>
         <EntityType Name="Tutor" BaseType="DiamondbackModel.Person">
           <NavigationProperty Name="Course" Relationship="DiamondbackModel.CourseTutor" FromRole="Tutor" ToRole="Course" />
         </EntityType>
         <EntityType Name="Student" BaseType="DiamondbackModel.Person">
-          <Property Type="String" Name="IBAN" Nullable="false" />
-          <Property Type="String" Name="BIC" Nullable="false" />
-          <Property Type="String" Name="Depositor" Nullable="false" />
-          <Property Type="String" Name="NameOfBank" Nullable="false" />
+          <Property Type="String" Name="IBAN" Nullable="true" />
+          <Property Type="String" Name="BIC" Nullable="true" />
+          <Property Type="String" Name="Depositor" Nullable="true" />
+          <Property Type="String" Name="NameOfBank" Nullable="true" />
           <NavigationProperty Name="Payment" Relationship="DiamondbackModel.PaymentStudent" FromRole="Student" ToRole="Payment" />
         </EntityType>
         <EntityType Name="User" BaseType="DiamondbackModel.Person">
-          <Property Type="String" Name="UserName" Nullable="false" />
-          <Property Type="String" Name="Password" Nullable="false" />
-          <Property Type="DateTime" Name="LastLogin" Nullable="false" />
-          <Property Type="Decimal" Name="RetryCount" Nullable="false" Precision="2" Scale="0" />
-          <Property Type="DateTime" Name="RegistrationDate" Nullable="false" />
-          <Property Type="Boolean" Name="Admin" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="true" />
+          <Property Type="String" Name="Password" Nullable="true" />
+          <Property Type="DateTime" Name="LastLogin" Nullable="true" />
+          <Property Type="Decimal" Name="RetryCount" Nullable="true" Precision="2" Scale="0" />
+          <Property Type="DateTime" Name="RegistrationDate" Nullable="true" />
+          <Property Type="Boolean" Name="Admin" Nullable="true" />
         </EntityType>
         <EntityType Name="Payment">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Boolean" Name="IsPaid" Nullable="false" />
+          <Property Type="Boolean" Name="IsPaid" Nullable="true" />
           <NavigationProperty Name="Students" Relationship="DiamondbackModel.PaymentStudent" FromRole="Payment" ToRole="Student" />
           <NavigationProperty Name="Courses" Relationship="DiamondbackModel.PaymentCourse" FromRole="Payment" ToRole="Course" />
         </EntityType>
@@ -310,14 +310,14 @@
             <PropertyRef Name="CourseNr" />
           </Key>
           <Property Type="Int32" Name="CourseNr" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Title" Nullable="false" />
-          <Property Type="Decimal" Name="AmountInEuro" Nullable="false" Precision="6" Scale="2" />
-          <Property Type="String" Name="Description" Nullable="false" />
-          <Property Type="DateTime" Name="StartDate" Nullable="false" />
-          <Property Type="DateTime" Name="EndDate" Nullable="false" />
-          <Property Type="Decimal" Name="MaxMember" Nullable="false" Precision="3" Scale="0" />
-          <Property Type="Decimal" Name="MinMember" Nullable="false" Precision="3" Scale="0" />
-          <Property Type="Decimal" Name="ValidityInMonth" Nullable="false" Precision="3" Scale="0" />
+          <Property Type="String" Name="Title" Nullable="true" />
+          <Property Type="Decimal" Name="AmountInEuro" Nullable="true" Precision="6" Scale="2" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="DateTime" Name="StartDate" Nullable="true" />
+          <Property Type="DateTime" Name="EndDate" Nullable="true" />
+          <Property Type="Decimal" Name="MaxMember" Nullable="true" Precision="3" Scale="0" />
+          <Property Type="Decimal" Name="MinMember" Nullable="true" Precision="3" Scale="0" />
+          <Property Type="Decimal" Name="ValidityInMonth" Nullable="true" Precision="3" Scale="0" />
           <NavigationProperty Name="Tutors" Relationship="DiamondbackModel.CourseTutor" FromRole="Course" ToRole="Tutor" />
           <NavigationProperty Name="Payment" Relationship="DiamondbackModel.PaymentCourse" FromRole="Course" ToRole="Payment" />
           <NavigationProperty Name="Rooms" Relationship="DiamondbackModel.CourseRoom" FromRole="Course" ToRole="Room" />
@@ -327,9 +327,9 @@
             <PropertyRef Name="RoomNr" />
           </Key>
           <Property Type="Int32" Name="RoomNr" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Decimal" Name="Capacity" Nullable="false" Precision="3" Scale="0" />
-          <Property Type="String" Name="Building" Nullable="false" />
-          <Property Type="String" Name="Address" Nullable="false" />
+          <Property Type="Decimal" Name="Capacity" Nullable="true" Precision="3" Scale="0" />
+          <Property Type="String" Name="Building" Nullable="true" />
+          <Property Type="String" Name="Address" Nullable="true" />
           <NavigationProperty Name="Course" Relationship="DiamondbackModel.CourseRoom" FromRole="Room" ToRole="Course" />
         </EntityType>
         <Association Name="CourseTutor">

@@ -23,8 +23,8 @@ namespace AdminTool.Client.DB
         public string Mail { get; set; }
         public string Fax { get; set; }
         public string PrivatePhone { get; set; }
-        public byte Gender { get; set; }
-        public bool Active { get; set; }
+        public Nullable<byte> Gender { get; set; }
+        public Nullable<bool> Active { get; set; }
         public string Title { get; set; }
     }
 }

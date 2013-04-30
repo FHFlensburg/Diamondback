@@ -15,7 +15,7 @@ namespace AdminTool.Client.DB
     public partial class Payment
     {
         public int Id { get; set; }
-        public bool IsPaid { get; set; }
+        public Nullable<bool> IsPaid { get; set; }
     
         public virtual Student Students { get; set; }
         public virtual Course Courses { get; set; }

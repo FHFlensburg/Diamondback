@@ -227,6 +227,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Client\DB\DiamondbackModel130430-2.edmx.sql" />
     <Content Include="Client\DB\DiamondbackModel130430.edmx.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
