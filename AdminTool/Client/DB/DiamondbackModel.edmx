@@ -55,7 +55,7 @@
     <Property Name="Surname" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Forename" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Birthdate" Type="datetime" Nullable="true" />
-    <Property Name="Address" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Street" Type="nvarchar(max)" Nullable="true" />
     <Property Name="MobilePhone" Type="nvarchar" Nullable="true" MaxLength="12" />
     <Property Name="Mail" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Fax" Type="nvarchar(max)" Nullable="true" />
@@ -63,6 +63,8 @@
     <Property Name="Gender" Type="tinyint" Nullable="true" />
     <Property Name="Active" Type="bit" Nullable="true" />
     <Property Name="Title" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="City" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CityCode" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Payments">
     <Key>
@@ -95,7 +97,9 @@
     <Property Name="RoomNr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Capacity" Type="decimal" Nullable="true" Precision="3" Scale="0" />
     <Property Name="Building" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Address" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Street" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="City" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CityCode" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Persons_Tutor">
     <Key>
@@ -120,7 +124,6 @@
     <Property Name="UserName" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Password" Type="nvarchar(max)" Nullable="true" />
     <Property Name="LastLogin" Type="datetime" Nullable="true" />
-    <Property Name="RetryCount" Type="decimal" Nullable="true" Precision="2" Scale="0" />
     <Property Name="RegistrationDate" Type="datetime" Nullable="true" />
     <Property Name="Admin" Type="bit" Nullable="true" />
     <Property Name="Id" Type="int" Nullable="false" />
@@ -269,7 +272,7 @@
           <Property Type="String" Name="Surname" Nullable="true" FixedLength="false" />
           <Property Type="String" Name="Forename" Nullable="true" />
           <Property Type="DateTime" Name="Birthdate" Nullable="true" />
-          <Property Type="String" Name="Address" Nullable="true" />
+          <Property Type="String" Name="Street" Nullable="true" />
           <Property Type="String" Name="MobilePhone" Nullable="true" MaxLength="12" />
           <Property Type="String" Name="Mail" Nullable="true" />
           <Property Type="String" Name="Fax" Nullable="true" />
@@ -277,6 +280,8 @@
           <Property Type="Byte" Name="Gender" Nullable="true" />
           <Property Type="Boolean" Name="Active" Nullable="true" />
           <Property Type="String" Name="Title" Nullable="true" />
+          <Property Type="String" Name="City" Nullable="false" />
+          <Property Type="String" Name="CityCode" Nullable="false" />
         </EntityType>
         <EntityType Name="Tutor" BaseType="DiamondbackModel.Person">
           <NavigationProperty Name="Course" Relationship="DiamondbackModel.CourseTutor" FromRole="Tutor" ToRole="Course" />
@@ -292,7 +297,6 @@
           <Property Type="String" Name="UserName" Nullable="true" />
           <Property Type="String" Name="Password" Nullable="true" />
           <Property Type="DateTime" Name="LastLogin" Nullable="true" />
-          <Property Type="Decimal" Name="RetryCount" Nullable="true" Precision="2" Scale="0" />
           <Property Type="DateTime" Name="RegistrationDate" Nullable="true" />
           <Property Type="Boolean" Name="Admin" Nullable="true" />
         </EntityType>
@@ -329,8 +333,10 @@
           <Property Type="Int32" Name="RoomNr" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="Decimal" Name="Capacity" Nullable="true" Precision="3" Scale="0" />
           <Property Type="String" Name="Building" Nullable="true" />
-          <Property Type="String" Name="Address" Nullable="true" />
+          <Property Type="String" Name="Street" Nullable="true" />
           <NavigationProperty Name="Course" Relationship="DiamondbackModel.CourseRoom" FromRole="Room" ToRole="Course" />
+          <Property Type="String" Name="City" Nullable="false" />
+          <Property Type="String" Name="CityCode" Nullable="false" />
         </EntityType>
         <Association Name="CourseTutor">
           <End Type="DiamondbackModel.Course" Role="Course" Multiplicity="*" />
@@ -361,7 +367,7 @@
           <ScalarProperty Name="Surname" ColumnName="Surname" />
           <ScalarProperty Name="Forename" ColumnName="Forename" />
           <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Street" ColumnName="Street" />
           <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
           <ScalarProperty Name="Mail" ColumnName="Mail" />
           <ScalarProperty Name="Fax" ColumnName="Fax" />
@@ -369,6 +375,8 @@
           <ScalarProperty Name="Gender" ColumnName="Gender" />
           <ScalarProperty Name="Active" ColumnName="Active" />
           <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="CityCode" ColumnName="CityCode" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(DiamondbackModel.Tutor)">
@@ -391,7 +399,6 @@
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
-          <ScalarProperty Name="RetryCount" ColumnName="RetryCount" />
           <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
           <ScalarProperty Name="Admin" ColumnName="Admin" />
         </MappingFragment>
@@ -426,7 +433,9 @@
           <ScalarProperty Name="RoomNr" ColumnName="RoomNr" />
           <ScalarProperty Name="Capacity" ColumnName="Capacity" />
           <ScalarProperty Name="Building" ColumnName="Building" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Street" ColumnName="Street" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="CityCode" ColumnName="CityCode" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

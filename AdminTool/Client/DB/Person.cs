@@ -18,7 +18,7 @@ namespace AdminTool.Client.DB
         public string Surname { get; set; }
         public string Forename { get; set; }
         public Nullable<System.DateTime> Birthdate { get; set; }
-        public string Address { get; set; }
+        public string Street { get; set; }
         public string MobilePhone { get; set; }
         public string Mail { get; set; }
         public string Fax { get; set; }
@@ -26,5 +26,7 @@ namespace AdminTool.Client.DB
         public Nullable<byte> Gender { get; set; }
         public Nullable<bool> Active { get; set; }
         public string Title { get; set; }
+        public string City { get; set; }
+        public string CityCode { get; set; }
     }
 }

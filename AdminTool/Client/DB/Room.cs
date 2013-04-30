@@ -22,7 +22,9 @@ namespace AdminTool.Client.DB
         public int RoomNr { get; set; }
         public Nullable<decimal> Capacity { get; set; }
         public string Building { get; set; }
-        public string Address { get; set; }
+        public string Street { get; set; }
+        public string City { get; set; }
+        public string CityCode { get; set; }
     
         public virtual ICollection<Course> Course { get; set; }
     }

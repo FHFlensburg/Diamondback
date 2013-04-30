@@ -17,7 +17,6 @@ namespace AdminTool.Client.DB
         public string UserName { get; set; }
         public string Password { get; set; }
         public Nullable<System.DateTime> LastLogin { get; set; }
-        public Nullable<decimal> RetryCount { get; set; }
         public Nullable<System.DateTime> RegistrationDate { get; set; }
         public Nullable<bool> Admin { get; set; }
     }
