@@ -60,7 +60,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Client\Controller\Test.cs" />
-    <Compile Include="Client\Model\Room.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client\Controller\Start.cs" />
@@ -159,6 +158,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Client\View\Images\logoPlatzhalter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Client\Model\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
