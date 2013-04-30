@@ -34,9 +34,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="RibbonControlsLibrary, Version=4.0.0.11019, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Windows.Controls.Ribbon" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -63,6 +70,42 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client\Controller\Start.cs" />
+    <Compile Include="Client\DB\Course.cs">
+      <DependentUpon>DiamondbackModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Client\DB\DiamondbackModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DiamondbackModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Client\DB\DiamondbackModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DiamondbackModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Client\DB\DiamondbackModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DiamondbackModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Client\DB\Payment.cs">
+      <DependentUpon>DiamondbackModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Client\DB\Person.cs">
+      <DependentUpon>DiamondbackModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Client\DB\Room.cs">
+      <DependentUpon>DiamondbackModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Client\DB\Student.cs">
+      <DependentUpon>DiamondbackModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Client\DB\Tutor.cs">
+      <DependentUpon>DiamondbackModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Client\DB\User.cs">
+      <DependentUpon>DiamondbackModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Client\View\WndNewCourse.xaml.cs">
       <DependentUpon>WndNewCourse.xaml</DependentUpon>
     </Compile>
@@ -98,6 +141,24 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="Client\DB\DiamondbackModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DiamondbackModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Client\DB\DiamondbackModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DiamondbackModel.edmx</DependentUpon>
+      <LastGenOutput>DiamondbackModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Client\DB\DiamondbackModel.edmx.diagram">
+      <DependentUpon>DiamondbackModel.edmx</DependentUpon>
+    </None>
+    <None Include="Client\DB\DiamondbackModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DiamondbackModel.edmx</DependentUpon>
+      <LastGenOutput>DiamondbackModel.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -161,6 +222,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Client\Model\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Client\DB\DiamondbackModel130430.edmx.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
