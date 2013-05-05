@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AdminTool.Client.DB
+namespace AdminTool.Client.Model
 {
     using System;
     using System.Collections.Generic;

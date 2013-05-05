@@ -7,24 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AdminTool.Client.DB
+namespace AdminTool.Client.Model
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Room
+    public partial class Tutor : Person
     {
-        public Room()
+        public Tutor()
         {
             this.Course = new HashSet<Course>();
         }
     
-        public int RoomNr { get; set; }
-        public Nullable<decimal> Capacity { get; set; }
-        public string Building { get; set; }
-        public string Street { get; set; }
-        public string City { get; set; }
-        public string CityCode { get; set; }
     
         public virtual ICollection<Course> Course { get; set; }
     }

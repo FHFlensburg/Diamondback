@@ -63,8 +63,8 @@
     <Property Name="Gender" Type="tinyint" Nullable="true" />
     <Property Name="Active" Type="bit" Nullable="true" />
     <Property Name="Title" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="City" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="CityCode" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="City" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CityCode" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="Payments">
     <Key>
@@ -98,8 +98,8 @@
     <Property Name="Capacity" Type="decimal" Nullable="true" Precision="3" Scale="0" />
     <Property Name="Building" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Street" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="City" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="CityCode" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="City" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CityCode" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="Persons_Tutor">
     <Key>
@@ -264,7 +264,7 @@
             <End Role="Room" EntitySet="Rooms" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Person">
+        <EntityType Name="Person" Abstract="true">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -280,8 +280,8 @@
           <Property Type="Byte" Name="Gender" Nullable="true" />
           <Property Type="Boolean" Name="Active" Nullable="true" />
           <Property Type="String" Name="Title" Nullable="true" />
-          <Property Type="String" Name="City" Nullable="false" />
-          <Property Type="String" Name="CityCode" Nullable="false" />
+          <Property Type="String" Name="City" Nullable="true" />
+          <Property Type="String" Name="CityCode" Nullable="true" />
         </EntityType>
         <EntityType Name="Tutor" BaseType="DiamondbackModel.Person">
           <NavigationProperty Name="Course" Relationship="DiamondbackModel.CourseTutor" FromRole="Tutor" ToRole="Course" />
@@ -335,8 +335,8 @@
           <Property Type="String" Name="Building" Nullable="true" />
           <Property Type="String" Name="Street" Nullable="true" />
           <NavigationProperty Name="Course" Relationship="DiamondbackModel.CourseRoom" FromRole="Room" ToRole="Course" />
-          <Property Type="String" Name="City" Nullable="false" />
-          <Property Type="String" Name="CityCode" Nullable="false" />
+          <Property Type="String" Name="City" Nullable="true" />
+          <Property Type="String" Name="CityCode" Nullable="true" />
         </EntityType>
         <Association Name="CourseTutor">
           <End Type="DiamondbackModel.Course" Role="Course" Multiplicity="*" />

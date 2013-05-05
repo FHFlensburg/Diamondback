@@ -10,9 +10,9 @@ namespace AdminTool.Client.Controller
             ///
             ///
             ///##
-            WndLogin startWindow = new WndLogin();
-            startWindow.Show();
-            WndIndex secondWindow = new WndIndex();
+           // WndLogin startWindow = new WndLogin();
+            //startWindow.Show();
+            WndNewCourse secondWindow = new WndNewCourse();
             secondWindow.Show();
         }
     }

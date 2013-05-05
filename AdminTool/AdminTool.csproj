@@ -70,40 +70,45 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client\Controller\Start.cs" />
-    <Compile Include="Client\DB\Course.cs">
+    <Compile Include="Client\DB\DBConfiguration.cs" />
+    <Compile Include="Client\DB\PersonQuery.cs" />
+    <Compile Include="Client\DB\StudentQuery.cs" />
+    <Compile Include="Client\Model\ContextConstructors.cs" />
+    <Compile Include="Client\Model\Course.cs">
       <DependentUpon>DiamondbackModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Client\DB\DiamondbackModel.Context.cs">
+    <Compile Include="Client\Model\DiamondbackModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DiamondbackModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Client\DB\DiamondbackModel.cs">
+    <Compile Include="Client\Model\DiamondbackModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DiamondbackModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Client\DB\DiamondbackModel.Designer.cs">
+    <Compile Include="Client\Model\DiamondbackModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DiamondbackModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Client\DB\Payment.cs">
+    <Compile Include="Client\Model\Payment.cs">
       <DependentUpon>DiamondbackModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Client\DB\Person.cs">
+    <Compile Include="Client\Model\Person.cs">
       <DependentUpon>DiamondbackModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Client\DB\Room.cs">
+    <Compile Include="Client\Model\Room.cs">
       <DependentUpon>DiamondbackModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Client\DB\Student.cs">
+    <Compile Include="Client\Model\Student.cs">
       <DependentUpon>DiamondbackModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Client\DB\Tutor.cs">
+    <Compile Include="Client\Model\StudentActivity.cs" />
+    <Compile Include="Client\Model\Tutor.cs">
       <DependentUpon>DiamondbackModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Client\DB\User.cs">
+    <Compile Include="Client\Model\User.cs">
       <DependentUpon>DiamondbackModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Client\View\WndNewCourse.xaml.cs">
@@ -141,19 +146,19 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Client\DB\DiamondbackModel.edmx">
+    <EntityDeploy Include="Client\Model\DiamondbackModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DiamondbackModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Client\DB\DiamondbackModel.Context.tt">
+    <None Include="Client\Model\DiamondbackModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DiamondbackModel.edmx</DependentUpon>
       <LastGenOutput>DiamondbackModel.Context.cs</LastGenOutput>
     </None>
-    <None Include="Client\DB\DiamondbackModel.edmx.diagram">
+    <None Include="Client\Model\DiamondbackModel.edmx.diagram">
       <DependentUpon>DiamondbackModel.edmx</DependentUpon>
     </None>
-    <None Include="Client\DB\DiamondbackModel.tt">
+    <None Include="Client\Model\DiamondbackModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DiamondbackModel.edmx</DependentUpon>
       <LastGenOutput>DiamondbackModel.cs</LastGenOutput>
@@ -220,16 +225,15 @@
   <ItemGroup>
     <Resource Include="Client\View\Images\logoPlatzhalter.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Client\Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Client\DB\DiamondbackModel130430-3.edmx.sql" />
-    <Content Include="Client\DB\DiamondbackModel130430-2.edmx.sql" />
-    <Content Include="Client\DB\DiamondbackModel130430-1.edmx.sql" />
+    <Content Include="Client\DB\Scripte\DiamondbackModel130430-3.edmx.sql" />
+    <Content Include="Client\DB\Scripte\DiamondbackModel130430-2.edmx.sql" />
+    <Content Include="Client\DB\Scripte\DiamondbackModel130430-1.edmx.sql" />
+    <Content Include="Client\DB\Scripte\DiamondbackModel130503-1.edmx.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

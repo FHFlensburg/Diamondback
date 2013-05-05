@@ -7,19 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AdminTool.Client.DB
+namespace AdminTool.Client.Model
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Tutor : Person
+    public partial class Payment
     {
-        public Tutor()
-        {
-            this.Course = new HashSet<Course>();
-        }
+        public int Id { get; set; }
+        public Nullable<bool> IsPaid { get; set; }
     
-    
-        public virtual ICollection<Course> Course { get; set; }
+        public virtual Student Students { get; set; }
+        public virtual Course Courses { get; set; }
     }
 }

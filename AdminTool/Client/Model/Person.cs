@@ -7,12 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AdminTool.Client.DB
+namespace AdminTool.Client.Model
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Person
+    public abstract partial class Person
     {
         public int Id { get; set; }
         public string Surname { get; set; }
