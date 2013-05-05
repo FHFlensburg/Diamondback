@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AdminTool.Client.Model;
-using System.Text.RegularExpressions;
+
 
 namespace AdminTool.Client.DB
 {
@@ -75,8 +75,8 @@ namespace AdminTool.Client.DB
         public static List<Student> search(string like)
         {
             List<Student> qry = new List<Student>();
-            Regex isNumber = new Regex(@"^\d+$");
-            if (isNumber.Match(like).Success)
+
+            if (DBUtils.isNumber(like))
             {
                 int wert = Convert.ToInt32(like);
                 List<Student> listStudent = (from student in DBConfiguration.getContext().Persons.OfType<Student>()

@@ -37,8 +37,7 @@ namespace AdminTool.Client.View
 
         private void btnAport_Click(object sender, RoutedEventArgs e)
         {
-            
-           
+                      
         }
 
         private void tbCourseNumber_TextChanged(object sender, TextChangedEventArgs e)
