@@ -60,7 +60,7 @@
     <Property Name="Mail" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Fax" Type="nvarchar(max)" Nullable="true" />
     <Property Name="PrivatePhone" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Gender" Type="tinyint" Nullable="true" />
+    <Property Name="Gender" Type="nvarchar" Nullable="true" MaxLength="4" />
     <Property Name="Active" Type="bit" Nullable="true" />
     <Property Name="Title" Type="nvarchar(max)" Nullable="true" />
     <Property Name="City" Type="nvarchar(max)" Nullable="true" />
@@ -277,7 +277,7 @@
           <Property Type="String" Name="Mail" Nullable="true" cg:SetterAccess="Protected" cg:GetterAccess="Public" />
           <Property Type="String" Name="Fax" Nullable="true" cg:SetterAccess="Protected" cg:GetterAccess="Public" />
           <Property Type="String" Name="PrivatePhone" Nullable="true" cg:SetterAccess="Protected" cg:GetterAccess="Public" />
-          <Property Type="Byte" Name="Gender" Nullable="true" cg:SetterAccess="Protected" cg:GetterAccess="Public" />
+          <Property Type="String" Name="Gender" Nullable="true" cg:SetterAccess="Protected" cg:GetterAccess="Public" MaxLength="4" />
           <Property Type="Boolean" Name="Active" Nullable="true" cg:SetterAccess="Protected" cg:GetterAccess="Public" />
           <Property Type="String" Name="Title" Nullable="true" cg:SetterAccess="Protected" cg:GetterAccess="Public" />
           <Property Type="String" Name="City" Nullable="true" cg:SetterAccess="Protected" cg:GetterAccess="Public" />

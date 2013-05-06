@@ -23,7 +23,7 @@ namespace CourseManagement.Client.DB.Model_EF
         public string Mail { get; protected set; }
         public string Fax { get; protected set; }
         public string PrivatePhone { get; protected set; }
-        public Nullable<byte> Gender { get; protected set; }
+        public string Gender { get; protected set; }
         public Nullable<bool> Active { get; protected set; }
         public string Title { get; protected set; }
         public string City { get; protected set; }
