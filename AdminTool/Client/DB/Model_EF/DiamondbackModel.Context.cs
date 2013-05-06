@@ -27,7 +27,7 @@ namespace AdminTool.Client.DB.Model_EF
     
         public DbSet<Person> Persons { get; set; }
         public DbSet<Payment> Payments { get; set; }
-        internal DbSet<Course> Courses { get; set; }
+        public DbSet<Course> Courses { get; set; }
         public DbSet<Room> Rooms { get; set; }
     }
 }

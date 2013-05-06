@@ -105,14 +105,16 @@
     <Compile Include="Client\DB\Model_EF\Student.cs">
       <DependentUpon>DiamondbackModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Client\Model\StudentActions.cs" />
+    <Compile Include="Client\Model\ActiveUser.cs" />
+    <Compile Include="Client\Model\EF_Extensions\StudentActions.cs" />
     <Compile Include="Client\DB\Model_EF\Tutor.cs">
       <DependentUpon>DiamondbackModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Client\Model\TutorActions.cs" />
+    <Compile Include="Client\Model\EF_Extensions\TutorActions.cs" />
     <Compile Include="Client\DB\Model_EF\User.cs">
       <DependentUpon>DiamondbackModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Client\Model\EF_Extensions\UserActions.cs" />
     <Compile Include="Client\View\WndNewCourse.xaml.cs">
       <DependentUpon>WndNewCourse.xaml</DependentUpon>
     </Compile>
