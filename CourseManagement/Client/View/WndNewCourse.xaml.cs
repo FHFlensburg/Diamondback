@@ -29,10 +29,10 @@ namespace CourseManagement.Client.View
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            foreach(Student strldk in Student.search("12"))
+            foreach(Student strldk in Student.search("Krueger"))
             {
                 strldk.setForename(tbRoom.Text);
-                tbCourseNumber.Text += strldk.Forename;
+                tbCourseNumber.Text += strldk.IBAN + strldk.Birthyear;
             }
         }
 

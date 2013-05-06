@@ -17,7 +17,7 @@ namespace CourseManagement.Client.DB.Model_EF
         public int Id { get; protected set; }
         public string Surname { get; protected set; }
         public string Forename { get; protected set; }
-        public Nullable<System.DateTime> Birthdate { get; protected set; }
+        public string Birthyear { get; protected set; }
         public string Street { get; protected set; }
         public string MobilePhone { get; protected set; }
         public string Mail { get; protected set; }

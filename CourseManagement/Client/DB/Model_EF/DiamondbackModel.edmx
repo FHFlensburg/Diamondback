@@ -54,7 +54,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Surname" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Forename" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Birthdate" Type="datetime" Nullable="true" />
+    <Property Name="Birthyear" Type="nvarchar" Nullable="true" MaxLength="4" />
     <Property Name="Street" Type="nvarchar(max)" Nullable="true" />
     <Property Name="MobilePhone" Type="nvarchar" Nullable="true" MaxLength="12" />
     <Property Name="Mail" Type="nvarchar(max)" Nullable="true" />
@@ -271,7 +271,7 @@
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" cg:SetterAccess="Protected" cg:GetterAccess="Public" />
           <Property Type="String" Name="Surname" Nullable="true" FixedLength="false" cg:SetterAccess="Protected" cg:GetterAccess="Public" />
           <Property Type="String" Name="Forename" Nullable="true" cg:SetterAccess="Protected" cg:GetterAccess="Public" />
-          <Property Type="DateTime" Name="Birthdate" Nullable="true" cg:SetterAccess="Protected" cg:GetterAccess="Public" />
+          <Property Type="String" Name="Birthyear" Nullable="true" cg:SetterAccess="Protected" cg:GetterAccess="Public" MaxLength="4" />
           <Property Type="String" Name="Street" Nullable="true" cg:SetterAccess="Protected" cg:GetterAccess="Public" />
           <Property Type="String" Name="MobilePhone" Nullable="true" MaxLength="12" cg:SetterAccess="Protected" cg:GetterAccess="Public" />
           <Property Type="String" Name="Mail" Nullable="true" cg:SetterAccess="Protected" cg:GetterAccess="Public" />
@@ -366,7 +366,7 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Surname" ColumnName="Surname" />
           <ScalarProperty Name="Forename" ColumnName="Forename" />
-          <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+          <ScalarProperty Name="Birthyear" ColumnName="Birthyear" />
           <ScalarProperty Name="Street" ColumnName="Street" />
           <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
           <ScalarProperty Name="Mail" ColumnName="Mail" />
