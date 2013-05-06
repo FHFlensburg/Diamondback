@@ -5,7 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdminTool.Client.Model
+
+namespace AdminTool.Client.DB.Model_EF
 {
     public partial class Tutor : Person
     {
@@ -38,5 +39,7 @@ namespace AdminTool.Client.Model
         {
             return TutorQuery.search(like);
         }
+
+
     }
 }

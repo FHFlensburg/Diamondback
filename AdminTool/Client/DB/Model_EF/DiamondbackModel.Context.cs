@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AdminTool.Client.Model
+namespace AdminTool.Client.DB.Model_EF
 {
     using System;
     using System.Data.Entity;
@@ -27,7 +27,7 @@ namespace AdminTool.Client.Model
     
         public DbSet<Person> Persons { get; set; }
         public DbSet<Payment> Payments { get; set; }
-        public DbSet<Course> Courses { get; set; }
+        internal DbSet<Course> Courses { get; set; }
         public DbSet<Room> Rooms { get; set; }
     }
 }

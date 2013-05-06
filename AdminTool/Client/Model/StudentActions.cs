@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AdminTool.Client.DB;
 
-namespace AdminTool.Client.Model
+
+namespace AdminTool.Client.DB.Model_EF
 {
     public partial class Student : Person
     {
@@ -38,5 +38,12 @@ namespace AdminTool.Client.Model
         {
             return StudentQuery.search(like);
         }
+
+        public void setForename(string forename)
+        {
+            Forename = forename;
+        }
+
+    
     }
 }

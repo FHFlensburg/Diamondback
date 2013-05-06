@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using AdminTool.Client.Model;
+using AdminTool.Client.DB.Model_EF;
 
 
 namespace AdminTool.Client.View
@@ -29,15 +29,16 @@ namespace AdminTool.Client.View
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            foreach(Student strldk in Student.search("a"))
+            foreach(Student strldk in Student.search("12"))
             {
-                tbCourseNumber.Text += strldk.Surname;
+                strldk.setForename(tbRoom.Text);
+                tbCourseNumber.Text += strldk.Forename;
             }
         }
 
         private void btnAport_Click(object sender, RoutedEventArgs e)
         {
-                      
+            
         }
 
         private void tbCourseNumber_TextChanged(object sender, TextChangedEventArgs e)

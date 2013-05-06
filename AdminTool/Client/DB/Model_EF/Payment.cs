@@ -7,17 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AdminTool.Client.Model
+namespace AdminTool.Client.DB.Model_EF
 {
     using System;
     using System.Collections.Generic;
     
     public partial class Payment
     {
-        public int Id { get; set; }
-        public Nullable<bool> IsPaid { get; set; }
+        public int Id { get; private set; }
+        public Nullable<bool> IsPaid { get; private set; }
     
-        public virtual Student Students { get; set; }
-        public virtual Course Courses { get; set; }
+        public virtual Student Students { get; private set; }
+        public virtual Course Courses { get; private set; }
     }
 }

@@ -66,7 +66,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Client\Controller\Test.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client\Controller\Start.cs" />
@@ -75,43 +74,43 @@
     <Compile Include="Client\DB\PersonQuery.cs" />
     <Compile Include="Client\DB\StudentQuery.cs" />
     <Compile Include="Client\DB\TutorQuery.cs" />
-    <Compile Include="Client\Model\ContextConstructors.cs" />
-    <Compile Include="Client\Model\Course.cs">
+    <Compile Include="Client\DB\Model_EF\ContextConstructors.cs" />
+    <Compile Include="Client\DB\Model_EF\Course.cs">
       <DependentUpon>DiamondbackModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Client\Model\DiamondbackModel.Context.cs">
+    <Compile Include="Client\DB\Model_EF\DiamondbackModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DiamondbackModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Client\Model\DiamondbackModel.cs">
+    <Compile Include="Client\DB\Model_EF\DiamondbackModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DiamondbackModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Client\Model\DiamondbackModel.Designer.cs">
+    <Compile Include="Client\DB\Model_EF\DiamondbackModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DiamondbackModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Client\Model\Payment.cs">
+    <Compile Include="Client\DB\Model_EF\Payment.cs">
       <DependentUpon>DiamondbackModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Client\Model\Person.cs">
+    <Compile Include="Client\DB\Model_EF\Person.cs">
       <DependentUpon>DiamondbackModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Client\Model\Room.cs">
+    <Compile Include="Client\DB\Model_EF\Room.cs">
       <DependentUpon>DiamondbackModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Client\Model\Student.cs">
+    <Compile Include="Client\DB\Model_EF\Student.cs">
       <DependentUpon>DiamondbackModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Client\Model\StudentActions.cs" />
-    <Compile Include="Client\Model\Tutor.cs">
+    <Compile Include="Client\DB\Model_EF\Tutor.cs">
       <DependentUpon>DiamondbackModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Client\Model\TutorActions.cs" />
-    <Compile Include="Client\Model\User.cs">
+    <Compile Include="Client\DB\Model_EF\User.cs">
       <DependentUpon>DiamondbackModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Client\View\WndNewCourse.xaml.cs">
@@ -149,19 +148,19 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Client\Model\DiamondbackModel.edmx">
+    <EntityDeploy Include="Client\DB\Model_EF\DiamondbackModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DiamondbackModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Client\Model\DiamondbackModel.Context.tt">
+    <None Include="Client\DB\Model_EF\DiamondbackModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DiamondbackModel.edmx</DependentUpon>
       <LastGenOutput>DiamondbackModel.Context.cs</LastGenOutput>
     </None>
-    <None Include="Client\Model\DiamondbackModel.edmx.diagram">
+    <None Include="Client\DB\Model_EF\DiamondbackModel.edmx.diagram">
       <DependentUpon>DiamondbackModel.edmx</DependentUpon>
     </None>
-    <None Include="Client\Model\DiamondbackModel.tt">
+    <None Include="Client\DB\Model_EF\DiamondbackModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DiamondbackModel.edmx</DependentUpon>
       <LastGenOutput>DiamondbackModel.cs</LastGenOutput>

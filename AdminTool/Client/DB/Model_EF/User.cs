@@ -7,25 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AdminTool.Client.Model
+namespace AdminTool.Client.DB.Model_EF
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Room
+    public partial class User : Person
     {
-        public Room()
-        {
-            this.Course = new HashSet<Course>();
-        }
-    
-        public int RoomNr { get; set; }
-        public Nullable<decimal> Capacity { get; set; }
-        public string Building { get; set; }
-        public string Street { get; set; }
-        public string City { get; set; }
-        public string CityCode { get; set; }
-    
-        public virtual ICollection<Course> Course { get; set; }
+        public string UserName { get; private set; }
+        public string Password { get; private set; }
+        public Nullable<System.DateTime> LastLogin { get; private set; }
+        public Nullable<System.DateTime> RegistrationDate { get; private set; }
+        public Nullable<bool> Admin { get; private set; }
     }
 }

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AdminTool.Client.Model;
+using AdminTool.Client.DB.Model_EF;
 
 namespace AdminTool.Client.DB
 {
     class TutorQuery
     {
+ 
         /// <summary>
         /// Get all Tutors from database.
         /// </summary>

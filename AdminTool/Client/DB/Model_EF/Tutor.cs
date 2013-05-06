@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AdminTool.Client.Model
+namespace AdminTool.Client.DB.Model_EF
 {
     using System;
     using System.Collections.Generic;
@@ -20,6 +20,6 @@ namespace AdminTool.Client.Model
         }
     
     
-        public virtual ICollection<Course> Course { get; set; }
+        public virtual ICollection<Course> Course { get; private set; }
     }
 }

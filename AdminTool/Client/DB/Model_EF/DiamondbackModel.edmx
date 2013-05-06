@@ -245,7 +245,7 @@
         <EntityContainer Name="DiamondbackModelContainer" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Persons" EntityType="DiamondbackModel.Person" />
           <EntitySet Name="Payments" EntityType="DiamondbackModel.Payment" />
-          <EntitySet Name="Courses" EntityType="DiamondbackModel.Course" />
+          <EntitySet Name="Courses" EntityType="DiamondbackModel.Course" cg:GetterAccess="Internal" />
           <EntitySet Name="Rooms" EntityType="DiamondbackModel.Room" />
           <AssociationSet Name="CourseTutor" Association="DiamondbackModel.CourseTutor">
             <End Role="Course" EntitySet="Courses" />
@@ -268,75 +268,75 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Surname" Nullable="true" FixedLength="false" />
-          <Property Type="String" Name="Forename" Nullable="true" />
-          <Property Type="DateTime" Name="Birthdate" Nullable="true" />
-          <Property Type="String" Name="Street" Nullable="true" />
-          <Property Type="String" Name="MobilePhone" Nullable="true" MaxLength="12" />
-          <Property Type="String" Name="Mail" Nullable="true" />
-          <Property Type="String" Name="Fax" Nullable="true" />
-          <Property Type="String" Name="PrivatePhone" Nullable="true" />
-          <Property Type="Byte" Name="Gender" Nullable="true" />
-          <Property Type="Boolean" Name="Active" Nullable="true" />
-          <Property Type="String" Name="Title" Nullable="true" />
-          <Property Type="String" Name="City" Nullable="true" />
-          <Property Type="String" Name="CityCode" Nullable="true" />
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" cg:SetterAccess="Protected" cg:GetterAccess="Public" />
+          <Property Type="String" Name="Surname" Nullable="true" FixedLength="false" cg:SetterAccess="Protected" cg:GetterAccess="Public" />
+          <Property Type="String" Name="Forename" Nullable="true" cg:SetterAccess="Protected" cg:GetterAccess="Public" />
+          <Property Type="DateTime" Name="Birthdate" Nullable="true" cg:SetterAccess="Protected" cg:GetterAccess="Public" />
+          <Property Type="String" Name="Street" Nullable="true" cg:SetterAccess="Protected" cg:GetterAccess="Public" />
+          <Property Type="String" Name="MobilePhone" Nullable="true" MaxLength="12" cg:SetterAccess="Protected" cg:GetterAccess="Public" />
+          <Property Type="String" Name="Mail" Nullable="true" cg:SetterAccess="Protected" cg:GetterAccess="Public" />
+          <Property Type="String" Name="Fax" Nullable="true" cg:SetterAccess="Protected" cg:GetterAccess="Public" />
+          <Property Type="String" Name="PrivatePhone" Nullable="true" cg:SetterAccess="Protected" cg:GetterAccess="Public" />
+          <Property Type="Byte" Name="Gender" Nullable="true" cg:SetterAccess="Protected" cg:GetterAccess="Public" />
+          <Property Type="Boolean" Name="Active" Nullable="true" cg:SetterAccess="Protected" cg:GetterAccess="Public" />
+          <Property Type="String" Name="Title" Nullable="true" cg:SetterAccess="Protected" cg:GetterAccess="Public" />
+          <Property Type="String" Name="City" Nullable="true" cg:SetterAccess="Protected" cg:GetterAccess="Public" />
+          <Property Type="String" Name="CityCode" Nullable="true" cg:SetterAccess="Protected" cg:GetterAccess="Public" />
         </EntityType>
         <EntityType Name="Tutor" BaseType="DiamondbackModel.Person">
-          <NavigationProperty Name="Course" Relationship="DiamondbackModel.CourseTutor" FromRole="Tutor" ToRole="Course" />
+          <NavigationProperty Name="Course" Relationship="DiamondbackModel.CourseTutor" FromRole="Tutor" ToRole="Course" cg:SetterAccess="Private" cg:GetterAccess="Public" />
         </EntityType>
         <EntityType Name="Student" BaseType="DiamondbackModel.Person">
-          <Property Type="String" Name="IBAN" Nullable="true" />
-          <Property Type="String" Name="BIC" Nullable="true" />
-          <Property Type="String" Name="Depositor" Nullable="true" />
-          <Property Type="String" Name="NameOfBank" Nullable="true" />
-          <NavigationProperty Name="Payment" Relationship="DiamondbackModel.PaymentStudent" FromRole="Student" ToRole="Payment" />
+          <Property Type="String" Name="IBAN" Nullable="true" cg:SetterAccess="Private" cg:GetterAccess="Public" />
+          <Property Type="String" Name="BIC" Nullable="true" cg:SetterAccess="Private" cg:GetterAccess="Public" />
+          <Property Type="String" Name="Depositor" Nullable="true" cg:SetterAccess="Private" cg:GetterAccess="Public" />
+          <Property Type="String" Name="NameOfBank" Nullable="true" cg:SetterAccess="Private" cg:GetterAccess="Public" />
+          <NavigationProperty Name="Payment" Relationship="DiamondbackModel.PaymentStudent" FromRole="Student" ToRole="Payment" cg:SetterAccess="Private" cg:GetterAccess="Public" />
         </EntityType>
         <EntityType Name="User" BaseType="DiamondbackModel.Person">
-          <Property Type="String" Name="UserName" Nullable="true" />
-          <Property Type="String" Name="Password" Nullable="true" />
-          <Property Type="DateTime" Name="LastLogin" Nullable="true" />
-          <Property Type="DateTime" Name="RegistrationDate" Nullable="true" />
-          <Property Type="Boolean" Name="Admin" Nullable="true" />
+          <Property Type="String" Name="UserName" Nullable="true" cg:SetterAccess="Private" cg:GetterAccess="Public" />
+          <Property Type="String" Name="Password" Nullable="true" cg:SetterAccess="Private" cg:GetterAccess="Public" />
+          <Property Type="DateTime" Name="LastLogin" Nullable="true" cg:SetterAccess="Private" cg:GetterAccess="Public" />
+          <Property Type="DateTime" Name="RegistrationDate" Nullable="true" cg:SetterAccess="Private" cg:GetterAccess="Public" />
+          <Property Type="Boolean" Name="Admin" Nullable="true" cg:SetterAccess="Private" cg:GetterAccess="Public" />
         </EntityType>
         <EntityType Name="Payment">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Boolean" Name="IsPaid" Nullable="true" />
-          <NavigationProperty Name="Students" Relationship="DiamondbackModel.PaymentStudent" FromRole="Payment" ToRole="Student" />
-          <NavigationProperty Name="Courses" Relationship="DiamondbackModel.PaymentCourse" FromRole="Payment" ToRole="Course" />
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" cg:SetterAccess="Private" cg:GetterAccess="Public" />
+          <Property Type="Boolean" Name="IsPaid" Nullable="true" cg:SetterAccess="Private" cg:GetterAccess="Public" />
+          <NavigationProperty Name="Students" Relationship="DiamondbackModel.PaymentStudent" FromRole="Payment" ToRole="Student" cg:SetterAccess="Private" cg:GetterAccess="Public" />
+          <NavigationProperty Name="Courses" Relationship="DiamondbackModel.PaymentCourse" FromRole="Payment" ToRole="Course" cg:SetterAccess="Private" cg:GetterAccess="Public" />
         </EntityType>
-        <EntityType Name="Course">
+        <EntityType Name="Course" cg:TypeAccess="Public">
           <Key>
             <PropertyRef Name="CourseNr" />
           </Key>
-          <Property Type="Int32" Name="CourseNr" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Title" Nullable="true" />
-          <Property Type="Decimal" Name="AmountInEuro" Nullable="true" Precision="6" Scale="2" />
-          <Property Type="String" Name="Description" Nullable="true" />
-          <Property Type="DateTime" Name="StartDate" Nullable="true" />
-          <Property Type="DateTime" Name="EndDate" Nullable="true" />
-          <Property Type="Decimal" Name="MaxMember" Nullable="true" Precision="3" Scale="0" />
-          <Property Type="Decimal" Name="MinMember" Nullable="true" Precision="3" Scale="0" />
-          <Property Type="Decimal" Name="ValidityInMonth" Nullable="true" Precision="3" Scale="0" />
-          <NavigationProperty Name="Tutors" Relationship="DiamondbackModel.CourseTutor" FromRole="Course" ToRole="Tutor" />
-          <NavigationProperty Name="Payment" Relationship="DiamondbackModel.PaymentCourse" FromRole="Course" ToRole="Payment" />
-          <NavigationProperty Name="Rooms" Relationship="DiamondbackModel.CourseRoom" FromRole="Course" ToRole="Room" />
+          <Property Type="Int32" Name="CourseNr" Nullable="false" annotation:StoreGeneratedPattern="Identity" cg:SetterAccess="Private" cg:GetterAccess="Public" />
+          <Property Type="String" Name="Title" Nullable="true" cg:SetterAccess="Private" cg:GetterAccess="Public" />
+          <Property Type="Decimal" Name="AmountInEuro" Nullable="true" Precision="6" Scale="2" cg:SetterAccess="Private" cg:GetterAccess="Public" />
+          <Property Type="String" Name="Description" Nullable="true" cg:SetterAccess="Private" cg:GetterAccess="Public" />
+          <Property Type="DateTime" Name="StartDate" Nullable="true" cg:SetterAccess="Private" cg:GetterAccess="Public" />
+          <Property Type="DateTime" Name="EndDate" Nullable="true" cg:SetterAccess="Private" cg:GetterAccess="Public" />
+          <Property Type="Decimal" Name="MaxMember" Nullable="true" Precision="3" Scale="0" cg:SetterAccess="Private" cg:GetterAccess="Public" />
+          <Property Type="Decimal" Name="MinMember" Nullable="true" Precision="3" Scale="0" cg:SetterAccess="Private" cg:GetterAccess="Public" />
+          <Property Type="Decimal" Name="ValidityInMonth" Nullable="true" Precision="3" Scale="0" cg:SetterAccess="Private" cg:GetterAccess="Public" />
+          <NavigationProperty Name="Tutors" Relationship="DiamondbackModel.CourseTutor" FromRole="Course" ToRole="Tutor" cg:SetterAccess="Private" cg:GetterAccess="Public" />
+          <NavigationProperty Name="Payment" Relationship="DiamondbackModel.PaymentCourse" FromRole="Course" ToRole="Payment" cg:SetterAccess="Private" cg:GetterAccess="Public" />
+          <NavigationProperty Name="Rooms" Relationship="DiamondbackModel.CourseRoom" FromRole="Course" ToRole="Room" cg:SetterAccess="Private" cg:GetterAccess="Public" />
         </EntityType>
         <EntityType Name="Room">
           <Key>
             <PropertyRef Name="RoomNr" />
           </Key>
-          <Property Type="Int32" Name="RoomNr" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Decimal" Name="Capacity" Nullable="true" Precision="3" Scale="0" />
-          <Property Type="String" Name="Building" Nullable="true" />
-          <Property Type="String" Name="Street" Nullable="true" />
-          <NavigationProperty Name="Course" Relationship="DiamondbackModel.CourseRoom" FromRole="Room" ToRole="Course" />
-          <Property Type="String" Name="City" Nullable="true" />
-          <Property Type="String" Name="CityCode" Nullable="true" />
+          <Property Type="Int32" Name="RoomNr" Nullable="false" annotation:StoreGeneratedPattern="Identity" cg:SetterAccess="Private" cg:GetterAccess="Public" />
+          <Property Type="Decimal" Name="Capacity" Nullable="true" Precision="3" Scale="0" cg:SetterAccess="Private" cg:GetterAccess="Public" />
+          <Property Type="String" Name="Building" Nullable="true" cg:SetterAccess="Private" cg:GetterAccess="Public" />
+          <Property Type="String" Name="Street" Nullable="true" cg:SetterAccess="Private" cg:GetterAccess="Public" />
+          <NavigationProperty Name="Course" Relationship="DiamondbackModel.CourseRoom" FromRole="Room" ToRole="Course" cg:SetterAccess="Private" cg:GetterAccess="Public" />
+          <Property Type="String" Name="City" Nullable="true" cg:SetterAccess="Private" cg:GetterAccess="Public" />
+          <Property Type="String" Name="CityCode" Nullable="true" cg:SetterAccess="Private" cg:GetterAccess="Public" />
         </EntityType>
         <Association Name="CourseTutor">
           <End Type="DiamondbackModel.Course" Role="Course" Multiplicity="*" />

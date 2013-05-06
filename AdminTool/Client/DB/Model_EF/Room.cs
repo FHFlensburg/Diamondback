@@ -7,23 +7,25 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AdminTool.Client.Model
+namespace AdminTool.Client.DB.Model_EF
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Student : Person
+    public partial class Room
     {
-        public Student()
+        public Room()
         {
-            this.Payment = new HashSet<Payment>();
+            this.Course = new HashSet<Course>();
         }
     
-        public string IBAN { get; set; }
-        public string BIC { get; set; }
-        public string Depositor { get; set; }
-        public string NameOfBank { get; set; }
+        public int RoomNr { get; private set; }
+        public Nullable<decimal> Capacity { get; private set; }
+        public string Building { get; private set; }
+        public string Street { get; private set; }
+        public string City { get; private set; }
+        public string CityCode { get; private set; }
     
-        public virtual ICollection<Payment> Payment { get; set; }
+        public virtual ICollection<Course> Course { get; private set; }
     }
 }
