@@ -14,10 +14,10 @@ namespace CourseManagement.Client.DB.Model
     
     public partial class Payment
     {
-        public int Id { get; private set; }
-        public Nullable<bool> IsPaid { get; private set; }
+        public int Id { get; set; }
+        public Nullable<bool> IsPaid { get; set; }
     
-        public virtual Student Students { get; private set; }
-        public virtual Course Courses { get; private set; }
+        public virtual Student Students { get; set; }
+        public virtual Course Courses { get; set; }
     }
 }

@@ -19,11 +19,11 @@ namespace CourseManagement.Client.DB.Model
             this.Payment = new HashSet<Payment>();
         }
     
-        public string IBAN { get; private set; }
-        public string BIC { get; private set; }
-        public string Depositor { get; private set; }
-        public string NameOfBank { get; private set; }
+        public string IBAN { get; set; }
+        public string BIC { get; set; }
+        public string Depositor { get; set; }
+        public string NameOfBank { get; set; }
     
-        public virtual ICollection<Payment> Payment { get; private set; }
+        public virtual ICollection<Payment> Payment { get; set; }
     }
 }

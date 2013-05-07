@@ -14,19 +14,19 @@ namespace CourseManagement.Client.DB.Model
     
     public abstract partial class Person
     {
-        public int Id { get; protected set; }
-        public string Surname { get; protected set; }
-        public string Forename { get; protected set; }
-        public string Birthyear { get; protected set; }
-        public string Street { get; protected set; }
-        public string MobilePhone { get; protected set; }
-        public string Mail { get; protected set; }
-        public string Fax { get; protected set; }
-        public string PrivatePhone { get; protected set; }
-        public string Gender { get; protected set; }
-        public Nullable<bool> Active { get; protected set; }
-        public string Title { get; protected set; }
-        public string City { get; protected set; }
-        public string CityCode { get; protected set; }
+        public int Id { get; set; }
+        public string Surname { get; set; }
+        public string Forename { get; set; }
+        public string Birthyear { get; set; }
+        public string Street { get; set; }
+        public string MobilePhone { get; set; }
+        public string Mail { get; set; }
+        public string Fax { get; set; }
+        public string PrivatePhone { get; set; }
+        public string Gender { get; set; }
+        public Nullable<bool> Active { get; set; }
+        public string Title { get; set; }
+        public string City { get; set; }
+        public string CityCode { get; set; }
     }
 }

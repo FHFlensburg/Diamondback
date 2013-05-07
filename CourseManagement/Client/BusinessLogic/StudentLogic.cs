@@ -11,46 +11,25 @@ namespace CourseManagement.Client.BusinessLogic
 {
     public static class StudentLogic
     {
-        public static DataSet getDataSet()
-        {
-            DataSet studentSet = new DataSet();
-            DataTable studentTable = new DataTable();
-            studentTable.Columns.Add("Test");
-            studentTable.Rows.Add("TestWert");
-            studentTable.Rows.Add("Testwert2");
-            studentSet.Tables.Add(studentTable);
-            /*foreach (PropertyInfo pi in (new Student()).GetType().GetProperties())
-            {
-                studentTable.Columns.Add(pi.Name);
-            }
-            studentSet.Tables.Add(studentTable);*/
-            return studentSet;
-        }
+ 
 
-        public static DataTable getDataTable()
+        public static DataTable getAllStudents()
         {
             
             DataTable studentTable = new DataTable();
-            studentTable.Columns.Add("Test");
-            studentTable.Rows.Add("TestWert");
-            studentTable.Rows.Add("Testwert2");
-            studentTable.Columns.Add("Test2");
-            //studentTable.
            
-            /*foreach (PropertyInfo pi in (new Student()).GetType().GetProperties())
+            foreach (PropertyInfo pi in (new Student()).GetType().GetProperties())
             {
                 studentTable.Columns.Add(pi.Name);
             }
-            studentSet.Tables.Add(studentTable);*/
+
+            foreach (Student student in Student.getAll())
+            {
+               
+            }
+            
             return studentTable;
         }
-        public static DataTable getDataTable2()
-        {
-            DataTable studentTable2 = new DataTable();
-            studentTable2.Columns.Add("Penis");
-            studentTable2.Rows.Add("Vagina");
-            studentTable2.Rows.Add("Vagina2");
-            return studentTable2;
-        }
+
     }
 }

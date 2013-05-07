@@ -20,6 +20,6 @@ namespace CourseManagement.Client.DB.Model
         }
     
     
-        public virtual ICollection<Course> Course { get; private set; }
+        public virtual ICollection<Course> Course { get; set; }
     }
 }

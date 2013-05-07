@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CourseManagement.Client.DB.Model_EF;
+using CourseManagement.Client.DB.Model;
 
 
 namespace TestCourseManagement

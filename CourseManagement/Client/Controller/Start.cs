@@ -11,10 +11,10 @@ namespace CourseManagement.Client.Controller
         void App_Startup(object sender, StartupEventArgs e)
         {
 
-
+            
             WndLogin startWindow = new WndLogin();
             WndIndex mainWindow = new WndIndex();
-            DataTable myDataTable = StudentLogic.getDataTable();
+            DataTable myDataTable = StudentLogic.getAllStudents();
             mainWindow.dgCourse.DataContext = myDataTable;
             if (startWindow.ShowDialog() == true)
             {
@@ -39,12 +39,12 @@ namespace CourseManagement.Client.Controller
                     if (a.mainRibbon.SelectedIndex == 0)
                     {
 
-                        DataTable myDataTable = StudentLogic.getDataTable();
+                        DataTable myDataTable = StudentLogic.getAllStudents();
                         a.dgCourse.DataContext = myDataTable;
                     }
                     else
                     {
-                        DataTable myDataTable2 = StudentLogic.getDataTable2();
+                        DataTable myDataTable2 = StudentLogic.getAllStudents();
                         a.dgCourse.DataContext = myDataTable2;
 
                     }

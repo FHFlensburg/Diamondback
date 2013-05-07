@@ -20,18 +20,18 @@ namespace CourseManagement.Client.DB.Model
             this.Payment = new HashSet<Payment>();
         }
     
-        public int CourseNr { get; private set; }
-        public string Title { get; private set; }
-        public Nullable<decimal> AmountInEuro { get; private set; }
-        public string Description { get; private set; }
-        public Nullable<System.DateTime> StartDate { get; private set; }
-        public Nullable<System.DateTime> EndDate { get; private set; }
-        public Nullable<decimal> MaxMember { get; private set; }
-        public Nullable<decimal> MinMember { get; private set; }
-        public Nullable<decimal> ValidityInMonth { get; private set; }
+        public int CourseNr { get; set; }
+        public string Title { get; set; }
+        public Nullable<decimal> AmountInEuro { get; set; }
+        public string Description { get; set; }
+        public Nullable<System.DateTime> StartDate { get; set; }
+        public Nullable<System.DateTime> EndDate { get; set; }
+        public Nullable<decimal> MaxMember { get; set; }
+        public Nullable<decimal> MinMember { get; set; }
+        public Nullable<decimal> ValidityInMonth { get; set; }
     
-        public virtual ICollection<Tutor> Tutors { get; private set; }
-        public virtual ICollection<Payment> Payment { get; private set; }
-        public virtual Room Rooms { get; private set; }
+        public virtual ICollection<Tutor> Tutors { get; set; }
+        public virtual ICollection<Payment> Payment { get; set; }
+        public virtual Room Rooms { get; set; }
     }
 }

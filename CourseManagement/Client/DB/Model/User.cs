@@ -14,10 +14,10 @@ namespace CourseManagement.Client.DB.Model
     
     public partial class User : Person
     {
-        public string UserName { get; private set; }
-        public string Password { get; private set; }
-        public Nullable<System.DateTime> LastLogin { get; private set; }
-        public Nullable<System.DateTime> RegistrationDate { get; private set; }
-        public Nullable<bool> Admin { get; private set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public Nullable<System.DateTime> LastLogin { get; set; }
+        public Nullable<System.DateTime> RegistrationDate { get; set; }
+        public Nullable<bool> Admin { get; set; }
     }
 }
