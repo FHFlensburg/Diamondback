@@ -46,11 +46,11 @@ namespace CourseManagement.Client.BusinessLogic
         }
         public static DataTable getDataTable2()
         {
-            DataTable studentTable2 = new DataTable();
-            studentTable2.Columns.Add("Penis");
-            studentTable2.Rows.Add("Vagina");
-            studentTable2.Rows.Add("Vagina2");
-            return studentTable2;
+            DataTable personTable = new DataTable();
+            personTable.Columns.Add("Persons");
+            personTable.Rows.Add("Person1");
+            personTable.Rows.Add("Person2");
+            return personTable;
         }
     }
 }

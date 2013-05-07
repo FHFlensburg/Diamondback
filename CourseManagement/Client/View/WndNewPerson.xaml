@@ -4,16 +4,22 @@
         Title="Neue Person" Height="300" Width="300">
     <Grid>
         <Label x:Name="lblNewPerson" Content="Neue Person" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblParticipant" Content="Teilnehmer-Nr." HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbParticipant" HorizontalAlignment="Left" Height="23" Margin="10,83,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <ComboBox x:Name="cbRole" HorizontalAlignment="Left" Margin="162,83,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label x:Name="lblRole" Content="Rolle" HorizontalAlignment="Left" Margin="162,57,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblLastname" Content="Nachname" HorizontalAlignment="Left" Margin="10,111,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbLastname" HorizontalAlignment="Left" Height="23" Margin="10,137,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="tbAdress" HorizontalAlignment="Left" Height="23" Margin="162,137,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-        <Label x:Name="lblAdress" Content="Wohnort" HorizontalAlignment="Left" Margin="162,111,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblFirstname" Content="Vorname" HorizontalAlignment="Left" Margin="10,165,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbFirstname" HorizontalAlignment="Left" Height="23" Margin="10,191,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <StackPanel Orientation="Horizontal" Margin="10,45" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="10">
+            <Label x:Name="lblParticipant" Content="Teilnehmer-Nr."/>
+            <TextBox x:Name="tbParticipant" Width="120"/>
+            <Label x:Name="lblLastname" Content="Nachname" />
+            <TextBox x:Name="tbLastname" Width="120"/>
+            <Label x:Name="lblFirstname" Content="Vorname"/>
+            <TextBox x:Name="tbFirstname" Width="120"/>
+        </StackPanel>
+        <StackPanel Margin="10">
+                <Label x:Name="lblRole" Content="Rolle"/>
+                <ComboBox x:Name="cbRole" Width="120"/>
+                <Label x:Name="lblAdress" Content="Wohnort" />
+                <TextBox x:Name="tbAdress" Width="120"/>
+        </StackPanel>
+        </StackPanel>
         <Button x:Name="btnSave" Content="Speichern" HorizontalAlignment="Left" Margin="10,238,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="btnAport" Content="Abbrechen" HorizontalAlignment="Left" Margin="106,238,0,0" VerticalAlignment="Top" Width="75"/>
 

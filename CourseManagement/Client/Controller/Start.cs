@@ -20,14 +20,6 @@ namespace CourseManagement.Client.Controller
             {
                 mainWindow.Show();
             }
-            else
-            {
-                MessageBox.Show("Falsches Passwort");
-                mainWindow.Close();
-            }
-
-
-
         }
 
         public static void foo(WndIndex a, SelectionChangedEventArgs e)
