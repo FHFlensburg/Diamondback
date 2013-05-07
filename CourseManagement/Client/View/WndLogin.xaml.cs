@@ -26,7 +26,22 @@ namespace CourseManagement.Client.View
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-
+            if (checkPassword())
+            {
+                DialogResult = true;
+            }
         }
+
+        private bool checkPassword()
+        {
+            //TODO
+            //DB Abfrage nach Password
+            //Hier noch weg zu lagern
+            return true;
+        }
+
+        
+
+
     }
 }

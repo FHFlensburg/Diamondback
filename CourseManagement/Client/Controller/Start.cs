@@ -1,19 +1,68 @@
 ﻿using System.Windows;
 using CourseManagement.Client.View;
+using System.Data;
+using CourseManagement.Client.BusinessLogic;
+using System.Windows.Controls;
 
 namespace CourseManagement.Client.Controller
 {
-   public partial class Start : Application
+    public partial class Start : Application
     {
         void App_Startup(object sender, StartupEventArgs e)
         {
-            ///
-            ///
-            ///##
-           // WndLogin startWindow = new WndLogin();
-            //startWindow.Show();
-            WndNewCourse secondWindow = new WndNewCourse();
-            secondWindow.Show();
+
+
+            WndLogin startWindow = new WndLogin();
+            WndIndex mainWindow = new WndIndex();
+            DataTable myDataTable = StudentLogic.getDataTable();
+            mainWindow.dgCourse.DataContext = myDataTable;
+            if (startWindow.ShowDialog() == true)
+            {
+                mainWindow.Show();
+            }
+            else
+            {
+                MessageBox.Show("Falsches Passwort");
+                mainWindow.Close();
+            }
+
+
+
         }
+
+        public static void foo(WndIndex a, SelectionChangedEventArgs e)
+        {
+            if (a.IsLoaded)
+            {
+                try
+                {
+                    if (a.mainRibbon.SelectedIndex == 0)
+                    {
+
+                        DataTable myDataTable = StudentLogic.getDataTable();
+                        a.dgCourse.DataContext = myDataTable;
+                    }
+                    else
+                    {
+                        DataTable myDataTable2 = StudentLogic.getDataTable2();
+                        a.dgCourse.DataContext = myDataTable2;
+
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Test");
+                }
+
+            }
+        }
+
+
+
+
+        //WndNewCourse secondWindow = new WndNewCourse();
+        //secondWindow.Show();
+
     }
 }
+

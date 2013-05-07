@@ -34,6 +34,8 @@ namespace CourseManagement.Client.BusinessLogic
             studentTable.Columns.Add("Test");
             studentTable.Rows.Add("TestWert");
             studentTable.Rows.Add("Testwert2");
+            studentTable.Columns.Add("Test2");
+            //studentTable.
            
             /*foreach (PropertyInfo pi in (new Student()).GetType().GetProperties())
             {
@@ -41,6 +43,14 @@ namespace CourseManagement.Client.BusinessLogic
             }
             studentSet.Tables.Add(studentTable);*/
             return studentTable;
+        }
+        public static DataTable getDataTable2()
+        {
+            DataTable studentTable2 = new DataTable();
+            studentTable2.Columns.Add("Penis");
+            studentTable2.Rows.Add("Vagina");
+            studentTable2.Rows.Add("Vagina2");
+            return studentTable2;
         }
     }
 }

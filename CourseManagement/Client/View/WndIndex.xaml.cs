@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.Windows.Controls.Ribbon;
+using System.Data;
+
 
 namespace CourseManagement.Client.View
 {
@@ -28,19 +30,22 @@ namespace CourseManagement.Client.View
         private void Ribbon_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-            /*
-            Auszulagern nach Controller. Test zur Unterscheidung welcher Tab ausgewählt ist
-            -> funktioniert!
-             * 
-            if (mainRibbon.SelectedIndex == 1)
-            {
-                MessageBox.Show("Winner");
-            }
-            else
-            {
-                MessageBox.Show("Looser");
-            }
-             */
+            Controller.Start.foo(this, e);
+            
+
+            
+            //Auszulagern nach Controller. Test zur Unterscheidung welcher Tab ausgewählt ist
+            //-> funktioniert!
+             
+            //if (mainRibbon.SelectedIndex == 1)
+            //{
+            //    MessageBox.Show("Winner");
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Looser");
+            //}
+             
         }
 
        
