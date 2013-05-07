@@ -52,5 +52,10 @@ namespace CourseManagement.Client.BusinessLogic
             personTable.Rows.Add("Person2");
             return personTable;
         }
+
+        public static DataTable getAllStudents()
+        {
+            return new DataTable();
+        }
     }
 }
