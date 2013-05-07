@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CourseManagement.Client.DB;
 
 
-namespace CourseManagement.Client.DB.Model_EF
+namespace CourseManagement.Client.DB.Model
 {
     public partial class Student : Person
     {

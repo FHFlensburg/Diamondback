@@ -11,7 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using CourseManagement.Client.DB.Model_EF;
+using CourseManagement.Client.BusinessLogic;
+using System.Data;
 
 
 namespace CourseManagement.Client.View
@@ -25,29 +26,9 @@ namespace CourseManagement.Client.View
         {
             InitializeComponent();
         }
+
       
 
-        private void btnSave_Click(object sender, RoutedEventArgs e)
-        {
-            foreach(Student strldk in Student.search("Krueger"))
-            {
-                strldk.setForename(tbRoom.Text);
-                tbCourseNumber.Text += strldk.IBAN + strldk.Birthyear;
-            }
-        }
-
-        private void btnAport_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void tbCourseNumber_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            lblCourseNumber.Content = "";
-                foreach(Student student in Student.search(tbCourseNumber.Text))
-                {
-                    lblCourseNumber.Content += student.Id.ToString() + " | ";
-                }
-        }
+       
     }
 }

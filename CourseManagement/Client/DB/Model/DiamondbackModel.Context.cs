@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CourseManagement.Client.DB.Model_EF
+namespace CourseManagement.Client.DB.Model
 {
     using System;
     using System.Data.Entity;

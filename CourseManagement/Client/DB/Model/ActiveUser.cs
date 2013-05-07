@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CourseManagement.Client.Model
+namespace CourseManagement.Client.DB.Model
 {
     class ActiveUser
     {

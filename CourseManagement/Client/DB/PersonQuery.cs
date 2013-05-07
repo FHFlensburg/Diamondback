@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CourseManagement.Client.DB.Model_EF;
+using CourseManagement.Client.DB.Model;
 
 
 namespace CourseManagement.Client.DB

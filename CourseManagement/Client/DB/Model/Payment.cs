@@ -7,23 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CourseManagement.Client.DB.Model_EF
+namespace CourseManagement.Client.DB.Model
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Student : Person
+    public partial class Payment
     {
-        public Student()
-        {
-            this.Payment = new HashSet<Payment>();
-        }
+        public int Id { get; private set; }
+        public Nullable<bool> IsPaid { get; private set; }
     
-        public string IBAN { get; private set; }
-        public string BIC { get; private set; }
-        public string Depositor { get; private set; }
-        public string NameOfBank { get; private set; }
-    
-        public virtual ICollection<Payment> Payment { get; private set; }
+        public virtual Student Students { get; private set; }
+        public virtual Course Courses { get; private set; }
     }
 }
