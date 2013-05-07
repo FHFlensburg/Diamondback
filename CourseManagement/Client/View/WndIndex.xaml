@@ -8,7 +8,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <r:Ribbon x:Name="mainRibbon"  SelectedIndex="0" SelectionChanged="Ribbon_SelectionChanged">
+        <r:Ribbon x:Name="mainRibbon"  SelectedIndex="2" SelectionChanged="Ribbon_SelectionChanged">
             <!-- Help Pane, located at the right-hand side -->
             <r:Ribbon.HelpPaneContent>
                 <RibbonButton SmallImageSource="Images\help.ico" />
@@ -29,38 +29,38 @@
             <r:RibbonTab x:Name="ribbonCourse" Header="Kurse" KeyTip="K" >
                 <!-- Employee And Payroll group-->
                 <r:RibbonGroup x:Name="ribbongroupCourseNew" Header="Neu">
-                    <r:RibbonMenuButton LargeImageSource="Images\new.ico" Label="Neuer Kurs" />
+                    <r:RibbonButton LargeImageSource="Images\new.ico" Label="Neuer Kurs" Click="RibbonButtonNewCourse_Click"/>
                 </r:RibbonGroup>
                 <r:RibbonGroup x:Name="ribbongroupCourseAdd" Header="Hinzufügen">
-                    <r:RibbonMenuButton SmallImageSource="Images\addParticipant.ico" Label="Teilnehmer" />
-                    <r:RibbonMenuButton SmallImageSource="Images\addRoom.ico" Label="Raum" />
+                    <r:RibbonButton SmallImageSource="Images\addParticipant.ico" Label="Teilnehmer" />
+                    <r:RibbonButton SmallImageSource="Images\addRoom.ico" Label="Raum" />
                 </r:RibbonGroup>
                 <r:RibbonGroup x:Name="ribbonGroupCourseDelete" Header="Löschen">
-                    <r:RibbonMenuButton LargeImageSource="Images\delete.ico" Label="Löschen" />
+                    <r:RibbonButton LargeImageSource="Images\delete.ico" Label="Löschen" />
                 </r:RibbonGroup>
             </r:RibbonTab>
             <!-- Ribbon Tab #2: -->
             <r:RibbonTab x:Name="ribbonPerson" Header="Personen" KeyTip="P">
                 <r:RibbonGroup x:Name="ribbonGroupPersonsNew" Header="Neu">
-                    <r:RibbonMenuButton LargeImageSource="Images\new.ico" Label="Neue Person" />
+                    <r:RibbonButton LargeImageSource="Images\new.ico" Label="Neue Person" Click="RibbonButtonNewPerson_Click"/>
                 </r:RibbonGroup>
                 <r:RibbonGroup x:Name="ribbonGroupPersonsDelete" Header="Löschen">
-                    <r:RibbonMenuButton LargeImageSource="Images\delete.ico" Label="Löschen" />
+                    <r:RibbonButton LargeImageSource="Images\delete.ico" Label="Löschen" />
                 </r:RibbonGroup>
             </r:RibbonTab>
             <!-- Ribbon Tab #3: -->
             <r:RibbonTab x:Name="ribbonRoom" Header="Räume" KeyTip="R">
                 <r:RibbonGroup x:Name="ribbonGroupRoomNew" Header="Neu">
-                    <r:RibbonMenuButton LargeImageSource="Images\new.ico" Label="Neuer Raum" />
+                    <r:RibbonButton LargeImageSource="Images\new.ico" Label="Neuer Raum" Click="RibbonButtonNewRoom_Click"/>
                 </r:RibbonGroup>
                 <r:RibbonGroup x:Name="ribbonGroupRoomDelete" Header="Löschen">
-                    <r:RibbonMenuButton LargeImageSource="Images\delete.ico" Label="Löschen" />
+                    <r:RibbonButton LargeImageSource="Images\delete.ico" Label="Löschen" />
                 </r:RibbonGroup>
             </r:RibbonTab>
             <!-- Ribbon Tab #4: -->
             <r:RibbonTab x:Name="ribbonPayment" Header="Zahlungen" KeyTip="Z">
                 <r:RibbonGroup x:Name="ribbonGroupPaymentBooking" Header="Buchen">
-                    <r:RibbonMenuButton LargeImageSource="Images/booking.ico" Label="Zahlungen buchen" />
+                    <r:RibbonButton LargeImageSource="Images/booking.ico" Label="Zahlungen buchen" />
                 </r:RibbonGroup>
             </r:RibbonTab>
         </r:Ribbon>

@@ -21,14 +21,23 @@ namespace CourseManagement.Client.View
     {
         public WndLogin()
         {
-            InitializeComponent();
+            InitializeComponent(); 
         }
+
+        //Zusammen mit checkPassword auszulagern
+        private int countLoginAttempts = 0; 
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
+            
             if (checkPassword())
             {
                 DialogResult = true;
+            }
+            else
+            {
+                
+                tbPasswordStatus.Text = "Passwort falsch(" + ++countLoginAttempts + ". Versuch)";
             }
         }
 
@@ -39,9 +48,5 @@ namespace CourseManagement.Client.View
             //Hier noch weg zu lagern
             return true;
         }
-
-        
-
-
     }
 }

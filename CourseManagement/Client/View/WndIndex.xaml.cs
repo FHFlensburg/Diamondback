@@ -31,21 +31,26 @@ namespace CourseManagement.Client.View
         {
 
             Controller.Start.foo(this, e);
-            
+            //Noch zu überarbeiten und zu prüfen ob sauberer Stil
+             
+        }
 
-            
-            //Auszulagern nach Controller. Test zur Unterscheidung welcher Tab ausgewählt ist
-            //-> funktioniert!
-             
-            //if (mainRibbon.SelectedIndex == 1)
-            //{
-            //    MessageBox.Show("Winner");
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Looser");
-            //}
-             
+        private void RibbonButtonNewCourse_Click(object sender, RoutedEventArgs e)
+        {
+            WndNewCourse aNewCourse = new WndNewCourse();
+            aNewCourse.ShowDialog();
+        }
+
+        private void RibbonButtonNewPerson_Click(object sender, RoutedEventArgs e)
+        {
+            wndNewPerson aNewPerson = new wndNewPerson();
+            aNewPerson.ShowDialog();
+        }
+
+        private void RibbonButtonNewRoom_Click(object sender, RoutedEventArgs e)
+        {
+            WndNewRoom aNewRoom = new WndNewRoom();
+            aNewRoom.ShowDialog();
         }
 
        

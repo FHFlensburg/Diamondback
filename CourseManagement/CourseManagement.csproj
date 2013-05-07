@@ -122,9 +122,6 @@
     <Compile Include="Client\View\WndNewRoom.xaml.cs">
       <DependentUpon>WndNewRoom.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Client\View\WndDatagridCourse.xaml.cs">
-      <DependentUpon>WndDatagridCourse.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Client\View\WndIndex.xaml.cs">
       <DependentUpon>WndIndex.xaml</DependentUpon>
     </Compile>
@@ -184,10 +181,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Client\View\WndNewRoom.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Client\View\WndDatagridCourse.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

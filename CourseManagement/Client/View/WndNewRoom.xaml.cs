@@ -17,9 +17,9 @@ namespace CourseManagement.Client.View
     /// <summary>
     /// Interaktionslogik für newRoom.xaml
     /// </summary>
-    public partial class newRoom : Window
+    public partial class WndNewRoom : Window
     {
-        public newRoom()
+        public WndNewRoom()
         {
             InitializeComponent();
         }
