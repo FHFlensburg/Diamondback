@@ -18,6 +18,6 @@ namespace CourseManagement.Client.DB.Model
         public Nullable<bool> IsPaid { get; set; }
     
         public virtual Student Students { get; set; }
-        public virtual Course Courses { get; set; }
+        public virtual Course Course { get; set; }
     }
 }

@@ -16,10 +16,10 @@ namespace CourseManagement.Client.DB.Model
     {
         public Tutor()
         {
-            this.Course = new HashSet<Course>();
+            this.Courses = new HashSet<Course>();
         }
     
     
-        public virtual ICollection<Course> Course { get; set; }
+        public virtual ICollection<Course> Courses { get; set; }
     }
 }

@@ -37,8 +37,8 @@ namespace CourseManagement.Client.DB
             DBConfiguration.getContext().Persons.Add(t);
             DBConfiguration.getContext().SaveChanges();
             Course k = DBConfiguration.getContext().Courses.Create();
-            k.Rooms = DBConfiguration.getContext().Rooms.Find(1);
-            k.Tutors =(DBConfiguration.getContext().Persons.Find(1)as Tutor);
+            k.Room = DBConfiguration.getContext().Rooms.Find(1);
+            k.Tutor=(DBConfiguration.getContext().Persons.Find(1)as Tutor);
             DBConfiguration.getContext().Courses.Add(k);
             DBConfiguration.getContext().SaveChanges();
         }

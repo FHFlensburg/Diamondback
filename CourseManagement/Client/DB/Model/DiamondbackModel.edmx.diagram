@@ -10,15 +10,15 @@
         <EntityTypeShape EntityType="DiamondbackModel.Student" Width="1.5" PointX="0.75" PointY="9.5" />
         <EntityTypeShape EntityType="DiamondbackModel.User" Width="1.5" PointX="8.625" PointY="9.5" />
         <EntityTypeShape EntityType="DiamondbackModel.Payment" Width="1.5" PointX="1.5" PointY="1.75" />
-        <EntityTypeShape EntityType="DiamondbackModel.Course" Width="1.5" PointX="3.75" PointY="1" />
         <EntityTypeShape EntityType="DiamondbackModel.Room" Width="1.5" PointX="6" PointY="1.625" />
         <InheritanceConnector EntityType="DiamondbackModel.Tutor" />
         <InheritanceConnector EntityType="DiamondbackModel.Student" />
         <InheritanceConnector EntityType="DiamondbackModel.User" />
-        <AssociationConnector Association="DiamondbackModel.CourseTutor" />
         <AssociationConnector Association="DiamondbackModel.PaymentStudent" />
-        <AssociationConnector Association="DiamondbackModel.PaymentCourse" />
-        <AssociationConnector Association="DiamondbackModel.CourseRoom" />
+        <EntityTypeShape EntityType="DiamondbackModel.Course" Width="1.5" PointX="3.875" PointY="1" />
+        <AssociationConnector Association="DiamondbackModel.TutorCourse" />
+        <AssociationConnector Association="DiamondbackModel.RoomCourse" />
+        <AssociationConnector Association="DiamondbackModel.CoursePayment" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
