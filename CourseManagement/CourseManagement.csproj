@@ -68,10 +68,17 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client\BusinessLogic\CourseLogic.cs" />
+    <Compile Include="Client\BusinessLogic\LogicUtils.cs" />
     <Compile Include="Client\BusinessLogic\StudentLogic.cs" />
+    <Compile Include="Client\BusinessLogic\testLogic.xaml.cs">
+      <DependentUpon>testLogic.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Client\Controller\Start.cs" />
     <Compile Include="Client\DB\DBConfiguration.cs" />
     <Compile Include="Client\DB\DBUtils.cs" />
+    <Compile Include="Client\DB\CourseQuery.cs" />
+    <Compile Include="Client\DB\Model\CourseActions.cs" />
     <Compile Include="Client\DB\PersonQuery.cs" />
     <Compile Include="Client\DB\StudentQuery.cs" />
     <Compile Include="Client\DB\TutorQuery.cs" />
@@ -176,6 +183,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Client\BusinessLogic\testLogic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Client\View\WndNewCourse.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -222,6 +233,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Client\DB\Scripte\DiamondbackModel130508-1.edmx.sql" />
     <Content Include="Client\DB\Scripte\DiamondbackModel130506-3.edmx.sql" />
     <Content Include="Client\DB\Scripte\DiamondbackModel130506-2.edmx.sql" />
     <Content Include="Client\DB\Scripte\DiamondbackModel130506-1.edmx.sql" />

@@ -10,7 +10,8 @@ namespace CourseManagement.Client.Controller
     {
         void App_Startup(object sender, StartupEventArgs e)
         {
-
+            //nur zum testen
+            testLogic testWindow = new testLogic();
             
             WndLogin startWindow = new WndLogin();
             WndIndex mainWindow = new WndIndex();
@@ -19,6 +20,9 @@ namespace CourseManagement.Client.Controller
             if (startWindow.ShowDialog() == true)
             {
                 mainWindow.Show();
+                
+                //nur zum testen
+                testWindow.Show();
             }
         }
 

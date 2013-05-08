@@ -13,14 +13,9 @@
     <EntitySet Name="Persons_Tutor" EntityType="DiamondbackModel.Store.Persons_Tutor" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Persons_Student" EntityType="DiamondbackModel.Store.Persons_Student" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Persons_User" EntityType="DiamondbackModel.Store.Persons_User" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="CourseTutor" EntityType="DiamondbackModel.Store.CourseTutor" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="FK_CourseTutor_Course" Association="DiamondbackModel.Store.FK_CourseTutor_Course">
+    <AssociationSet Name="CourseTutor" Association="DiamondbackModel.Store.CourseTutor">
       <End Role="Course" EntitySet="Courses" />
-      <End Role="CourseTutor" EntitySet="CourseTutor" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CourseTutor_Tutor" Association="DiamondbackModel.Store.FK_CourseTutor_Tutor">
       <End Role="Tutor" EntitySet="Persons_Tutor" />
-      <End Role="CourseTutor" EntitySet="CourseTutor" />
     </AssociationSet>
     <AssociationSet Name="PaymentStudent" Association="DiamondbackModel.Store.PaymentStudent">
       <End Role="Payment" EntitySet="Payments" />
@@ -88,6 +83,7 @@
     <Property Name="MaxMember" Type="decimal" Nullable="true" Precision="3" Scale="0" />
     <Property Name="MinMember" Type="decimal" Nullable="true" Precision="3" Scale="0" />
     <Property Name="ValidityInMonth" Type="decimal" Nullable="true" Precision="3" Scale="0" />
+    <Property Name="Tutors_Id" Type="int" Nullable="false" />
     <Property Name="Rooms_RoomNr" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Rooms">
@@ -128,14 +124,18 @@
     <Property Name="Admin" Type="bit" Nullable="true" />
     <Property Name="Id" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="CourseTutor">
-    <Key>
-      <PropertyRef Name="Course_CourseNr" />
-      <PropertyRef Name="Tutors_Id" />
-    </Key>
-    <Property Name="Course_CourseNr" Type="int" Nullable="false" />
-    <Property Name="Tutors_Id" Type="int" Nullable="false" />
-  </EntityType>
+  <Association Name="CourseTutor">
+    <End Role="Course" Type="DiamondbackModel.Store.Courses" Multiplicity="*" />
+    <End Role="Tutor" Type="DiamondbackModel.Store.Persons_Tutor" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Tutor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Course">
+        <PropertyRef Name="Tutors_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="PaymentStudent">
     <End Role="Payment" Type="DiamondbackModel.Store.Payments" Multiplicity="*" />
     <End Role="Student" Type="DiamondbackModel.Store.Persons_Student" Multiplicity="1" />
@@ -169,30 +169,6 @@
       </Principal>
       <Dependent Role="Course">
         <PropertyRef Name="Rooms_RoomNr" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_CourseTutor_Course">
-    <End Role="Course" Type="DiamondbackModel.Store.Courses" Multiplicity="1" />
-    <End Role="CourseTutor" Type="DiamondbackModel.Store.CourseTutor" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Course">
-        <PropertyRef Name="CourseNr" />
-      </Principal>
-      <Dependent Role="CourseTutor">
-        <PropertyRef Name="Course_CourseNr" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_CourseTutor_Tutor">
-    <End Role="CourseTutor" Type="DiamondbackModel.Store.CourseTutor" Multiplicity="*" />
-    <End Role="Tutor" Type="DiamondbackModel.Store.Persons_Tutor" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Tutor">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="CourseTutor">
-        <PropertyRef Name="Tutors_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -340,7 +316,7 @@
         </EntityType>
         <Association Name="CourseTutor">
           <End Type="DiamondbackModel.Course" Role="Course" Multiplicity="*" />
-          <End Type="DiamondbackModel.Tutor" Role="Tutor" Multiplicity="*" />
+          <End Type="DiamondbackModel.Tutor" Role="Tutor" Multiplicity="1" />
         </Association>
         <Association Name="PaymentStudent">
           <End Type="DiamondbackModel.Payment" Role="Payment" Multiplicity="*" />
@@ -439,12 +415,12 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="CourseTutor" TypeName="DiamondbackModel.CourseTutor" StoreEntitySet="CourseTutor">
-      <EndProperty Name="Course">
-        <ScalarProperty Name="CourseNr" ColumnName="Course_CourseNr" />
-      </EndProperty>
+    <AssociationSetMapping Name="CourseTutor" TypeName="DiamondbackModel.CourseTutor" StoreEntitySet="Courses">
       <EndProperty Name="Tutor">
         <ScalarProperty Name="Id" ColumnName="Tutors_Id" />
+      </EndProperty>
+      <EndProperty Name="Course">
+        <ScalarProperty Name="CourseNr" ColumnName="CourseNr" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="PaymentStudent" TypeName="DiamondbackModel.PaymentStudent" StoreEntitySet="Payments">

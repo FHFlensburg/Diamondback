@@ -16,7 +16,6 @@ namespace CourseManagement.Client.DB.Model
     {
         public Course()
         {
-            this.Tutors = new HashSet<Tutor>();
             this.Payment = new HashSet<Payment>();
         }
     
@@ -30,7 +29,7 @@ namespace CourseManagement.Client.DB.Model
         public Nullable<decimal> MinMember { get; set; }
         public Nullable<decimal> ValidityInMonth { get; set; }
     
-        public virtual ICollection<Tutor> Tutors { get; set; }
+        public virtual Tutor Tutors { get; set; }
         public virtual ICollection<Payment> Payment { get; set; }
         public virtual Room Rooms { get; set; }
     }
