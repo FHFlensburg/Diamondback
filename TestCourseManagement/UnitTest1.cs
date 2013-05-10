@@ -14,17 +14,17 @@ namespace TestCourseManagement
     [TestClass]
     public class UnitTest1
     {
-        //Switches the DB from Diamondback to testdb
+
         
         
         public void tryRoomBooking()
             {
-
+            
                 DBConfiguration.getContext(UnitHelper.getUnitConnectionString());
 
-            StudentQuery.insert(new Student() { Forename = "Tjark" });
+            StudentQuery.insert(new Student() { Forename = "Markus" });
 
-            Assert.AreEqual(StudentQuery.getById(1).Forename, "Tjark");
+            Assert.AreEqual(StudentQuery.search("MARKUS")[0].Forename, "Markus");
             
         }
  
