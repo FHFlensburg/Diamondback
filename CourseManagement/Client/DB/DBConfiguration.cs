@@ -14,15 +14,15 @@ namespace CourseManagement.Client.DB
         private static DiamondbackModelContainer context = null;
 
         
-        private static DiamondbackModelContainer getContext(string dbModelName)
+        public static DiamondbackModelContainer getContext(string dbModelNameOrConnectionString)
         {
-            if (context == null) context = new DiamondbackModelContainer("name="+dbModelName);
+            if (context == null) context = new DiamondbackModelContainer(dbModelNameOrConnectionString);
             return context;
         }
 
         public static DiamondbackModelContainer getContext()
         {
-           return DBConfiguration.getContext("DiamondbackModelContainer");
+           return DBConfiguration.getContext("name=DiamondbackModelContainer");
         }
 
         public static void closeContext()
