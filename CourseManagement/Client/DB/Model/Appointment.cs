@@ -12,16 +12,14 @@ namespace CourseManagement.Client.DB.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Tutor : Person
+    public partial class Appointment
     {
-        public Tutor()
-        {
-            this.Courses = new HashSet<Course>();
-            this.Appointments = new HashSet<Appointment>();
-        }
+        public int Id { get; set; }
+        public System.DateTime StartDate { get; set; }
+        public System.DateTime EndDate { get; set; }
     
-    
-        public virtual ICollection<Course> Courses { get; set; }
-        public virtual ICollection<Appointment> Appointments { get; set; }
+        public virtual Course Courses { get; set; }
+        public virtual Room Rooms { get; set; }
+        public virtual Tutor Tutor { get; set; }
     }
 }

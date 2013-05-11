@@ -17,14 +17,13 @@ namespace CourseManagement.Client.DB.Model
         public Course()
         {
             this.Payments = new HashSet<Payment>();
+            this.Appointment = new HashSet<Appointment>();
         }
     
         public int CourseNr { get; set; }
         public string Title { get; set; }
         public Nullable<decimal> AmountInEuro { get; set; }
         public string Description { get; set; }
-        public Nullable<System.DateTime> StartDate { get; set; }
-        public Nullable<System.DateTime> EndDate { get; set; }
         public Nullable<decimal> MaxMember { get; set; }
         public Nullable<decimal> MinMember { get; set; }
         public Nullable<decimal> ValidityInMonth { get; set; }
@@ -32,5 +31,6 @@ namespace CourseManagement.Client.DB.Model
         public virtual Tutor Tutor { get; set; }
         public virtual Room Room { get; set; }
         public virtual ICollection<Payment> Payments { get; set; }
+        public virtual ICollection<Appointment> Appointment { get; set; }
     }
 }

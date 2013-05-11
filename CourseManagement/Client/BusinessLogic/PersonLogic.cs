@@ -73,8 +73,14 @@ namespace CourseManagement.Client.BusinessLogic
         public static void createNewPerson(string surname, string forename, string city, bool isTutor)
         {
             Person person;
-            if (isTutor) person = new Tutor();
-            else person = new Student();
+            if (isTutor)
+            {
+                person = new Tutor();
+            }
+            else
+            {
+                person = new Student();
+            }
             person.Surname = surname;
             person.Forename = forename;
             person.City = city;

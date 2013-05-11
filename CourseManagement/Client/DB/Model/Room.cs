@@ -17,6 +17,7 @@ namespace CourseManagement.Client.DB.Model
         public Room()
         {
             this.Courses = new HashSet<Course>();
+            this.Appointment = new HashSet<Appointment>();
         }
     
         public int RoomNr { get; set; }
@@ -27,5 +28,6 @@ namespace CourseManagement.Client.DB.Model
         public string CityCode { get; set; }
     
         public virtual ICollection<Course> Courses { get; set; }
+        public virtual ICollection<Appointment> Appointment { get; set; }
     }
 }

@@ -11,5 +11,8 @@ namespace CourseManagement.Client.BusinessLogic
     /// </summary>
     public class ActiveUser
     {
+        private int passwordFailCounter = 0;
+
+
     }
 }

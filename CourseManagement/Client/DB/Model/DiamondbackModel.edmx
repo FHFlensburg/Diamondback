@@ -10,6 +10,7 @@
     <EntitySet Name="Payments" EntityType="DiamondbackModel.Store.Payments" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Rooms" EntityType="DiamondbackModel.Store.Rooms" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Courses" EntityType="DiamondbackModel.Store.Courses" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Appointments" EntityType="DiamondbackModel.Store.Appointments" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Persons_Student" EntityType="DiamondbackModel.Store.Persons_Student" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Persons_Tutor" EntityType="DiamondbackModel.Store.Persons_Tutor" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Persons_User" EntityType="DiamondbackModel.Store.Persons_User" store:Type="Tables" Schema="dbo" />
@@ -28,6 +29,18 @@
     <AssociationSet Name="CoursePayment" Association="DiamondbackModel.Store.CoursePayment">
       <End Role="Course" EntitySet="Courses" />
       <End Role="Payment" EntitySet="Payments" />
+    </AssociationSet>
+    <AssociationSet Name="CourseAppointment" Association="DiamondbackModel.Store.CourseAppointment">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="Appointment" EntitySet="Appointments" />
+    </AssociationSet>
+    <AssociationSet Name="RoomAppointment" Association="DiamondbackModel.Store.RoomAppointment">
+      <End Role="Room" EntitySet="Rooms" />
+      <End Role="Appointment" EntitySet="Appointments" />
+    </AssociationSet>
+    <AssociationSet Name="TutorAppointment" Association="DiamondbackModel.Store.TutorAppointment">
+      <End Role="Tutor" EntitySet="Persons_Tutor" />
+      <End Role="Appointment" EntitySet="Appointments" />
     </AssociationSet>
     <AssociationSet Name="FK_Student_inherits_Person" Association="DiamondbackModel.Store.FK_Student_inherits_Person">
       <End Role="Person" EntitySet="Persons" />
@@ -89,13 +102,22 @@
     <Property Name="Title" Type="nvarchar(max)" Nullable="true" />
     <Property Name="AmountInEuro" Type="decimal" Nullable="true" Precision="6" Scale="2" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="StartDate" Type="datetime" Nullable="true" />
-    <Property Name="EndDate" Type="datetime" Nullable="true" />
     <Property Name="MaxMember" Type="decimal" Nullable="true" Precision="3" Scale="0" />
     <Property Name="MinMember" Type="decimal" Nullable="true" Precision="3" Scale="0" />
     <Property Name="ValidityInMonth" Type="decimal" Nullable="true" Precision="3" Scale="0" />
     <Property Name="Tutor_Id" Type="int" Nullable="false" />
     <Property Name="Room_RoomNr" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Appointments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="Courses_CourseNr" Type="int" Nullable="false" />
+    <Property Name="Rooms_RoomNr" Type="int" Nullable="false" />
+    <Property Name="Tutor_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Persons_Student">
     <Key>
@@ -172,6 +194,42 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="CourseAppointment">
+    <End Role="Course" Type="DiamondbackModel.Store.Courses" Multiplicity="1" />
+    <End Role="Appointment" Type="DiamondbackModel.Store.Appointments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="CourseNr" />
+      </Principal>
+      <Dependent Role="Appointment">
+        <PropertyRef Name="Courses_CourseNr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RoomAppointment">
+    <End Role="Room" Type="DiamondbackModel.Store.Rooms" Multiplicity="1" />
+    <End Role="Appointment" Type="DiamondbackModel.Store.Appointments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Room">
+        <PropertyRef Name="RoomNr" />
+      </Principal>
+      <Dependent Role="Appointment">
+        <PropertyRef Name="Rooms_RoomNr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TutorAppointment">
+    <End Role="Tutor" Type="DiamondbackModel.Store.Persons_Tutor" Multiplicity="1" />
+    <End Role="Appointment" Type="DiamondbackModel.Store.Appointments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tutor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Appointment">
+        <PropertyRef Name="Tutor_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Student_inherits_Person">
     <End Role="Person" Type="DiamondbackModel.Store.Persons" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -239,6 +297,19 @@
             <End Role="Course" EntitySet="Courses" />
             <End Role="Payment" EntitySet="Payments" />
           </AssociationSet>
+          <EntitySet Name="Appointments" EntityType="DiamondbackModel.Appointment" />
+          <AssociationSet Name="CourseAppointment" Association="DiamondbackModel.CourseAppointment">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="Appointment" EntitySet="Appointments" />
+          </AssociationSet>
+          <AssociationSet Name="RoomAppointment" Association="DiamondbackModel.RoomAppointment">
+            <End Role="Room" EntitySet="Rooms" />
+            <End Role="Appointment" EntitySet="Appointments" />
+          </AssociationSet>
+          <AssociationSet Name="TutorAppointment" Association="DiamondbackModel.TutorAppointment">
+            <End Role="Tutor" EntitySet="Persons" />
+            <End Role="Appointment" EntitySet="Appointments" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Person" Abstract="true">
           <Key>
@@ -261,6 +332,7 @@
         </EntityType>
         <EntityType Name="Tutor" BaseType="DiamondbackModel.Person">
           <NavigationProperty Name="Courses" Relationship="DiamondbackModel.TutorCourse" FromRole="Tutor" ToRole="Course" />
+          <NavigationProperty Name="Appointments" Relationship="DiamondbackModel.TutorAppointment" FromRole="Tutor" ToRole="Appointment" />
         </EntityType>
         <EntityType Name="Student" BaseType="DiamondbackModel.Person">
           <Property Type="String" Name="IBAN" Nullable="true" cg:SetterAccess="Public" cg:GetterAccess="Public" />
@@ -296,6 +368,7 @@
           <Property Type="String" Name="City" Nullable="true" cg:SetterAccess="Public" cg:GetterAccess="Public" />
           <Property Type="String" Name="CityCode" Nullable="true" cg:SetterAccess="Public" cg:GetterAccess="Public" />
           <NavigationProperty Name="Courses" Relationship="DiamondbackModel.RoomCourse" FromRole="Room" ToRole="Course" />
+          <NavigationProperty Name="Appointment" Relationship="DiamondbackModel.RoomAppointment" FromRole="Room" ToRole="Appointment" />
         </EntityType>
         <Association Name="PaymentStudent">
           <End Type="DiamondbackModel.Payment" Role="Payment" Multiplicity="*" />
@@ -309,14 +382,13 @@
           <Property Type="String" Name="Title" Nullable="true" cg:GetterAccess="Public" cg:SetterAccess="Public" />
           <Property Type="Decimal" Name="AmountInEuro" Nullable="true" cg:GetterAccess="Public" cg:SetterAccess="Public" Precision="6" Scale="2" />
           <Property Type="String" Name="Description" Nullable="true" cg:GetterAccess="Public" cg:SetterAccess="Public" />
-          <Property Type="DateTime" Name="StartDate" Nullable="true" cg:GetterAccess="Public" cg:SetterAccess="Public" />
-          <Property Type="DateTime" Name="EndDate" Nullable="true" cg:GetterAccess="Public" cg:SetterAccess="Public" />
           <Property Type="Decimal" Name="MaxMember" Nullable="true" cg:GetterAccess="Public" cg:SetterAccess="Public" Precision="3" Scale="0" />
           <Property Type="Decimal" Name="MinMember" Nullable="true" cg:GetterAccess="Public" cg:SetterAccess="Public" Precision="3" Scale="0" />
           <Property Type="Decimal" Name="ValidityInMonth" Nullable="true" cg:GetterAccess="Public" cg:SetterAccess="Public" Precision="3" Scale="0" />
           <NavigationProperty Name="Tutor" Relationship="DiamondbackModel.TutorCourse" FromRole="Course" ToRole="Tutor" />
           <NavigationProperty Name="Room" Relationship="DiamondbackModel.RoomCourse" FromRole="Course" ToRole="Room" />
           <NavigationProperty Name="Payments" Relationship="DiamondbackModel.CoursePayment" FromRole="Course" ToRole="Payment" />
+          <NavigationProperty Name="Appointment" Relationship="DiamondbackModel.CourseAppointment" FromRole="Course" ToRole="Appointment" />
         </EntityType>
         <Association Name="TutorCourse">
           <End Type="DiamondbackModel.Tutor" Role="Tutor" Multiplicity="1" />
@@ -329,6 +401,29 @@
         <Association Name="CoursePayment">
           <End Type="DiamondbackModel.Course" Role="Course" Multiplicity="1" />
           <End Type="DiamondbackModel.Payment" Role="Payment" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Appointment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="StartDate" Nullable="false" />
+          <Property Type="DateTime" Name="EndDate" Nullable="false" />
+          <NavigationProperty Name="Courses" Relationship="DiamondbackModel.CourseAppointment" FromRole="Appointment" ToRole="Course" />
+          <NavigationProperty Name="Rooms" Relationship="DiamondbackModel.RoomAppointment" FromRole="Appointment" ToRole="Room" />
+          <NavigationProperty Name="Tutor" Relationship="DiamondbackModel.TutorAppointment" FromRole="Appointment" ToRole="Tutor" />
+        </EntityType>
+        <Association Name="CourseAppointment">
+          <End Type="DiamondbackModel.Course" Role="Course" Multiplicity="1" />
+          <End Type="DiamondbackModel.Appointment" Role="Appointment" Multiplicity="*" />
+        </Association>
+        <Association Name="RoomAppointment">
+          <End Type="DiamondbackModel.Room" Role="Room" Multiplicity="1" />
+          <End Type="DiamondbackModel.Appointment" Role="Appointment" Multiplicity="*" />
+        </Association>
+        <Association Name="TutorAppointment">
+          <End Type="DiamondbackModel.Tutor" Role="Tutor" Multiplicity="1" />
+          <End Type="DiamondbackModel.Appointment" Role="Appointment" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -407,11 +502,18 @@
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="AmountInEuro" ColumnName="AmountInEuro" />
           <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
           <ScalarProperty Name="MaxMember" ColumnName="MaxMember" />
           <ScalarProperty Name="MinMember" ColumnName="MinMember" />
           <ScalarProperty Name="ValidityInMonth" ColumnName="ValidityInMonth" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Appointments">
+      <EntityTypeMapping TypeName="IsTypeOf(DiamondbackModel.Appointment)">
+        <MappingFragment StoreEntitySet="Appointments">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -444,6 +546,30 @@
         <ScalarProperty Name="CourseNr" ColumnName="Course_CourseNr" />
       </EndProperty>
       <EndProperty Name="Payment">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CourseAppointment" TypeName="DiamondbackModel.CourseAppointment" StoreEntitySet="Appointments">
+      <EndProperty Name="Course">
+        <ScalarProperty Name="CourseNr" ColumnName="Courses_CourseNr" />
+      </EndProperty>
+      <EndProperty Name="Appointment">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RoomAppointment" TypeName="DiamondbackModel.RoomAppointment" StoreEntitySet="Appointments">
+      <EndProperty Name="Room">
+        <ScalarProperty Name="RoomNr" ColumnName="Rooms_RoomNr" />
+      </EndProperty>
+      <EndProperty Name="Appointment">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TutorAppointment" TypeName="DiamondbackModel.TutorAppointment" StoreEntitySet="Appointments">
+      <EndProperty Name="Tutor">
+        <ScalarProperty Name="Id" ColumnName="Tutor_Id" />
+      </EndProperty>
+      <EndProperty Name="Appointment">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>

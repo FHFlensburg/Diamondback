@@ -1,63 +1,62 @@
-﻿using System;
+﻿using CourseManagement.Client.DB.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CourseManagement.Client.DB.Model;
 
 namespace CourseManagement.Client.DB
 {
-    class TutorQuery
+    class RoomQuery
     {
- 
         /// <summary>
-        /// Get all Users from database.
+        /// Get all Rooms from database.
         /// </summary>
-        /// <returns>List of Tutors</returns>
-        public static List<Tutor> getAll()
+        /// <returns>List of Rooms</returns>
+        public static List<Room> getAll()
         {
-            List<Tutor> qry = (from tutor in DBConfiguration.getContext().Persons.OfType<Tutor>()
-                               select tutor).ToList();
+            List<Room> qry = (from room in DBConfiguration.getContext().Rooms.OfType<Room>()
+                              select room).ToList();
 
             return qry;
         }
 
         /// <summary>
-        /// Add's the submitted Tutor to database.
+        /// Add's the submitted Room to database.
         /// </summary>
-        /// <param name="student"></param>
-        public static void insert(Tutor tutor)
+        /// <param name="room"></param>
+        public static void insert(Room room)
         {
-            DBConfiguration.getContext().Persons.Add(tutor);
+            DBConfiguration.getContext().Rooms.Add(room);
             DBConfiguration.getContext().SaveChanges();
         }
 
         /// <summary>
-        /// Deletes the submitted Tutor from the database.
+        /// Deletes the submitted Room from the database.
         /// </summary>
-        /// <param name="student"></param>
-        public static void delete(Tutor tutor)
+        /// <param name="room"></param>
+        public static void delete(Room room)
         {
-            DBConfiguration.getContext().Persons.Remove(tutor);
+            DBConfiguration.getContext().Rooms.Remove(room);
             DBConfiguration.getContext().SaveChanges();
         }
 
         /// <summary>
-        /// Returns the Tutor who is bound to the given ID.
+        /// Returns the Room who is bound to the given ID.
         /// </summary>
         /// <param name="studentId"></param>
         /// <returns>Student</returns>
-        public static Tutor getById(int tutorId)
+        public static Room getById(int roomId)
         {
-            return (DBConfiguration.getContext().Persons.Find(tutorId)) as Tutor;
+            return (DBConfiguration.getContext().Rooms.Find(roomId)) as Room;
         }
 
         /// <summary>
         /// Saves all changes made on the DataContext.
         /// Parameter is Placeholder for a new database-layer
         /// </summary>
-        /// <param name="student"></param>
-        public static void update(Tutor tutor)
+        /// <param name="room"></param>
+        public static void update(Room room)
         {
             DBConfiguration.getContext().SaveChanges();
         }
@@ -77,7 +76,7 @@ namespace CourseManagement.Client.DB
             {
                 int wert = Convert.ToInt32(like);
                 List<Tutor> listTutor = (from tutor in DBConfiguration.getContext().Persons.OfType<Tutor>()
-                                             select tutor).ToList();
+                                         select tutor).ToList();
                 foreach (Tutor tutor in listTutor)
                 {
                     if (tutor.Id.ToString().Contains(like)) qry.Add(tutor);

@@ -29,5 +29,6 @@ namespace CourseManagement.Client.DB.Model
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Course> Courses { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
     }
 }

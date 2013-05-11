@@ -24,12 +24,34 @@ namespace CourseManagement.Client.BusinessLogic
           
             foreach(Course course in Course.getAll())
             {
-                allCourses.Rows.Add(course.CourseNr, course.StartDate, course.EndDate, null, null,
+                allCourses.Rows.Add(course.CourseNr, null, null,
                     course.Room.RoomNr, course.Tutor.Surname, course.Payments.Count);
             }
             
             
             return allCourses;
+        }
+
+        /// <summary>
+        /// Creates a new Course by the given parameters
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="amountinEuro"></param>
+        /// <param name="description"></param>
+        /// <param name="maxMember"></param>
+        /// <param name="minMember"></param>
+        /// <param name="validityInMonth"></param>
+        public static void createCourse(String title, decimal amountInEuro, String description, decimal maxMember, decimal minMember, decimal validityInMonth)
+        {
+            Course course = new Course();
+            course.Title = title;
+            course.AmountInEuro = amountInEuro;
+            course.Description = description;
+            course.MaxMember = maxMember;
+            course.MinMember = minMember;
+            course.ValidityInMonth = validityInMonth;
+
+            course.addToDB();
         }
     }
 }

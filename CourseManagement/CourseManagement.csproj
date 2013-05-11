@@ -68,6 +68,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client\BusinessLogic\AppointmentLogic.cs" />
     <Compile Include="Client\BusinessLogic\CourseLogic.cs" />
     <Compile Include="Client\BusinessLogic\LogicUtils.cs" />
     <Compile Include="Client\BusinessLogic\PersonLogic.cs" />
@@ -79,9 +80,16 @@
     <Compile Include="Client\DB\DBConfiguration.cs" />
     <Compile Include="Client\DB\DBUtils.cs" />
     <Compile Include="Client\DB\CourseQuery.cs" />
+    <Compile Include="Client\DB\AppointmentQuery.cs" />
+    <Compile Include="Client\DB\Model\Appointment.cs">
+      <DependentUpon>DiamondbackModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Client\DB\Model\CourseActions.cs" />
+    <Compile Include="Client\DB\Model\AppointmentActions.cs" />
     <Compile Include="Client\DB\Model\PersonActions.cs" />
+    <Compile Include="Client\DB\Model\RoomActions.cs" />
     <Compile Include="Client\DB\PersonQuery.cs" />
+    <Compile Include="Client\DB\RoomQuery.cs" />
     <Compile Include="Client\DB\StudentQuery.cs" />
     <Compile Include="Client\DB\TutorQuery.cs" />
     <Compile Include="Client\DB\Model\ContextConstructors.cs" />
@@ -125,6 +133,7 @@
       <DependentUpon>DiamondbackModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Client\DB\Model\UserActions.cs" />
+    <Compile Include="Client\DB\UserQuery.cs" />
     <Compile Include="Client\View\WndNewCourse.xaml.cs">
       <DependentUpon>WndNewCourse.xaml</DependentUpon>
     </Compile>
@@ -235,6 +244,8 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Client\DB\Scripte\DiamondbackModel130511-2.edmx.sql" />
+    <Content Include="Client\DB\Scripte\DiamondbackModel130511-1.edmx.sql" />
     <Content Include="Client\DB\Scripte\DiamondbackModel130508-2.edmx.sql" />
     <Content Include="Client\DB\Scripte\DiamondbackModel130508-1.edmx.sql" />
     <Content Include="Client\DB\Scripte\DiamondbackModel130506-3.edmx.sql" />
