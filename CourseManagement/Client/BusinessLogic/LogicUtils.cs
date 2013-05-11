@@ -18,5 +18,16 @@ namespace CourseManagement.Client.BusinessLogic
             }
             return table;
         }
+
+        /// <summary>
+        /// Returns true if the given string is not null
+        /// and contains the given string 
+        /// </summary>
+        public static bool notNullAndContains(string stringToCheck, string like)
+        {
+            bool result = false;
+            if(stringToCheck != null && stringToCheck.ToUpper().Contains(like.ToUpper())) result = true;
+            return result;
+        }
     }
 }

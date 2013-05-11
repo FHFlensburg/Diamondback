@@ -64,8 +64,6 @@
                 </r:RibbonGroup>
             </r:RibbonTab>
         </r:Ribbon>
-        <DataGrid x:Name="dgCourse" Margin="10" Grid.Row="1" ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="True">
-               
-        </DataGrid>            
+        <DataGrid x:Name="dgCourse" Margin="10" Grid.Row="1" ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="True"/>
     </Grid>
 </r:RibbonWindow>

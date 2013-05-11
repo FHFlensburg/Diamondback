@@ -10,35 +10,32 @@ namespace CourseManagement.Client.DB.Model
 {
     public partial class Tutor : Person
     {
-        public void addToDB()
+        public override void addToDB()
         {
             TutorQuery.insert(this);
         }
 
-        public static List<Tutor> getAll()
+        public  static new List<Tutor> getAll()
         {
             return TutorQuery.getAll();
         }
 
-        public static void delete(Tutor tutor)
+        public override void delete()
         {
-            TutorQuery.delete(tutor);
+            TutorQuery.delete(this);
         }
 
-        public static void update(Tutor tutor)
+        public override void update()
         {
-            TutorQuery.update(tutor);
+            TutorQuery.update(this);
         }
 
-        public static Tutor getById(int tutorId)
+        public static new Tutor getById(int tutorId)
         {
             return TutorQuery.getById(tutorId);
         }
 
-        public static List<Tutor> search(string like)
-        {
-            return TutorQuery.search(like);
-        }
+
 
 
     }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CourseManagement.Client.DB.Model;
-using CourseManagement.Client.DB;
+
 
 namespace CourseManagement.Client.BusinessLogic
 {
@@ -20,12 +20,14 @@ namespace CourseManagement.Client.BusinessLogic
         {
             DataTable allCourses = LogicUtils.getNewDataTable(
                 "CourseNr", "StartDate", "EndDate", "StartTime", "DateCount", "Room", "Tutor", "StudentCount");
-            /*foreach(Course course in CourseQuery.getAll())
+
+          
+            foreach(Course course in Course.getAll())
             {
                 allCourses.Rows.Add(course.CourseNr, course.StartDate, course.EndDate, null, null,
-                    course.Rooms.RoomNr, course.Tutors.FirstOrDefault().Surname, null);
-            }*/
-            new Course().update(new Course());
+                    course.Room.RoomNr, course.Tutor.Surname, course.Payments.Count);
+            }
+            
             
             return allCourses;
         }

@@ -28,19 +28,9 @@ namespace CourseManagement.Client.DB
         /// <param name="student"></param>
         public static void insert(Course course)
         {
-            //DBConfiguration.getContext().Courses.Add(course);
-            //update(course);
-            Room a = new Room();
-            DBConfiguration.getContext().Rooms.Add(a);
-
-            Tutor t = new Tutor();
-            DBConfiguration.getContext().Persons.Add(t);
-            DBConfiguration.getContext().SaveChanges();
-            Course k = DBConfiguration.getContext().Courses.Create();
-            k.Room = DBConfiguration.getContext().Rooms.Find(1);
-            k.Tutor=(DBConfiguration.getContext().Persons.Find(1)as Tutor);
-            DBConfiguration.getContext().Courses.Add(k);
-            DBConfiguration.getContext().SaveChanges();
+            DBConfiguration.getContext().Courses.Add(course);
+            update(course);
+            
         }
 
         /// <summary>

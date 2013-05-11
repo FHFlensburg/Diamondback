@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="Client\BusinessLogic\CourseLogic.cs" />
     <Compile Include="Client\BusinessLogic\LogicUtils.cs" />
+    <Compile Include="Client\BusinessLogic\PersonLogic.cs" />
     <Compile Include="Client\BusinessLogic\StudentLogic.cs" />
     <Compile Include="Client\BusinessLogic\testLogic.xaml.cs">
       <DependentUpon>testLogic.xaml</DependentUpon>
@@ -79,6 +80,7 @@
     <Compile Include="Client\DB\DBUtils.cs" />
     <Compile Include="Client\DB\CourseQuery.cs" />
     <Compile Include="Client\DB\Model\CourseActions.cs" />
+    <Compile Include="Client\DB\Model\PersonActions.cs" />
     <Compile Include="Client\DB\PersonQuery.cs" />
     <Compile Include="Client\DB\StudentQuery.cs" />
     <Compile Include="Client\DB\TutorQuery.cs" />
@@ -113,7 +115,7 @@
     <Compile Include="Client\DB\Model\Student.cs">
       <DependentUpon>DiamondbackModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Client\DB\Model\ActiveUser.cs" />
+    <Compile Include="Client\BusinessLogic\ActiveUser.cs" />
     <Compile Include="Client\DB\Model\StudentActions.cs" />
     <Compile Include="Client\DB\Model\Tutor.cs">
       <DependentUpon>DiamondbackModel.tt</DependentUpon>

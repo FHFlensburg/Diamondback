@@ -26,7 +26,22 @@ namespace CourseManagement.Client.BusinessLogic
 
         private void btnTest_Click(object sender, RoutedEventArgs e)
         {
-            dg_Test.DataContext = CourseLogic.getAllCourses();
+           // dg_Test.CanUserAddRows = false;
+            //dg_Test.CanUserDeleteRows = false;
+            dg_Test.IsReadOnly = true;
+            dg_Test.DataContext = PersonLogic.getAllPersons();
+            
+            
+        }
+
+        private void tb_test_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            dg_Test.DataContext = PersonLogic.searchPersons(tb_test.Text);
+        }
+
+        private void btn_test2_Click(object sender, RoutedEventArgs e)
+        {
+            PersonLogic.createNewPerson("tjark", DateTime.Now.ToString(), DateTime.Now.ToString(),false);
         }
 
 

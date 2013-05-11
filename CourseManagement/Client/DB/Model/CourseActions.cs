@@ -8,14 +8,35 @@ namespace CourseManagement.Client.DB.Model
 {
     public partial class Course
     {
-        public List<Course> getAll()
+        public void addToDB()
+        {
+            CourseQuery.insert(this);
+        }
+
+        public static List<Course> getAll()
         {
             return CourseQuery.getAll();
         }
 
-        public void update(Course course)
+        public  void delete()
         {
-            CourseQuery.insert(this);
+            CourseQuery.delete(this);
         }
+
+        public  void update()
+        {
+            CourseQuery.update(this);
+        }
+
+        public static Course getById(int courseNr)
+        {
+            return CourseQuery.getById(courseNr);
+        }
+
+        public static List<Course> search(string like)
+        {
+            return CourseQuery.search(like);
+        }
+
     }
 }

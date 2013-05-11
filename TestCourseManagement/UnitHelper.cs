@@ -14,7 +14,7 @@ namespace TestCourseManagement
     class UnitHelper
     {
         /// <summary>
-        /// Returns the testdb-Context
+        /// Returns the ConnectionString for the testdb-Context
         /// </summary>
         /// <returns></returns>
         public static string getUnitConnectionString()

@@ -10,40 +10,32 @@ namespace CourseManagement.Client.DB.Model
 {
     public partial class Student : Person
     {
-        public void addToDB()
+        public override void addToDB()
         {
             StudentQuery.insert(this);
         }
 
-        public static List<Student> getAll()
+        public static new List<Student> getAll()
         {
             return StudentQuery.getAll();
         }
 
-        public static void delete(Student student)
+        public override void delete()
         {
-            StudentQuery.delete(student);
+            StudentQuery.delete(this);
         }
 
-        public static void update(Student student)
+        public override void update()
         {
-            StudentQuery.update(student);
+            StudentQuery.update(this);
         }
 
-        public static Student getById(int studentId)
+        public static new Student getById(int studentId)
         {
             return StudentQuery.getById(studentId);
         }
 
-        public static List<Student> search(string like)
-        {
-            return StudentQuery.search(like);
-        }
 
-        public void setForename(string forename)
-        {
-            Forename = forename;
-        }
 
     
     }

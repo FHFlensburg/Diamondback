@@ -12,6 +12,7 @@ namespace CourseManagement.Client.Controller
         {
             //nur zum testen
             testLogic testWindow = new testLogic();
+            testWindow.Show();
             
             WndLogin startWindow = new WndLogin();
             WndIndex mainWindow = new WndIndex();
@@ -21,8 +22,7 @@ namespace CourseManagement.Client.Controller
             {
                 mainWindow.Show();
                 
-                //nur zum testen
-                testWindow.Show();
+                
             }
         }
 

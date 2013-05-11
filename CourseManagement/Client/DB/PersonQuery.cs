@@ -11,21 +11,56 @@ namespace CourseManagement.Client.DB
     public static class PersonQuery
     {
         /// <summary>
-        /// 
-        /// Returns a list of all persons in the database.
+        /// Get all Students from database.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List of Students</returns>
         public static List<Person> getAll()
         {
-            return DBConfiguration.getContext().Persons.ToList();
+            List<Person> qry = (from person in DBConfiguration.getContext().Persons
+                                select person).ToList();
+
+            return qry;
         }
 
-        public static Person getById(int personNr)
+        /// <summary>
+        /// Add's the submitted Student to database.
+        /// </summary>
+        /// <param name="student"></param>
+        public static void insert(Person person)
         {
-            return DBConfiguration.getContext().Persons.Find(personNr);
+            DBConfiguration.getContext().Persons.Add(person);
+            DBConfiguration.getContext().SaveChanges();
         }
 
-        
-        
+        /// <summary>
+        /// Deletes the submitted Student from the database.
+        /// </summary>
+        /// <param name="student"></param>
+        public static void delete(Person person)
+        {
+            DBConfiguration.getContext().Persons.Remove(person);
+            DBConfiguration.getContext().SaveChanges();
+        }
+
+        /// <summary>
+        /// Returns the Student who is bound to the given ID.
+        /// </summary>
+        /// <param name="studentId"></param>
+        /// <returns>Student</returns>
+        public static Person getById(int personId)
+        {
+            return (DBConfiguration.getContext().Persons.Find(personId));
+        }
+
+        /// <summary>
+        /// Saves all changes made on the DataContext.
+        /// Parameter is Placeholder for a new database-layer
+        /// </summary>
+        /// <param name="student"></param>
+        public static void update(Person person)
+        {
+            DBConfiguration.getContext().SaveChanges();
+        }
     }
+
 }
