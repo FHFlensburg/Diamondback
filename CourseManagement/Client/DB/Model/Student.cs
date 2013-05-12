@@ -16,7 +16,7 @@ namespace CourseManagement.Client.DB.Model
     {
         public Student()
         {
-            this.Payment = new HashSet<Payment>();
+            this.Payments = new HashSet<Payment>();
         }
     
         public string IBAN { get; set; }
@@ -24,6 +24,6 @@ namespace CourseManagement.Client.DB.Model
         public string Depositor { get; set; }
         public string NameOfBank { get; set; }
     
-        public virtual ICollection<Payment> Payment { get; set; }
+        public virtual ICollection<Payment> Payments { get; set; }
     }
 }

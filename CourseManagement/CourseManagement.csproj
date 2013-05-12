@@ -81,6 +81,7 @@
     <Compile Include="Client\BusinessLogic\LogicUtils.cs" />
     <Compile Include="Client\BusinessLogic\PersonLogic.cs" />
     <Compile Include="Client\BusinessLogic\StudentLogic.cs" />
+    <Compile Include="Client\BusinessLogic\TestData.cs" />
     <Compile Include="Client\BusinessLogic\testLogic.xaml.cs">
       <DependentUpon>testLogic.xaml</DependentUpon>
     </Compile>
@@ -255,6 +256,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Client\DB\Scripte\DiamondbackModel130512-1.edmx.sql" />
     <Content Include="Client\DB\Scripte\DiamondbackModel130511-2.edmx.sql" />
     <Content Include="Client\DB\Scripte\DiamondbackModel130511-1.edmx.sql" />
     <Content Include="Client\DB\Scripte\DiamondbackModel130508-2.edmx.sql" />

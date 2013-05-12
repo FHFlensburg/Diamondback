@@ -1,4 +1,4 @@
-﻿// Default code generation is disabled for model 'C:\Users\chris_000\Documents\FH-Flensburg\6. Semester\Software-Projekt\Diamondback\CourseManagement\Client\DB\Model\DiamondbackModel.edmx'. 
-// To enable default code generation, change the value of the 'Code Generation Strategy' designer
-// property to an alternate value. This property is available in the Properties Window when the model is
-// open in the designer.
+﻿// Die standardmäßige Codegenerierung für Modell 'C:\Users\tjark\Documents\GitHub\Diamondback\CourseManagement\Client\DB\Model\DiamondbackModel.edmx' ist deaktiviert. 
+// Ändern Sie zur Aktivierung der standardmäßigen Codegenerierung den Wert der Designer-Eigenschaft 'Codegenerierungsstrategie'
+// in einen anderen Wert. Diese Eigenschaft ist im Fenster 'Eigenschaften' verfügbar, wenn das Modell
+// im Designer geöffnet ist.
