@@ -16,18 +16,16 @@ namespace CourseManagement.Client.DB.Model
     {
         public Room()
         {
-            this.Courses = new HashSet<Course>();
             this.Appointment = new HashSet<Appointment>();
         }
     
         public int RoomNr { get; set; }
-        public Nullable<decimal> Capacity { get; set; }
+        public Nullable<int> Capacity { get; set; }
         public string Building { get; set; }
         public string Street { get; set; }
         public string City { get; set; }
         public string CityCode { get; set; }
     
-        public virtual ICollection<Course> Courses { get; set; }
         public virtual ICollection<Appointment> Appointment { get; set; }
     }
 }

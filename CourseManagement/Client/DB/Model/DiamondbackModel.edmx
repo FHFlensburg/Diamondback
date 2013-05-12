@@ -289,10 +289,6 @@
             <End Role="Tutor" EntitySet="Persons" />
             <End Role="Course" EntitySet="Courses" />
           </AssociationSet>
-          <AssociationSet Name="RoomCourse" Association="DiamondbackModel.RoomCourse">
-            <End Role="Room" EntitySet="Rooms" />
-            <End Role="Course" EntitySet="Courses" />
-          </AssociationSet>
           <AssociationSet Name="CoursePayment" Association="DiamondbackModel.CoursePayment">
             <End Role="Course" EntitySet="Courses" />
             <End Role="Payment" EntitySet="Payments" />
@@ -304,10 +300,6 @@
           </AssociationSet>
           <AssociationSet Name="RoomAppointment" Association="DiamondbackModel.RoomAppointment">
             <End Role="Room" EntitySet="Rooms" />
-            <End Role="Appointment" EntitySet="Appointments" />
-          </AssociationSet>
-          <AssociationSet Name="TutorAppointment" Association="DiamondbackModel.TutorAppointment">
-            <End Role="Tutor" EntitySet="Persons" />
             <End Role="Appointment" EntitySet="Appointments" />
           </AssociationSet>
         </EntityContainer>
@@ -332,7 +324,6 @@
         </EntityType>
         <EntityType Name="Tutor" BaseType="DiamondbackModel.Person">
           <NavigationProperty Name="Courses" Relationship="DiamondbackModel.TutorCourse" FromRole="Tutor" ToRole="Course" />
-          <NavigationProperty Name="Appointments" Relationship="DiamondbackModel.TutorAppointment" FromRole="Tutor" ToRole="Appointment" />
         </EntityType>
         <EntityType Name="Student" BaseType="DiamondbackModel.Person">
           <Property Type="String" Name="IBAN" Nullable="true" cg:SetterAccess="Public" cg:GetterAccess="Public" />
@@ -362,12 +353,11 @@
             <PropertyRef Name="RoomNr" />
           </Key>
           <Property Type="Int32" Name="RoomNr" Nullable="false" annotation:StoreGeneratedPattern="Identity" cg:SetterAccess="Public" cg:GetterAccess="Public" />
-          <Property Type="Decimal" Name="Capacity" Nullable="true" Precision="3" Scale="0" cg:SetterAccess="Public" cg:GetterAccess="Public" />
+          <Property Type="Int32" Name="Capacity" Nullable="true" cg:SetterAccess="Public" cg:GetterAccess="Public" />
           <Property Type="String" Name="Building" Nullable="true" cg:SetterAccess="Public" cg:GetterAccess="Public" />
           <Property Type="String" Name="Street" Nullable="true" cg:SetterAccess="Public" cg:GetterAccess="Public" />
           <Property Type="String" Name="City" Nullable="true" cg:SetterAccess="Public" cg:GetterAccess="Public" />
           <Property Type="String" Name="CityCode" Nullable="true" cg:SetterAccess="Public" cg:GetterAccess="Public" />
-          <NavigationProperty Name="Courses" Relationship="DiamondbackModel.RoomCourse" FromRole="Room" ToRole="Course" />
           <NavigationProperty Name="Appointment" Relationship="DiamondbackModel.RoomAppointment" FromRole="Room" ToRole="Appointment" />
         </EntityType>
         <Association Name="PaymentStudent">
@@ -382,20 +372,15 @@
           <Property Type="String" Name="Title" Nullable="true" cg:GetterAccess="Public" cg:SetterAccess="Public" />
           <Property Type="Decimal" Name="AmountInEuro" Nullable="true" cg:GetterAccess="Public" cg:SetterAccess="Public" Precision="6" Scale="2" />
           <Property Type="String" Name="Description" Nullable="true" cg:GetterAccess="Public" cg:SetterAccess="Public" />
-          <Property Type="Decimal" Name="MaxMember" Nullable="true" cg:GetterAccess="Public" cg:SetterAccess="Public" Precision="3" Scale="0" />
-          <Property Type="Decimal" Name="MinMember" Nullable="true" cg:GetterAccess="Public" cg:SetterAccess="Public" Precision="3" Scale="0" />
-          <Property Type="Decimal" Name="ValidityInMonth" Nullable="true" cg:GetterAccess="Public" cg:SetterAccess="Public" Precision="3" Scale="0" />
+          <Property Type="Int32" Name="MaxMember" Nullable="true" cg:GetterAccess="Public" cg:SetterAccess="Public" />
+          <Property Type="Int32" Name="MinMember" Nullable="true" cg:GetterAccess="Public" cg:SetterAccess="Public" />
+          <Property Type="Int32" Name="ValidityInMonth" Nullable="true" cg:GetterAccess="Public" cg:SetterAccess="Public" />
           <NavigationProperty Name="Tutor" Relationship="DiamondbackModel.TutorCourse" FromRole="Course" ToRole="Tutor" />
-          <NavigationProperty Name="Room" Relationship="DiamondbackModel.RoomCourse" FromRole="Course" ToRole="Room" />
           <NavigationProperty Name="Payments" Relationship="DiamondbackModel.CoursePayment" FromRole="Course" ToRole="Payment" />
           <NavigationProperty Name="Appointment" Relationship="DiamondbackModel.CourseAppointment" FromRole="Course" ToRole="Appointment" />
         </EntityType>
         <Association Name="TutorCourse">
           <End Type="DiamondbackModel.Tutor" Role="Tutor" Multiplicity="1" />
-          <End Type="DiamondbackModel.Course" Role="Course" Multiplicity="*" />
-        </Association>
-        <Association Name="RoomCourse">
-          <End Type="DiamondbackModel.Room" Role="Room" Multiplicity="1" />
           <End Type="DiamondbackModel.Course" Role="Course" Multiplicity="*" />
         </Association>
         <Association Name="CoursePayment">
@@ -411,7 +396,6 @@
           <Property Type="DateTime" Name="EndDate" Nullable="false" />
           <NavigationProperty Name="Courses" Relationship="DiamondbackModel.CourseAppointment" FromRole="Appointment" ToRole="Course" />
           <NavigationProperty Name="Rooms" Relationship="DiamondbackModel.RoomAppointment" FromRole="Appointment" ToRole="Room" />
-          <NavigationProperty Name="Tutor" Relationship="DiamondbackModel.TutorAppointment" FromRole="Appointment" ToRole="Tutor" />
         </EntityType>
         <Association Name="CourseAppointment">
           <End Type="DiamondbackModel.Course" Role="Course" Multiplicity="1" />
@@ -419,10 +403,6 @@
         </Association>
         <Association Name="RoomAppointment">
           <End Type="DiamondbackModel.Room" Role="Room" Multiplicity="1" />
-          <End Type="DiamondbackModel.Appointment" Role="Appointment" Multiplicity="*" />
-        </Association>
-        <Association Name="TutorAppointment">
-          <End Type="DiamondbackModel.Tutor" Role="Tutor" Multiplicity="1" />
           <End Type="DiamondbackModel.Appointment" Role="Appointment" Multiplicity="*" />
         </Association>
       </Schema>
@@ -533,14 +513,6 @@
         <ScalarProperty Name="CourseNr" ColumnName="CourseNr" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="RoomCourse" TypeName="DiamondbackModel.RoomCourse" StoreEntitySet="Courses">
-      <EndProperty Name="Room">
-        <ScalarProperty Name="RoomNr" ColumnName="Room_RoomNr" />
-      </EndProperty>
-      <EndProperty Name="Course">
-        <ScalarProperty Name="CourseNr" ColumnName="CourseNr" />
-      </EndProperty>
-    </AssociationSetMapping>
     <AssociationSetMapping Name="CoursePayment" TypeName="DiamondbackModel.CoursePayment" StoreEntitySet="Payments">
       <EndProperty Name="Course">
         <ScalarProperty Name="CourseNr" ColumnName="Course_CourseNr" />
@@ -560,14 +532,6 @@
     <AssociationSetMapping Name="RoomAppointment" TypeName="DiamondbackModel.RoomAppointment" StoreEntitySet="Appointments">
       <EndProperty Name="Room">
         <ScalarProperty Name="RoomNr" ColumnName="Rooms_RoomNr" />
-      </EndProperty>
-      <EndProperty Name="Appointment">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="TutorAppointment" TypeName="DiamondbackModel.TutorAppointment" StoreEntitySet="Appointments">
-      <EndProperty Name="Tutor">
-        <ScalarProperty Name="Id" ColumnName="Tutor_Id" />
       </EndProperty>
       <EndProperty Name="Appointment">
         <ScalarProperty Name="Id" ColumnName="Id" />

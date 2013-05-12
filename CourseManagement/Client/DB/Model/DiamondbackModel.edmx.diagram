@@ -17,12 +17,10 @@
         <AssociationConnector Association="DiamondbackModel.PaymentStudent" />
         <EntityTypeShape EntityType="DiamondbackModel.Course" Width="1.5" PointX="3.875" PointY="1" />
         <AssociationConnector Association="DiamondbackModel.TutorCourse" />
-        <AssociationConnector Association="DiamondbackModel.RoomCourse" />
         <AssociationConnector Association="DiamondbackModel.CoursePayment" />
         <EntityTypeShape EntityType="DiamondbackModel.Appointment" Width="1.5" PointX="6" PointY="4.5" />
         <AssociationConnector Association="DiamondbackModel.CourseAppointment" />
         <AssociationConnector Association="DiamondbackModel.RoomAppointment" />
-        <AssociationConnector Association="DiamondbackModel.TutorAppointment" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

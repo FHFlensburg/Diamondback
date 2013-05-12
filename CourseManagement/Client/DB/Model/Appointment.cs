@@ -20,6 +20,5 @@ namespace CourseManagement.Client.DB.Model
     
         public virtual Course Courses { get; set; }
         public virtual Room Rooms { get; set; }
-        public virtual Tutor Tutor { get; set; }
     }
 }

@@ -24,12 +24,11 @@ namespace CourseManagement.Client.DB.Model
         public string Title { get; set; }
         public Nullable<decimal> AmountInEuro { get; set; }
         public string Description { get; set; }
-        public Nullable<decimal> MaxMember { get; set; }
-        public Nullable<decimal> MinMember { get; set; }
-        public Nullable<decimal> ValidityInMonth { get; set; }
+        public Nullable<int> MaxMember { get; set; }
+        public Nullable<int> MinMember { get; set; }
+        public Nullable<int> ValidityInMonth { get; set; }
     
         public virtual Tutor Tutor { get; set; }
-        public virtual Room Room { get; set; }
         public virtual ICollection<Payment> Payments { get; set; }
         public virtual ICollection<Appointment> Appointment { get; set; }
     }

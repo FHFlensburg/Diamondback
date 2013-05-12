@@ -17,11 +17,9 @@ namespace CourseManagement.Client.DB.Model
         public Tutor()
         {
             this.Courses = new HashSet<Course>();
-            this.Appointments = new HashSet<Appointment>();
         }
     
     
         public virtual ICollection<Course> Courses { get; set; }
-        public virtual ICollection<Appointment> Appointments { get; set; }
     }
 }
