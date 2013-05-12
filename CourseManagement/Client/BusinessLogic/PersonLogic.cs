@@ -8,25 +8,38 @@ using System.Data;
 
 namespace CourseManagement.Client.BusinessLogic
 {
-    public static class PersonLogic
+    public class PersonLogic:AbstractLogic
     {
+        private PersonLogic() { }
+
+        /// <summary>
+        /// Getting an instance of PersonLogic is only possible if
+        /// a user is logged in.
+        /// </summary>
+        /// <returns></returns>
+        public static PersonLogic getInstance()
+        {
+            PersonLogic temp = null;
+            if (ActiveUser.userIsLoggedIn()) temp = new PersonLogic();
+            return temp;
+        }
 
         /// <summary>
         /// Returns a DataTable containing all Person in DB
         /// </summary>
         /// <returns></returns>
-        public static DataTable getAllPersons()
+        public override DataTable getAll()
         {
-            DataTable allStudents = generatatePersonTable();
+            DataTable allPersons = generatatePersonTable();
 
 
             foreach (Person person in Person.getAll())
             {
-                allStudents.Rows.Add(
+                allPersons.Rows.Add(
                 person.Id, person.Surname, person.Forename, person.City);
             }
 
-            return allStudents;
+            return allPersons;
         }
 
 
@@ -36,7 +49,7 @@ namespace CourseManagement.Client.BusinessLogic
         /// </summary>
         /// <param name="search"></param>
         /// <returns></returns>
-        public static DataTable searchPersons(string search)
+        public override  DataTable search(string search)
         {
             DataTable allPersons = generatatePersonTable();
 
@@ -58,7 +71,7 @@ namespace CourseManagement.Client.BusinessLogic
         /// Generates the standard Person DataTable for this class.
         /// </summary>
         /// <returns></returns>
-        private static DataTable generatatePersonTable()
+        private  DataTable generatatePersonTable()
         {
             return LogicUtils.getNewDataTable(
                 "StudentNr", "Surname", "Forename", "City");
@@ -69,7 +82,7 @@ namespace CourseManagement.Client.BusinessLogic
         /// Creates a new Person in the database
         /// </summary>
         /// <param name="?"></param>
-        public static void createNewPerson(string surname, string forename, string city, bool isTutor)
+        public  void createNewPerson(string surname, string forename, string city, bool isTutor)
         {
             Person person;
             if (isTutor)
@@ -92,7 +105,7 @@ namespace CourseManagement.Client.BusinessLogic
         /// </summary>
         /// <param name="studentNr"></param>
         /// <returns></returns>
-        public static DataTable getPerson(int personNr)
+        public override  DataTable getById(int personNr)
         {
             DataTable dtPerson = generatatePersonTable();
             Person person = Person.getById(personNr);
@@ -114,7 +127,7 @@ namespace CourseManagement.Client.BusinessLogic
         /// <param name="surname"></param>
         /// <param name="forename"></param>
         /// <param name="city"></param>
-        public static void changePersonProperties(int personNr, string surname, string forename, string city, bool isTutor)
+        public void changePersonProperties(int personNr, string surname, string forename, string city, bool isTutor)
         {
             Person person = Person.getById(personNr);
             person.Surname = surname;

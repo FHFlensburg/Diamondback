@@ -32,5 +32,10 @@ namespace CourseManagement.Client.DB.Model
         {
             return UserQuery.getById(userId);
         }
+
+        public static User getByUserName(string userName)
+        {
+            return UserQuery.getByUserName(userName);
+        }
     }
 }

@@ -12,11 +12,24 @@ namespace CourseManagement.Client.BusinessLogic
     /// <summary>
     /// Contains all Methods for the interaction between Co
     /// </summary>
-    public static class CourseLogic
+    public class CourseLogic:AbstractLogic
     {
+        private CourseLogic() { }
+
+        /// <summary>
+        /// Getting an instance of CourseLogic is only possible if
+        /// a user is logged in.
+        /// </summary>
+        /// <returns></returns>
+        public static CourseLogic getInstance()
+        {
+            CourseLogic temp = null;
+            if (ActiveUser.userIsLoggedIn()) temp = new CourseLogic();
+            return temp;
+        }
         
 
-        public static DataTable getAllCourses()
+        public override DataTable getAll()
         {
             DataTable allCourses = LogicUtils.getNewDataTable(
                 "CourseNr", "StartDate", "EndDate", "StartTime", "DateCount", "Room", "Tutor", "StudentCount");
@@ -41,7 +54,7 @@ namespace CourseManagement.Client.BusinessLogic
         /// <param name="maxMember"></param>
         /// <param name="minMember"></param>
         /// <param name="validityInMonth"></param>
-        public static void createCourse(String title, decimal amountInEuro, String description, int maxMember, int minMember, int validityInMonth)
+        public void createCourse(String title, decimal amountInEuro, String description, int maxMember, int minMember, int validityInMonth)
         {
             Course course = new Course();
             course.Title = title;
@@ -52,6 +65,16 @@ namespace CourseManagement.Client.BusinessLogic
             course.ValidityInMonth = validityInMonth;
 
             course.addToDB();
+        }
+
+        public override DataTable getById(int courseNr)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override DataTable search(string search)
+        {
+            throw new NotImplementedException();
         }
     }
 }

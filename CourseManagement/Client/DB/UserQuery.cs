@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CourseManagement.Client.DB
 {
-    class UserQuery
+    public static class UserQuery
     {
         /// <summary>
         /// Get all Users from database.
@@ -90,6 +90,14 @@ namespace CourseManagement.Client.DB
                        || user.Surname.ToUpper().Contains(like)
                        select user).ToList();
             }
+            return qry;
+        }
+
+        public static User getByUserName(string userName)
+        {
+            User qry = (from user in DBConfiguration.getContext().Persons.OfType<User>()
+                        where user.UserName == userName
+                        select user).Single();
             return qry;
         }
     }

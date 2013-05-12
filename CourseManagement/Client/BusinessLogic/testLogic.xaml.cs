@@ -26,22 +26,26 @@ namespace CourseManagement.Client.BusinessLogic
 
         private void btnTest_Click(object sender, RoutedEventArgs e)
         {
+            ActiveUser.login("admin", "admin");
+            PersonLogic pl = PersonLogic.getInstance();
            // dg_Test.CanUserAddRows = false;
             //dg_Test.CanUserDeleteRows = false;
+            
             dg_Test.IsReadOnly = true;
-            dg_Test.DataContext = PersonLogic.getAllPersons();
+            dg_Test.DataContext = pl.getAll();
             
             
         }
 
         private void tb_test_TextChanged(object sender, TextChangedEventArgs e)
         {
-            dg_Test.DataContext = PersonLogic.searchPersons(tb_test.Text);
+            PersonLogic pl = PersonLogic.getInstance();
+            //dg_Test.DataContext = pl.search(tb_test.Text);
         }
 
         private void btn_test2_Click(object sender, RoutedEventArgs e)
         {
-            TestData.generateTestData();
+            //TestData.generateTestData();
         }
 
 

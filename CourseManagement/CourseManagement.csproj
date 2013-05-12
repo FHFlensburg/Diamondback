@@ -78,6 +78,7 @@
     <Compile Include="Client\BusinessLogic\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Client\BusinessLogic\AbstractLogic.cs" />
     <Compile Include="Client\BusinessLogic\LogicUtils.cs" />
     <Compile Include="Client\BusinessLogic\PersonLogic.cs" />
     <Compile Include="Client\BusinessLogic\StudentLogic.cs" />
@@ -182,6 +183,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DiamondbackModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Client\DB\Model\DiamondbackModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DiamondbackModel.edmx</DependentUpon>

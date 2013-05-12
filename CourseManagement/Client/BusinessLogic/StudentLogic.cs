@@ -9,14 +9,28 @@ using System.Reflection;
 
 namespace CourseManagement.Client.BusinessLogic
 {
-    public static class StudentLogic
+
+    public class StudentLogic:AbstractLogic
     {
+        private StudentLogic() { }
+
+        /// <summary>
+        /// Getting an instance of StudentLogic is only possible if
+        /// a user is logged in.
+        /// </summary>
+        /// <returns></returns>
+        public static StudentLogic getInstance()
+        {
+            StudentLogic temp = null;
+            if (ActiveUser.userIsLoggedIn()) temp = new StudentLogic();
+            return temp;
+        }
 
         /// <summary>
         /// Returns a DataTable containing all Students in DB
         /// </summary>
         /// <returns></returns>
-        public static DataTable getAllStudents()
+        public override DataTable getAll()
         {
             DataTable allStudents = generatateStudentTable();
 
@@ -30,7 +44,7 @@ namespace CourseManagement.Client.BusinessLogic
             return allStudents;
         }
 
-        public static DataTable searchStudents(string search)
+        public override DataTable search(string search)
         {
             search = search.ToUpper();
             DataTable allStudents = generatateStudentTable();
@@ -53,7 +67,7 @@ namespace CourseManagement.Client.BusinessLogic
         /// Generates the standard Student DataTable for this class.
         /// </summary>
         /// <returns></returns>
-        private static DataTable generatateStudentTable()
+        private DataTable generatateStudentTable()
         {
             return LogicUtils.getNewDataTable(
                 "StudentNr", "Surname", "Forename", "City");
@@ -64,7 +78,7 @@ namespace CourseManagement.Client.BusinessLogic
         /// Creates a new Student in the database
         /// </summary>
         /// <param name="?"></param>
-        public static void createNewStudent(string surname, string forename, string city)
+        public void createNewStudent(string surname, string forename, string city)
         {
             Student student = new Student();
             student.Surname = surname;
@@ -79,7 +93,7 @@ namespace CourseManagement.Client.BusinessLogic
         /// </summary>
         /// <param name="studentNr"></param>
         /// <returns></returns>
-        public static DataTable getStudent(int studentNr)
+        public override DataTable getById(int studentNr)
         {
             DataTable dtStudent = generatateStudentTable();
             Student student = Student.getById(studentNr);
@@ -92,7 +106,7 @@ namespace CourseManagement.Client.BusinessLogic
 
         }
 
-        public static void changeStudentProperties(int studentNr, string surname, string forename, string city)
+        public void changeStudentProperties(int studentNr, string surname, string forename, string city)
         {
             Student student = Student.getById(studentNr);
             student.Surname = surname;
