@@ -29,5 +29,21 @@ namespace CourseManagement.Client.BusinessLogic
             if(stringToCheck != null && stringToCheck.ToUpper().Contains(like.ToUpper())) result = true;
             return result;
         }
+
+        /// <summary>
+        /// Returns true if the given int? is not null
+        /// and cointains the given string
+        /// </summary>
+        /// <param name="intToCheck"></param>
+        /// <param name="like"></param>
+        /// <returns></returns>
+        public static bool notNullAndContains(int? intToCheck, string like)
+        {
+            bool result = false;
+            if (intToCheck.HasValue) result = notNullAndContains(intToCheck.ToString(), like);
+            return result;
+        }
+
+
     }
 }

@@ -8,7 +8,7 @@ using System.Data;
 
 namespace CourseManagement.Client.BusinessLogic
 {
-    class PersonLogic
+    public static class PersonLogic
     {
 
         /// <summary>
@@ -38,14 +38,13 @@ namespace CourseManagement.Client.BusinessLogic
         /// <returns></returns>
         public static DataTable searchPersons(string search)
         {
-            search = search.ToUpper();
             DataTable allPersons = generatatePersonTable();
 
             foreach (Person person in Person.getAll())
             {
                 if (LogicUtils.notNullAndContains(person.Forename,search)
                     || LogicUtils.notNullAndContains(person.Surname, search)
-                    || person.Id.ToString().Contains(search))
+                    || LogicUtils.notNullAndContains(person.Id, search))
                 {
                     allPersons.Rows.Add(
                     person.Id, person.Surname, person.Forename, person.City);
