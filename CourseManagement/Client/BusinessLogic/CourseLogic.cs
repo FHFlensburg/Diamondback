@@ -25,7 +25,7 @@ namespace CourseManagement.Client.BusinessLogic
             foreach(Course course in Course.getAll())
             {
                 allCourses.Rows.Add(course.CourseNr, null, null,
-                    course.Room.RoomNr, course.Tutor.Surname, course.Payments.Count);
+                    course.Tutor.Surname, course.Payments.Count);
             }
             
             
@@ -41,7 +41,7 @@ namespace CourseManagement.Client.BusinessLogic
         /// <param name="maxMember"></param>
         /// <param name="minMember"></param>
         /// <param name="validityInMonth"></param>
-        public static void createCourse(String title, decimal amountInEuro, String description, decimal maxMember, decimal minMember, decimal validityInMonth)
+        public static void createCourse(String title, decimal amountInEuro, String description, int maxMember, int minMember, int validityInMonth)
         {
             Course course = new Course();
             course.Title = title;

@@ -17,6 +17,8 @@ namespace CourseManagement.Client.DB.Model
         public int Id { get; set; }
         public System.DateTime StartDate { get; set; }
         public System.DateTime EndDate { get; set; }
+        public int Course_CourseNr { get; set; }
+        public int Room_RoomNr { get; set; }
     
         public virtual Course Courses { get; set; }
         public virtual Room Rooms { get; set; }

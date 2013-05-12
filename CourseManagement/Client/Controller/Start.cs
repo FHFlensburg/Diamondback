@@ -24,6 +24,9 @@ namespace CourseManagement.Client.Controller
                 
                 
             }
+
+            Form1 form1 = new Form1();
+            form1.ShowDialog();
         }
 
         public static void foo(WndIndex a, SelectionChangedEventArgs e)
