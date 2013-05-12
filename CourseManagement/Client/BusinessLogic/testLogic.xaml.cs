@@ -41,7 +41,7 @@ namespace CourseManagement.Client.BusinessLogic
 
         private void btn_test2_Click(object sender, RoutedEventArgs e)
         {
-            PersonLogic.createNewPerson("tjark", DateTime.Now.ToString(), DateTime.Now.ToString(),false);
+            PersonLogic.createNewPerson("tjark", "-1", DateTime.Now.ToString(),false);
         }
 
 
