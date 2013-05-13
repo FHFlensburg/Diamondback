@@ -30,7 +30,7 @@ namespace CourseManagement.Client.View
         private void Ribbon_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-            Controller.Start.foo(this, e);
+            Controller.Start.viewChanged(this, e);
             //Noch zu überarbeiten und zu prüfen ob sauberer Stil
              
         }
@@ -51,6 +51,24 @@ namespace CourseManagement.Client.View
         {
             WndNewRoom aNewRoom = new WndNewRoom();
             aNewRoom.ShowDialog();
+        }
+
+        private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (sender != null)
+            {
+                try
+                {
+                    WndParticipant2Course aNewAllocation = new WndParticipant2Course();
+                    //next one throws exception, needs some polish
+                    //aNewAllocation.dgParticipant.DataContext = this.dgCourse.DataContext;
+                    aNewAllocation.ShowDialog();
+                }
+                catch
+                {
+                    MessageBox.Show("Something went wrong");
+                }
+            }
         }
 
        

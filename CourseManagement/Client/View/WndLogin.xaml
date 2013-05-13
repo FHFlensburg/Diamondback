@@ -11,7 +11,7 @@
             <StackPanel Margin="10" Width="100">
                 <Label x:Name="lblPassword" Content="Passwort" Background="#FF2D2D30" Foreground="White"  />
                 <PasswordBox x:Name="pwbPassword" Margin="2"/>
-                <Button x:Name="btnLogin" Content="Login" Click="btnLogin_Click" Margin="10"/>
+                <Button x:Name="btnLogin" Content="Login" Click="btnLogin_Click" Margin="10" IsDefault="True"/>
             </StackPanel>
         </StackPanel>
         <Image x:Name="imgLogo" HorizontalAlignment="Left" Height="100" Margin="56,41,0,0" VerticalAlignment="Top" Width="195" Source="Images/logoPlatzhalter.png" Opacity="0.2"/>

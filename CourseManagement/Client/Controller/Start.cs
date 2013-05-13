@@ -18,45 +18,55 @@ namespace CourseManagement.Client.Controller
             
             WndLogin startWindow = new WndLogin();
             WndIndex mainWindow = new WndIndex();
-            //DataTable myDataTable = StudentLogic.getInstance().getAll();
-            //mainWindow.dgCourse.DataContext = myDataTable;
             if (startWindow.ShowDialog() == true)
             {
                 mainWindow.Show();
-                
-                
             }
 
             Form1 form1 = new Form1();
             form1.ShowDialog();
         }
 
-        public static void foo(WndIndex a, SelectionChangedEventArgs e)
+        public static void viewChanged(WndIndex mainWindow, SelectionChangedEventArgs e)
         {
-            if (a.IsLoaded)
+            /// <summary>
+            /// Manages which of the DataTables are shown in the datagrid of the view
+            /// just for test here, needs to be placed better^^
+            /// </summary>
+            /// <returns></returns>
+
+            DataTable dt4Grid = null;
+            if (mainWindow.IsLoaded)
             {
                 try
                 {
-                    if (a.mainRibbon.SelectedIndex == 0)
+                    switch (mainWindow.mainRibbon.SelectedIndex)
                     {
-
-                        DataTable myDataTable = StudentLogic.getInstance().getAll();
-                        a.dgCourse.DataContext = myDataTable;
-                    }
-                    else
-                    {
-                        DataTable myDataTable2 = StudentLogic.getInstance().getAll();
-                        a.dgCourse.DataContext = myDataTable2;
-
+                        case 0:
+                            dt4Grid = CourseLogic.getInstance().getAll();
+                            mainWindow.dgCourse.DataContext = dt4Grid;
+                            break;
+                        case 1:
+                            dt4Grid = StudentLogic.getInstance().getAll();
+                            mainWindow.dgCourse.DataContext = dt4Grid;
+                            break;
+                        case 2:
+                            dt4Grid = RoomLogic.getInstance().getAll();
+                            mainWindow.dgCourse.DataContext = dt4Grid;
+                            break;
+                        default:
+                            mainWindow.dgCourse.DataContext = null;
+                            break;
                     }
                 }
                 catch
                 {
-                    MessageBox.Show("Test");
+                    MessageBox.Show("Error");
                 }
 
             }
         }
+        
 
 
 

@@ -82,6 +82,9 @@
     <Compile Include="Client\BusinessLogic\LogicUtils.cs" />
     <Compile Include="Client\BusinessLogic\RoomLogic.cs" />
     <Compile Include="Client\BusinessLogic\UserLogic.cs" />
+    <Compile Include="Client\View\WndParticipant2Course.xaml.cs">
+      <DependentUpon>WndParticipant2Course.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GitHub\PersonLogic.cs" />
     <Compile Include="Client\BusinessLogic\StudentLogic.cs" />
     <Compile Include="Client\BusinessLogic\TestData.cs" />
@@ -234,6 +237,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Client\View\WndParticipant2Course.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Client\View\Images\todo.png" />
@@ -272,6 +279,7 @@
     <Content Include="Client\DB\Scripte\DiamondbackModel130430-2.edmx.sql" />
     <Content Include="Client\DB\Scripte\DiamondbackModel130430-1.edmx.sql" />
     <Content Include="Client\DB\Scripte\DiamondbackModel130503-1.edmx.sql" />
+    <Resource Include="Client\View\Images\change.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
