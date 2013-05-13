@@ -10,6 +10,7 @@ namespace CourseManagement.Client.BusinessLogic
 {
     class RoomLogic:AbstractLogic
     {
+        private RoomLogic() { }
 
         /// <summary>
         /// Getting an instance of RoomLogic is only possible if
@@ -33,10 +34,9 @@ namespace CourseManagement.Client.BusinessLogic
         /// <param name="cityCode"></param>
         /// <param name="roomNr"></param>
         /// <param name="street"></param>
-        public void createRoom(Appointment appointment, String building, int capacity, String city, String cityCode, int roomNr, String street)
+        public void createRoom(String building, int capacity, String city, String cityCode, int roomNr, String street)
         {
             Room room = new Room();
-            room.Appointments.Add(appointment);
             room.Building = building;
             room.Capacity = capacity;
             room.City = city;
@@ -53,11 +53,11 @@ namespace CourseManagement.Client.BusinessLogic
         /// <returns></returns>
         public override DataTable getAll()
         {
-            DataTable allRooms = LogicUtils.getNewDataTable("RoomNr", "Building", "Capacity", "Street", "City", "CityCode", "Appointments");
+            DataTable allRooms = LogicUtils.getNewDataTable("RoomNr", "Building", "Capacity", "Street", "City", "CityCode");
 
             foreach(Room room in Room.getAll())
             {
-                allRooms.Rows.Add(room.RoomNr, room.Building, room.Capacity, room.Street, room.City, room.CityCode, room.Appointments);
+                allRooms.Rows.Add(room.RoomNr, room.Building, room.Capacity, room.Street, room.City, room.CityCode);
             }
 
             return allRooms;

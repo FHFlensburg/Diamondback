@@ -37,6 +37,85 @@ namespace CourseManagement.Client.BusinessLogic
             CourseLogic course = CourseLogic.getInstance();
             DataTable dtCourse = course.getAll();
             dgvCourses.DataSource = dtCourse;
+
+            cbxStudentsMAX.SelectedIndex = 0;
+            cbxStudentsMIN.SelectedIndex = 0;
+
+            tbxAmount.Enabled = false;
+            tbxDescription.Enabled = false;
+            tbxTitle.Enabled = false;
+            tbxValidity.Enabled = false;
+            cbxRoom.Enabled = false;
+            cbxStudentsMAX.Enabled = false;
+            cbxStudentsMIN.Enabled = false;
+            cbxTutor.Enabled = false;
+            btnSaveCourse.Visible = false;
+        }
+
+        private void btnCreateCourse_Click(object sender, EventArgs e)
+        {
+            tbxAmount.Enabled = true;
+            tbxDescription.Enabled = true;
+            tbxTitle.Enabled = true;
+            tbxValidity.Enabled = true;
+            cbxRoom.Enabled = true;
+            cbxStudentsMAX.Enabled = true;
+            cbxStudentsMIN.Enabled = true;
+            cbxTutor.Enabled = true;
+            btnCreateCourse.Enabled = false;
+            btnSaveCourse.Visible = true;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            CourseLogic course = CourseLogic.getInstance();
+            course.createNewCourse(tbxTitle.Text,Convert.ToDecimal(tbxAmount.Text),tbxDescription.Text,Convert.ToInt32(cbxStudentsMAX.SelectedItem),
+                                    Convert.ToInt32(cbxStudentsMIN.SelectedItem),cbxTutor.SelectedIndex,1,Convert.ToInt32(tbxValidity.Text));
+            tbxTitle.Clear();
+            tbxDescription.Clear();
+            tbxAmount.Clear();
+            tbxValidity.Clear();
+            cbxRoom.SelectedIndex = 0;
+            cbxStudentsMAX.SelectedIndex = 0;
+            cbxStudentsMIN.SelectedIndex = 0;
+            cbxTutor.SelectedIndex = 0;
+            tbxAmount.Enabled = false;
+            tbxDescription.Enabled = false;
+            tbxTitle.Enabled = false;
+            tbxValidity.Enabled = false;
+            cbxRoom.Enabled = false;
+            cbxStudentsMAX.Enabled = false;
+            cbxStudentsMIN.Enabled = false;
+            cbxTutor.Enabled = false;
+            btnCreateCourse.Enabled = true;
+            btnSaveCourse.Visible = false;
+
+            //Collect all courses from the DB and put them in the courses Datatable
+            DataTable dtCourse = course.getAll();
+            dgvCourses.DataSource = dtCourse;
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            if (dgvCourses.SelectedCells.Count > 0)
+            {
+                int selectedrowindex = dgvCourses.SelectedCells[0].RowIndex;
+
+                DataGridViewRow selectedRow = dgvCourses.Rows[selectedrowindex];
+
+                string courseNr = Convert.ToString(selectedRow.Cells["CourseNr"].Value);
+
+                CourseLogic course = CourseLogic.getInstance();
+                course.delete(Convert.ToInt32(selectedRow.Cells["CourseNr"].Value));
+
+                MessageBox.Show("Kurs Nr. " + courseNr + " wurde gelöscht!");
+
+            }
+
+            //Collect all courses from the DB and put them in the courses Datatable
+            CourseLogic newCourse = CourseLogic.getInstance();
+            DataTable dtCourse = newCourse.getAll();
+            dgvCourses.DataSource = dtCourse;
         }
     }
 }

@@ -55,8 +55,8 @@ namespace CourseManagement.Client.BusinessLogic
         /// <param name="maxMember"></param>
         /// <param name="minMember"></param>
         /// <param name="validityInMonth"></param>
-        public void createCourse(String title, decimal amountInEuro, String description, int maxMember, int minMember, Tutor tutor,
-                                        Appointment appointment, int validityInMonth)
+        public void createNewCourse(String title, decimal amountInEuro, String description, int maxMember, int minMember, int tutor,
+                                        int appointment, int validityInMonth)
         {
             Course course = new Course();
             course.Title = title;
@@ -64,8 +64,8 @@ namespace CourseManagement.Client.BusinessLogic
             course.Description = description;
             course.MaxMember = maxMember;
             course.MinMember = minMember;
-            course.Tutor = tutor;
-            course.Appointments.Add(appointment);
+            course.Tutor = new Tutor();
+            //course.Appointments.Add(Appointment.getById(appointment));
             course.ValidityInMonth = validityInMonth;
 
             course.addToDB();
@@ -79,6 +79,12 @@ namespace CourseManagement.Client.BusinessLogic
         public override DataTable search(string search)
         {
             throw new NotImplementedException();
+        }
+
+        public void delete(int courseNr)
+        {
+            Course course = Course.getById(courseNr);
+            course.delete();
         }
     }
 }

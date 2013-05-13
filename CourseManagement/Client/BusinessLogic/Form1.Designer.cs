@@ -57,7 +57,12 @@
             this.cbxTutor = new System.Windows.Forms.ComboBox();
             this.cbxRoom = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.btnSaveCourse = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.label10 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCourses)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvCourses
@@ -157,6 +162,7 @@
             this.btnCreateCourse.TabIndex = 2;
             this.btnCreateCourse.Text = "Kurs anlegen...";
             this.btnCreateCourse.UseVisualStyleBackColor = true;
+            this.btnCreateCourse.Click += new System.EventHandler(this.btnCreateCourse_Click);
             // 
             // label2
             // 
@@ -221,14 +227,14 @@
             // 
             // tbxAmount
             // 
-            this.tbxAmount.Location = new System.Drawing.Point(157, 263);
+            this.tbxAmount.Location = new System.Drawing.Point(160, 259);
             this.tbxAmount.Name = "tbxAmount";
             this.tbxAmount.Size = new System.Drawing.Size(85, 22);
             this.tbxAmount.TabIndex = 10;
             // 
             // tbxDescription
             // 
-            this.tbxDescription.Location = new System.Drawing.Point(254, 263);
+            this.tbxDescription.Location = new System.Drawing.Point(254, 259);
             this.tbxDescription.Name = "tbxDescription";
             this.tbxDescription.Size = new System.Drawing.Size(166, 22);
             this.tbxDescription.TabIndex = 11;
@@ -335,7 +341,7 @@
             // 
             // tbxValidity
             // 
-            this.tbxValidity.Location = new System.Drawing.Point(653, 263);
+            this.tbxValidity.Location = new System.Drawing.Point(653, 259);
             this.tbxValidity.Name = "tbxValidity";
             this.tbxValidity.Size = new System.Drawing.Size(138, 22);
             this.tbxValidity.TabIndex = 14;
@@ -376,11 +382,53 @@
             this.label9.TabIndex = 18;
             this.label9.Text = "Raum (Nr, Gebäude, Kapazität)";
             // 
+            // btnSaveCourse
+            // 
+            this.btnSaveCourse.Location = new System.Drawing.Point(15, 292);
+            this.btnSaveCourse.Name = "btnSaveCourse";
+            this.btnSaveCourse.Size = new System.Drawing.Size(122, 23);
+            this.btnSaveCourse.TabIndex = 19;
+            this.btnSaveCourse.Text = "SPEICHERN";
+            this.btnSaveCourse.UseVisualStyleBackColor = true;
+            this.btnSaveCourse.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(15, 354);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(1094, 150);
+            this.dataGridView1.TabIndex = 20;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(12, 334);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(60, 17);
+            this.label10.TabIndex = 21;
+            this.label10.Text = "Termine";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(143, 208);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(119, 23);
+            this.button1.TabIndex = 22;
+            this.button1.Text = "Kurs löschen...";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1121, 500);
+            this.ClientSize = new System.Drawing.Size(1121, 529);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.btnSaveCourse);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.cbxRoom);
             this.Controls.Add(this.cbxTutor);
@@ -404,6 +452,7 @@
             this.Text = "WindowsFormForTesting";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCourses)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -440,5 +489,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn StudentCount;
         private System.Windows.Forms.ComboBox cbxRoom;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button btnSaveCourse;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button button1;
     }
 }
