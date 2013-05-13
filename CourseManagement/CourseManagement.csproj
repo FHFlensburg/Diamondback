@@ -80,6 +80,7 @@
     </Compile>
     <Compile Include="Client\BusinessLogic\AbstractLogic.cs" />
     <Compile Include="Client\BusinessLogic\LogicUtils.cs" />
+    <Compile Include="Client\BusinessLogic\RoomLogic.cs" />
     <Compile Include="Client\BusinessLogic\UserLogic.cs" />
     <Compile Include="GitHub\PersonLogic.cs" />
     <Compile Include="Client\BusinessLogic\StudentLogic.cs" />

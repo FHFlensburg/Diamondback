@@ -32,13 +32,14 @@ namespace CourseManagement.Client.BusinessLogic
         public override DataTable getAll()
         {
             DataTable allCourses = LogicUtils.getNewDataTable(
-                "CourseNr", "StartDate", "EndDate", "StartTime", "DateCount", "Room", "Tutor", "StudentCount");
+                "CourseNr", "Title", "AmountInEuro", "Description", "MAXMember", "MINMember", "ValidityInMonth",
+                "Room", "Tutor", "StudentCount");
 
           
             foreach(Course course in Course.getAll())
             {
-                allCourses.Rows.Add(course.CourseNr, null, null,
-                    course.Tutor.Surname, course.Payments.Count);
+                allCourses.Rows.Add(course.CourseNr, course.Title, course.AmountInEuro, course.Description, course.MaxMember,
+                    course.MinMember, course.ValidityInMonth, null, course.Tutor.Surname, course.Payments.Count);
             }
             
             
@@ -54,7 +55,8 @@ namespace CourseManagement.Client.BusinessLogic
         /// <param name="maxMember"></param>
         /// <param name="minMember"></param>
         /// <param name="validityInMonth"></param>
-        public void createCourse(String title, decimal amountInEuro, String description, int maxMember, int minMember, int validityInMonth)
+        public void createCourse(String title, decimal amountInEuro, String description, int maxMember, int minMember, Tutor tutor,
+                                        Appointment appointment, int validityInMonth)
         {
             Course course = new Course();
             course.Title = title;
@@ -62,6 +64,8 @@ namespace CourseManagement.Client.BusinessLogic
             course.Description = description;
             course.MaxMember = maxMember;
             course.MinMember = minMember;
+            course.Tutor = tutor;
+            course.Appointments.Add(appointment);
             course.ValidityInMonth = validityInMonth;
 
             course.addToDB();
