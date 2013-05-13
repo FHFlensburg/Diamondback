@@ -80,12 +80,14 @@
     </Compile>
     <Compile Include="Client\BusinessLogic\AbstractLogic.cs" />
     <Compile Include="Client\BusinessLogic\LogicUtils.cs" />
-    <Compile Include="Client\BusinessLogic\PersonLogic.cs" />
+    <Compile Include="Client\BusinessLogic\UserLogic.cs" />
+    <Compile Include="GitHub\PersonLogic.cs" />
     <Compile Include="Client\BusinessLogic\StudentLogic.cs" />
     <Compile Include="Client\BusinessLogic\TestData.cs" />
     <Compile Include="Client\BusinessLogic\testLogic.xaml.cs">
       <DependentUpon>testLogic.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Client\BusinessLogic\TutorLogic.cs" />
     <Compile Include="Client\Controller\Start.cs" />
     <Compile Include="Client\DB\DBConfiguration.cs" />
     <Compile Include="Client\DB\DBUtils.cs" />
@@ -183,7 +185,6 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DiamondbackModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="ClassDiagram1.cd" />
     <None Include="Client\DB\Model\DiamondbackModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DiamondbackModel.edmx</DependentUpon>

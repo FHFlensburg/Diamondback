@@ -27,7 +27,7 @@ namespace CourseManagement.Client.BusinessLogic
         private void btnTest_Click(object sender, RoutedEventArgs e)
         {
             ActiveUser.login("admin", "admin");
-            PersonLogic pl = PersonLogic.getInstance();
+            StudentLogic pl = StudentLogic.getInstance();
            // dg_Test.CanUserAddRows = false;
             //dg_Test.CanUserDeleteRows = false;
             
@@ -39,7 +39,7 @@ namespace CourseManagement.Client.BusinessLogic
 
         private void tb_test_TextChanged(object sender, TextChangedEventArgs e)
         {
-            PersonLogic pl = PersonLogic.getInstance();
+            StudentLogic pl = StudentLogic.getInstance();
             //dg_Test.DataContext = pl.search(tb_test.Text);
         }
 

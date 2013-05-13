@@ -11,15 +11,15 @@ namespace CourseManagement.Client.Controller
         void App_Startup(object sender, StartupEventArgs e)
         {
             //nur zum testen
-            ActiveUser.login("admin", "admin"); ///////////Without login there is no access to DB!!!!
-            testLogic testWindow = new testLogic();
-            testWindow.Show();
+            //ActiveUser.login("admin", "admin"); ///////////Without login there is no access to DB!!!!
+            //testLogic testWindow = new testLogic();
+            //testWindow.Show();
             
             
             WndLogin startWindow = new WndLogin();
             WndIndex mainWindow = new WndIndex();
-            DataTable myDataTable = StudentLogic.getInstance().getAll();
-            mainWindow.dgCourse.DataContext = myDataTable;
+            //DataTable myDataTable = StudentLogic.getInstance().getAll();
+            //mainWindow.dgCourse.DataContext = myDataTable;
             if (startWindow.ShowDialog() == true)
             {
                 mainWindow.Show();

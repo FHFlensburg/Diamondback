@@ -7,7 +7,7 @@ using CourseManagement.Client.DB.Model;
 
 namespace CourseManagement.Client.DB
 {
-    class TutorQuery
+    public static class TutorQuery
     {
  
         /// <summary>

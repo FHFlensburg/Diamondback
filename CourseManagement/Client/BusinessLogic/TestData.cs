@@ -11,6 +11,7 @@ namespace CourseManagement.Client.BusinessLogic
     {
         public static void generateTestData()
         {
+            
             for(int i = 0; i<10;i++)
             {
                 bool unterschied =false;
@@ -55,7 +56,7 @@ namespace CourseManagement.Client.BusinessLogic
                                                             
             }
 
-
+            new User() { UserName = "admin", Password = "admin", Active = true, Admin = true }.addToDB();
 
         }
     }

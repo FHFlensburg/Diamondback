@@ -93,11 +93,21 @@ namespace CourseManagement.Client.DB
             return qry;
         }
 
+        /// <summary>
+        /// Return a user or null.
+        /// Search for the username in DB
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
         public static User getByUserName(string userName)
         {
-            User qry = (from user in DBConfiguration.getContext().Persons.OfType<User>()
-                        where user.UserName == userName
-                        select user).Single();
+            User qry = null;
+            if (userName != "" && userName!=null)
+            {
+                qry = (from user in DBConfiguration.getContext().Persons.OfType<User>()
+                            where user.UserName.Equals(userName)
+                            select user).FirstOrDefault();
+            }
             return qry;
         }
     }

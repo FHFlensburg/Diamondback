@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using CourseManagement.Client.BusinessLogic;
 
 namespace CourseManagement.Client.View
 {
@@ -22,6 +23,9 @@ namespace CourseManagement.Client.View
         public WndLogin()
         {
             InitializeComponent(); 
+
+            //Nur im Testbetrieb
+            tbPasswordStatus.Text = "user: admin, psw: admin";
         }
 
         //Zusammen mit checkPassword auszulagern
@@ -30,7 +34,7 @@ namespace CourseManagement.Client.View
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             
-            if (checkPassword())
+            if (checkPassword(tbUsername.Text,pwbPassword.Password))
             {
                 DialogResult = true;
             }
@@ -41,12 +45,9 @@ namespace CourseManagement.Client.View
             }
         }
 
-        private bool checkPassword()
+        private bool checkPassword(string userName, string password)
         {
-            //TODO
-            //DB Abfrage nach Password
-            //Hier noch weg zu lagern
-            return true;
+            return ActiveUser.login(userName, password);
         }
     }
 }
