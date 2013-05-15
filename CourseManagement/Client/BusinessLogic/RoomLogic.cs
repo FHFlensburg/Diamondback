@@ -36,15 +36,22 @@ namespace CourseManagement.Client.BusinessLogic
         /// <param name="street"></param>
         public void createRoom(String building, int capacity, String city, String cityCode, int roomNr, String street)
         {
-            Room room = new Room();
-            room.Building = building;
-            room.Capacity = capacity;
-            room.City = city;
-            room.CityCode = cityCode;
-            room.RoomNr = roomNr;
-            room.Street = street;
+            try
+            {
+                Room room = new Room();
+                room.Building = building;
+                room.Capacity = capacity;
+                room.City = city;
+                room.CityCode = cityCode;
+                room.RoomNr = roomNr;
+                room.Street = street;
 
-            room.addToDB();
+                room.addToDB();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }  
         }
 
         /// <summary>
@@ -53,14 +60,21 @@ namespace CourseManagement.Client.BusinessLogic
         /// <returns></returns>
         public override DataTable getAll()
         {
-            DataTable allRooms = LogicUtils.getNewDataTable("RoomNr", "Building", "Capacity", "Street", "City", "CityCode");
-
-            foreach(Room room in Room.getAll())
+            try
             {
-                allRooms.Rows.Add(room.RoomNr, room.Building, room.Capacity, room.Street, room.City, room.CityCode);
-            }
+                DataTable allRooms = LogicUtils.getNewDataTable("RoomNr", "Building", "Capacity", "Street", "City", "CityCode");
 
-            return allRooms;
+                foreach (Room room in Room.getAll())
+                {
+                    allRooms.Rows.Add(room.RoomNr, room.Building, room.Capacity, room.Street, room.City, room.CityCode);
+                }
+
+                return allRooms;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }  
         }
 
         public override DataTable search(string search)
@@ -76,30 +90,44 @@ namespace CourseManagement.Client.BusinessLogic
         /// <returns></returns>
         public override DataTable getById(int courseNr)
         {
-            Room room = Room.getById(courseNr);
-            DataTable aRoom = LogicUtils.getNewDataTable(room);
+            try
+            {
+                Room room = Room.getById(courseNr);
+                DataTable aRoom = LogicUtils.getNewDataTable(room);
 
+                aRoom.Rows.Add(getNewRow(aRoom, room));
 
-            aRoom.Rows.Add(getNewRow(aRoom, room));
-
-            return aRoom;
+                return aRoom;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }  
         }
+        
         /// <summary>
-        /// Create the default DataRow for Room-DataTables and
-        /// Change the fields which references other entities. 
+        /// Method for specific RoomRow-changes to the default Row-Method in LogicUtils
         /// </summary>
-        /// <param name="row"></param>
-        /// <param name="course"></param>
+        /// <param name="table"></param>
+        /// <param name="room"></param>
+        /// <returns></returns>
         private DataRow getNewRow(DataTable table, Room room)
         {
-            DataRow row = table.NewRow();
-            List<string> names = LogicUtils.getPropertyNames(room);
-            for (int i = 0; i < names.Count; i++)
+            try
             {
-                row[names[i]] = room.GetType().GetProperty(names[i]).GetMethod.Invoke(room, null);
-            }
+                DataRow row = table.NewRow();
+                List<string> names = LogicUtils.getPropertyNames(room);
+                for (int i = 0; i < names.Count; i++)
+                {
+                    row[names[i]] = room.GetType().GetProperty(names[i]).GetMethod.Invoke(room, null);
+                }
 
-            return row;
+                return row;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }  
         }
 
 
@@ -109,7 +137,14 @@ namespace CourseManagement.Client.BusinessLogic
         /// <param name="courseNr"></param>
         public override void delete(int roomNr)
         {
-            Room.getById(roomNr).delete();
+            try
+            {
+                Room.getById(roomNr).delete();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }  
         }
     }
 }

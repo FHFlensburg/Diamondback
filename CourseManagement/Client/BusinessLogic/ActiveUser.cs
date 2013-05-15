@@ -34,12 +34,12 @@ namespace CourseManagement.Client.BusinessLogic
                     loginSuccessful = true;
                     currentUser = userToCheck;
                 }
+                return loginSuccessful;
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
-            }
-            return loginSuccessful;
+            }  
         }
 
         /// <summary>
@@ -48,6 +48,7 @@ namespace CourseManagement.Client.BusinessLogic
         public static void logout()
         {
             currentUser = null;
+            //context disposen?
         }
 
         /// <summary>
@@ -56,7 +57,14 @@ namespace CourseManagement.Client.BusinessLogic
         /// <param name="newPassword"></param>
         public static void changePassword(string newPassword)
         {
-            if (userIsLoggedIn()&&possiblePassword(newPassword)) currentUser.Password = newPassword;
+            try
+            {
+                if (userIsLoggedIn() && possiblePassword(newPassword)) currentUser.Password = newPassword;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         /// <summary>
@@ -65,7 +73,7 @@ namespace CourseManagement.Client.BusinessLogic
         /// <returns></returns>
         public static bool userIsLoggedIn()
         {
-            return currentUser != null;
+                return currentUser != null;
         }
 
         /// <summary>
@@ -74,9 +82,16 @@ namespace CourseManagement.Client.BusinessLogic
         /// <returns></returns>
         public static bool userIsAdmin()
         {
-            bool isAdmin = false;
-            if (userIsLoggedIn()) isAdmin = currentUser.Admin.GetValueOrDefault(false);
-            return isAdmin;
+            try
+            {
+                bool isAdmin = false;
+                if (userIsLoggedIn()) isAdmin = currentUser.Admin.GetValueOrDefault(false);
+                return isAdmin;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         /// <summary>

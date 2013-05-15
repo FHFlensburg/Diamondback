@@ -32,41 +32,51 @@ namespace CourseManagement.Client.BusinessLogic
         /// <returns></returns>
         public override DataTable getAll()
         {
-            DataTable allStudents = generatateStudentTable();
-
-
-            foreach (Student student in Student.getAll())
+            try
             {
-                allStudents.Rows.Add(
-                student.Id, student.Surname, student.Forename, student.City);
-            }
+                DataTable allStudents = generatateStudentTable();
 
-            return allStudents;
-        }
 
-        public override DataTable search(string search)
-        {
-            search = search.ToUpper();
-            DataTable allStudents = generatateStudentTable();
-
-            foreach (Student student in Student.getAll())
-            {
-                if (LogicUtils.notNullAndContains(student.Forename, search)
-                    || LogicUtils.notNullAndContains(student.Surname, search)
-                    || student.Id.ToString().Contains(search))
+                foreach (Student student in Student.getAll())
                 {
                     allStudents.Rows.Add(
                     student.Id, student.Surname, student.Forename, student.City);
                 }
-            }
 
-            return allStudents;
+                return allStudents;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }  
         }
 
-        /// <summary>
-        /// Generates the standard Student DataTable for this class.
-        /// </summary>
-        /// <returns></returns>
+        public override DataTable search(string search)
+        {
+            try
+            {
+                DataTable allStudents = generatateStudentTable();
+
+                foreach (Student student in Student.getAll())
+                {
+                    if (LogicUtils.notNullAndContains(student.Forename, search)
+                        || LogicUtils.notNullAndContains(student.Surname, search)
+                        || student.Id.ToString().Contains(search))//---to correct!
+                    {
+                        allStudents.Rows.Add(
+                        student.Id, student.Surname, student.Forename, student.City);
+                    }
+                }
+
+                return allStudents;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }  
+        }
+
+        //depricated
         private DataTable generatateStudentTable()
         {
             return LogicUtils.getNewDataTable(
@@ -80,12 +90,19 @@ namespace CourseManagement.Client.BusinessLogic
         /// <param name="?"></param>
         public void createNewStudent(string surname, string forename, string city)
         {
-            Student student = new Student();
-            student.Surname = surname;
-            student.Forename = forename;
-            student.City = city;
+            try
+            {
+                Student student = new Student();
+                student.Surname = surname;
+                student.Forename = forename;
+                student.City = city;
 
-            student.addToDB();
+                student.addToDB();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }  
         }
 
         /// <summary>
@@ -95,24 +112,37 @@ namespace CourseManagement.Client.BusinessLogic
         /// <returns></returns>
         public override DataTable getById(int studentNr)
         {
-            DataTable dtStudent = generatateStudentTable();
-            Student student = Student.getById(studentNr);
-            if (student != null)
+            try
             {
-                dtStudent.Rows.Add(
-                    student.Id, student.Surname, student.Forename, student.City);
+                DataTable dtStudent = generatateStudentTable();
+                Student student = Student.getById(studentNr);
+                if (student != null)
+                {
+                    dtStudent.Rows.Add(
+                        student.Id, student.Surname, student.Forename, student.City);
+                }
+                return dtStudent;
             }
-            return dtStudent;
-
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }  
         }
 
         public void changeStudentProperties(int studentNr, string surname, string forename, string city)
         {
-            Student student = Student.getById(studentNr);
-            student.Surname = surname;
-            student.Forename = forename;
-            student.City = city;
-            student.update();
+            try
+            {
+                Student student = Student.getById(studentNr);
+                student.Surname = surname;
+                student.Forename = forename;
+                student.City = city;
+                student.update();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }  
         }
 
         /// <summary>
@@ -121,7 +151,14 @@ namespace CourseManagement.Client.BusinessLogic
         /// <param name="courseNr"></param>
         public override void delete(int studentNr)
         {
-            Student.getById(studentNr).delete();
+            try
+            {
+                Student.getById(studentNr).delete();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }  
         }
         
     }

@@ -22,6 +22,10 @@ namespace CourseManagement.Client.DB
                                   select user).ToList();
                 return qry;
             }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }  
         }
 
         /// <summary>

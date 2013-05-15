@@ -35,18 +35,25 @@ namespace CourseManagement.Client.BusinessLogic
         /// <returns></returns>
         public override DataTable getAll()
         {
-            DataTable allCourses = LogicUtils.getNewDataTable(new Course());          
-            List<string> names = LogicUtils.getPropertyNames(new Course());
-            foreach(Course course in Course.getAll())
+            try
             {
-               allCourses.Rows.Add(getNewRow(allCourses, course));
+                DataTable allCourses = LogicUtils.getNewDataTable(new Course());
+                List<string> names = LogicUtils.getPropertyNames(new Course());
+                foreach (Course course in Course.getAll())
+                {
+                    allCourses.Rows.Add(getNewRow(allCourses, course));
 
-                //allCourses.Rows.Add(course.CourseNr, course.Title, course.AmountInEuro, course.Description, course.MaxMember,
-                  //  course.MinMember, course.ValidityInMonth, null, course.Tutor.Surname, course.Payments.Count);
+                    //allCourses.Rows.Add(course.CourseNr, course.Title, course.AmountInEuro, course.Description, course.MaxMember,
+                    //  course.MinMember, course.ValidityInMonth, null, course.Tutor.Surname, course.Payments.Count);
+                }
+
+
+                return allCourses;
             }
-            
-            
-            return allCourses;
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }  
         }
 
         /// <summary>
@@ -61,19 +68,26 @@ namespace CourseManagement.Client.BusinessLogic
         public int createNewCourse(String title, decimal amountInEuro, String description, int maxMember, int minMember, int tutor,
                                         int appointment, int validityInMonth)
         {
-            Course course = new Course();
-            course.Title = title;
-            course.AmountInEuro = amountInEuro;
-            course.Description = description;
-            course.MaxMember = maxMember;
-            course.MinMember = minMember;
-            course.Tutor = Tutor.getById(tutor); 
+            try
+            {
+                Course course = new Course();
+                course.Title = title;
+                course.AmountInEuro = amountInEuro;
+                course.Description = description;
+                course.MaxMember = maxMember;
+                course.MinMember = minMember;
+                course.Tutor = Tutor.getById(tutor);
 
-            
-            course.ValidityInMonth = validityInMonth;
 
-            course.addToDB();
-            return course.CourseNr;
+                course.ValidityInMonth = validityInMonth;
+
+                course.addToDB();
+                return course.CourseNr;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }  
         }
 
         /// <summary>
@@ -84,34 +98,36 @@ namespace CourseManagement.Client.BusinessLogic
         /// <returns></returns>
         public override DataTable getById(int courseNr)
         {
-            Course course = Course.getById(courseNr);
-            DataTable aCourse = LogicUtils.getNewDataTable(course);
+            try
+            {
+                Course course = Course.getById(courseNr);
+                DataTable aCourse = LogicUtils.getNewDataTable(course);
 
-            
-            aCourse.Rows.Add(getNewRow(aCourse, course));
 
-            return aCourse;
+                aCourse.Rows.Add(getNewRow(aCourse, course));
+
+                return aCourse;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }  
         }
 
         /// <summary>
-        /// Create the default DataRow for Course-DataTables and
-        /// Change the fields which references other entities. 
+        /// Method for specific CourseRow-changes to the default Row-Method in LogicUtils
         /// </summary>
-        /// <param name="row"></param>
+        /// <param name="table"></param>
         /// <param name="course"></param>
+        /// <returns></returns>
         private DataRow getNewRow(DataTable table, Course course)
         {
-            DataRow row = table.NewRow();
-            List<string> names = LogicUtils.getPropertyNames(course);
-            for (int i = 0; i < names.Count; i++)
-            {
-                row[names[i]] = course.GetType().GetProperty(names[i]).GetMethod.Invoke(course, null);
-            }
-            row["Tutor"] = course.Tutor.Surname;
-            row["Payments"] = course.Payments.Count;
-            row["Appointments"] = course.Appointments.Count;
+                DataRow row = LogicUtils.getNewRow(table,course);
+                row["Tutor"] = course.Tutor.Surname;
+                row["Payments"] = course.Payments.Count;
+                row["Appointments"] = course.Appointments.Count;
 
-            return row;
+                return row;
         }
 
         /// <summary>
@@ -122,19 +138,26 @@ namespace CourseManagement.Client.BusinessLogic
         /// <returns></returns>
         public override DataTable search(string search)
         {
-            DataTable allCourses = LogicUtils.getNewDataTable(new Course());
-
-            foreach (Course course in Course.getAll())
+            try
             {
-                if (LogicUtils.notNullAndContains(course.CourseNr, search)
-                    || LogicUtils.notNullAndContains(course.Title, search)
-                    || LogicUtils.notNullAndContains(course.Description, search))
-                {
-                    allCourses.Rows.Add(getNewRow(allCourses,course));
-                }
-            }
+                DataTable allCourses = LogicUtils.getNewDataTable(new Course());
 
-            return allCourses;
+                foreach (Course course in Course.getAll())
+                {
+                    if (LogicUtils.notNullAndContains(course.CourseNr, search)
+                        || LogicUtils.notNullAndContains(course.Title, search)
+                        || LogicUtils.notNullAndContains(course.Description, search))
+                    {
+                        allCourses.Rows.Add(getNewRow(allCourses, course));
+                    }
+                }
+
+                return allCourses;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }  
         }
 
         /// <summary>
@@ -143,7 +166,14 @@ namespace CourseManagement.Client.BusinessLogic
         /// <param name="courseNr"></param>
         public override void delete(int courseNr)
         {
-            Course.getById(courseNr).delete();
+            try
+            {
+                Course.getById(courseNr).delete();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }  
         }
     }
 }

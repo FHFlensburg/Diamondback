@@ -30,16 +30,24 @@ namespace CourseManagement.Client.BusinessLogic
         /// <returns></returns>
         public override DataTable getAll()
         {
-            DataTable allUsers = generatateUserTable();
-
-
-            foreach (User user in User.getAll())
+            try
             {
-                allUsers.Rows.Add(
-                user.Id, user.Surname, user.Forename, user.City);
-            }
+                DataTable allUsers = generatateUserTable();
 
-            return allUsers;
+
+                foreach (User user in User.getAll())
+                {
+                    allUsers.Rows.Add(
+                    user.Id, user.Surname, user.Forename, user.City);
+                }
+
+
+                return allUsers;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }  
         }
 
         /// <summary>
@@ -50,26 +58,30 @@ namespace CourseManagement.Client.BusinessLogic
         /// <returns></returns>
         public override DataTable search(string search)
         {
-            DataTable allUsers = generatateUserTable();
-
-            foreach (User user in User.getAll())
+            try
             {
-                if (LogicUtils.notNullAndContains(user.Forename, search)
-                    || LogicUtils.notNullAndContains(user.Surname, search)
-                    || LogicUtils.notNullAndContains(user.Id, search))
-                {
-                    allUsers.Rows.Add(
-                    user.Id, user.Surname, user.Forename, user.City);
-                }
-            }
+                DataTable allUsers = generatateUserTable();
 
-            return allUsers;
+                foreach (User user in User.getAll())
+                {
+                    if (LogicUtils.notNullAndContains(user.Forename, search)
+                        || LogicUtils.notNullAndContains(user.Surname, search)
+                        || LogicUtils.notNullAndContains(user.Id, search))
+                    {
+                        allUsers.Rows.Add(
+                        user.Id, user.Surname, user.Forename, user.City);
+                    }
+                }
+
+                return allUsers;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }  
         }
 
-        /// <summary>
-        /// Generates the standard User DataTable for this class.
-        /// </summary>
-        /// <returns></returns>
+        //depricated
         private DataTable generatateUserTable()
         {
             return LogicUtils.getNewDataTable(
@@ -83,12 +95,19 @@ namespace CourseManagement.Client.BusinessLogic
         /// <param name="?"></param>
         public void createNewUser(string surname, string forename, string city)
         {
-            User user = new User();
-            user.Surname = surname;
-            user.Forename = forename;
-            user.City = city;
+            try
+            {
+                User user = new User();
+                user.Surname = surname;
+                user.Forename = forename;
+                user.City = city;
 
-            user.addToDB();
+                user.addToDB();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }  
         }
 
         /// <summary>
@@ -98,14 +117,21 @@ namespace CourseManagement.Client.BusinessLogic
         /// <returns></returns>
         public override DataTable getById(int userNr)
         {
-            DataTable dtUser = generatateUserTable();
-            Tutor user = Tutor.getById(userNr);
-            if (user != null)
+            try
             {
-                dtUser.Rows.Add(
-                    user.Id, user.Surname, user.Forename, user.City);
+                DataTable dtUser = generatateUserTable();
+                Tutor user = Tutor.getById(userNr);
+                if (user != null)
+                {
+                    dtUser.Rows.Add(
+                        user.Id, user.Surname, user.Forename, user.City);
+                }
+                return dtUser;
             }
-            return dtUser;
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }  
 
         }
 
@@ -119,11 +145,18 @@ namespace CourseManagement.Client.BusinessLogic
         /// <param name="city"></param>
         public void changeTutorProperties(int userNr, string surname, string forename, string city)
         {
-            User user = User.getById(userNr);
-            user.Surname = surname;
-            user.Forename = forename;
-            user.City = city;
-            user.update();
+            try
+            {
+                User user = User.getById(userNr);
+                user.Surname = surname;
+                user.Forename = forename;
+                user.City = city;
+                user.update();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }  
         }
 
         /// <summary>
@@ -132,7 +165,14 @@ namespace CourseManagement.Client.BusinessLogic
         /// <param name="courseNr"></param>
         public override void delete(int userNr)
         {
-            User.getById(userNr).delete();
+            try
+            {
+                User.getById(userNr).delete();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }  
         }
 
     }

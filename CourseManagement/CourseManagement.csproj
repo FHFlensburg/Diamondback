@@ -88,9 +88,6 @@
     <Compile Include="GitHub\PersonLogic.cs" />
     <Compile Include="Client\BusinessLogic\StudentLogic.cs" />
     <Compile Include="Client\BusinessLogic\TestData.cs" />
-    <Compile Include="Client\BusinessLogic\testLogic.xaml.cs">
-      <DependentUpon>testLogic.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Client\BusinessLogic\TutorLogic.cs" />
     <Compile Include="Client\Controller\Start.cs" />
     <Compile Include="Client\DB\DBConfiguration.cs" />
@@ -213,10 +210,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Client\BusinessLogic\testLogic.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Client\View\WndNewCourse.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

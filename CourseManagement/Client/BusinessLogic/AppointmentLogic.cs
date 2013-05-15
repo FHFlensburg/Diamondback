@@ -32,30 +32,37 @@ namespace CourseManagement.Client.BusinessLogic
         /// <param name="endDate"></param>
         public int createAppointment(int courseNr, int roomNr, DateTime startDate, DateTime endDate)
         {
-            Appointment appointment = new Appointment();
-            appointment.Course = Course.getById(courseNr);
-            appointment.Room = Room.getById(roomNr);
-            appointment.StartDate = startDate;
-            appointment.EndDate = endDate;
+            try
+            {
+                Appointment appointment = new Appointment();
+                appointment.Course = Course.getById(courseNr);
+                appointment.Room = Room.getById(roomNr);
+                appointment.StartDate = startDate;
+                appointment.EndDate = endDate;
 
-            appointment.addToDB();
+                appointment.addToDB();
 
-            return appointment.Id;
+                return appointment.Id;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
-        public override System.Data.DataTable getAll()
+        public override DataTable getAll()
         {
-            //DataTable allAppointments = LogicUtils.getNewDataTable(
+            //try/Catch!!!
             throw new NotImplementedException();
         }
 
-        public override System.Data.DataTable search(string search)
-        {
+        public override DataTable search(string search)
+        { //try/Catch!!!
             throw new NotImplementedException();
         }
 
-        public override System.Data.DataTable getById(int id)
-        {
+        public override DataTable getById(int id)
+        { //try/Catch!!!
             throw new NotImplementedException();
         }
 
@@ -65,7 +72,14 @@ namespace CourseManagement.Client.BusinessLogic
         /// <param name="courseNr"></param>
         public override void delete(int appointmentNr)
         {
-            Room.getById(appointmentNr).delete();
+            try
+            {
+                Room.getById(appointmentNr).delete();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }  
         }
     }
 }

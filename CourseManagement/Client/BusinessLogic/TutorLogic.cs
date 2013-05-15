@@ -30,16 +30,23 @@ namespace CourseManagement.Client.BusinessLogic
         /// <returns></returns>
         public override DataTable getAll()
         {
-            DataTable allTutors = generatateTutorTable();
-
-
-            foreach (Tutor tutor in Tutor.getAll())
+            try
             {
-                allTutors.Rows.Add(
-                tutor.Id, tutor.Surname, tutor.Forename, tutor.City);
-            }
+                DataTable allTutors = generatateTutorTable();
 
-            return allTutors;
+
+                foreach (Tutor tutor in Tutor.getAll())
+                {
+                    allTutors.Rows.Add(
+                    tutor.Id, tutor.Surname, tutor.Forename, tutor.City);
+                }
+
+                return allTutors;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }  
         }
 
         /// <summary>
@@ -50,26 +57,30 @@ namespace CourseManagement.Client.BusinessLogic
         /// <returns></returns>
         public override DataTable search(string search)
         {
-            DataTable allTutors = generatateTutorTable();
-
-            foreach (Tutor tutor in Tutor.getAll())
+            try
             {
-                if (LogicUtils.notNullAndContains(tutor.Forename, search)
-                    || LogicUtils.notNullAndContains(tutor.Surname, search)
-                    || LogicUtils.notNullAndContains(tutor.Id,search))
-                {
-                    allTutors.Rows.Add(
-                    tutor.Id, tutor.Surname, tutor.Forename, tutor.City);
-                }
-            }
+                DataTable allTutors = generatateTutorTable();
 
-            return allTutors;
+                foreach (Tutor tutor in Tutor.getAll())
+                {
+                    if (LogicUtils.notNullAndContains(tutor.Forename, search)
+                        || LogicUtils.notNullAndContains(tutor.Surname, search)
+                        || LogicUtils.notNullAndContains(tutor.Id, search))
+                    {
+                        allTutors.Rows.Add(
+                        tutor.Id, tutor.Surname, tutor.Forename, tutor.City);
+                    }
+                }
+
+                return allTutors;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }  
         }
 
-        /// <summary>
-        /// Generates the standard Tutor DataTable for this class.
-        /// </summary>
-        /// <returns></returns>
+        //depricated
         private DataTable generatateTutorTable()
         {
             return LogicUtils.getNewDataTable(
@@ -83,12 +94,19 @@ namespace CourseManagement.Client.BusinessLogic
         /// <param name="?"></param>
         public void createNewTutor(string surname, string forename, string city)
         {
-            Tutor tutor = new Tutor();
-            tutor.Surname = surname;
-            tutor.Forename = forename;
-            tutor.City = city;
+            try
+            {
+                Tutor tutor = new Tutor();
+                tutor.Surname = surname;
+                tutor.Forename = forename;
+                tutor.City = city;
 
-            tutor.addToDB();
+                tutor.addToDB();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }  
         }
 
         /// <summary>
@@ -98,14 +116,21 @@ namespace CourseManagement.Client.BusinessLogic
         /// <returns></returns>
         public override DataTable getById(int tutorNr)
         {
-            DataTable dtTutor = generatateTutorTable();
-            Tutor tutor = Tutor.getById(tutorNr);
-            if (tutor != null)
+            try
             {
-                dtTutor.Rows.Add(
-                    tutor.Id, tutor.Surname, tutor.Forename, tutor.City);
+                DataTable dtTutor = generatateTutorTable();
+                Tutor tutor = Tutor.getById(tutorNr);
+                if (tutor != null)
+                {
+                    dtTutor.Rows.Add(
+                        tutor.Id, tutor.Surname, tutor.Forename, tutor.City);
+                }
+                return dtTutor;
             }
-            return dtTutor;
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }  
 
         }
 
@@ -119,11 +144,18 @@ namespace CourseManagement.Client.BusinessLogic
         /// <param name="city"></param>
         public void changeTutorProperties(int studentNr, string surname, string forename, string city)
         {
-            Tutor tutor = Tutor.getById(studentNr);
-            tutor.Surname = surname;
-            tutor.Forename = forename;
-            tutor.City = city;
-            tutor.update();
+            try
+            {
+                Tutor tutor = Tutor.getById(studentNr);
+                tutor.Surname = surname;
+                tutor.Forename = forename;
+                tutor.City = city;
+                tutor.update();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }  
         }
 
         /// <summary>
@@ -132,7 +164,14 @@ namespace CourseManagement.Client.BusinessLogic
         /// <param name="courseNr"></param>
         public override void delete(int tutorNr)
         {
-            Tutor.getById(tutorNr).delete();
+            try
+            {
+                Tutor.getById(tutorNr).delete();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }  
         }
     }
 }

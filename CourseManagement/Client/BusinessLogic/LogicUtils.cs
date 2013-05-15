@@ -11,37 +11,67 @@ namespace CourseManagement.Client.BusinessLogic
 {
     public static class LogicUtils
     {
+
         public static DataTable getNewDataTable(params string[] columnNames)
         {
             DataTable table = new DataTable();
-            for (int i = 0; i < columnNames.Length;i++ )
+            for (int i = 0; i < columnNames.Length; i++)
             {
                 table.Columns.Add(columnNames[i]);
             }
             return table;
         }
 
-        public static DataTable getNewDataTable(object entity)
+        /// <summary>
+        /// Return a DataTable with 
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="additionalColumnNames"></param>
+        /// <returns></returns>
+        public static DataTable getNewDataTable(object entity, params string[] additionalColumnNames)
         {
-            DataTable table = new DataTable();
-            foreach(PropertyInfo pi in entity.GetType().GetProperties())
+            try
             {
-                table.Columns.Add(pi.Name);
-            }        
-            return table;
+                DataTable table = new DataTable();
+                foreach (PropertyInfo pi in entity.GetType().GetProperties())
+                {
+                    table.Columns.Add(pi.Name);
+                }
+                foreach (string s in additionalColumnNames)
+                {
+                    table.Columns.Add(s);
+                }
+                return table;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
+        /// <summary>
+        /// Return a list with all propertyNames of the submitted object
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         public static List<string> getPropertyNames(object entity)
         {
-            List<string> names = new List<string>();
-            foreach (PropertyInfo pi in entity.GetType().GetProperties())
+            try
             {
-                names.Add(pi.Name);
-            }  
-            return names;
+                List<string> names = new List<string>();
+                foreach (PropertyInfo pi in entity.GetType().GetProperties())
+                {
+                    names.Add(pi.Name);
+                }
+                return names;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
-        
+
 
         /// <summary>
         /// Returns true if the given string is not null
@@ -50,7 +80,7 @@ namespace CourseManagement.Client.BusinessLogic
         public static bool notNullAndContains(string stringToCheck, string like)
         {
             bool result = false;
-            if(stringToCheck != null && stringToCheck.ToUpper().Contains(like.ToUpper())) result = true;
+            if (stringToCheck != null && stringToCheck.ToUpper().Contains(like.ToUpper())) result = true;
             return result;
         }
 
@@ -68,7 +98,27 @@ namespace CourseManagement.Client.BusinessLogic
             return result;
         }
 
-
-
+        /// <summary>
+        /// Create the default DataRow for entity-DataTables and
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="course"></param>
+        public static DataRow getNewRow(DataTable table, object entity)
+        {
+            try
+            {
+                DataRow row = table.NewRow();
+                List<string> names = getPropertyNames(entity);
+                for (int i = 0; i < names.Count; i++)
+                {
+                    row[names[i]] = entity.GetType().GetProperty(names[i]).GetMethod.Invoke(entity, null);
+                }
+                return row;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }
