@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseManagement.Client.DB.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -35,8 +36,10 @@ namespace CourseManagement.Client.BusinessLogic
 
             //Collect all courses from the DB and put them in the courses Datatable
             CourseLogic course = CourseLogic.getInstance();
-            DataTable dtCourse = course.getAll();
+            DataTable dtCourse = course.search("Englisch");
+            //DataTable dtCourse = course.getById(1);
             dgvCourses.DataSource = dtCourse;
+         
 
             cbxStudentsMAX.SelectedIndex = 0;
             cbxStudentsMIN.SelectedIndex = 0;
@@ -69,8 +72,13 @@ namespace CourseManagement.Client.BusinessLogic
         private void button1_Click(object sender, EventArgs e)
         {
             CourseLogic course = CourseLogic.getInstance();
-            course.createNewCourse(tbxTitle.Text,Convert.ToDecimal(tbxAmount.Text),tbxDescription.Text,Convert.ToInt32(cbxStudentsMAX.SelectedItem),
-                                    Convert.ToInt32(cbxStudentsMIN.SelectedItem),cbxTutor.SelectedIndex,1,Convert.ToInt32(tbxValidity.Text));
+            DataTable tutor = (DataTable)cbxTutor.DataSource;
+            DataTable room = (DataTable)cbxRoom.DataSource;
+
+            int id = course.createNewCourse(tbxTitle.Text,Convert.ToDecimal(tbxAmount.Text),tbxDescription.Text,Convert.ToInt32(cbxStudentsMAX.SelectedItem),
+                                    Convert.ToInt32(cbxStudentsMIN.SelectedItem),Convert.ToInt32(tutor.Rows[cbxTutor.SelectedIndex]["TutorNr"]),1,Convert.ToInt32(tbxValidity.Text));
+            AppointmentLogic.getInstance().createAppointment(id, Convert.ToInt32(room.Rows[cbxRoom.SelectedIndex]["RoomNr"]),DateTime.Now,DateTime.Now);
+
             tbxTitle.Clear();
             tbxDescription.Clear();
             tbxAmount.Clear();
@@ -89,6 +97,8 @@ namespace CourseManagement.Client.BusinessLogic
             cbxTutor.Enabled = false;
             btnCreateCourse.Enabled = true;
             btnSaveCourse.Visible = false;
+
+            
 
             //Collect all courses from the DB and put them in the courses Datatable
             DataTable dtCourse = course.getAll();

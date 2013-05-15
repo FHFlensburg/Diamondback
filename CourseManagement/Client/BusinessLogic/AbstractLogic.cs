@@ -12,5 +12,6 @@ namespace CourseManagement.Client.BusinessLogic
         public abstract DataTable getAll();
         public abstract DataTable search(string search);
         public abstract DataTable getById(int id);
+        public abstract void delete(int id);
     }
 }

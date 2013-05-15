@@ -1,6 +1,7 @@
 ﻿using CourseManagement.Client.DB.Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,17 +30,22 @@ namespace CourseManagement.Client.BusinessLogic
         /// </summary>
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
-        public static void createAppointment(DateTime startDate, DateTime endDate)
+        public int createAppointment(int courseNr, int roomNr, DateTime startDate, DateTime endDate)
         {
             Appointment appointment = new Appointment();
+            appointment.Course = Course.getById(courseNr);
+            appointment.Room = Room.getById(roomNr);
             appointment.StartDate = startDate;
             appointment.EndDate = endDate;
 
             appointment.addToDB();
+
+            return appointment.Id;
         }
 
         public override System.Data.DataTable getAll()
         {
+            //DataTable allAppointments = LogicUtils.getNewDataTable(
             throw new NotImplementedException();
         }
 
@@ -51,6 +57,15 @@ namespace CourseManagement.Client.BusinessLogic
         public override System.Data.DataTable getById(int id)
         {
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Get one appointment by id manage the remove from database of this appointment
+        /// </summary>
+        /// <param name="courseNr"></param>
+        public override void delete(int appointmentNr)
+        {
+            Room.getById(appointmentNr).delete();
         }
     }
 }

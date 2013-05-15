@@ -16,7 +16,7 @@ namespace TestCourseManagement
     {
 
         
-        
+        [TestMethod]
         public void tryRoomBooking()
             {
             

@@ -126,7 +126,14 @@ namespace CourseManagement.Client.BusinessLogic
             user.update();
         }
 
-
+        /// <summary>
+        /// Get one user by id manage the remove from database of this user
+        /// </summary>
+        /// <param name="courseNr"></param>
+        public override void delete(int userNr)
+        {
+            User.getById(userNr).delete();
+        }
 
     }
 }

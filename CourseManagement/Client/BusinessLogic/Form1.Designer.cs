@@ -29,16 +29,6 @@
         private void InitializeComponent()
         {
             this.dgvCourses = new System.Windows.Forms.DataGridView();
-            this.CourseNr = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Titel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AmountInEuro = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MaxMember = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MinMember = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ValidityInMonth = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tutor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Room = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StudentCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.btnCreateCourse = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -61,6 +51,22 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label10 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.CourseNr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Titel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AmountInEuro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaxMember = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MinMember = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ValidityInMonth = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tutor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Room = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StudentCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Payments = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Appointments = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCourses)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -78,72 +84,14 @@
             this.ValidityInMonth,
             this.Tutor,
             this.Room,
-            this.StudentCount});
+            this.StudentCount,
+            this.Payments,
+            this.Appointments});
             this.dgvCourses.Location = new System.Drawing.Point(12, 51);
             this.dgvCourses.Name = "dgvCourses";
             this.dgvCourses.RowTemplate.Height = 24;
             this.dgvCourses.Size = new System.Drawing.Size(1097, 150);
             this.dgvCourses.TabIndex = 0;
-            // 
-            // CourseNr
-            // 
-            this.CourseNr.DataPropertyName = "CourseNr";
-            this.CourseNr.HeaderText = "Kurs Nr.";
-            this.CourseNr.Name = "CourseNr";
-            // 
-            // Titel
-            // 
-            this.Titel.DataPropertyName = "Title";
-            this.Titel.HeaderText = "Titel";
-            this.Titel.Name = "Titel";
-            // 
-            // AmountInEuro
-            // 
-            this.AmountInEuro.DataPropertyName = "AmountInEuro";
-            this.AmountInEuro.HeaderText = "Beitrag in €";
-            this.AmountInEuro.Name = "AmountInEuro";
-            // 
-            // Description
-            // 
-            this.Description.DataPropertyName = "Description";
-            this.Description.HeaderText = "Beschreibung";
-            this.Description.Name = "Description";
-            // 
-            // MaxMember
-            // 
-            this.MaxMember.DataPropertyName = "MAXMember";
-            this.MaxMember.HeaderText = "Teilnehmer MAX";
-            this.MaxMember.Name = "MaxMember";
-            // 
-            // MinMember
-            // 
-            this.MinMember.DataPropertyName = "MINMember";
-            this.MinMember.HeaderText = "Teilnehmer MIN";
-            this.MinMember.Name = "MinMember";
-            // 
-            // ValidityInMonth
-            // 
-            this.ValidityInMonth.DataPropertyName = "ValidityInMonth";
-            this.ValidityInMonth.HeaderText = "Gültigkeit in Monaten";
-            this.ValidityInMonth.Name = "ValidityInMonth";
-            // 
-            // Tutor
-            // 
-            this.Tutor.DataPropertyName = "Tutor";
-            this.Tutor.HeaderText = "Dozent";
-            this.Tutor.Name = "Tutor";
-            // 
-            // Room
-            // 
-            this.Room.DataPropertyName = "Room";
-            this.Room.HeaderText = "Raum";
-            this.Room.Name = "Room";
-            // 
-            // StudentCount
-            // 
-            this.StudentCount.DataPropertyName = "StudentCount";
-            this.StudentCount.HeaderText = "Anzahl Studenten";
-            this.StudentCount.Name = "StudentCount";
             // 
             // label1
             // 
@@ -167,11 +115,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 239);
+            this.label2.Location = new System.Drawing.Point(12, 507);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 17);
+            this.label2.Size = new System.Drawing.Size(83, 17);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Titel";
+            this.label2.Text = "Start Datum";
             // 
             // tbxTitle
             // 
@@ -420,11 +368,120 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(12, 638);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(139, 23);
+            this.button2.TabIndex = 23;
+            this.button2.Text = "Termin speichern";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(284, 507);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(86, 17);
+            this.label11.TabIndex = 24;
+            this.label11.Text = "Ende Datum";
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(15, 528);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(247, 22);
+            this.dateTimePicker1.TabIndex = 25;
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.Location = new System.Drawing.Point(287, 528);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(244, 22);
+            this.dateTimePicker2.TabIndex = 26;
+            // 
+            // CourseNr
+            // 
+            this.CourseNr.DataPropertyName = "CourseNr";
+            this.CourseNr.HeaderText = "Kurs Nr.";
+            this.CourseNr.Name = "CourseNr";
+            // 
+            // Titel
+            // 
+            this.Titel.DataPropertyName = "Title";
+            this.Titel.HeaderText = "Titel";
+            this.Titel.Name = "Titel";
+            // 
+            // AmountInEuro
+            // 
+            this.AmountInEuro.DataPropertyName = "AmountInEuro";
+            this.AmountInEuro.HeaderText = "Beitrag in €";
+            this.AmountInEuro.Name = "AmountInEuro";
+            // 
+            // Description
+            // 
+            this.Description.DataPropertyName = "Description";
+            this.Description.HeaderText = "Beschreibung";
+            this.Description.Name = "Description";
+            // 
+            // MaxMember
+            // 
+            this.MaxMember.DataPropertyName = "MAXMember";
+            this.MaxMember.HeaderText = "Teilnehmer MAX";
+            this.MaxMember.Name = "MaxMember";
+            // 
+            // MinMember
+            // 
+            this.MinMember.DataPropertyName = "MINMember";
+            this.MinMember.HeaderText = "Teilnehmer MIN";
+            this.MinMember.Name = "MinMember";
+            // 
+            // ValidityInMonth
+            // 
+            this.ValidityInMonth.DataPropertyName = "ValidityInMonth";
+            this.ValidityInMonth.HeaderText = "Gültigkeit in Monaten";
+            this.ValidityInMonth.Name = "ValidityInMonth";
+            // 
+            // Tutor
+            // 
+            this.Tutor.DataPropertyName = "Tutor";
+            this.Tutor.HeaderText = "Dozent";
+            this.Tutor.Name = "Tutor";
+            // 
+            // Room
+            // 
+            this.Room.DataPropertyName = "Room";
+            this.Room.HeaderText = "Raum";
+            this.Room.Name = "Room";
+            this.Room.Visible = false;
+            // 
+            // StudentCount
+            // 
+            this.StudentCount.DataPropertyName = "StudentCount";
+            this.StudentCount.HeaderText = "Anzahl Studenten";
+            this.StudentCount.Name = "StudentCount";
+            // 
+            // Payments
+            // 
+            this.Payments.DataPropertyName = "Payments";
+            this.Payments.HeaderText = "Anzahl Zahlungen";
+            this.Payments.Name = "Payments";
+            // 
+            // Appointments
+            // 
+            this.Appointments.DataPropertyName = "Appointments";
+            this.Appointments.HeaderText = "Anzahl Termine";
+            this.Appointments.Name = "Appointments";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1121, 529);
+            this.ClientSize = new System.Drawing.Size(1121, 673);
+            this.Controls.Add(this.dateTimePicker2);
+            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.dataGridView1);
@@ -477,6 +534,16 @@
         private System.Windows.Forms.TextBox tbxValidity;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cbxTutor;
+        private System.Windows.Forms.ComboBox cbxRoom;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button btnSaveCourse;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.DataGridViewTextBoxColumn CourseNr;
         private System.Windows.Forms.DataGridViewTextBoxColumn Titel;
         private System.Windows.Forms.DataGridViewTextBoxColumn AmountInEuro;
@@ -487,11 +554,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Tutor;
         private System.Windows.Forms.DataGridViewTextBoxColumn Room;
         private System.Windows.Forms.DataGridViewTextBoxColumn StudentCount;
-        private System.Windows.Forms.ComboBox cbxRoom;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button btnSaveCourse;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Payments;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Appointments;
     }
 }

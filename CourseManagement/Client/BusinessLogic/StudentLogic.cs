@@ -115,7 +115,14 @@ namespace CourseManagement.Client.BusinessLogic
             student.update();
         }
 
-
+        /// <summary>
+        /// Get one student by id manage the remove from database of this student
+        /// </summary>
+        /// <param name="courseNr"></param>
+        public override void delete(int studentNr)
+        {
+            Student.getById(studentNr).delete();
+        }
         
     }
 }

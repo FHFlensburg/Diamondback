@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using CourseManagement.Client.DB.Model;
 
 namespace CourseManagement.Client.BusinessLogic
 {
@@ -18,6 +20,28 @@ namespace CourseManagement.Client.BusinessLogic
             }
             return table;
         }
+
+        public static DataTable getNewDataTable(object entity)
+        {
+            DataTable table = new DataTable();
+            foreach(PropertyInfo pi in entity.GetType().GetProperties())
+            {
+                table.Columns.Add(pi.Name);
+            }        
+            return table;
+        }
+
+        public static List<string> getPropertyNames(object entity)
+        {
+            List<string> names = new List<string>();
+            foreach (PropertyInfo pi in entity.GetType().GetProperties())
+            {
+                names.Add(pi.Name);
+            }  
+            return names;
+        }
+
+        
 
         /// <summary>
         /// Returns true if the given string is not null

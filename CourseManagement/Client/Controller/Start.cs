@@ -12,7 +12,7 @@ namespace CourseManagement.Client.Controller
         {
             //nur zum testen
             //ActiveUser.login("admin", "admin"); ///////////Without login there is no access to DB!!!!
-            //testLogic testWindow = new testLogic();
+           // testLogic testWindow = new testLogic();
             //testWindow.Show();
             
             

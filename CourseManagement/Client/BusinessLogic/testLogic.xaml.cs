@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using CourseManagement.Client.DB.Model;
 
 namespace CourseManagement.Client.BusinessLogic
 {
@@ -21,7 +22,9 @@ namespace CourseManagement.Client.BusinessLogic
     {
         public testLogic()
         {
+            ActiveUser.login("admin", "admin");
             InitializeComponent();
+            dg_Test.DataContext = LogicUtils.getNewDataTable(new Course());
         }
 
         private void btnTest_Click(object sender, RoutedEventArgs e)

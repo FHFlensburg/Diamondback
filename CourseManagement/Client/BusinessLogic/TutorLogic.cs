@@ -126,7 +126,13 @@ namespace CourseManagement.Client.BusinessLogic
             tutor.update();
         }
 
-
-
+        /// <summary>
+        /// Get one tutor by id manage the remove from database of this tutor
+        /// </summary>
+        /// <param name="courseNr"></param>
+        public override void delete(int tutorNr)
+        {
+            Tutor.getById(tutorNr).delete();
+        }
     }
 }

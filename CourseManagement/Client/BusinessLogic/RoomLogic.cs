@@ -68,9 +68,48 @@ namespace CourseManagement.Client.BusinessLogic
             throw new NotImplementedException();
         }
 
-        public override DataTable getById(int id)
+        /// <summary>
+        /// Creates a datatable and get one Room by id and fills the datatable with all property names and
+        /// the data from the Course
+        /// </summary>
+        /// <param name="courseNr"></param>
+        /// <returns></returns>
+        public override DataTable getById(int courseNr)
         {
-            throw new NotImplementedException();
+            Room room = Room.getById(courseNr);
+            DataTable aRoom = LogicUtils.getNewDataTable(room);
+
+
+            aRoom.Rows.Add(getNewRow(aRoom, room));
+
+            return aRoom;
+        }
+        /// <summary>
+        /// Create the default DataRow for Room-DataTables and
+        /// Change the fields which references other entities. 
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="course"></param>
+        private DataRow getNewRow(DataTable table, Room room)
+        {
+            DataRow row = table.NewRow();
+            List<string> names = LogicUtils.getPropertyNames(room);
+            for (int i = 0; i < names.Count; i++)
+            {
+                row[names[i]] = room.GetType().GetProperty(names[i]).GetMethod.Invoke(room, null);
+            }
+
+            return row;
+        }
+
+
+        /// <summary>
+        /// Get one room by id manage the remove from database of this room
+        /// </summary>
+        /// <param name="courseNr"></param>
+        public override void delete(int roomNr)
+        {
+            Room.getById(roomNr).delete();
         }
     }
 }
