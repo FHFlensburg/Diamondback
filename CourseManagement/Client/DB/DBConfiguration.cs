@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CourseManagement.Client.DB.Model;
+using System.Data;
 
 
 namespace CourseManagement.Client.DB
@@ -16,19 +17,52 @@ namespace CourseManagement.Client.DB
         
         public static DiamondbackModelContainer getContext(string dbModelNameOrConnectionString)
         {
-            if (context == null) context = new DiamondbackModelContainer(dbModelNameOrConnectionString);
-            return context;
+            try
+            {
+                if (context == null) context = new DiamondbackModelContainer(dbModelNameOrConnectionString);
+                return context;
+            }
+            catch (EntityException e)
+            {
+                throw new Exception(e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public static DiamondbackModelContainer getContext()
         {
-           return DBConfiguration.getContext("name=DiamondbackModelContainer");
+            try
+            {
+                return DBConfiguration.getContext("name=DiamondbackModelContainer");
+            }
+            catch (EntityException e)
+            {
+                throw new Exception(e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public static void closeContext()
         {
-            context.Dispose();
-            context = null;
+            try
+            {
+                context.Dispose();
+                context = null;
+            }
+            catch (EntityException e)
+            {
+                throw new Exception(e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
        
      

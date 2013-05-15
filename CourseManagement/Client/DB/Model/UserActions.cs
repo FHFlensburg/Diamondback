@@ -35,7 +35,15 @@ namespace CourseManagement.Client.DB.Model
 
         public static User getByUserName(string userName)
         {
-            return UserQuery.getByUserName(userName);
+            try
+            {
+                return UserQuery.getByUserName(userName);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+                
+            }
         }
     }
 }

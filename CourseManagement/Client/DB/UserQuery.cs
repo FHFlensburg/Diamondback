@@ -1,6 +1,7 @@
 ﻿using CourseManagement.Client.DB.Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,10 +16,12 @@ namespace CourseManagement.Client.DB
         /// <returns>List of Users</returns>
         public static List<User> getAll()
         {
-            List<User> qry = (from user in DBConfiguration.getContext().Persons.OfType<User>()
-                                 select user).ToList();
-
-            return qry;
+            try
+            {
+                List<User> qry = (from user in DBConfiguration.getContext().Persons.OfType<User>()
+                                  select user).ToList();
+                return qry;
+            }
         }
 
         /// <summary>
@@ -27,8 +30,19 @@ namespace CourseManagement.Client.DB
         /// <param name="student"></param>
         public static void insert(User user)
         {
-            DBConfiguration.getContext().Persons.Add(user);
-            DBConfiguration.getContext().SaveChanges();
+            try
+            {
+                DBConfiguration.getContext().Persons.Add(user);
+                DBConfiguration.getContext().SaveChanges();
+            }
+            catch (EntityException e)
+            {
+                throw new Exception(e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         /// <summary>
@@ -37,8 +51,19 @@ namespace CourseManagement.Client.DB
         /// <param name="student"></param>
         public static void delete(User user)
         {
-            DBConfiguration.getContext().Persons.Remove(user);
-            DBConfiguration.getContext().SaveChanges();
+            try
+            {
+                DBConfiguration.getContext().Persons.Remove(user);
+                DBConfiguration.getContext().SaveChanges();
+            }
+            catch (EntityException e)
+            {
+                throw new Exception(e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         /// <summary>
@@ -48,7 +73,18 @@ namespace CourseManagement.Client.DB
         /// <returns>Student</returns>
         public static User getById(int userId)
         {
-            return (DBConfiguration.getContext().Persons.Find(userId)) as User;
+            try
+            {
+                return (DBConfiguration.getContext().Persons.Find(userId)) as User;
+            }
+            catch (EntityException e)
+            {
+                throw new Exception(e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         /// <summary>
@@ -58,7 +94,18 @@ namespace CourseManagement.Client.DB
         /// <param name="student"></param>
         public static void update(User user)
         {
-            DBConfiguration.getContext().SaveChanges();
+            try
+            {
+                DBConfiguration.getContext().SaveChanges();
+            }
+            catch (EntityException e)
+            {
+                throw new Exception(e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         /// <summary>
@@ -70,27 +117,38 @@ namespace CourseManagement.Client.DB
         /// <returns></returns>
         public static List<User> search(String like)
         {
-            List<User> qry = new List<User>();
+            try
+            {
+                List<User> qry = new List<User>();
 
-            if (DBUtils.isNumber(like))
-            {
-                int wert = Convert.ToInt32(like);
-                List<User> listUser = (from user in DBConfiguration.getContext().Persons.OfType<User>()
-                                             select user).ToList();
-                foreach (User user in listUser)
+                if (DBUtils.isNumber(like))
                 {
-                    if (user.Id.ToString().Contains(like)) qry.Add(user);
+                    int wert = Convert.ToInt32(like);
+                    List<User> listUser = (from user in DBConfiguration.getContext().Persons.OfType<User>()
+                                           select user).ToList();
+                    foreach (User user in listUser)
+                    {
+                        if (user.Id.ToString().Contains(like)) qry.Add(user);
+                    }
                 }
+                else
+                {
+                    like = like.ToUpper();
+                    qry = (from user in DBConfiguration.getContext().Persons.OfType<User>()
+                           where user.Forename.ToUpper().Contains(like)
+                           || user.Surname.ToUpper().Contains(like)
+                           select user).ToList();
+                }
+                return qry;
             }
-            else
+            catch (EntityException e)
             {
-                like = like.ToUpper();
-                qry = (from user in DBConfiguration.getContext().Persons.OfType<User>()
-                       where user.Forename.ToUpper().Contains(like)
-                       || user.Surname.ToUpper().Contains(like)
-                       select user).ToList();
+                throw new Exception(e.Message);
             }
-            return qry;
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         /// <summary>
@@ -101,14 +159,32 @@ namespace CourseManagement.Client.DB
         /// <returns></returns>
         public static User getByUserName(string userName)
         {
-            User qry = null;
-            if (userName != "" && userName!=null)
+            try
             {
-                qry = (from user in DBConfiguration.getContext().Persons.OfType<User>()
-                            where user.UserName.Equals(userName)
-                            select user).FirstOrDefault();
+                User qry = null;
+                if (userName != "" && userName != null)
+                {
+                    try
+                    {
+                        qry = (from user in DBConfiguration.getContext().Persons.OfType<User>()
+                               where user.UserName.Equals(userName)
+                               select user).FirstOrDefault();
+                    }
+                    catch (EntityException e)
+                    {
+                        throw new Exception(e.Message);
+                    }
+                }
+                return qry;
             }
-            return qry;
+            catch (EntityException e)
+            {
+                throw new Exception(e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 }

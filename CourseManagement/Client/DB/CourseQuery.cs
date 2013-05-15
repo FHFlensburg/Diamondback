@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CourseManagement.Client.DB.Model;
+using System.Data;
 
 namespace CourseManagement.Client.DB
 {
@@ -16,10 +17,23 @@ namespace CourseManagement.Client.DB
         /// <returns>List of courses</returns>
         public static List<Course> getAll()
         {
-            List<Course> qry = (from course in DBConfiguration.getContext().Courses
-                                 select course).ToList();
+            try
+            {
+                List<Course> qry = (from course in DBConfiguration.getContext().Courses
+                                    select course).ToList();
 
-            return qry;
+
+                return qry;
+            }
+            catch (EntityException e)
+            {
+                throw new Exception(e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+  
         }
 
         /// <summary>
@@ -28,8 +42,19 @@ namespace CourseManagement.Client.DB
         /// <param name="student"></param>
         public static void insert(Course course)
         {
-            DBConfiguration.getContext().Courses.Add(course);
-            update(course);
+            try
+            {
+                DBConfiguration.getContext().Courses.Add(course);
+                update(course);
+            }
+            catch (EntityException e)
+            {
+                throw new Exception(e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
             
         }
 
@@ -39,8 +64,19 @@ namespace CourseManagement.Client.DB
         /// <param name="student"></param>
         public static void delete(Course course)
         {
-            DBConfiguration.getContext().Courses.Remove(course);
-            update(course);
+            try
+            {
+                DBConfiguration.getContext().Courses.Remove(course);
+                update(course);
+            }
+            catch (EntityException e)
+            {
+                throw new Exception(e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         /// <summary>
@@ -50,7 +86,18 @@ namespace CourseManagement.Client.DB
         /// <returns>Student</returns>
         public static Course getById(int courseId)
         {
-            return (DBConfiguration.getContext().Courses.Find(courseId));
+            try
+            {
+                return (DBConfiguration.getContext().Courses.Find(courseId));
+            }
+            catch (EntityException e)
+            {
+                throw new Exception(e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         /// <summary>
@@ -60,7 +107,18 @@ namespace CourseManagement.Client.DB
         /// <param name="student"></param>
         public static void update(Course course)
         {
-            DBConfiguration.getContext().SaveChanges();
+            try
+            {
+                DBConfiguration.getContext().SaveChanges();
+            }
+            catch (EntityException e)
+            {
+                throw new Exception(e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         /// <summary>
@@ -72,27 +130,38 @@ namespace CourseManagement.Client.DB
         /// <returns></returns>
         public static List<Course> search(string like)
         {
-            List<Course> qry = new List<Course>();
+            try
+            {
+                List<Course> qry = new List<Course>();
 
-            if (DBUtils.isNumber(like))
-            {
-                int wert = Convert.ToInt32(like);
-                List<Course> listCourse = (from course in DBConfiguration.getContext().Courses
-                                             select course).ToList();
-                foreach (Course course in listCourse)
+                if (DBUtils.isNumber(like))
                 {
-                    if (course.CourseNr.ToString().Contains(like)) qry.Add(course);
+                    int wert = Convert.ToInt32(like);
+                    List<Course> listCourse = (from course in DBConfiguration.getContext().Courses
+                                               select course).ToList();
+                    foreach (Course course in listCourse)
+                    {
+                        if (course.CourseNr.ToString().Contains(like)) qry.Add(course);
+                    }
                 }
+                else
+                {
+                    like = like.ToUpper();
+                    qry = (from course in DBConfiguration.getContext().Courses
+                           where course.Title.ToUpper().Contains(like)
+
+                           select course).ToList();
+                }
+                return qry;
             }
-            else
+            catch (EntityException e)
             {
-                like = like.ToUpper();
-                qry = (from course in DBConfiguration.getContext().Courses
-                       where course.Title.ToUpper().Contains(like)
-                       
-                       select course).ToList();
+                throw new Exception(e.Message);
             }
-            return qry;
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 }

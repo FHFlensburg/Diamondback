@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CourseManagement.Client.DB.Model;
+using System.Data;
 
 
 
@@ -20,10 +21,21 @@ namespace CourseManagement.Client.DB
         /// <returns>List of Students</returns>
         public static List<Student> getAll()
         {
-            List<Student> qry = (from student in DBConfiguration.getContext().Persons.OfType<Student>()
-                                 select student).ToList();
+            try
+            {
+                List<Student> qry = (from student in DBConfiguration.getContext().Persons.OfType<Student>()
+                                     select student).ToList();
 
-            return qry;
+                return qry;
+            }
+            catch (EntityException e)
+            {
+                throw new Exception(e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         /// <summary>
@@ -32,8 +44,19 @@ namespace CourseManagement.Client.DB
         /// <param name="student"></param>
         public static void insert(Student student)
         {
-            DBConfiguration.getContext().Persons.Add(student);
-            DBConfiguration.getContext().SaveChanges();
+            try
+            {
+                DBConfiguration.getContext().Persons.Add(student);
+                DBConfiguration.getContext().SaveChanges();
+            }
+            catch (EntityException e)
+            {
+                throw new Exception(e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         /// <summary>
@@ -42,8 +65,19 @@ namespace CourseManagement.Client.DB
         /// <param name="student"></param>
         public static void delete(Student student)
         {
-            DBConfiguration.getContext().Persons.Remove(student);
-            DBConfiguration.getContext().SaveChanges();
+            try
+            {
+                DBConfiguration.getContext().Persons.Remove(student);
+                DBConfiguration.getContext().SaveChanges();
+            }
+            catch (EntityException e)
+            {
+                throw new Exception(e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         /// <summary>
@@ -53,7 +87,18 @@ namespace CourseManagement.Client.DB
         /// <returns>Student</returns>
         public static Student getById(int studentId)
         {
-            return (DBConfiguration.getContext().Persons.Find(studentId)) as Student;
+            try
+            {
+                return (DBConfiguration.getContext().Persons.Find(studentId)) as Student;
+            }
+            catch (EntityException e)
+            {
+                throw new Exception(e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         /// <summary>
@@ -63,7 +108,18 @@ namespace CourseManagement.Client.DB
         /// <param name="student"></param>
         public static void update(Student student)
         {
-            DBConfiguration.getContext().SaveChanges();
+            try
+            {
+                DBConfiguration.getContext().SaveChanges();
+            }
+            catch (EntityException e)
+            {
+                throw new Exception(e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         /// <summary>
@@ -75,27 +131,38 @@ namespace CourseManagement.Client.DB
         /// <returns></returns>
         public static List<Student> search(string like)
         {
-            List<Student> qry = new List<Student>();
+            try
+            {
+                List<Student> qry = new List<Student>();
 
-            if (DBUtils.isNumber(like))
-            {
-                int wert = Convert.ToInt32(like);
-                List<Student> listStudent = (from student in DBConfiguration.getContext().Persons.OfType<Student>()
-                                             select student).ToList();
-                foreach (Student student in listStudent)
+                if (DBUtils.isNumber(like))
                 {
-                    if (student.Id.ToString().Contains(like)) qry.Add(student);
+                    int wert = Convert.ToInt32(like);
+                    List<Student> listStudent = (from student in DBConfiguration.getContext().Persons.OfType<Student>()
+                                                 select student).ToList();
+                    foreach (Student student in listStudent)
+                    {
+                        if (student.Id.ToString().Contains(like)) qry.Add(student);
+                    }
                 }
+                else
+                {
+                    like = like.ToUpper();
+                    qry = (from student in DBConfiguration.getContext().Persons.OfType<Student>()
+                           where student.Forename.ToUpper().Contains(like)
+                           || student.Surname.ToUpper().Contains(like)
+                           select student).ToList();
+                }
+                return qry;
             }
-            else
+            catch (EntityException e)
             {
-                like = like.ToUpper();
-                qry = (from student in DBConfiguration.getContext().Persons.OfType<Student>()
-                       where student.Forename.ToUpper().Contains(like)
-                       || student.Surname.ToUpper().Contains(like)
-                       select student).ToList();               
+                throw new Exception(e.Message);
             }
-            return qry;
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 }

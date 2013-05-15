@@ -24,14 +24,21 @@ namespace CourseManagement.Client.BusinessLogic
         public static bool login(string userName, string password)
         {
             bool loginSuccessful = false;
-            User userToCheck = User.getByUserName(userName);
-            if (!userIsLoggedIn() && userToCheck != null && 
-                userToCheck.Active == true && userToCheck.Password == password)
+            try
             {
-                loginSuccessful = true;
-                currentUser = userToCheck;
-            }
+                User userToCheck = User.getByUserName(userName);
 
+                if (!userIsLoggedIn() && userToCheck != null &&
+                    userToCheck.Active == true && userToCheck.Password == password)
+                {
+                    loginSuccessful = true;
+                    currentUser = userToCheck;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
             return loginSuccessful;
         }
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CourseManagement.Client.DB.Model;
+using System.Data;
 
 namespace CourseManagement.Client.DB
 {
@@ -16,10 +17,20 @@ namespace CourseManagement.Client.DB
         /// <returns>List of Appointments</returns>
         public static List<Appointment> getAll()
         {
-            List<Appointment> qry = (from appointment in DBConfiguration.getContext().Appointments.OfType<Appointment>()
-                                     select appointment).ToList();
-
-            return qry;
+            try
+            {
+                List<Appointment> qry = (from appointment in DBConfiguration.getContext().Appointments.OfType<Appointment>()
+                                         select appointment).ToList();
+                return qry;
+            }
+            catch (EntityException e)
+            {
+                throw new Exception(e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         /// <summary>
@@ -28,8 +39,19 @@ namespace CourseManagement.Client.DB
         /// <param name="appointment"></param>
         public static void insert(Appointment appointment)
         {
-            DBConfiguration.getContext().Appointments.Add(appointment);
-            DBConfiguration.getContext().SaveChanges();
+            try
+            {
+                DBConfiguration.getContext().Appointments.Add(appointment);
+                DBConfiguration.getContext().SaveChanges();
+            }
+            catch (EntityException e)
+            {
+                throw new Exception(e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         /// <summary>
@@ -38,8 +60,19 @@ namespace CourseManagement.Client.DB
         /// <param name="appointment"></param>
         public static void delete(Appointment appointment)
         {
-            DBConfiguration.getContext().Appointments.Remove(appointment);
-            DBConfiguration.getContext().SaveChanges();
+            try
+            {
+                DBConfiguration.getContext().Appointments.Remove(appointment);
+                DBConfiguration.getContext().SaveChanges();
+            }
+            catch (EntityException e)
+            {
+                throw new Exception(e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         /// <summary>
@@ -49,7 +82,18 @@ namespace CourseManagement.Client.DB
         /// <returns>Student</returns>
         public static Appointment getById(int appointmentId)
         {
-            return (DBConfiguration.getContext().Appointments.Find(appointmentId)) as Appointment;
+            try
+            {
+                return (DBConfiguration.getContext().Appointments.Find(appointmentId)) as Appointment;
+            }
+            catch (EntityException e)
+            {
+                throw new Exception(e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         /// <summary>
@@ -59,7 +103,18 @@ namespace CourseManagement.Client.DB
         /// <param name="appointment"></param>
         public static void update(Appointment appointment)
         {
-            DBConfiguration.getContext().SaveChanges();
+            try
+            {
+                DBConfiguration.getContext().SaveChanges();
+            }
+            catch (EntityException e)
+            {
+                throw new Exception(e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
                
     }

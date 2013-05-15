@@ -47,7 +47,16 @@ namespace CourseManagement.Client.View
 
         private bool checkPassword(string userName, string password)
         {
-            return ActiveUser.login(userName, password);
+            bool passwordOkay = false;
+            try
+            {
+                passwordOkay= ActiveUser.login(userName, password);
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            return passwordOkay;
         }
     }
 }

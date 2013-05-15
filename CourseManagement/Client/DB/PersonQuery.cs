@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CourseManagement.Client.DB.Model;
+using System.Data;
 
 
 namespace CourseManagement.Client.DB
@@ -16,10 +17,21 @@ namespace CourseManagement.Client.DB
         /// <returns>List of Students</returns>
         public static List<Person> getAll()
         {
-            List<Person> qry = (from person in DBConfiguration.getContext().Persons
-                                select person).ToList();
+            try
+            {
+                List<Person> qry = (from person in DBConfiguration.getContext().Persons
+                                    select person).ToList();
 
-            return qry;
+                return qry;
+            }
+            catch (EntityException e)
+            {
+                throw new Exception(e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         /// <summary>
@@ -28,8 +40,19 @@ namespace CourseManagement.Client.DB
         /// <param name="student"></param>
         public static void insert(Person person)
         {
-            DBConfiguration.getContext().Persons.Add(person);
-            DBConfiguration.getContext().SaveChanges();
+            try
+            {
+                DBConfiguration.getContext().Persons.Add(person);
+                DBConfiguration.getContext().SaveChanges();
+            }
+            catch (EntityException e)
+            {
+                throw new Exception(e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         /// <summary>
@@ -38,8 +61,19 @@ namespace CourseManagement.Client.DB
         /// <param name="student"></param>
         public static void delete(Person person)
         {
-            DBConfiguration.getContext().Persons.Remove(person);
-            DBConfiguration.getContext().SaveChanges();
+            try
+            {
+                DBConfiguration.getContext().Persons.Remove(person);
+                DBConfiguration.getContext().SaveChanges();
+            }
+            catch (EntityException e)
+            {
+                throw new Exception(e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         /// <summary>
@@ -49,7 +83,18 @@ namespace CourseManagement.Client.DB
         /// <returns>Student</returns>
         public static Person getById(int personId)
         {
-            return (DBConfiguration.getContext().Persons.Find(personId));
+            try
+            {
+                return (DBConfiguration.getContext().Persons.Find(personId));
+            }
+            catch (EntityException e)
+            {
+                throw new Exception(e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         /// <summary>
@@ -59,7 +104,18 @@ namespace CourseManagement.Client.DB
         /// <param name="student"></param>
         public static void update(Person person)
         {
-            DBConfiguration.getContext().SaveChanges();
+            try
+            {
+                DBConfiguration.getContext().SaveChanges();
+            }
+            catch (EntityException e)
+            {
+                throw new Exception(e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 
