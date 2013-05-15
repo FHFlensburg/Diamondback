@@ -10,27 +10,62 @@ namespace CourseManagement.Client.DB.Model
     {
         public void addToDB()
         {
-            AppointmentQuery.insert(this);
+            try
+            {
+                AppointmentQuery.insert(this);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public static List<Appointment> getAll()
         {
-            return AppointmentQuery.getAll();
+            try
+            {
+                return AppointmentQuery.getAll();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public void delete()
         {
-            AppointmentQuery.delete(this);
+            try
+            {
+                AppointmentQuery.delete(this);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public void update()
         {
-            AppointmentQuery.update(this);
+            try
+            {
+                AppointmentQuery.update(this);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public static Appointment getById(int appointmentId)
         {
-            return AppointmentQuery.getById(appointmentId);
+            try
+            {
+                return AppointmentQuery.getById(appointmentId);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 }

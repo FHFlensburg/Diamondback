@@ -10,27 +10,62 @@ namespace CourseManagement.Client.DB.Model
     {
         public virtual void addToDB()
         {
-            PersonQuery.insert(this);
+            try
+            {
+                PersonQuery.insert(this);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public  static List<Person> getAll()
         {
-            return PersonQuery.getAll();
+            try
+            {
+                return PersonQuery.getAll();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public virtual void delete()
         {
-            PersonQuery.delete(this);
+            try
+            {
+                PersonQuery.delete(this);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public virtual void update()
         {
-            PersonQuery.update(this);
+            try
+            {
+                PersonQuery.update(this);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public  static Person getById(int personId)
         {
-            return PersonQuery.getById(personId);
+            try
+            {
+                return PersonQuery.getById(personId);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
 

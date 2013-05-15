@@ -8,34 +8,77 @@ namespace CourseManagement.Client.DB.Model
 {
     public partial class Course
     {
+
         public void addToDB()
         {
-            CourseQuery.insert(this);
+            try
+            {
+                CourseQuery.insert(this);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public static List<Course> getAll()
         {
-            return CourseQuery.getAll();
+            try
+            {
+                return CourseQuery.getAll();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public  void delete()
         {
-            CourseQuery.delete(this);
+            try
+            {
+                CourseQuery.delete(this);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public  void update()
         {
-            CourseQuery.update(this);
+            try
+            {
+                CourseQuery.update(this);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public static Course getById(int courseNr)
         {
-            return CourseQuery.getById(courseNr);
+            try
+            {
+                return CourseQuery.getById(courseNr);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public static List<Course> search(string like)
         {
-            return CourseQuery.search(like);
+            try
+            {
+                return CourseQuery.search(like);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
     }

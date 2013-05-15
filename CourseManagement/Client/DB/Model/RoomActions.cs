@@ -10,27 +10,62 @@ namespace CourseManagement.Client.DB.Model
     {
         public void addToDB()
         {
-            RoomQuery.insert(this);
+            try
+            {
+                RoomQuery.insert(this);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public static List<Room> getAll()
         {
-            return RoomQuery.getAll();
+            try
+            {
+                return RoomQuery.getAll();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public void delete()
         {
-            RoomQuery.delete(this);
+            try
+            {
+                RoomQuery.delete(this);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public void update()
         {
-            RoomQuery.update(this);
+            try
+            {
+                RoomQuery.update(this);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public static Room getById(int roomId)
         {
-            return RoomQuery.getById(roomId);
+            try
+            {
+                return RoomQuery.getById(roomId);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 }

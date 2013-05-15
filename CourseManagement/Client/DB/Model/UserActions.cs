@@ -10,27 +10,62 @@ namespace CourseManagement.Client.DB.Model
     {
         public override void addToDB()
         {
-            UserQuery.insert(this);
+            try
+            {
+                UserQuery.insert(this);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public static new List<User> getAll()
         {
-            return UserQuery.getAll();
+            try
+            {
+                return UserQuery.getAll();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public override void delete()
         {
-            UserQuery.delete(this);
+            try
+            {
+                UserQuery.delete(this);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public override void update()
         {
-            UserQuery.update(this);
+            try
+            {
+                UserQuery.update(this);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public static new User getById(int userId)
         {
-            return UserQuery.getById(userId);
+            try
+            {
+                return UserQuery.getById(userId);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public static User getByUserName(string userName)

@@ -12,31 +12,62 @@ namespace CourseManagement.Client.DB.Model
     {
         public override void addToDB()
         {
-            TutorQuery.insert(this);
+            try
+            {
+                TutorQuery.insert(this);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
-        public  static new List<Tutor> getAll()
+        public static new List<Tutor> getAll()
         {
-            return TutorQuery.getAll();
+            try
+            {
+                return TutorQuery.getAll();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public override void delete()
         {
-            TutorQuery.delete(this);
+            try
+            {
+                TutorQuery.delete(this);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public override void update()
         {
-            TutorQuery.update(this);
+            try
+            {
+                TutorQuery.update(this);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public static new Tutor getById(int tutorId)
         {
-            return TutorQuery.getById(tutorId);
+            try
+            {
+                return TutorQuery.getById(tutorId);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
-
-
-
-
     }
 }
