@@ -37,14 +37,10 @@ namespace CourseManagement.Client.BusinessLogic
         {
             try
             {
-                DataTable allCourses = LogicUtils.getNewDataTable(new Course());
-                List<string> names = LogicUtils.getPropertyNames(new Course());
+                DataTable allCourses = getNewDataTable();
                 foreach (Course course in Course.getAll())
                 {
                     allCourses.Rows.Add(getNewRow(allCourses, course));
-
-                    //allCourses.Rows.Add(course.CourseNr, course.Title, course.AmountInEuro, course.Description, course.MaxMember,
-                    //  course.MinMember, course.ValidityInMonth, null, course.Tutor.Surname, course.Payments.Count);
                 }
 
 
@@ -65,8 +61,8 @@ namespace CourseManagement.Client.BusinessLogic
         /// <param name="maxMember"></param>
         /// <param name="minMember"></param>
         /// <param name="validityInMonth"></param>
-        public int createNewCourse(String title, decimal amountInEuro, String description, int maxMember, int minMember, int tutor,
-                                        int appointment, int validityInMonth)
+        public int create(String title, decimal amountInEuro, String description, int maxMember, int minMember, int tutorNr,
+                                         int validityInMonth)
         {
             try
             {
@@ -76,7 +72,8 @@ namespace CourseManagement.Client.BusinessLogic
                 course.Description = description;
                 course.MaxMember = maxMember;
                 course.MinMember = minMember;
-                course.Tutor = Tutor.getById(tutor);
+                course.Tutor = Tutor.getById(tutorNr);
+                course.ValidityInMonth = validityInMonth;
 
 
                 course.ValidityInMonth = validityInMonth;
@@ -101,7 +98,7 @@ namespace CourseManagement.Client.BusinessLogic
             try
             {
                 Course course = Course.getById(courseNr);
-                DataTable aCourse = LogicUtils.getNewDataTable(course);
+                DataTable aCourse = getNewDataTable();
 
 
                 aCourse.Rows.Add(getNewRow(aCourse, course));
@@ -131,6 +128,16 @@ namespace CourseManagement.Client.BusinessLogic
         }
 
         /// <summary>
+        /// Method for specific CourseTable-changes to the default Table-Method in LogicUtils
+        /// </summary>
+        /// <param name="table"></param>
+        /// <returns></returns>
+        private DataTable getNewDataTable()
+        {
+            return LogicUtils.getNewDataTable(new Course());
+        }
+
+        /// <summary>
         /// Search all courses by the parameter in the columns CourseNr, Title and Description
         /// A datatable with the resultset will be returned
         /// </summary>
@@ -140,7 +147,7 @@ namespace CourseManagement.Client.BusinessLogic
         {
             try
             {
-                DataTable allCourses = LogicUtils.getNewDataTable(new Course());
+                DataTable allCourses = getNewDataTable();
 
                 foreach (Course course in Course.getAll())
                 {
@@ -174,6 +181,50 @@ namespace CourseManagement.Client.BusinessLogic
             {
                 throw new Exception(e.Message);
             }  
+        }
+
+        /// <summary>
+        /// Return a DataTable containing all Courses of the submitted Student
+        /// </summary>
+        /// <param name="roomNr"></param>
+        /// <returns></returns>
+        public DataTable getByStudent(int studentNr)
+        {
+            try
+            {
+                DataTable allOfStudent = getNewDataTable();
+                foreach (Payment payment in Student.getById(studentNr).Payments )
+                {
+                    allOfStudent.Rows.Add(getNewRow(allOfStudent, payment.Course));
+                }
+                return allOfStudent;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Return a DataTable containing all Courses of the submitted Tutor
+        /// </summary>
+        /// <param name="roomNr"></param>
+        /// <returns></returns>
+        public DataTable getByTutor(int tutorNr)
+        {
+            try
+            {
+                DataTable allOfTutor = getNewDataTable();
+                foreach (Course course in Tutor.getById(tutorNr).Courses)
+                {
+                    allOfTutor.Rows.Add(getNewRow(allOfTutor, course));
+                }
+                return allOfTutor;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 }

@@ -13,5 +13,10 @@ namespace CourseManagement.Client.BusinessLogic
         public abstract DataTable search(string search);
         public abstract DataTable getById(int id);
         public abstract void delete(int id);
+        //public int create(mit unterschiedlichen Parametern je nach Entity) --- return ist die jeweilige id
+        //public void changeProperties()
+        
+        //private DataTable getNewTable()
+        //private DataRow getNewRow()
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CourseManagement.Client.BusinessLogic
 {
-    class RoomLogic:AbstractLogic
+    public class RoomLogic:AbstractLogic
     {
         private RoomLogic() { }
 

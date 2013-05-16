@@ -7,7 +7,7 @@
             <Label Content="Teilnehmer zu Kurs hinzufügen" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" />
             <DataGrid x:Name="dgParticipant" Margin="10" ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="True"/>
             <Button x:Name="addPerson2Course" Content="hinzufügen" Margin="10,5,10,0" />
-            <Button x:Name="Close" Content="Abrrechen" Margin="10,5,10,0" />
+            <Button x:Name="abc" Content="Abrrechen" Margin="10,5,10,0" />
         </StackPanel>
 
     </Grid>

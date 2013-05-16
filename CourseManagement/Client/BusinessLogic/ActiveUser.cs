@@ -23,9 +23,10 @@ namespace CourseManagement.Client.BusinessLogic
         /// <returns></returns>
         public static bool login(string userName, string password)
         {
-            bool loginSuccessful = false;
             try
             {
+                bool loginSuccessful = false;
+
                 User userToCheck = User.getByUserName(userName);
 
                 if (!userIsLoggedIn() && userToCheck != null &&
@@ -43,23 +44,36 @@ namespace CourseManagement.Client.BusinessLogic
         }
 
         /// <summary>
-        /// Logout the current User.
+        /// Logout the current User and close the DB-Connection
         /// </summary>
         public static void logout()
         {
-            currentUser = null;
-            //context disposen?
+            try
+            {
+                currentUser = null;
+                ActiveUserActions.closeContext();
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         /// <summary>
         /// change the password of the logged in user
         /// </summary>
         /// <param name="newPassword"></param>
-        public static void changePassword(string newPassword)
+        public static bool changePassword(string newPassword)
         {
             try
             {
-                if (userIsLoggedIn() && possiblePassword(newPassword)) currentUser.Password = newPassword;
+                bool changed = false;
+                if (userIsLoggedIn() && possiblePassword(newPassword))
+                {
+                    currentUser.Password = newPassword;
+                    changed = true;
+                }
+                return changed;
             }
             catch (Exception e)
             {

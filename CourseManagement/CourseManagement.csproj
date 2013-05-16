@@ -82,6 +82,7 @@
     <Compile Include="Client\BusinessLogic\LogicUtils.cs" />
     <Compile Include="Client\BusinessLogic\RoomLogic.cs" />
     <Compile Include="Client\BusinessLogic\UserLogic.cs" />
+    <Compile Include="Client\DB\Model\ActiveUserActions.cs" />
     <Compile Include="Client\View\WndParticipant2Course.xaml.cs">
       <DependentUpon>WndParticipant2Course.xaml</DependentUpon>
     </Compile>

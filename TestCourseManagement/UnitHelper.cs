@@ -20,7 +20,7 @@ namespace TestCourseManagement
         public static string getUnitConnectionString()
         {
             EntityConnectionStringBuilder ec = new EntityConnectionStringBuilder();
-            ec.ProviderConnectionString = "data source=scott-speed.selfhost.bz;initial catalog=testdb;persist security info=True;user id=sa;password=Diamond2013;MultipleActiveResultSets=True;App=EntityFramework";
+            ec.ProviderConnectionString = "data source=scott-speed.selfhost.bz;initial catalog=Diamondback;persist security info=True;user id=sa;password=Diamond2013;MultipleActiveResultSets=True;App=EntityFramework";
             string help = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))));
             help += "\\CourseManagement\\obj\\Debug\\edmxResourcesToEmbed\\Client\\DB\\Model\\DiamondbackModel";
             help = help + ".csdl|" + help + ".ssdl|" + help + ".msl";

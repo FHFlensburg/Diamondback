@@ -75,9 +75,9 @@ namespace CourseManagement.Client.BusinessLogic
             DataTable tutor = (DataTable)cbxTutor.DataSource;
             DataTable room = (DataTable)cbxRoom.DataSource;
 
-            int id = course.createNewCourse(tbxTitle.Text,Convert.ToDecimal(tbxAmount.Text),tbxDescription.Text,Convert.ToInt32(cbxStudentsMAX.SelectedItem),
-                                    Convert.ToInt32(cbxStudentsMIN.SelectedItem),Convert.ToInt32(tutor.Rows[cbxTutor.SelectedIndex]["TutorNr"]),1,Convert.ToInt32(tbxValidity.Text));
-            AppointmentLogic.getInstance().createAppointment(id, Convert.ToInt32(room.Rows[cbxRoom.SelectedIndex]["RoomNr"]),DateTime.Now,DateTime.Now);
+            int id = course.create(tbxTitle.Text,Convert.ToDecimal(tbxAmount.Text),tbxDescription.Text,Convert.ToInt32(cbxStudentsMAX.SelectedItem),
+                                    Convert.ToInt32(cbxStudentsMIN.SelectedItem),Convert.ToInt32(tutor.Rows[cbxTutor.SelectedIndex]["TutorNr"]),Convert.ToInt32(tbxValidity.Text));
+            AppointmentLogic.getInstance().create(id, Convert.ToInt32(room.Rows[cbxRoom.SelectedIndex]["RoomNr"]),DateTime.Now,DateTime.Now);
 
             tbxTitle.Clear();
             tbxDescription.Clear();
