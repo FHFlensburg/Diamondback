@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CourseManagement.Client.DB.Model;
+﻿using CourseManagement.Client.DB.Model;
+using System;
 using System.Data;
-using System.Reflection;
 
 namespace CourseManagement.Client.BusinessLogic
 {
@@ -34,7 +29,7 @@ namespace CourseManagement.Client.BusinessLogic
         {
             try
             {
-                DataTable allStudents = generatateStudentTable();
+                DataTable allStudents = getNewDataTable();
 
 
                 foreach (Student student in Student.getAll())
@@ -51,20 +46,25 @@ namespace CourseManagement.Client.BusinessLogic
             }  
         }
 
+        /// <summary>
+        /// Search all students by the parameter in the columns studentNr, surname and forename
+        /// A datatable with the resultset will be returned
+        /// </summary>
+        /// <param name="search"></param>
+        /// <returns></returns>
         public override DataTable search(string search)
         {
             try
             {
-                DataTable allStudents = generatateStudentTable();
+                DataTable allStudents = getNewDataTable();
 
                 foreach (Student student in Student.getAll())
                 {
                     if (LogicUtils.notNullAndContains(student.Forename, search)
                         || LogicUtils.notNullAndContains(student.Surname, search)
-                        || student.Id.ToString().Contains(search))//---to correct!
+                        || LogicUtils.notNullAndContains(student.Id,search))
                     {
-                        allStudents.Rows.Add(
-                        student.Id, student.Surname, student.Forename, student.City);
+                        allStudents.Rows.Add(getNewRow(allStudents,student));
                     }
                 }
 
@@ -76,33 +76,103 @@ namespace CourseManagement.Client.BusinessLogic
             }  
         }
 
-        //depricated
-        private DataTable generatateStudentTable()
+        /// <summary>
+        /// Method for specific StudentDataTable-changes to the default DataTable-Method in LogicUtils
+        /// </summary>
+        /// <returns></returns>
+        private DataTable getNewDataTable()
         {
-            return LogicUtils.getNewDataTable(
-                "StudentNr", "Surname", "Forename", "City");
+            return LogicUtils.getNewDataTable(new Student());
         }
 
+        /// <summary>
+        /// Method for specific StudentRow-changes to the default Row-Method in LogicUtils
+        /// </summary>
+        /// <param name="table"></param>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        private DataRow getNewRow(DataTable table, object entity)
+        {
+            return LogicUtils.getNewRow(table, entity);
+        }
 
         /// <summary>
-        /// Creates a new Student in the database
+        /// Creates a new Student in the database and return the studentNr
         /// </summary>
         /// <param name="?"></param>
-        public void createNewStudent(string surname, string forename, string city)
+        public int create(string surname, string forename, string birthyear, string street,
+            string mobilePhone, string mail, string fax, string privatePhone, string gender,
+            bool active, string title, string city, string citycode, string iban, string bic,
+            string depositor, string nameOfBank)
         {
             try
             {
                 Student student = new Student();
                 student.Surname = surname;
                 student.Forename = forename;
+                student.Birthyear = birthyear;
+                student.Street = street;
+                student.MobilePhone = mobilePhone;
+                student.Mail = mail;
+                student.Fax = fax;
+                student.PrivatePhone = privatePhone;
+                student.Gender = gender;
+                student.Active = active;
+                student.Title = title;
+                student.City = city;
+                student.CityCode = citycode;
+                student.IBAN = iban;
+                student.BIC = bic;
+                student.Depositor = depositor;
+                student.NameOfBank = nameOfBank;
                 student.City = city;
 
                 student.addToDB();
+                return student.Id;
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }  
+        }
+
+        /// <summary>
+        /// Creates a new Student in the database and return the studentNr
+        /// </summary>
+        /// <param name="?"></param>
+        public void changeProperties(int studentNr,string surname, string forename, string birthyear, string street,
+            string mobilePhone, string mail, string fax, string privatePhone, string gender,
+            bool? isActive, string title, string city, string citycode, string iban, string bic,
+            string depositor, string nameOfBank)
+        {
+            try
+            {
+                Student student = Student.getById(studentNr);
+                student.Surname = surname;
+                student.Forename = forename;
+                student.Birthyear = birthyear;
+                student.Street = street;
+                student.MobilePhone = mobilePhone;
+                student.Mail = mail;
+                student.Fax = fax;
+                student.PrivatePhone = privatePhone;
+                student.Gender = gender;
+                student.Active = isActive;
+                student.Title = title;
+                student.City = city;
+                student.CityCode = citycode;
+                student.IBAN = iban;
+                student.BIC = bic;
+                student.Depositor = depositor;
+                student.NameOfBank = nameOfBank;
+                student.City = city;
+
+                student.update();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         /// <summary>
@@ -114,7 +184,7 @@ namespace CourseManagement.Client.BusinessLogic
         {
             try
             {
-                DataTable dtStudent = generatateStudentTable();
+                DataTable dtStudent = getNewDataTable();
                 Student student = Student.getById(studentNr);
                 if (student != null)
                 {
@@ -122,22 +192,6 @@ namespace CourseManagement.Client.BusinessLogic
                         student.Id, student.Surname, student.Forename, student.City);
                 }
                 return dtStudent;
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }  
-        }
-
-        public void changeStudentProperties(int studentNr, string surname, string forename, string city)
-        {
-            try
-            {
-                Student student = Student.getById(studentNr);
-                student.Surname = surname;
-                student.Forename = forename;
-                student.City = city;
-                student.update();
             }
             catch (Exception e)
             {
@@ -160,6 +214,28 @@ namespace CourseManagement.Client.BusinessLogic
                 throw new Exception(e.Message);
             }  
         }
-        
+
+        /// <summary>
+        /// Return a DataTable containing all Students of the submitted Cours
+        /// </summary>
+        /// <param name="courseNr"></param>
+        /// <returns></returns>
+        public DataTable getByCourse(int courseNr)
+        {
+            try
+            {
+                DataTable students = getNewDataTable();
+                foreach (Payment payment in Course.getById(courseNr).Payments)
+                {
+                    students.Rows.Add(getNewRow(students, payment.Student));
+                }
+
+                return students;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

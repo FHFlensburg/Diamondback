@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CourseManagement.Client.DB.Model;
 
 
@@ -61,8 +57,8 @@ namespace CourseManagement.Client.BusinessLogic
         /// <param name="maxMember"></param>
         /// <param name="minMember"></param>
         /// <param name="validityInMonth"></param>
-        public int create(String title, decimal amountInEuro, String description, int maxMember, int minMember, int tutorNr,
-                                         int validityInMonth)
+        public int create(String title, decimal? amountInEuro, String description, int? maxMember, int? minMember, int? tutorNr,
+                                         int? validityInMonth)
         {
             try
             {
@@ -72,12 +68,15 @@ namespace CourseManagement.Client.BusinessLogic
                 course.Description = description;
                 course.MaxMember = maxMember;
                 course.MinMember = minMember;
-                course.Tutor = Tutor.getById(tutorNr);
+                if (maxMember < minMember)
+                {
+                    course.MaxMember = course.MinMember = null;
+                }
+                if (tutorNr.HasValue)
+                {
+                    course.Tutor = Tutor.getById(tutorNr.Value);
+                }
                 course.ValidityInMonth = validityInMonth;
-
-
-                course.ValidityInMonth = validityInMonth;
-
                 course.addToDB();
                 return course.CourseNr;
             }
@@ -85,6 +84,40 @@ namespace CourseManagement.Client.BusinessLogic
             {
                 throw new Exception(e.Message);
             }  
+        }
+        /// <summary>
+        /// Method for changing Properties of the Course with the submitted id.
+        /// All Parameters have to be submitted.
+        /// </summary>
+        /// <param name="idToChange"></param>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        public void changeProperties(int courseNr, String title, decimal? amountInEuro, String description, int? maxMember, 
+            int? minMember, int? tutorNr, int? validityInMonth)
+        {
+            try
+            {
+                Course course = Course.getById(courseNr);
+                course.Title = title;
+                course.AmountInEuro = amountInEuro;
+                course.Description = description;
+                course.MaxMember = maxMember;
+                course.MinMember = minMember;
+                if (maxMember < minMember)
+                {
+                    course.MaxMember = course.MinMember = null;
+                }
+                if (tutorNr.HasValue)
+                {
+                    course.Tutor = Tutor.getById(tutorNr.Value);
+                }
+                course.ValidityInMonth = validityInMonth;
+                course.update();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         /// <summary>

@@ -1,26 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using CourseManagement.Client.DB.Model;
 
 namespace CourseManagement.Client.BusinessLogic
 {
     public static class LogicUtils
     {
-
-        public static DataTable getNewDataTable(params string[] columnNames)
-        {
-            DataTable table = new DataTable();
-            for (int i = 0; i < columnNames.Length; i++)
-            {
-                table.Columns.Add(columnNames[i]);
-            }
-            return table;
-        }
 
         /// <summary>
         /// Return a DataTable with 
@@ -70,8 +56,6 @@ namespace CourseManagement.Client.BusinessLogic
                 throw new Exception(e.Message);
             }
         }
-
-
 
         /// <summary>
         /// Returns true if the given string is not null

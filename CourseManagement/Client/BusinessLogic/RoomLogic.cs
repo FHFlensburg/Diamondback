@@ -1,10 +1,6 @@
 ﻿using CourseManagement.Client.DB.Model;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CourseManagement.Client.BusinessLogic
 {
@@ -34,7 +30,7 @@ namespace CourseManagement.Client.BusinessLogic
         /// <param name="cityCode"></param>
         /// <param name="roomNr"></param>
         /// <param name="street"></param>
-        public void createRoom(String building, int capacity, String city, String cityCode, int roomNr, String street)
+        public int createRoom(String building, int? capacity, String city, String cityCode, String street)
         {
             try
             {
@@ -43,15 +39,70 @@ namespace CourseManagement.Client.BusinessLogic
                 room.Capacity = capacity;
                 room.City = city;
                 room.CityCode = cityCode;
-                room.RoomNr = roomNr;
                 room.Street = street;
 
                 room.addToDB();
+                return room.RoomNr;
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }  
+        }
+
+        /// <summary>
+        /// Method for changing Properties of the Room with the submitted id.
+        /// All Parameters have to be submitted.
+        /// </summary>
+        /// <param name="idToChange"></param>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        public void changeProperties(int roomNr, String building, int? capacity, String city, String cityCode, String street)
+        {
+            try
+            {
+                Room room = Room.getById(roomNr);
+                room.Building = building;
+                room.Capacity = capacity;
+                room.City = city;
+                room.CityCode = cityCode;
+                room.RoomNr = roomNr;
+                room.Street = street;
+
+                room.update();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Method for specific RoomDataTable-changes to the default DataTable-Method in LogicUtils
+        /// </summary>
+        /// <returns></returns>
+        private DataTable getNewDataTable()
+        {
+            try
+            {
+                return LogicUtils.getNewDataTable(new Room());
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+        }
+
+        /// <summary>
+        /// Method for specific RoomRow-changes to the default Row-Method in LogicUtils
+        /// </summary>
+        /// <param name="table"></param>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        private DataRow getNewRow(DataTable table, object entity)
+        {
+            return LogicUtils.getNewRow(table, entity);
         }
 
         /// <summary>
@@ -62,11 +113,11 @@ namespace CourseManagement.Client.BusinessLogic
         {
             try
             {
-                DataTable allRooms = LogicUtils.getNewDataTable("RoomNr", "Building", "Capacity", "Street", "City", "CityCode");
+                DataTable allRooms = getNewDataTable();
 
                 foreach (Room room in Room.getAll())
                 {
-                    allRooms.Rows.Add(room.RoomNr, room.Building, room.Capacity, room.Street, room.City, room.CityCode);
+                    allRooms.Rows.Add(getNewRow(allRooms, room));
                 }
 
                 return allRooms;
@@ -77,22 +128,47 @@ namespace CourseManagement.Client.BusinessLogic
             }  
         }
 
+        /// <summary>
+        /// Search all rooms by the parameter in the columns roomNr, Street and Building
+        /// A datatable with the resultset will be returned
+        /// </summary>
+        /// <param name="search"></param>
+        /// <returns></returns>
         public override DataTable search(string search)
         {
-            throw new NotImplementedException();
+            try
+            {
+                DataTable allRooms = getNewDataTable();
+
+                foreach (Room room in Room.getAll())
+                {
+                    if (LogicUtils.notNullAndContains(room.Building, search)
+                        || LogicUtils.notNullAndContains(room.Street, search)
+                        || LogicUtils.notNullAndContains(room.RoomNr, search))
+                    {
+                        allRooms.Rows.Add(getNewRow(allRooms, room));
+                    }
+                }
+
+                return allRooms;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         /// <summary>
         /// Creates a datatable and get one Room by id and fills the datatable with all property names and
         /// the data from the Course
         /// </summary>
-        /// <param name="courseNr"></param>
+        /// <param name="roomNr"></param>
         /// <returns></returns>
-        public override DataTable getById(int courseNr)
+        public override DataTable getById(int roomNr)
         {
             try
             {
-                Room room = Room.getById(courseNr);
+                Room room = Room.getById(roomNr);
                 DataTable aRoom = LogicUtils.getNewDataTable(room);
 
                 aRoom.Rows.Add(getNewRow(aRoom, room));
@@ -104,32 +180,6 @@ namespace CourseManagement.Client.BusinessLogic
                 throw new Exception(e.Message);
             }  
         }
-        
-        /// <summary>
-        /// Method for specific RoomRow-changes to the default Row-Method in LogicUtils
-        /// </summary>
-        /// <param name="table"></param>
-        /// <param name="room"></param>
-        /// <returns></returns>
-        private DataRow getNewRow(DataTable table, Room room)
-        {
-            try
-            {
-                DataRow row = table.NewRow();
-                List<string> names = LogicUtils.getPropertyNames(room);
-                for (int i = 0; i < names.Count; i++)
-                {
-                    row[names[i]] = room.GetType().GetProperty(names[i]).GetMethod.Invoke(room, null);
-                }
-
-                return row;
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }  
-        }
-
 
         /// <summary>
         /// Get one room by id manage the remove from database of this room
@@ -145,6 +195,78 @@ namespace CourseManagement.Client.BusinessLogic
             {
                 throw new Exception(e.Message);
             }  
+        }
+
+        /// <summary>
+        /// Return a DataTable containing all Rooms of the submitted Course
+        /// </summary>
+        /// <param name="courseNr"></param>
+        /// <returns></returns>
+        public DataTable getByCourse(int courseNr)
+        {
+            try
+            {
+                DataTable courses = getNewDataTable();
+                foreach (Appointment appointment in Course.getById(courseNr).Appointments)
+                {
+                    courses.Rows.Add(getNewRow(courses,appointment.Room));
+                }
+                return courses;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Return a DataTable containing all Rooms of the submitted Student
+        /// </summary>
+        /// <param name="tutorNr"></param>
+        /// <returns></returns>
+        public DataTable getByStudent(int studentNr)
+        {
+            try
+            {
+                DataTable courses = getNewDataTable();
+                foreach (Payment payment in Student.getById(studentNr).Payments)
+                {
+                    foreach (Appointment appointment in payment.Course.Appointments)
+                    {
+                        courses.Rows.Add(getNewRow(courses, appointment.Room));
+                    }
+                }
+                return courses;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Return a DataTable containing all Rooms of the submitted Tutor
+        /// </summary>
+        /// <param name="tutorNr"></param>
+        /// <returns></returns>
+        public DataTable getByTutor(int tutorNr)
+        {
+            try
+            {
+                DataTable courses = getNewDataTable();
+                foreach (Course course in Tutor.getById(tutorNr).Courses)
+                {
+                    foreach (Appointment appointment in course.Appointments)
+                    {
+                        courses.Rows.Add(getNewRow(courses, appointment.Room));
+                    }
+                }
+                return courses;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 }
