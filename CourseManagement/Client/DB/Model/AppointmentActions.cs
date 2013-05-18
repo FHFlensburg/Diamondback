@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace CourseManagement.Client.DB.Model
 {
+    /// <summary>
+    /// Acts like a controler for the Appointment Model
+    /// </summary>
     public partial class Appointment
     {
         public void addToDB()

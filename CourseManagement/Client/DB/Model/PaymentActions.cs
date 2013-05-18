@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 namespace CourseManagement.Client.DB.Model
 {
     /// <summary>
-    /// Acts like a controler for the Person Model
+    /// Acts like a controler for the PaymentModel
     /// </summary>
-    public abstract partial class Person
+    public partial class Payment
     {
-        public virtual void addToDB()
+        public static List<Payment> getAll()
         {
             try
             {
-                PersonQuery.insert(this);
+                return PaymentQuery.getAll();
             }
             catch (Exception e)
             {
@@ -23,11 +23,11 @@ namespace CourseManagement.Client.DB.Model
             }
         }
 
-        public  static List<Person> getAll()
+        public void addToDB()
         {
             try
             {
-                return PersonQuery.getAll();
+                PaymentQuery.insert(this);
             }
             catch (Exception e)
             {
@@ -35,11 +35,11 @@ namespace CourseManagement.Client.DB.Model
             }
         }
 
-        public virtual void delete()
+        public static Payment getById(int paymentId)
         {
             try
             {
-                PersonQuery.delete(this);
+                return PaymentQuery.getById(paymentId);
             }
             catch (Exception e)
             {
@@ -47,31 +47,16 @@ namespace CourseManagement.Client.DB.Model
             }
         }
 
-        public virtual void update()
+        public void delete()
         {
             try
             {
-                PersonQuery.update(this);
+                PaymentQuery.delete(this);
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
         }
-
-        public  static Person getById(int personId)
-        {
-            try
-            {
-                return PersonQuery.getById(personId);
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
-
-
-
     }
 }

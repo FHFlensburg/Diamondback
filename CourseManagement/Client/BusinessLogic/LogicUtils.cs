@@ -92,7 +92,7 @@ namespace CourseManagement.Client.BusinessLogic
             try
             {
                 DataRow row = table.NewRow();
-                List<string> names = getPropertyNames(entity);
+                List<String> names = getPropertyNames(entity);
                 for (int i = 0; i < names.Count; i++)
                 {
                     row[names[i]] = entity.GetType().GetProperty(names[i]).GetMethod.Invoke(entity, null);

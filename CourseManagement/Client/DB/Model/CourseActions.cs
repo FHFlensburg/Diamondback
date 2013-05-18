@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace CourseManagement.Client.DB.Model
 {
+    /// <summary>
+    /// Acts like a controler for the Course Model
+    /// </summary>
     public partial class Course
     {
 

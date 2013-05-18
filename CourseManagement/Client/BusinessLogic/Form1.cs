@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -39,7 +40,20 @@ namespace CourseManagement.Client.BusinessLogic
             DataTable dtCourse = course.search("Englisch");
             //DataTable dtCourse = course.getById(1);
             dgvCourses.DataSource = dtCourse;
-         
+
+            //Fill the student combobox with the surnames of all students
+            StudentLogic student = StudentLogic.getInstance();
+            DataTable dtStudent = student.getAll();
+            cbxStudents.DataSource = dtStudent;
+            cbxStudents.DisplayMember = "Surname";
+            cbxStudents.BindingContext = this.BindingContext;
+
+            //Fill the payment combobox with id´s of all payments
+            PaymentLogic payment = PaymentLogic.getInstance();
+            DataTable dtPayment = payment.getAll();
+            cbxPayments.DataSource = dtPayment;
+            cbxPayments.DisplayMember = "Id";
+            cbxPayments.BindingContext = this.BindingContext;
 
             cbxStudentsMAX.SelectedIndex = 0;
             cbxStudentsMIN.SelectedIndex = 0;
@@ -126,6 +140,56 @@ namespace CourseManagement.Client.BusinessLogic
             CourseLogic newCourse = CourseLogic.getInstance();
             DataTable dtCourse = newCourse.getAll();
             dgvCourses.DataSource = dtCourse;
+        }
+
+        private void dgvCourses_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //Get all Appointments of the selected Course and put the result into a DataGridView
+            AppointmentLogic appointment = AppointmentLogic.getInstance();
+            if (new Regex(@"^\d+$").Match(dgvCourses.SelectedCells[0].Value.ToString()).Success)
+            {
+                int courseId = Convert.ToInt32(dgvCourses.SelectedCells[0].Value);
+                DataTable dtAppointment = appointment.getByCourse(courseId);
+                dgvAppointments.DataSource = dtAppointment;
+            }
+        }
+
+        private void btnAddStudent_Click(object sender, EventArgs e)
+        {
+            int courseId = Convert.ToInt32(dgvCourses.SelectedCells[0].Value);
+            DataTable dtStudent = (DataTable)cbxStudents.DataSource;
+            //int studentId = Convert.ToInt32(dtStudent.Rows[cbxStudents.SelectedIndex]["StudentNr"]);
+            int studentId = 7;
+            PaymentLogic payment = PaymentLogic.getInstance();
+            payment.createPayment(courseId, studentId);
+
+            //Collect all courses from the DB and put them in the courses Datatable
+            CourseLogic course = CourseLogic.getInstance();
+            DataTable dtCourse = course.getAll();
+            dgvCourses.DataSource = dtCourse;
+
+            lblAmount.Text = payment.getStudentBalance(7);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            DataTable dtPayment = (DataTable)cbxPayments.DataSource;
+            int paymentId = Convert.ToInt32(dtPayment.Rows[cbxPayments.SelectedIndex]["Id"]);
+            PaymentLogic payment = PaymentLogic.getInstance();
+            payment.delete(paymentId);
+
+            //Fill the payment combobox with id´s of all payments
+            dtPayment = payment.getAll();
+            cbxPayments.DataSource = dtPayment;
+            cbxPayments.DisplayMember = "Id";
+            cbxPayments.BindingContext = this.BindingContext;
+
+            //Collect all courses from the DB and put them in the courses Datatable
+            CourseLogic course = CourseLogic.getInstance();
+            DataTable dtCourse = course.getAll();
+            dgvCourses.DataSource = dtCourse;
+
+            lblAmount.Text = payment.getStudentBalance(7);
         }
     }
 }

@@ -8,6 +8,9 @@ using CourseManagement.Client.DB;
 
 namespace CourseManagement.Client.DB.Model
 {
+    /// <summary>
+    /// Acts like a controler for the Person_Student Model
+    /// </summary>
     public partial class Student : Person
     {
         public override void addToDB()

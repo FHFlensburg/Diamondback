@@ -160,7 +160,7 @@ namespace CourseManagement.Client.BusinessLogic
 
         /// <summary>
         /// Creates a datatable and get one Room by id and fills the datatable with all property names and
-        /// the data from the Course
+        /// the data from the Room
         /// </summary>
         /// <param name="roomNr"></param>
         /// <returns></returns>
@@ -182,9 +182,9 @@ namespace CourseManagement.Client.BusinessLogic
         }
 
         /// <summary>
-        /// Get one room by id manage the remove from database of this room
+        /// Get one Room by id manage the remove from database of this Room
         /// </summary>
-        /// <param name="courseNr"></param>
+        /// <param name="roomNr"></param>
         public override void delete(int roomNr)
         {
             try

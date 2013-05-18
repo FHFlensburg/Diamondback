@@ -7,6 +7,9 @@ using CourseManagement.Client.DB;
 
 namespace CourseManagement.Client.DB.Model
 {
+    /// <summary>
+    /// Acts like a controler for the ActiveUser
+    /// </summary>
     public static class ActiveUserActions
     {
         /// <summary>

@@ -29,6 +29,18 @@
         private void InitializeComponent()
         {
             this.dgvCourses = new System.Windows.Forms.DataGridView();
+            this.CourseNr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Titel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AmountInEuro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaxMember = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MinMember = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ValidityInMonth = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tutor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Room = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StudentCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Payments = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Appointments = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.btnCreateCourse = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -48,27 +60,31 @@
             this.cbxRoom = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.btnSaveCourse = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvAppointments = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Course = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StartDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EndDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RoomNr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label10 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.CourseNr = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Titel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AmountInEuro = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MaxMember = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MinMember = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ValidityInMonth = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tutor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Room = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StudentCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Payments = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Appointments = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label12 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbxStudents = new System.Windows.Forms.ComboBox();
+            this.btnAddStudent = new System.Windows.Forms.Button();
+            this.Studenten = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.lblAmount = new System.Windows.Forms.Label();
+            this.cbxPayments = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCourses)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAppointments)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvCourses
@@ -92,6 +108,80 @@
             this.dgvCourses.RowTemplate.Height = 24;
             this.dgvCourses.Size = new System.Drawing.Size(1097, 150);
             this.dgvCourses.TabIndex = 0;
+            this.dgvCourses.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCourses_CellClick);
+            // 
+            // CourseNr
+            // 
+            this.CourseNr.DataPropertyName = "CourseNr";
+            this.CourseNr.HeaderText = "Kurs Nr.";
+            this.CourseNr.Name = "CourseNr";
+            // 
+            // Titel
+            // 
+            this.Titel.DataPropertyName = "Title";
+            this.Titel.HeaderText = "Titel";
+            this.Titel.Name = "Titel";
+            // 
+            // AmountInEuro
+            // 
+            this.AmountInEuro.DataPropertyName = "AmountInEuro";
+            this.AmountInEuro.HeaderText = "Beitrag in €";
+            this.AmountInEuro.Name = "AmountInEuro";
+            // 
+            // Description
+            // 
+            this.Description.DataPropertyName = "Description";
+            this.Description.HeaderText = "Beschreibung";
+            this.Description.Name = "Description";
+            // 
+            // MaxMember
+            // 
+            this.MaxMember.DataPropertyName = "MAXMember";
+            this.MaxMember.HeaderText = "Teilnehmer MAX";
+            this.MaxMember.Name = "MaxMember";
+            // 
+            // MinMember
+            // 
+            this.MinMember.DataPropertyName = "MINMember";
+            this.MinMember.HeaderText = "Teilnehmer MIN";
+            this.MinMember.Name = "MinMember";
+            // 
+            // ValidityInMonth
+            // 
+            this.ValidityInMonth.DataPropertyName = "ValidityInMonth";
+            this.ValidityInMonth.HeaderText = "Gültigkeit in Monaten";
+            this.ValidityInMonth.Name = "ValidityInMonth";
+            // 
+            // Tutor
+            // 
+            this.Tutor.DataPropertyName = "Tutor";
+            this.Tutor.HeaderText = "Dozent";
+            this.Tutor.Name = "Tutor";
+            // 
+            // Room
+            // 
+            this.Room.DataPropertyName = "Room";
+            this.Room.HeaderText = "Raum";
+            this.Room.Name = "Room";
+            this.Room.Visible = false;
+            // 
+            // StudentCount
+            // 
+            this.StudentCount.DataPropertyName = "StudentCount";
+            this.StudentCount.HeaderText = "Anzahl Studenten";
+            this.StudentCount.Name = "StudentCount";
+            // 
+            // Payments
+            // 
+            this.Payments.DataPropertyName = "Payments";
+            this.Payments.HeaderText = "Anzahl Zahlungen";
+            this.Payments.Name = "Payments";
+            // 
+            // Appointments
+            // 
+            this.Appointments.DataPropertyName = "Appointments";
+            this.Appointments.HeaderText = "Anzahl Termine";
+            this.Appointments.Name = "Appointments";
             // 
             // label1
             // 
@@ -123,7 +213,7 @@
             // 
             // tbxTitle
             // 
-            this.tbxTitle.Location = new System.Drawing.Point(12, 263);
+            this.tbxTitle.Location = new System.Drawing.Point(15, 259);
             this.tbxTitle.Name = "tbxTitle";
             this.tbxTitle.Size = new System.Drawing.Size(139, 22);
             this.tbxTitle.TabIndex = 4;
@@ -340,14 +430,53 @@
             this.btnSaveCourse.UseVisualStyleBackColor = true;
             this.btnSaveCourse.Click += new System.EventHandler(this.button1_Click);
             // 
-            // dataGridView1
+            // dgvAppointments
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(15, 354);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(1094, 150);
-            this.dataGridView1.TabIndex = 20;
+            this.dgvAppointments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAppointments.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id,
+            this.Course,
+            this.StartDate,
+            this.EndDate,
+            this.RoomNr});
+            this.dgvAppointments.Location = new System.Drawing.Point(15, 354);
+            this.dgvAppointments.Name = "dgvAppointments";
+            this.dgvAppointments.RowTemplate.Height = 24;
+            this.dgvAppointments.Size = new System.Drawing.Size(1094, 150);
+            this.dgvAppointments.TabIndex = 20;
+            // 
+            // id
+            // 
+            this.id.DataPropertyName = "id";
+            this.id.HeaderText = "Id";
+            this.id.Name = "id";
+            this.id.Visible = false;
+            // 
+            // Course
+            // 
+            this.Course.DataPropertyName = "Course";
+            this.Course.HeaderText = "Kurs Nr.";
+            this.Course.Name = "Course";
+            // 
+            // StartDate
+            // 
+            this.StartDate.DataPropertyName = "StartDate";
+            this.StartDate.HeaderText = "Beginn";
+            this.StartDate.Name = "StartDate";
+            this.StartDate.Width = 200;
+            // 
+            // EndDate
+            // 
+            this.EndDate.DataPropertyName = "EndDate";
+            this.EndDate.HeaderText = "Ende";
+            this.EndDate.Name = "EndDate";
+            this.EndDate.Width = 200;
+            // 
+            // RoomNr
+            // 
+            this.RoomNr.DataPropertyName = "Room";
+            this.RoomNr.HeaderText = "Raum Nr.";
+            this.RoomNr.Name = "RoomNr";
             // 
             // label10
             // 
@@ -400,91 +529,120 @@
             this.dateTimePicker2.Size = new System.Drawing.Size(244, 22);
             this.dateTimePicker2.TabIndex = 26;
             // 
-            // CourseNr
+            // label12
             // 
-            this.CourseNr.DataPropertyName = "CourseNr";
-            this.CourseNr.HeaderText = "Kurs Nr.";
-            this.CourseNr.Name = "CourseNr";
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(12, 239);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(35, 17);
+            this.label12.TabIndex = 27;
+            this.label12.Text = "Titel";
             // 
-            // Titel
+            // groupBox1
             // 
-            this.Titel.DataPropertyName = "Title";
-            this.Titel.HeaderText = "Titel";
-            this.Titel.Name = "Titel";
+            this.groupBox1.Controls.Add(this.button3);
+            this.groupBox1.Controls.Add(this.label14);
+            this.groupBox1.Controls.Add(this.cbxPayments);
+            this.groupBox1.Controls.Add(this.lblAmount);
+            this.groupBox1.Controls.Add(this.label13);
+            this.groupBox1.Controls.Add(this.Studenten);
+            this.groupBox1.Controls.Add(this.btnAddStudent);
+            this.groupBox1.Controls.Add(this.cbxStudents);
+            this.groupBox1.Location = new System.Drawing.Point(15, 556);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(1094, 76);
+            this.groupBox1.TabIndex = 28;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Zahlungen";
             // 
-            // AmountInEuro
+            // cbxStudents
             // 
-            this.AmountInEuro.DataPropertyName = "AmountInEuro";
-            this.AmountInEuro.HeaderText = "Beitrag in €";
-            this.AmountInEuro.Name = "AmountInEuro";
+            this.cbxStudents.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxStudents.FormattingEnabled = true;
+            this.cbxStudents.Location = new System.Drawing.Point(6, 46);
+            this.cbxStudents.Name = "cbxStudents";
+            this.cbxStudents.Size = new System.Drawing.Size(241, 24);
+            this.cbxStudents.TabIndex = 0;
             // 
-            // Description
+            // btnAddStudent
             // 
-            this.Description.DataPropertyName = "Description";
-            this.Description.HeaderText = "Beschreibung";
-            this.Description.Name = "Description";
+            this.btnAddStudent.Location = new System.Drawing.Point(256, 46);
+            this.btnAddStudent.Name = "btnAddStudent";
+            this.btnAddStudent.Size = new System.Drawing.Size(98, 23);
+            this.btnAddStudent.TabIndex = 1;
+            this.btnAddStudent.Text = "Hinzufügen";
+            this.btnAddStudent.UseVisualStyleBackColor = true;
+            this.btnAddStudent.Click += new System.EventHandler(this.btnAddStudent_Click);
             // 
-            // MaxMember
+            // Studenten
             // 
-            this.MaxMember.DataPropertyName = "MAXMember";
-            this.MaxMember.HeaderText = "Teilnehmer MAX";
-            this.MaxMember.Name = "MaxMember";
+            this.Studenten.AutoSize = true;
+            this.Studenten.Location = new System.Drawing.Point(7, 22);
+            this.Studenten.Name = "Studenten";
+            this.Studenten.Size = new System.Drawing.Size(73, 17);
+            this.Studenten.TabIndex = 2;
+            this.Studenten.Text = "Studenten";
             // 
-            // MinMember
+            // label13
             // 
-            this.MinMember.DataPropertyName = "MINMember";
-            this.MinMember.HeaderText = "Teilnehmer MIN";
-            this.MinMember.Name = "MinMember";
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(360, 22);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(80, 17);
+            this.label13.TabIndex = 3;
+            this.label13.Text = "Kontostand";
             // 
-            // ValidityInMonth
+            // lblAmount
             // 
-            this.ValidityInMonth.DataPropertyName = "ValidityInMonth";
-            this.ValidityInMonth.HeaderText = "Gültigkeit in Monaten";
-            this.ValidityInMonth.Name = "ValidityInMonth";
+            this.lblAmount.AutoSize = true;
+            this.lblAmount.Location = new System.Drawing.Point(360, 49);
+            this.lblAmount.Name = "lblAmount";
+            this.lblAmount.Size = new System.Drawing.Size(48, 17);
+            this.lblAmount.TabIndex = 4;
+            this.lblAmount.Text = "0,00 €";
             // 
-            // Tutor
+            // cbxPayments
             // 
-            this.Tutor.DataPropertyName = "Tutor";
-            this.Tutor.HeaderText = "Dozent";
-            this.Tutor.Name = "Tutor";
+            this.cbxPayments.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxPayments.FormattingEnabled = true;
+            this.cbxPayments.Location = new System.Drawing.Point(444, 46);
+            this.cbxPayments.Name = "cbxPayments";
+            this.cbxPayments.Size = new System.Drawing.Size(241, 24);
+            this.cbxPayments.TabIndex = 5;
             // 
-            // Room
+            // label14
             // 
-            this.Room.DataPropertyName = "Room";
-            this.Room.HeaderText = "Raum";
-            this.Room.Name = "Room";
-            this.Room.Visible = false;
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(446, 22);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(76, 17);
+            this.label14.TabIndex = 6;
+            this.label14.Text = "Zahlungen";
             // 
-            // StudentCount
+            // button3
             // 
-            this.StudentCount.DataPropertyName = "StudentCount";
-            this.StudentCount.HeaderText = "Anzahl Studenten";
-            this.StudentCount.Name = "StudentCount";
-            // 
-            // Payments
-            // 
-            this.Payments.DataPropertyName = "Payments";
-            this.Payments.HeaderText = "Anzahl Zahlungen";
-            this.Payments.Name = "Payments";
-            // 
-            // Appointments
-            // 
-            this.Appointments.DataPropertyName = "Appointments";
-            this.Appointments.HeaderText = "Anzahl Termine";
-            this.Appointments.Name = "Appointments";
+            this.button3.Location = new System.Drawing.Point(701, 46);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(98, 23);
+            this.button3.TabIndex = 7;
+            this.button3.Text = "Löschen";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1121, 673);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.label12);
             this.Controls.Add(this.dateTimePicker2);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgvAppointments);
             this.Controls.Add(this.btnSaveCourse);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.cbxRoom);
@@ -509,7 +667,9 @@
             this.Text = "WindowsFormForTesting";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCourses)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAppointments)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -537,7 +697,7 @@
         private System.Windows.Forms.ComboBox cbxRoom;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btnSaveCourse;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvAppointments;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
@@ -556,5 +716,20 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn StudentCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn Payments;
         private System.Windows.Forms.DataGridViewTextBoxColumn Appointments;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Course;
+        private System.Windows.Forms.DataGridViewTextBoxColumn StartDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EndDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RoomNr;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label lblAmount;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label Studenten;
+        private System.Windows.Forms.Button btnAddStudent;
+        private System.Windows.Forms.ComboBox cbxStudents;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.ComboBox cbxPayments;
+        private System.Windows.Forms.Button button3;
     }
 }

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace CourseManagement.Client.DB.Model
 {
+    /// <summary>
+    /// Acts like a controler for the Person_User Model
+    /// </summary>
     public partial class User : Person
     {
         public override void addToDB()
