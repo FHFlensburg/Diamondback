@@ -99,9 +99,13 @@ namespace CourseManagement.Client.BusinessLogic
         /// <param name="table"></param>
         /// <param name="entity"></param>
         /// <returns></returns>
-        private DataRow getNewRow(DataTable table, object entity)
+        private DataRow getNewRow(DataTable table, Payment payment)
         {
-            return LogicUtils.getNewRow(table, entity);
+            DataRow row = LogicUtils.getNewRow(table, payment);
+            row["Course"] = payment.Course.CourseNr;
+            row["Student"] = payment.Student.Id;
+            return row;
+
         }
 
         /// <summary>
@@ -125,18 +129,17 @@ namespace CourseManagement.Client.BusinessLogic
         /// </summary>
         /// <param name="courseId"></param>
         /// <param name="studentId"></param>
-        public void createPayment(int courseId, int studentId)
+        public int create(int courseId, int studentId)
         {
             try
             {
                 Payment payment = new Payment();
                 payment.IsPaid = false;
                 payment.Student = Student.getById(studentId);
+                payment.Course = Course.getById(courseId);
                 payment.addToDB();
+                return payment.Id;
 
-                Course course = Course.getById(courseId);
-                course.Payments.Add(payment);
-                course.update();
             }
             catch (Exception e)
             {
@@ -210,6 +213,15 @@ namespace CourseManagement.Client.BusinessLogic
             {
                 throw new Exception(e.Message);
             }
+        }
+
+        /// <summary>
+        /// Set the payment payed/unpayed
+        /// </summary>
+        /// <param name="paymentId"></param>
+        public void changeProperties(int paymentId, bool? isPayed)
+        {
+            Payment.getById(paymentId).IsPaid = isPayed;
         }
     }
 }

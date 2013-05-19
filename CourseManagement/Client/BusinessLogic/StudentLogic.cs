@@ -124,7 +124,6 @@ namespace CourseManagement.Client.BusinessLogic
                 student.BIC = bic;
                 student.Depositor = depositor;
                 student.NameOfBank = nameOfBank;
-                student.City = city;
 
                 student.addToDB();
                 return student.Id;
@@ -164,7 +163,6 @@ namespace CourseManagement.Client.BusinessLogic
                 student.BIC = bic;
                 student.Depositor = depositor;
                 student.NameOfBank = nameOfBank;
-                student.City = city;
 
                 student.update();
             }

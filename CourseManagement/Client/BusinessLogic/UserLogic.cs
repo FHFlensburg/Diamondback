@@ -32,13 +32,12 @@ namespace CourseManagement.Client.BusinessLogic
         {
             try
             {
-                DataTable allUsers = generatateUserTable();
+                DataTable allUsers = getNewDataTable();
 
 
                 foreach (User user in User.getAll())
                 {
-                    allUsers.Rows.Add(
-                    user.Id, user.Surname, user.Forename, user.City);
+                    allUsers.Rows.Add(getNewRow(allUsers,user));
                 }
 
 
@@ -60,16 +59,16 @@ namespace CourseManagement.Client.BusinessLogic
         {
             try
             {
-                DataTable allUsers = generatateUserTable();
+                DataTable allUsers = getNewDataTable();
 
                 foreach (User user in User.getAll())
                 {
                     if (LogicUtils.notNullAndContains(user.Forename, search)
                         || LogicUtils.notNullAndContains(user.Surname, search)
+                        || LogicUtils.notNullAndContains(user.UserName, search)
                         || LogicUtils.notNullAndContains(user.Id, search))
                     {
-                        allUsers.Rows.Add(
-                        user.Id, user.Surname, user.Forename, user.City);
+                        allUsers.Rows.Add(getNewRow(allUsers,user));
                     }
                 }
 
@@ -81,33 +80,110 @@ namespace CourseManagement.Client.BusinessLogic
             }  
         }
 
-        //depricated
-        private DataTable generatateUserTable()
+        /// <summary>
+        /// Method for specific UserDataTable-changes to the default DataTable-Method in LogicUtils
+        /// </summary>
+        /// <returns></returns>
+        private DataTable getNewDataTable()
         {
-            return LogicUtils.getNewDataTable(
-                "TutorNr", "Surname", "Forename", "City");
+            return LogicUtils.getNewDataTable(new User());
+        }
+
+        /// <summary>
+        /// Method for specific UserRow-changes to the default Row-Method in LogicUtils
+        /// </summary>
+        /// <param name="table"></param>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        private DataRow getNewRow(DataTable table, User user)
+        {
+            DataRow row = LogicUtils.getNewRow(table, user);
+            row["Password"] = "***";
+            return row;
         }
 
 
         /// <summary>
-        /// Creates a new User in the database
+        /// Creates a new User in the database and return the userNr
         /// </summary>
         /// <param name="?"></param>
-        public void createNewUser(string surname, string forename, string city)
+        public int create(string surname, string forename, string birthyear, string street,
+            string mobilePhone, string mail, string fax, string privatePhone, string gender,
+            bool? active, string title, string city, string citycode, string username, string password,
+            bool? admin)
         {
             try
             {
-                User user = new User();
-                user.Surname = surname;
-                user.Forename = forename;
-                user.City = city;
+                if (isPossibleNewUserName(username))
+                {
+                    User user = new User();
+                    user.Surname = surname;
+                    user.Forename = forename;
+                    user.Birthyear = birthyear;
+                    user.Street = street;
+                    user.MobilePhone = mobilePhone;
+                    user.Mail = mail;
+                    user.Fax = fax;
+                    user.PrivatePhone = privatePhone;
+                    user.Gender = gender;
+                    user.Active = active;
+                    user.Title = title;
+                    user.City = city;
+                    user.CityCode = citycode;
+                    user.UserName = username;
+                    user.Password = password;
+                    user.Admin = admin;
 
-                user.addToDB();
+                    user.addToDB();
+                    return user.Id;
+                }
+                else throw new Exception("Username nicht zulässig");
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
-            }  
+            }
+        }
+
+        /// <summary>
+        /// Creates a new User in the database and return the userNr
+        /// </summary>
+        /// <param name="?"></param>
+        public void changeProperties(int userNr,string surname, string forename, string birthyear, string street,
+           string mobilePhone, string mail, string fax, string privatePhone, string gender,
+           bool? active, string title, string city, string citycode, string username, string password,
+           bool? admin)
+        {
+            try
+            {
+                User user = User.getById(userNr);
+                user.Surname = surname;
+                user.Forename = forename;
+                user.Birthyear = birthyear;
+                user.Street = street;
+                user.MobilePhone = mobilePhone;
+                user.Mail = mail;
+                user.Fax = fax;
+                user.PrivatePhone = privatePhone;
+                user.Gender = gender;
+                user.Active = active;
+                user.Title = title;
+                user.City = city;
+                user.CityCode = citycode;
+                if (user.UserName == username || isPossibleNewUserName(username))
+                {
+                    user.UserName = username;
+                }
+                else throw new Exception("Username nicht zulässig");
+                user.Password = password;
+                user.Admin = admin;
+
+                user.update();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         /// <summary>
@@ -119,12 +195,11 @@ namespace CourseManagement.Client.BusinessLogic
         {
             try
             {
-                DataTable dtUser = generatateUserTable();
-                Tutor user = Tutor.getById(userNr);
+                DataTable dtUser = getNewDataTable();
+                User user = User.getById(userNr);
                 if (user != null)
                 {
-                    dtUser.Rows.Add(
-                        user.Id, user.Surname, user.Forename, user.City);
+                    dtUser.Rows.Add(getNewRow(dtUser,user));
                 }
                 return dtUser;
             }
@@ -133,30 +208,6 @@ namespace CourseManagement.Client.BusinessLogic
                 throw new Exception(e.Message);
             }  
 
-        }
-
-        /// <summary>
-        /// Changing attributes of a User.
-        /// The Tutor which is to be updated is specified by userNr.
-        /// </summary>
-        /// <param name="studentNr"></param>
-        /// <param name="surname"></param>
-        /// <param name="forename"></param>
-        /// <param name="city"></param>
-        public void changeTutorProperties(int userNr, string surname, string forename, string city)
-        {
-            try
-            {
-                User user = User.getById(userNr);
-                user.Surname = surname;
-                user.Forename = forename;
-                user.City = city;
-                user.update();
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }  
         }
 
         /// <summary>
@@ -173,6 +224,19 @@ namespace CourseManagement.Client.BusinessLogic
             {
                 throw new Exception(e.Message);
             }  
+        }
+
+        public bool isPossibleNewUserName(string userName)
+        {
+            try
+            {
+                User user = User.getByUserName(userName);
+                return (user == null && userName != "" && userName != null);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
     }

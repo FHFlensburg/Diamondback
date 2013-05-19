@@ -10,10 +10,7 @@ namespace CourseManagement.Client.Controller
     {
         void App_Startup(object sender, StartupEventArgs e)
         {
-            //nur zum testen
-            //ActiveUser.login("admin", "admin"); ///////////Without login there is no access to DB!!!!
-           // testLogic testWindow = new testLogic();
-            //testWindow.Show();
+            //TestData.generateTestData();
             
             
             WndLogin startWindow = new WndLogin();

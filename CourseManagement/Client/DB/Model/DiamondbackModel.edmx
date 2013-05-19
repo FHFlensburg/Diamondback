@@ -161,7 +161,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="CoursePayment">
-    <End Role="Course" Type="DiamondbackModel.Store.Courses" Multiplicity="1" />
+    <End Role="Course" Type="DiamondbackModel.Store.Courses" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Payment" Type="DiamondbackModel.Store.Payments" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Course">
@@ -173,7 +175,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="CourseAppointment">
-    <End Role="Course" Type="DiamondbackModel.Store.Courses" Multiplicity="1" />
+    <End Role="Course" Type="DiamondbackModel.Store.Courses" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Appointment" Type="DiamondbackModel.Store.Appointments" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Course">
@@ -350,7 +354,9 @@
           <End Type="DiamondbackModel.Course" Role="Course" Multiplicity="*" />
         </Association>
         <Association Name="CoursePayment">
-          <End Type="DiamondbackModel.Course" Role="Course" Multiplicity="1" />
+          <End Type="DiamondbackModel.Course" Role="Course" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="DiamondbackModel.Payment" Role="Payment" Multiplicity="*" />
         </Association>
         <EntityType Name="Appointment">
@@ -364,11 +370,14 @@
           <NavigationProperty Name="Room" Relationship="DiamondbackModel.RoomAppointment" FromRole="Appointment" ToRole="Room" />
         </EntityType>
         <Association Name="CourseAppointment">
-          <End Type="DiamondbackModel.Course" Role="Course" Multiplicity="1" />
+          <End Type="DiamondbackModel.Course" Role="Course" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="DiamondbackModel.Appointment" Role="Appointment" Multiplicity="*" />
         </Association>
         <Association Name="RoomAppointment">
-          <End Type="DiamondbackModel.Room" Multiplicity="1" Role="Room" />
+          <End Type="DiamondbackModel.Room" Multiplicity="1" Role="Room" >
+          </End>
           <End Type="DiamondbackModel.Appointment" Multiplicity="*" Role="Appointment" />
         </Association>
       </Schema>

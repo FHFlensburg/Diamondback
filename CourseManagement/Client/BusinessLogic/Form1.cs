@@ -161,7 +161,7 @@ namespace CourseManagement.Client.BusinessLogic
             int studentId = Convert.ToInt32(dtStudent.Rows[cbxStudents.SelectedIndex]["Id"]);
             //int studentId = 7;
             PaymentLogic payment = PaymentLogic.getInstance();
-            payment.createPayment(courseId, studentId);
+            payment.create(courseId, studentId);
 
             //Collect all courses from the DB and put them in the courses Datatable
             CourseLogic course = CourseLogic.getInstance();

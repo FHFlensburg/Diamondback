@@ -102,22 +102,47 @@ namespace CourseManagement.Client.BusinessLogic
         /// <summary>
         /// Creates a new Tutor in the database
         /// </summary>
-        /// <param name="?"></param>
-        public void create(string surname, string forename, string city)
+        /// <param name="surname"></param>
+        /// <param name="forename"></param>
+        /// <param name="birthyear"></param>
+        /// <param name="street"></param>
+        /// <param name="mobilePhone"></param>
+        /// <param name="mail"></param>
+        /// <param name="fax"></param>
+        /// <param name="privatePhone"></param>
+        /// <param name="gender"></param>
+        /// <param name="isActive"></param>
+        /// <param name="title"></param>
+        /// <param name="city"></param>
+        /// <param name="citycode"></param>
+        public int create( string surname, string forename, string birthyear, string street,
+             string mobilePhone, string mail, string fax, string privatePhone, string gender,
+             bool? isActive, string title, string city, string citycode)
         {
             try
             {
                 Tutor tutor = new Tutor();
                 tutor.Surname = surname;
                 tutor.Forename = forename;
+                tutor.Birthyear = birthyear;
+                tutor.Street = street;
+                tutor.MobilePhone = mobilePhone;
+                tutor.Mail = mail;
+                tutor.Fax = fax;
+                tutor.PrivatePhone = privatePhone;
+                tutor.Gender = gender;
+                tutor.Active = isActive;
+                tutor.Title = title;
                 tutor.City = city;
+                tutor.CityCode = citycode;
 
                 tutor.addToDB();
+                return tutor.Id;
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
-            }  
+            }
         }
 
         /// <summary>
@@ -144,28 +169,51 @@ namespace CourseManagement.Client.BusinessLogic
 
         }
 
-        /// <summary>
-        /// Changing attributes of a Tutor.
-        /// The Tutor which is to be updated is specified by tutorNr.
+
+        /// Updates the Tutorproperties.
+        /// Tupel will be find by tutornr
         /// </summary>
-        /// <param name="studentNr"></param>
+        /// <param name="personNr"></param>
         /// <param name="surname"></param>
         /// <param name="forename"></param>
+        /// <param name="birthyear"></param>
+        /// <param name="street"></param>
+        /// <param name="mobilePhone"></param>
+        /// <param name="mail"></param>
+        /// <param name="fax"></param>
+        /// <param name="privatePhone"></param>
+        /// <param name="gender"></param>
+        /// <param name="isActive"></param>
+        /// <param name="title"></param>
         /// <param name="city"></param>
-        public void changeProperties(int studentNr, string surname, string forename, string city)
+        /// <param name="citycode"></param>
+        public void changeProperties(int tutorNr, string surname, string forename, string birthyear, string street,
+            string mobilePhone, string mail, string fax, string privatePhone, string gender,
+            bool? isActive, string title, string city, string citycode)
         {
             try
             {
-                Tutor tutor = Tutor.getById(studentNr);
+                Tutor tutor = Tutor.getById(tutorNr);
                 tutor.Surname = surname;
                 tutor.Forename = forename;
+                tutor.Birthyear = birthyear;
+                tutor.Street = street;
+                tutor.MobilePhone = mobilePhone;
+                tutor.Mail = mail;
+                tutor.Fax = fax;
+                tutor.PrivatePhone = privatePhone;
+                tutor.Gender = gender;
+                tutor.Active = isActive;
+                tutor.Title = title;
                 tutor.City = city;
+                tutor.CityCode = citycode;
+
                 tutor.update();
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
-            }  
+            }
         }
 
         /// <summary>
