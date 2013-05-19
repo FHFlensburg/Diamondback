@@ -187,8 +187,7 @@ namespace CourseManagement.Client.BusinessLogic
                 Student student = Student.getById(studentNr);
                 if (student != null)
                 {
-                    dtStudent.Rows.Add(
-                        student.Id, student.Surname, student.Forename, student.City);
+                    dtStudent.Rows.Add(getNewRow(dtStudent, student));
                 }
                 return dtStudent;
             }

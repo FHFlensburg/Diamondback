@@ -10,6 +10,8 @@ namespace CourseManagement.Client.BusinessLogic
 {
     public class PaymentLogic:AbstractLogic
     {
+        private PaymentLogic() { }
+
         /// <summary>
         /// Getting an instance of PaymentLogic is only possible if
         /// a user is logged in.
@@ -172,7 +174,7 @@ namespace CourseManagement.Client.BusinessLogic
         public String getStudentBalance(int studentId)
         {
             decimal sum = 0.00M;
-            foreach (Payment aPayment in Payment.getAll())
+            foreach (Payment aPayment in Student.getById(studentId).Payments)
             {
                 if (aPayment.IsPaid == false)
                 {

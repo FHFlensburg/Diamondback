@@ -30,7 +30,7 @@ namespace CourseManagement.Client.BusinessLogic
         /// <param name="cityCode"></param>
         /// <param name="roomNr"></param>
         /// <param name="street"></param>
-        public int createRoom(String building, int? capacity, String city, String cityCode, String street)
+        public int create(String building, int? capacity, String city, String cityCode, String street)
         {
             try
             {

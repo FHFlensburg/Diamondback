@@ -158,8 +158,8 @@ namespace CourseManagement.Client.BusinessLogic
         {
             int courseId = Convert.ToInt32(dgvCourses.SelectedCells[0].Value);
             DataTable dtStudent = (DataTable)cbxStudents.DataSource;
-            //int studentId = Convert.ToInt32(dtStudent.Rows[cbxStudents.SelectedIndex]["StudentNr"]);
-            int studentId = 7;
+            int studentId = Convert.ToInt32(dtStudent.Rows[cbxStudents.SelectedIndex]["Id"]);
+            //int studentId = 7;
             PaymentLogic payment = PaymentLogic.getInstance();
             payment.createPayment(courseId, studentId);
 
@@ -168,7 +168,14 @@ namespace CourseManagement.Client.BusinessLogic
             DataTable dtCourse = course.getAll();
             dgvCourses.DataSource = dtCourse;
 
-            lblAmount.Text = payment.getStudentBalance(7);
+            //Fill the payment combobox with id´s of all payments
+            DataTable dtPayment = (DataTable)cbxPayments.DataSource;
+            dtPayment = payment.getAll();
+            cbxPayments.DataSource = dtPayment;
+            cbxPayments.DisplayMember = "Id";
+            cbxPayments.BindingContext = this.BindingContext;
+
+            lblAmount.Text = payment.getStudentBalance(Convert.ToInt32(dtStudent.Rows[cbxStudents.SelectedIndex]["Id"]));
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -189,7 +196,8 @@ namespace CourseManagement.Client.BusinessLogic
             DataTable dtCourse = course.getAll();
             dgvCourses.DataSource = dtCourse;
 
-            lblAmount.Text = payment.getStudentBalance(7);
+            DataTable dtStudent = (DataTable)cbxStudents.DataSource;
+            lblAmount.Text = payment.getStudentBalance(Convert.ToInt32(dtStudent.Rows[cbxStudents.SelectedIndex]["Id"]));
         }
     }
 }

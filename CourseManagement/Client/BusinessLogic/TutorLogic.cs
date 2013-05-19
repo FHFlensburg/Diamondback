@@ -32,13 +32,12 @@ namespace CourseManagement.Client.BusinessLogic
         {
             try
             {
-                DataTable allTutors = generatateTutorTable();
+                DataTable allTutors = getNewDataTable();
 
 
                 foreach (Tutor tutor in Tutor.getAll())
                 {
-                    allTutors.Rows.Add(
-                    tutor.Id, tutor.Surname, tutor.Forename, tutor.City);
+                    allTutors.Rows.Add(getNewRow(allTutors, tutor));
                 }
 
                 return allTutors;
@@ -59,7 +58,7 @@ namespace CourseManagement.Client.BusinessLogic
         {
             try
             {
-                DataTable allTutors = generatateTutorTable();
+                DataTable allTutors = getNewDataTable();
 
                 foreach (Tutor tutor in Tutor.getAll())
                 {
@@ -67,8 +66,7 @@ namespace CourseManagement.Client.BusinessLogic
                         || LogicUtils.notNullAndContains(tutor.Surname, search)
                         || LogicUtils.notNullAndContains(tutor.Id, search))
                     {
-                        allTutors.Rows.Add(
-                        tutor.Id, tutor.Surname, tutor.Forename, tutor.City);
+                        allTutors.Rows.Add(getNewRow(allTutors, tutor));
                     }
                 }
 
@@ -80,11 +78,24 @@ namespace CourseManagement.Client.BusinessLogic
             }  
         }
 
-        //depricated
-        private DataTable generatateTutorTable()
+        /// <summary>
+        /// Method for specific TutorDataTable-changes to the default DataTable-Method in LogicUtils
+        /// </summary>
+        /// <returns></returns>
+        private DataTable getNewDataTable()
         {
-            return LogicUtils.getNewDataTable(
-                "TutorNr", "Surname", "Forename", "City");
+            return LogicUtils.getNewDataTable(new Tutor());
+        }
+
+        /// <summary>
+        /// Method for specific TutorRow-changes to the default Row-Method in LogicUtils
+        /// </summary>
+        /// <param name="table"></param>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        private DataRow getNewRow(DataTable table, object entity)
+        {
+            return LogicUtils.getNewRow(table, entity);
         }
 
 
@@ -92,7 +103,7 @@ namespace CourseManagement.Client.BusinessLogic
         /// Creates a new Tutor in the database
         /// </summary>
         /// <param name="?"></param>
-        public void createNewTutor(string surname, string forename, string city)
+        public void create(string surname, string forename, string city)
         {
             try
             {
@@ -118,12 +129,11 @@ namespace CourseManagement.Client.BusinessLogic
         {
             try
             {
-                DataTable dtTutor = generatateTutorTable();
+                DataTable dtTutor = getNewDataTable();
                 Tutor tutor = Tutor.getById(tutorNr);
                 if (tutor != null)
                 {
-                    dtTutor.Rows.Add(
-                        tutor.Id, tutor.Surname, tutor.Forename, tutor.City);
+                    dtTutor.Rows.Add(getNewRow(dtTutor, tutor));
                 }
                 return dtTutor;
             }
@@ -142,7 +152,7 @@ namespace CourseManagement.Client.BusinessLogic
         /// <param name="surname"></param>
         /// <param name="forename"></param>
         /// <param name="city"></param>
-        public void changeTutorProperties(int studentNr, string surname, string forename, string city)
+        public void changeProperties(int studentNr, string surname, string forename, string city)
         {
             try
             {
