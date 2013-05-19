@@ -137,9 +137,13 @@ namespace CourseManagement.Client.BusinessLogic
         {
             try
             {
-                DataTable appointment = getNewDataTable();
-                appointment.Rows.Add(getNewRow(appointment,Appointment.getById(id)));
-                return appointment;
+                DataTable dtappointment = getNewDataTable();
+                Appointment appointment = Appointment.getById(id);
+                if (appointment != null)
+                {
+                    dtappointment.Rows.Add(getNewRow(dtappointment, appointment));
+                }
+                return dtappointment;
             }
             catch (Exception e)
             {

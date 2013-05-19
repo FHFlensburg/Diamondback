@@ -170,8 +170,10 @@ namespace CourseManagement.Client.BusinessLogic
             {
                 Room room = Room.getById(roomNr);
                 DataTable aRoom = LogicUtils.getNewDataTable(room);
-
-                aRoom.Rows.Add(getNewRow(aRoom, room));
+                if (room != null)
+                {
+                    aRoom.Rows.Add(getNewRow(aRoom, room));
+                }
 
                 return aRoom;
             }

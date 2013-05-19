@@ -130,11 +130,13 @@ namespace CourseManagement.Client.BusinessLogic
         {
             try
             {
-                Course course = Course.getById(courseNr);
+                Course dtcourse = Course.getById(courseNr);
                 DataTable aCourse = getNewDataTable();
 
-
-                aCourse.Rows.Add(getNewRow(aCourse, course));
+                if (aCourse != null)
+                {
+                    aCourse.Rows.Add(getNewRow(aCourse, dtcourse));
+                }
 
                 return aCourse;
             }

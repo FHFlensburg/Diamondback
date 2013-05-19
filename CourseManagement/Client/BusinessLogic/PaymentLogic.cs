@@ -79,9 +79,10 @@ namespace CourseManagement.Client.BusinessLogic
             {
                 Payment payment = Payment.getById(paymentId);
                 DataTable aPayment = LogicUtils.getNewDataTable(payment);
-
-                aPayment.Rows.Add(getNewRow(aPayment, payment));
-
+                if (payment != null)
+                {
+                    aPayment.Rows.Add(getNewRow(aPayment, payment));
+                }
                 return aPayment;
             }
             catch (Exception e)
