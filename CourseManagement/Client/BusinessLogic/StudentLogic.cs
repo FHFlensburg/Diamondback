@@ -34,8 +34,7 @@ namespace CourseManagement.Client.BusinessLogic
 
                 foreach (Student student in Student.getAll())
                 {
-                    allStudents.Rows.Add(
-                    student.Id, student.Surname, student.Forename, student.City);
+                    allStudents.Rows.Add(getNewRow(allStudents,student));
                 }
 
                 return allStudents;
@@ -75,7 +74,7 @@ namespace CourseManagement.Client.BusinessLogic
                 throw new Exception(e.Message);
             }  
         }
-        /**
+        
         /// <summary>
         /// Method for specific StudentDataTable-changes to the default DataTable-Method in LogicUtils
         /// </summary>
@@ -83,13 +82,6 @@ namespace CourseManagement.Client.BusinessLogic
         private DataTable getNewDataTable()
         {
             return LogicUtils.getNewDataTable(new Student());
-        }*/
-
-        //depricated
-        private DataTable getNewDataTable()
-        {
-            return LogicUtils.getNewDataTable(
-                "StudentNr", "Surname", "Forename", "City");
         }
 
         /// <summary>
