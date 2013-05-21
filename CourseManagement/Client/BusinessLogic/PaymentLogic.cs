@@ -80,7 +80,7 @@ namespace CourseManagement.Client.BusinessLogic
             try
             {
                 Payment payment = Payment.getById(paymentId);
-                DataTable aPayment = LogicUtils.getNewDataTable(payment);
+                DataTable aPayment = getNewDataTable();
                 if (payment != null)
                 {
                     aPayment.Rows.Add(getNewRow(aPayment, payment));

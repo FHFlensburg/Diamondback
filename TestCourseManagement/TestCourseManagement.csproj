@@ -57,6 +57,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="TestAppointmentLogic.cs" />
+    <Compile Include="TestPaymentLogic.cs" />
     <Compile Include="UnitHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

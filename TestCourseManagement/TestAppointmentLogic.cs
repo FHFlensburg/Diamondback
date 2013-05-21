@@ -12,14 +12,15 @@ namespace TestCourseManagement
         public void TestCreate()
         {
             DBConfiguration.getContext(UnitHelper.getUnitConnectionString());
-            ActiveUser.login("admin", "admin");
+            if (!ActiveUser.userIsLoggedIn()) ActiveUser.login("admin", "admin");
             AppointmentLogic logic = AppointmentLogic.getInstance();
-            int? test = logic.create(3, 3, DateTime.Now, DateTime.Now.AddHours(1));
+            int? test = logic.create(11, 11, DateTime.Now, DateTime.Now.AddHours(1));
             Assert.IsNotNull(test);
-            int? test2 = logic.create(3, 3, DateTime.Now, DateTime.Now.AddHours(1));
+            int? test2 = logic.create(11, 11, DateTime.Now, DateTime.Now.AddHours(1));
             Assert.IsNull(test2);
             logic.delete(test.Value);
-            
+
         }
+
     }
 }
