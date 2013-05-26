@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Microsoft.Windows.Controls.Ribbon;
 using System.Data;
+using CourseManagement.Client.BusinessLogic;
 
 
 namespace CourseManagement.Client.View
@@ -22,15 +13,18 @@ namespace CourseManagement.Client.View
     /// </summary>
     public partial class WndIndex : RibbonWindow
     {
+        
         public WndIndex()
         {
+            
             InitializeComponent();
+            //viewChanged(this, null); doesn't work
         }
 
         private void Ribbon_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-            Controller.Start.viewChanged(this, e);
+            viewChanged(this, e);
             //Noch zu überarbeiten und zu prüfen ob sauberer Stil
              
         }
@@ -53,15 +47,58 @@ namespace CourseManagement.Client.View
             aNewRoom.ShowDialog();
         }
 
+        private void viewChanged(WndIndex mainWindow, SelectionChangedEventArgs e)
+        {
+            /// <summary>
+            /// Manages which of the DataTables are shown in the datagrid of the view
+            /// 
+            /// </summary>
+            /// <returns></returns>
+
+            DataTable dt4Grid = null;
+            if (mainWindow.IsLoaded)
+            {
+                try
+                {
+                    switch (mainWindow.mainRibbon.SelectedIndex)
+                    {
+                        case 0:
+                            dt4Grid = CourseLogic.getInstance().getAll();
+                            mainWindow.dgCourse.DataContext = dt4Grid;
+                            break;
+                        case 1:
+                            dt4Grid = StudentLogic.getInstance().getAll();
+                            mainWindow.dgCourse.DataContext = dt4Grid;
+                            break;
+                        case 2:
+                            dt4Grid = RoomLogic.getInstance().getAll();
+                            mainWindow.dgCourse.DataContext = dt4Grid;
+                            break;
+                        default:
+                            mainWindow.dgCourse.DataContext = null;
+                            break;
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Error");
+                }
+
+            }
+        }
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            OpenWindow2AddParticpant(sender);
+        }
+
+        private void OpenWindow2AddParticpant(object sender)
         {
             if (sender != null)
             {
                 try
                 {
                     WndParticipant2Course aNewAllocation = new WndParticipant2Course();
-                    //next one throws exception, needs some polish
-                    //aNewAllocation.dgParticipant.DataContext = this.dgCourse.DataContext;
+                    aNewAllocation.dgParticipant.DataContext = (DataTable)this.dgCourse.DataContext;
                     aNewAllocation.ShowDialog();
                 }
                 catch
@@ -69,6 +106,31 @@ namespace CourseManagement.Client.View
                     MessageBox.Show("Something went wrong");
                 }
             }
+        }
+
+        private void RibbonButtonAddParticipant_Click(object sender, RoutedEventArgs e)
+        {
+            OpenWindow2AddParticpant(sender);
+        }
+
+        private void OpenHelpFile(object sender, RoutedEventArgs e)
+        {
+            //opening a generated Help File
+            //Made a Word File and converted it. Test chm file in the Image Folder
+            //
+            //ToDo Change so it works with relative paths
+
+            try
+            {
+                System.Diagnostics.Process.Start(@"C:\path-to-chm-file.chm");
+            }
+            catch (System.Exception)
+            {
+                
+                //throw;
+                MessageBox.Show("HelpFile not found");
+            }
+            
         }
 
        

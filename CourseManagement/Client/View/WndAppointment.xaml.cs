@@ -11,24 +11,17 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.Data;
-using CourseManagement.Client.BusinessLogic;
 
 namespace CourseManagement.Client.View
 {
     /// <summary>
-    /// Interaktionslogik für wndParticipant2Course.xaml
+    /// Interaktionslogik für WndAppointment.xaml
     /// </summary>
-    public partial class WndParticipant2Course : Window
+    public partial class WndAppointment : Window
     {
-        public WndParticipant2Course()
+        public WndAppointment()
         {
             InitializeComponent();
-        }
-
-        private void close_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
     }
 }

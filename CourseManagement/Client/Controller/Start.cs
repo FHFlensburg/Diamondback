@@ -24,45 +24,7 @@ namespace CourseManagement.Client.Controller
             form1.ShowDialog();
         }
 
-        public static void viewChanged(WndIndex mainWindow, SelectionChangedEventArgs e)
-        {
-            /// <summary>
-            /// Manages which of the DataTables are shown in the datagrid of the view
-            /// just for test here, needs to be placed better^^
-            /// </summary>
-            /// <returns></returns>
-
-            DataTable dt4Grid = null;
-            if (mainWindow.IsLoaded)
-            {
-                try
-                {
-                    switch (mainWindow.mainRibbon.SelectedIndex)
-                    {
-                        case 0:
-                            dt4Grid = CourseLogic.getInstance().getAll();
-                            mainWindow.dgCourse.DataContext = dt4Grid;
-                            break;
-                        case 1:
-                            dt4Grid = StudentLogic.getInstance().getAll();
-                            mainWindow.dgCourse.DataContext = dt4Grid;
-                            break;
-                        case 2:
-                            dt4Grid = RoomLogic.getInstance().getAll();
-                            mainWindow.dgCourse.DataContext = dt4Grid;
-                            break;
-                        default:
-                            mainWindow.dgCourse.DataContext = null;
-                            break;
-                    }
-                }
-                catch
-                {
-                    MessageBox.Show("Error");
-                }
-
-            }
-        }
+        
         
 
 

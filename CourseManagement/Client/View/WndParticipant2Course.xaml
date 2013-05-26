@@ -1,13 +1,13 @@
 ﻿<Window x:Class="CourseManagement.Client.View.WndParticipant2Course"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Teilnehmer zu Kurz hinzufügen" Height="300" Width="500">
+        Title="Teilnehmer zu Kurz hinzufügen" Height="300" Width="500" SizeToContent="WidthAndHeight">
     <Grid>
         <StackPanel>
             <Label Content="Teilnehmer zu Kurs hinzufügen" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" />
             <DataGrid x:Name="dgParticipant" Margin="10" ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="True"/>
             <Button x:Name="addPerson2Course" Content="hinzufügen" Margin="10,5,10,0" />
-            <Button x:Name="abc" Content="Abrrechen" Margin="10,5,10,0" />
+            <Button x:Name="close" Content="Abrechen" Margin="10,5,10,5" Click="close_Click"/>
         </StackPanel>
 
     </Grid>

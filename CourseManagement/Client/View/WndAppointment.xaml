@@ -1,0 +1,29 @@
+﻿<Window x:Class="CourseManagement.Client.View.WndAppointment"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="WndAppointment" Height="300" Width="570">
+    <Grid>
+        <!-- ToDo: Finish this with names and everythin -->
+        <StackPanel VerticalAlignment="Bottom">
+            <DataGrid x:Name="Appointments"/>
+            <StackPanel Orientation="Horizontal">
+            <StackPanel Margin="5">
+                <Label Width="130" Content="Kurs" />
+                <ComboBox Width="120" />
+            </StackPanel>
+                <StackPanel Margin="5">
+                    <Label Width="130" Content="Beginn"/>
+                    <DatePicker/>
+                </StackPanel>
+                <StackPanel Margin="5">
+                    <Label Width="130" Content="Ende"/>
+                    <DatePicker />
+                </StackPanel>
+                <StackPanel Margin="5">
+                    <Label Width="130" Content="Raum-NR" />
+                    <ComboBox Width="120"/>
+                </StackPanel>
+            </StackPanel> 
+        </StackPanel>
+    </Grid>
+</Window>
