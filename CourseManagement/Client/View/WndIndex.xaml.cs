@@ -18,13 +18,12 @@ namespace CourseManagement.Client.View
         {
             
             InitializeComponent();
-            //viewChanged(this, null); doesn't work
         }
 
         private void Ribbon_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-            viewChanged(this, e);
+            refreshDataGrids(this);
             //Noch zu überarbeiten und zu prüfen ob sauberer Stil
              
         }
@@ -47,14 +46,14 @@ namespace CourseManagement.Client.View
             aNewRoom.ShowDialog();
         }
 
-        private void viewChanged(WndIndex mainWindow, SelectionChangedEventArgs e)
+        private void refreshDataGrids(WndIndex mainWindow)
         {
             /// <summary>
             /// Manages which of the DataTables are shown in the datagrid of the view
             /// 
             /// </summary>
             /// <returns></returns>
-
+            /// 
             DataTable dt4Grid = null;
             if (mainWindow.IsLoaded)
             {
@@ -78,12 +77,15 @@ namespace CourseManagement.Client.View
                             mainWindow.dgCourse.DataContext = null;
                             break;
                     }
+
+                    DataTable temp = null;
+                    temp = AppointmentLogic.getInstance().getAll();
+                    this.dgAppointments.DataContext = temp;
                 }
                 catch
                 {
                     MessageBox.Show("Error");
                 }
-
             }
         }
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
@@ -133,7 +135,62 @@ namespace CourseManagement.Client.View
             
         }
 
-       
+        private void mainWindow_IsLoaded(object sender, System.EventArgs e)
+        {
+            refreshDataGrids(this);
+            fillComboBoxCourse();      
+           
+        }
 
+        
+
+        private void fillComboBoxCourse()
+        {
+            try
+            {
+                this.cbxAppointmentCourse.Items.Clear();
+                string foo = "";
+                //MessageBox.Show("WIRD AUSGEFÜHRT?");
+                DataTable CourseTitle = null;
+                CourseTitle = CourseLogic.getInstance().getAll();
+                int fook = CourseTitle.Rows.Count;
+                for (int i = 0; i < fook; i++)
+                {
+                    foo = null;
+                    foo = CourseTitle.Rows[i][1].ToString();
+                    this.cbxAppointmentCourse.Items.Add(foo);
+                }
+            }
+            catch
+            {
+
+                MessageBox.Show("ComboBoxfilling failed");
+            }
+        }
+
+        private void RibbonButtonDeleteCourse_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.dgCourse.SelectedIndex != -1)
+            {
+                
+                DataTable temp = CourseLogic.getInstance().getAll();
+                string i = temp.Rows[dgCourse.SelectedIndex][0].ToString();
+                int bla = int.Parse(i);
+                try
+                {
+                    CourseLogic.getInstance().delete(bla);
+                }
+                catch
+                {
+
+                }
+                refreshDataGrids(this);
+                fillComboBoxCourse();
+                
+            }
+
+
+
+        }
     }
 }
