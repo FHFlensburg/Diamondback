@@ -90,7 +90,7 @@
             <StackPanel Orientation="Horizontal">
                 <StackPanel Margin="5">
                     <Label Width="130" Content="Kurs" />
-                    <ComboBox x:Name="cbxAppointmentCourse" Width="120" />
+                    <ComboBox x:Name="cbxAppointmentCourse" Width="120" SelectionChanged="cbxAppointmentCourse_SelectionChanged" />
                 </StackPanel>
                 <StackPanel Margin="5">
                     <Label Width="130" Content="Beginn"/>
@@ -102,8 +102,8 @@
                 </StackPanel>
                 <StackPanel Margin="5">
                     <Label Width="130" Content="Raum-NR" />
-                    <ComboBox Width="120"/>
-                </StackPanel>
+                        <ComboBox x:Name="cbxAppointmentRoomNumber" Width="120" SelectionChanged="cbxAppointmentRoomNumber_SelectionChanged" />
+                    </StackPanel>
                 <StackPanel VerticalAlignment="Bottom" Margin="5">
                     <Button x:Name="btnAddAppointment" Content="Hinzufügen" Width="130"/>
                 </StackPanel>

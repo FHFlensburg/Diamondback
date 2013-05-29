@@ -22,13 +22,29 @@ namespace CourseManagement.Client.View
     /// </summary>
     public partial class WndNewCourse : Window
     {
+
+        /*
+         * http://dotnet-forum.de/blogs/larsschmitt/archive/2009/11/04/einfache-input-validation-mit-wpf.aspx
+         */
+        private string title, description = string.Empty;
+        private int maxMember, minMember, tutorNr, validityInMonth = 0;
+        private decimal amountInEuro = 0m;
+
         public WndNewCourse()
         {
             InitializeComponent();
         }
 
-      
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            CourseLogic createCourse = CourseLogic.getInstance();
+            insertNewCourseAndValidate();
+            this.Close();
+        }
 
-       
+        private void insertNewCourseAndValidate()
+        {
+            this.title = tbCourseTitle.Text.ToString();
+        }     
     }
 }

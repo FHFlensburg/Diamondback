@@ -27,7 +27,7 @@
             </StackPanel>
         </StackPanel>
         
-        <Button x:Name="btnSave" Content="Speichern" HorizontalAlignment="Left" Margin="10,272,0,0" VerticalAlignment="Top" Width="75"  />
+        <Button x:Name="btnSave" Content="Speichern" HorizontalAlignment="Left" Margin="10,272,0,0" VerticalAlignment="Top" Width="75" Click="btnSave_Click"  />
         <Button x:Name="btnAport" Content="Abbrechen" HorizontalAlignment="Left" Margin="109,272,0,0" VerticalAlignment="Top" Width="75" />
     </Grid>
 </Window>

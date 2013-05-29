@@ -4,6 +4,7 @@ using System.Windows.Input;
 using Microsoft.Windows.Controls.Ribbon;
 using System.Data;
 using CourseManagement.Client.BusinessLogic;
+using System.Collections.Generic;
 
 
 namespace CourseManagement.Client.View
@@ -22,10 +23,8 @@ namespace CourseManagement.Client.View
 
         private void Ribbon_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
             refreshDataGrids(this);
             //Noch zu überarbeiten und zu prüfen ob sauberer Stil
-             
         }
 
         private void RibbonButtonNewCourse_Click(object sender, RoutedEventArgs e)
@@ -82,9 +81,9 @@ namespace CourseManagement.Client.View
                     temp = AppointmentLogic.getInstance().getAll();
                     this.dgAppointments.DataContext = temp;
                 }
-                catch
+                catch (System.Exception err)
                 {
-                    MessageBox.Show("Error");
+                    MessageBox.Show(err.ToString());
                 }
             }
         }
@@ -103,9 +102,9 @@ namespace CourseManagement.Client.View
                     aNewAllocation.dgParticipant.DataContext = (DataTable)this.dgCourse.DataContext;
                     aNewAllocation.ShowDialog();
                 }
-                catch
+                catch (System.Exception err)
                 {
-                    MessageBox.Show("Something went wrong");
+                    MessageBox.Show(err.ToString());
                 }
             }
         }
@@ -126,11 +125,9 @@ namespace CourseManagement.Client.View
             {
                 System.Diagnostics.Process.Start(@"C:\path-to-chm-file.chm");
             }
-            catch (System.Exception)
+            catch (System.Exception err)
             {
-                
-                //throw;
-                MessageBox.Show("HelpFile not found");
+                MessageBox.Show(err.ToString());
             }
             
         }
@@ -138,33 +135,61 @@ namespace CourseManagement.Client.View
         private void mainWindow_IsLoaded(object sender, System.EventArgs e)
         {
             refreshDataGrids(this);
-            fillComboBoxCourse();      
+            fillComboBoxCourse();
+            fillComboBoxRoomNumber();
            
+        }
+
+        private void fillComboBoxRoomNumber()
+        {
+            if (this.cbxAppointmentRoomNumber.Items.Count >= 1)
+            {
+                this.cbxAppointmentRoomNumber.Items.Clear();
+            }
+            try
+            {
+                DataTable courseRoomNumber = null;
+                courseRoomNumber = AppointmentLogic.getInstance().getAll();
+                string temporaryItem = string.Empty;
+                int temporaryCountIndex = courseRoomNumber.Rows.Count;
+
+                for (int i = 0; i < temporaryCountIndex; i++)
+                {
+                    temporaryItem = string.Empty;
+                    temporaryItem = courseRoomNumber.Rows[i]["Room"].ToString();
+                    cbxAppointmentRoomNumber.Items.Add(temporaryItem);
+                    //TODO: Duplizitäten. Wo erfolgt die Validierung?!
+                }       
+            }
+            catch (System.Exception err)
+            {
+
+                MessageBox.Show(err.ToString());
+            }
         }
 
         
 
         private void fillComboBoxCourse()
         {
+            this.cbxAppointmentCourse.Items.Clear();
             try
             {
-                this.cbxAppointmentCourse.Items.Clear();
-                string foo = "";
-                //MessageBox.Show("WIRD AUSGEFÜHRT?");
                 DataTable CourseTitle = null;
                 CourseTitle = CourseLogic.getInstance().getAll();
-                int fook = CourseTitle.Rows.Count;
-                for (int i = 0; i < fook; i++)
+                string temporaryItem = string.Empty; 
+                int temporaryCountIndex = CourseTitle.Rows.Count;
+                for (int i = 0; i < temporaryCountIndex; i++)
                 {
-                    foo = null;
-                    foo = CourseTitle.Rows[i][1].ToString();
-                    this.cbxAppointmentCourse.Items.Add(foo);
+                    temporaryItem = string.Empty;
+                    temporaryItem = CourseTitle.Rows[i]["Title"].ToString();
+                    this.cbxAppointmentCourse.Items.Add(temporaryItem);
                 }
             }
-            catch
+            catch (System.Exception err)
             {
 
-                MessageBox.Show("ComboBoxfilling failed");
+                MessageBox.Show(err.ToString());
             }
         }
 
@@ -188,9 +213,17 @@ namespace CourseManagement.Client.View
                 fillComboBoxCourse();
                 
             }
-
-
-
         }
+
+        private void cbxAppointmentRoomNumber_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //TODO: Jan, warum steht die Methode im XAML? Lösche Sie... Sie bringt nichts!
+        }
+
+        private void cbxAppointmentCourse_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //TODO: Jan, warum steht die Methode im XAML? Lösche Sie... Sie bringt nichts!
+        }
+
     }
 }
