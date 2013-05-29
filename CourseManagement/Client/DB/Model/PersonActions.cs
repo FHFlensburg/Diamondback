@@ -11,6 +11,9 @@ namespace CourseManagement.Client.DB.Model
     /// </summary>
     public abstract partial class Person
     {
+        /// <summary>
+        /// Calls the Database Query which adds a Person to the Database
+        /// </summary>
         public virtual void addToDB()
         {
             try
@@ -23,6 +26,10 @@ namespace CourseManagement.Client.DB.Model
             }
         }
 
+        /// <summary>
+        /// Calls the Database Query which gets a List of all Persons
+        /// </summary>
+        /// <returns>Persons</returns>
         public  static List<Person> getAll()
         {
             try
@@ -35,6 +42,9 @@ namespace CourseManagement.Client.DB.Model
             }
         }
 
+        /// <summary>
+        /// Calls the Database Query which deletes the selected Person
+        /// </summary>
         public virtual void delete()
         {
             try
@@ -47,6 +57,9 @@ namespace CourseManagement.Client.DB.Model
             }
         }
 
+        /// <summary>
+        /// Calls the Database Query which updates the selected Person
+        /// </summary>
         public virtual void update()
         {
             try
@@ -59,6 +72,11 @@ namespace CourseManagement.Client.DB.Model
             }
         }
 
+        /// <summary>
+        /// Calls the Database Query which calls a Person by Id
+        /// </summary>
+        /// <param name="personId"></param>
+        /// <returns>Person</returns>
         public  static Person getById(int personId)
         {
             try
@@ -70,8 +88,5 @@ namespace CourseManagement.Client.DB.Model
                 throw new Exception(e.Message);
             }
         }
-
-
-
     }
 }

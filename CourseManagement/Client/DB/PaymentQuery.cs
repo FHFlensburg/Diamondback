@@ -39,7 +39,6 @@ namespace CourseManagement.Client.DB
         /// Creates a new Payment for a Student, wich is also connected to a Course
         /// </summary>
         /// <param name="payment"></param>
-        /// <param name="studentId"></param>
         public static void insert(Payment payment)
         {
             try
@@ -59,7 +58,7 @@ namespace CourseManagement.Client.DB
         /// <summary>
         /// Deletes the submitted Payment from the database.
         /// </summary>
-        /// <param name="student"></param>
+        /// <param name="payment"></param>
         public static void delete(Payment payment)
         {
             try

@@ -11,18 +11,9 @@ namespace CourseManagement.Client.DB.Model
     /// </summary>
     public partial class Payment
     {
-        public static List<Payment> getAll()
-        {
-            try
-            {
-                return PaymentQuery.getAll();
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
-
+        /// <summary>
+        /// Calls the Database Query which adds a Payment to the Database
+        /// </summary>
         public void addToDB()
         {
             try
@@ -35,6 +26,42 @@ namespace CourseManagement.Client.DB.Model
             }
         }
 
+        /// <summary>
+        /// Calls the Database Query which gets a List of all Payment
+        /// </summary>
+        /// <returns>Payment</returns>
+        public static List<Payment> getAll()
+        {
+            try
+            {
+                return PaymentQuery.getAll();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Calls the Database Query which deletes the selected Payment
+        /// </summary>
+        public void delete()
+        {
+            try
+            {
+                PaymentQuery.delete(this);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Calls the Database Query which calls a Payment by Id
+        /// </summary>
+        /// <param name="paymentId"></param>
+        /// <returns>Payment</returns>
         public static Payment getById(int paymentId)
         {
             try
@@ -47,16 +74,6 @@ namespace CourseManagement.Client.DB.Model
             }
         }
 
-        public void delete()
-        {
-            try
-            {
-                PaymentQuery.delete(this);
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
+        
     }
 }

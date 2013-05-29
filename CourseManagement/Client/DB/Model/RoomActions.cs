@@ -43,7 +43,7 @@ namespace CourseManagement.Client.DB.Model
         }
 
         /// <summary>
-        /// Calls the Database Query witch deletes a Room
+        /// Calls the Database Query which deletes a Room
         /// </summary>
         public void delete()
         {
@@ -58,7 +58,7 @@ namespace CourseManagement.Client.DB.Model
         }
 
         /// <summary>
-        /// Calls the Database Query witch updates a Room
+        /// Calls the Database Query which updates a Room
         /// </summary>
         public void update()
         {
@@ -73,7 +73,7 @@ namespace CourseManagement.Client.DB.Model
         }
 
         /// <summary>
-        /// Calls the Database Query witch get one Room by Id
+        /// Calls the Database Query which get one Room by Id
         /// </summary>
         /// <param name="roomId"></param>
         /// <returns>Room</returns>

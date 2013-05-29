@@ -40,7 +40,7 @@ namespace CourseManagement.Client.DB
         /// <summary>
         /// Add's the submitted Student to database.
         /// </summary>
-        /// <param name="student"></param>
+        /// <param name="person"></param>
         public static void insert(Person person)
         {
             try
@@ -61,7 +61,7 @@ namespace CourseManagement.Client.DB
         /// <summary>
         /// Deletes the submitted Student from the database.
         /// </summary>
-        /// <param name="student"></param>
+        /// <param name="person"></param>
         public static void delete(Person person)
         {
             try
