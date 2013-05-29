@@ -11,6 +11,9 @@ namespace CourseManagement.Client.DB.Model
     /// </summary>
     public partial class User : Person
     {
+        /// <summary>
+        /// Calls the Database Query which adds a Person_User to the Database
+        /// </summary>
         public override void addToDB()
         {
             try
@@ -23,6 +26,10 @@ namespace CourseManagement.Client.DB.Model
             }
         }
 
+        /// <summary>
+        /// Calls the Database Query which gets a List of all Person_Users
+        /// </summary>
+        /// <returns>Person_Users</returns>
         public static new List<User> getAll()
         {
             try
@@ -35,6 +42,9 @@ namespace CourseManagement.Client.DB.Model
             }
         }
 
+        /// <summary>
+        /// Calls the Database Query which deletes the selected Person_User
+        /// </summary>
         public override void delete()
         {
             try
@@ -47,6 +57,9 @@ namespace CourseManagement.Client.DB.Model
             }
         }
 
+        /// <summary>
+        /// Calls the Database Query which updates the selected Person_User
+        /// </summary>
         public override void update()
         {
             try
@@ -59,6 +72,11 @@ namespace CourseManagement.Client.DB.Model
             }
         }
 
+        /// <summary>
+        /// Calls the Database Query which calls a Person_User by Id
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns>Person_User</returns>
         public static new User getById(int userId)
         {
             try
@@ -71,6 +89,11 @@ namespace CourseManagement.Client.DB.Model
             }
         }
 
+        /// <summary>
+        /// Calls the Database Query which calls a Person_User by username
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns>Person_User</returns>
         public static User getByUserName(string userName)
         {
             try

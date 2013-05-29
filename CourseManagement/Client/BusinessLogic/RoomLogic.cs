@@ -27,13 +27,12 @@ namespace CourseManagement.Client.BusinessLogic
         /// <summary>
         /// Creates a new room by the given parameters
         /// </summary>
-        /// <param name="appointment"></param>
         /// <param name="building"></param>
         /// <param name="capacity"></param>
         /// <param name="city"></param>
         /// <param name="cityCode"></param>
-        /// <param name="roomNr"></param>
         /// <param name="street"></param>
+        /// <returns></returns>
         public int create(String building, int? capacity, String city, String cityCode, String street)
         {
             try
@@ -58,9 +57,12 @@ namespace CourseManagement.Client.BusinessLogic
         /// Method for changing Properties of the Room with the submitted id.
         /// All Parameters have to be submitted.
         /// </summary>
-        /// <param name="idToChange"></param>
-        /// <param name="startDate"></param>
-        /// <param name="endDate"></param>
+        /// <param name="roomNr"></param>
+        /// <param name="building"></param>
+        /// <param name="capacity"></param>
+        /// <param name="city"></param>
+        /// <param name="cityCode"></param>
+        /// <param name="street"></param>
         public void changeProperties(int roomNr, String building, int? capacity, String city, String cityCode, String street)
         {
             try

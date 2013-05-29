@@ -42,7 +42,7 @@ namespace CourseManagement.Client.DB
         /// <summary>
         /// Add's the submitted course to database.
         /// </summary>
-        /// <param name="student"></param>
+        /// <param name="course"></param>
         public static void insert(Course course)
         {
             try

@@ -11,6 +11,9 @@ namespace CourseManagement.Client.DB.Model
     /// </summary>
     public partial class Appointment
     {
+        /// <summary>
+        /// Calls the Database Query which adds a Appointment to the Database
+        /// </summary>
         public void addToDB()
         {
             try
@@ -23,6 +26,10 @@ namespace CourseManagement.Client.DB.Model
             }
         }
 
+        /// <summary>
+        /// Calls the Database Query which gets a List of all Appointments
+        /// </summary>
+        /// <returns>Appointments</returns>
         public static List<Appointment> getAll()
         {
             try
@@ -35,6 +42,9 @@ namespace CourseManagement.Client.DB.Model
             }
         }
 
+        /// <summary>
+        /// Calls the Database Query which deletes the selected Appointment
+        /// </summary>
         public void delete()
         {
             try
@@ -47,6 +57,9 @@ namespace CourseManagement.Client.DB.Model
             }
         }
 
+        /// <summary>
+        /// Calls the Database Query which updates the selected Appointment
+        /// </summary>
         public void update()
         {
             try
@@ -59,6 +72,11 @@ namespace CourseManagement.Client.DB.Model
             }
         }
 
+        /// <summary>
+        /// Calls the Database Query which calls a Appointment by Id
+        /// </summary>
+        /// <param name="appointmentId"></param>
+        /// <returns>Appointment</returns>
         public static Appointment getById(int appointmentId)
         {
             try

@@ -52,11 +52,13 @@ namespace CourseManagement.Client.BusinessLogic
         /// Creates a new Course by the given parameters
         /// </summary>
         /// <param name="title"></param>
-        /// <param name="amountinEuro"></param>
+        /// <param name="amountInEuro"></param>
         /// <param name="description"></param>
         /// <param name="maxMember"></param>
         /// <param name="minMember"></param>
+        /// <param name="tutorNr"></param>
         /// <param name="validityInMonth"></param>
+        /// <returns></returns>
         public int create(String title, decimal? amountInEuro, String description, int? maxMember, int? minMember, int tutorNr,
                                          int? validityInMonth)
         {
