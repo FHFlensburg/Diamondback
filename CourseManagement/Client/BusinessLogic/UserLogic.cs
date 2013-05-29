@@ -105,12 +105,27 @@ namespace CourseManagement.Client.BusinessLogic
             row["Password"] = "***";
             return row;
         }
-
-
+        
         /// <summary>
         /// Creates a new User in the database and return the userNr
         /// </summary>
-        /// <param name="?"></param>
+        /// <param name="surname"></param>
+        /// <param name="forename"></param>
+        /// <param name="birthyear"></param>
+        /// <param name="street"></param>
+        /// <param name="mobilePhone"></param>
+        /// <param name="mail"></param>
+        /// <param name="fax"></param>
+        /// <param name="privatePhone"></param>
+        /// <param name="gender"></param>
+        /// <param name="active"></param>
+        /// <param name="title"></param>
+        /// <param name="city"></param>
+        /// <param name="citycode"></param>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="admin"></param>
+        /// <returns></returns>
         public int create(string surname, string forename, string birthyear, string street,
             string mobilePhone, string mail, string fax, string privatePhone, string gender,
             bool? active, string title, string city, string citycode, string username, string password,
@@ -152,7 +167,23 @@ namespace CourseManagement.Client.BusinessLogic
         /// <summary>
         /// Creates a new User in the database and return the userNr
         /// </summary>
-        /// <param name="?"></param>
+        /// <param name="userNr"></param>
+        /// <param name="surname"></param>
+        /// <param name="forename"></param>
+        /// <param name="birthyear"></param>
+        /// <param name="street"></param>
+        /// <param name="mobilePhone"></param>
+        /// <param name="mail"></param>
+        /// <param name="fax"></param>
+        /// <param name="privatePhone"></param>
+        /// <param name="gender"></param>
+        /// <param name="active"></param>
+        /// <param name="title"></param>
+        /// <param name="city"></param>
+        /// <param name="citycode"></param>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="admin"></param>
         public void changeProperties(int userNr,string surname, string forename, string birthyear, string street,
            string mobilePhone, string mail, string fax, string privatePhone, string gender,
            bool? active, string title, string city, string citycode, string username, string password,
@@ -193,7 +224,7 @@ namespace CourseManagement.Client.BusinessLogic
         /// <summary>
         /// Returns a DataTable containing one or zero User.
         /// </summary>
-        /// <param name="tutorNr"></param>
+        /// <param name="userNr"></param>
         /// <returns></returns>
         public override DataTable getById(int userNr)
         {

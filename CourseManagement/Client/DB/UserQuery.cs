@@ -76,7 +76,7 @@ namespace CourseManagement.Client.DB
         /// <summary>
         /// Returns the User who is bound to the given ID.
         /// </summary>
-        /// <param name="studentId"></param>
+        /// <param name="userId"></param>
         /// <returns>Student</returns>
         public static User getById(int userId)
         {
@@ -98,7 +98,7 @@ namespace CourseManagement.Client.DB
         /// Saves all changes made on the DataContext.
         /// Parameter is Placeholder for a new database-layer
         /// </summary>
-        /// <param name="student"></param>
+        /// <param name="user"></param>
         public static void update(User user)
         {
             try

@@ -86,10 +86,11 @@ namespace CourseManagement.Client.BusinessLogic
         }
 
         /// <summary>
-        /// Create the default DataRow for entity-DataTables and
+        /// Create the default DataRow for entity-DataTables
         /// </summary>
-        /// <param name="row"></param>
-        /// <param name="course"></param>
+        /// <param name="table"></param>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         public static DataRow getNewRow(DataTable table, object entity)
         {
             try

@@ -111,7 +111,7 @@ namespace CourseManagement.Client.BusinessLogic
         /// <summary>
         /// Returns a DataTable containing one or zero Person.
         /// </summary>
-        /// <param name="studentNr"></param>
+        /// <param name="personNr"></param>
         /// <returns></returns>
         public override  DataTable getById(int personNr)
         {
@@ -176,7 +176,7 @@ namespace CourseManagement.Client.BusinessLogic
         /// <summary>
         /// Get one person by id manage the remove from database of this person
         /// </summary>
-        /// <param name="courseNr"></param>
+        /// <param name="personNr"></param>
         public override void delete(int personNr)
         {
             try

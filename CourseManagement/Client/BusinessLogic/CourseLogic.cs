@@ -82,13 +82,19 @@ namespace CourseManagement.Client.BusinessLogic
                 throw new Exception(e.Message);
             }  
         }
+        
         /// <summary>
         /// Method for changing Properties of the Course with the submitted id.
         /// All Parameters have to be submitted.
         /// </summary>
-        /// <param name="idToChange"></param>
-        /// <param name="startDate"></param>
-        /// <param name="endDate"></param>
+        /// <param name="courseNr"></param>
+        /// <param name="title"></param>
+        /// <param name="amountInEuro"></param>
+        /// <param name="description"></param>
+        /// <param name="maxMember"></param>
+        /// <param name="minMember"></param>
+        /// <param name="tutorNr"></param>
+        /// <param name="validityInMonth"></param>
         public void changeProperties(int courseNr, String title, decimal? amountInEuro, String description, int? maxMember, 
             int? minMember, int? tutorNr, int? validityInMonth)
         {
@@ -162,7 +168,6 @@ namespace CourseManagement.Client.BusinessLogic
         /// <summary>
         /// Method for specific CourseTable-changes to the default Table-Method in LogicUtils
         /// </summary>
-        /// <param name="table"></param>
         /// <returns></returns>
         private DataTable getNewDataTable()
         {
@@ -218,7 +223,7 @@ namespace CourseManagement.Client.BusinessLogic
         /// <summary>
         /// Return a DataTable containing all Courses of the submitted Student
         /// </summary>
-        /// <param name="roomNr"></param>
+        /// <param name="studentNr"></param>
         /// <returns></returns>
         public DataTable getByStudent(int studentNr)
         {
