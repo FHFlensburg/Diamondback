@@ -64,7 +64,7 @@ namespace CourseManagement.Client.DB
         /// <summary>
         /// Deletes the submitted course from the database.
         /// </summary>
-        /// <param name="student"></param>
+        /// <param name="course"></param>
         public static void delete(Course course)
         {
             try
@@ -85,7 +85,7 @@ namespace CourseManagement.Client.DB
         /// <summary>
         /// Returns the course who is bound to the given ID.
         /// </summary>
-        /// <param name="studentId"></param>
+        /// <param name="courseId"></param>
         /// <returns>Student</returns>
         public static Course getById(int courseId)
         {
@@ -107,7 +107,7 @@ namespace CourseManagement.Client.DB
         /// Saves all changes made on the DataContext.
         /// Parameter is Placeholder for a new database-layer
         /// </summary>
-        /// <param name="student"></param>
+        /// <param name="course"></param>
         public static void update(Course course)
         {
             try

@@ -39,7 +39,7 @@ namespace CourseManagement.Client.DB
         /// <summary>
         /// Add's the submitted Tutor to database.
         /// </summary>
-        /// <param name="student"></param>
+        /// <param name="tutor"></param>
         public static void insert(Tutor tutor)
         {
             try
@@ -60,7 +60,7 @@ namespace CourseManagement.Client.DB
         /// <summary>
         /// Deletes the submitted Tutor from the database.
         /// </summary>
-        /// <param name="student"></param>
+        /// <param name="tutor"></param>
         public static void delete(Tutor tutor)
         {
             try
@@ -81,7 +81,7 @@ namespace CourseManagement.Client.DB
         /// <summary>
         /// Returns the Tutor who is bound to the given ID.
         /// </summary>
-        /// <param name="studentId"></param>
+        /// <param name="tutorId"></param>
         /// <returns>Student</returns>
         public static Tutor getById(int tutorId)
         {
@@ -103,7 +103,7 @@ namespace CourseManagement.Client.DB
         /// Saves all changes made on the DataContext.
         /// Parameter is Placeholder for a new database-layer
         /// </summary>
-        /// <param name="student"></param>
+        /// <param name="tutor"></param>
         public static void update(Tutor tutor)
         {
             try

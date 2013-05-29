@@ -11,7 +11,9 @@ namespace CourseManagement.Client.DB.Model
     /// </summary>
     public partial class Course
     {
-
+        /// <summary>
+        /// Calls the Database Query witch adds a Course to the Database
+        /// </summary>
         public void addToDB()
         {
             try
@@ -24,6 +26,10 @@ namespace CourseManagement.Client.DB.Model
             }
         }
 
+        /// <summary>
+        /// Calls the Database Query witch gets a List of all Courses
+        /// </summary>
+        /// <returns>Courses</returns>
         public static List<Course> getAll()
         {
             try
@@ -36,6 +42,9 @@ namespace CourseManagement.Client.DB.Model
             }
         }
 
+        /// <summary>
+        /// Calls the Database Query witch deletes the selected Course
+        /// </summary>
         public  void delete()
         {
             try
@@ -48,6 +57,9 @@ namespace CourseManagement.Client.DB.Model
             }
         }
 
+        /// <summary>
+        /// Calls the Database Query witch updates the selected Course
+        /// </summary>
         public  void update()
         {
             try
@@ -60,6 +72,11 @@ namespace CourseManagement.Client.DB.Model
             }
         }
 
+        /// <summary>
+        /// Calls the Database Query witch calls a Course by Id
+        /// </summary>
+        /// <param name="courseNr"></param>
+        /// <returns>Course</returns>
         public static Course getById(int courseNr)
         {
             try
@@ -72,6 +89,11 @@ namespace CourseManagement.Client.DB.Model
             }
         }
 
+        /// <summary>
+        /// Calls the Database Query witch search a resultset of Courses by a search-string
+        /// </summary>
+        /// <param name="like"></param>
+        /// <returns>Courses</returns>
         public static List<Course> search(string like)
         {
             try

@@ -174,10 +174,11 @@ namespace CourseManagement.Client.BusinessLogic
         }
 
 
+        /// <summary>
         /// Updates the Tutorproperties.
         /// Tupel will be find by tutornr
         /// </summary>
-        /// <param name="personNr"></param>
+        /// <param name="tutorNr"></param>
         /// <param name="surname"></param>
         /// <param name="forename"></param>
         /// <param name="birthyear"></param>
@@ -223,7 +224,7 @@ namespace CourseManagement.Client.BusinessLogic
         /// <summary>
         /// Get one tutor by id manage the remove from database of this tutor
         /// </summary>
-        /// <param name="courseNr"></param>
+        /// <param name="tutorNr"></param>
         public override void delete(int tutorNr)
         {
             try

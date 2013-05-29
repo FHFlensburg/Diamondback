@@ -101,7 +101,24 @@ namespace CourseManagement.Client.BusinessLogic
         /// <summary>
         /// Creates a new Student in the database and return the studentNr
         /// </summary>
-        /// <param name="?"></param>
+        /// <param name="surname"></param>
+        /// <param name="forename"></param>
+        /// <param name="birthyear"></param>
+        /// <param name="street"></param>
+        /// <param name="mobilePhone"></param>
+        /// <param name="mail"></param>
+        /// <param name="fax"></param>
+        /// <param name="privatePhone"></param>
+        /// <param name="gender"></param>
+        /// <param name="active"></param>
+        /// <param name="title"></param>
+        /// <param name="city"></param>
+        /// <param name="citycode"></param>
+        /// <param name="iban"></param>
+        /// <param name="bic"></param>
+        /// <param name="depositor"></param>
+        /// <param name="nameOfBank"></param>
+        /// <returns></returns>
         public int create(string surname, string forename, string birthyear, string street,
             string mobilePhone, string mail, string fax, string privatePhone, string gender,
             bool active, string title, string city, string citycode, string iban, string bic,
@@ -140,7 +157,24 @@ namespace CourseManagement.Client.BusinessLogic
         /// <summary>
         /// Creates a new Student in the database and return the studentNr
         /// </summary>
-        /// <param name="?"></param>
+        /// <param name="studentNr"></param>
+        /// <param name="surname"></param>
+        /// <param name="forename"></param>
+        /// <param name="birthyear"></param>
+        /// <param name="street"></param>
+        /// <param name="mobilePhone"></param>
+        /// <param name="mail"></param>
+        /// <param name="fax"></param>
+        /// <param name="privatePhone"></param>
+        /// <param name="gender"></param>
+        /// <param name="isActive"></param>
+        /// <param name="title"></param>
+        /// <param name="city"></param>
+        /// <param name="citycode"></param>
+        /// <param name="iban"></param>
+        /// <param name="bic"></param>
+        /// <param name="depositor"></param>
+        /// <param name="nameOfBank"></param>
         public void changeProperties(int studentNr,string surname, string forename, string birthyear, string street,
             string mobilePhone, string mail, string fax, string privatePhone, string gender,
             bool? isActive, string title, string city, string citycode, string iban, string bic,
@@ -201,7 +235,7 @@ namespace CourseManagement.Client.BusinessLogic
         /// <summary>
         /// Get one student by id manage the remove from database of this student
         /// </summary>
-        /// <param name="courseNr"></param>
+        /// <param name="studentNr"></param>
         public override void delete(int studentNr)
         {
             try

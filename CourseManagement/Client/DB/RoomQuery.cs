@@ -80,7 +80,7 @@ namespace CourseManagement.Client.DB
         /// <summary>
         /// Returns the Room who is bound to the given ID.
         /// </summary>
-        /// <param name="studentId"></param>
+        /// <param name="roomId"></param>
         /// <returns>Student</returns>
         public static Room getById(int roomId)
         {

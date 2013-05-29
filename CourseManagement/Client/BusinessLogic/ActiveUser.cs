@@ -107,9 +107,9 @@ namespace CourseManagement.Client.BusinessLogic
 
         /// <summary>
         /// Check rules for a new password
-        /// length>=6, 
+        /// length>=6,
         /// </summary>
-        /// <param name="?"></param>
+        /// <param name="newPassword"></param>
         /// <returns></returns>
         public static bool possiblePassword(string newPassword)
         {

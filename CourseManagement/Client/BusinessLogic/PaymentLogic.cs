@@ -68,6 +68,12 @@ namespace CourseManagement.Client.BusinessLogic
             }
         }
 
+        /// <summary>
+        /// Required because of the abstract class but it is not
+        /// necessary to search for Payments because they are connected to a Person
+        /// </summary>
+        /// <param name="search"></param>
+        /// <returns></returns>
         public override System.Data.DataTable search(string search)
         {
             throw new NotImplementedException();
@@ -101,7 +107,7 @@ namespace CourseManagement.Client.BusinessLogic
         /// Method for specific PaymentRow-changes to the default Row-Method in LogicUtils
         /// </summary>
         /// <param name="table"></param>
-        /// <param name="entity"></param>
+        /// <param name="payment"></param>
         /// <returns></returns>
         private DataRow getNewRow(DataTable table, Payment payment)
         {
@@ -200,7 +206,7 @@ namespace CourseManagement.Client.BusinessLogic
         /// <summary>
         /// Return a DataTable containing all Payments of the submitted Course
         /// </summary>
-        /// <param name="roomNr"></param>
+        /// <param name="courseNr"></param>
         /// <returns></returns>
         public DataTable getByCourse(int courseNr)
         {
@@ -223,6 +229,7 @@ namespace CourseManagement.Client.BusinessLogic
         /// Set the payment payed/unpayed
         /// </summary>
         /// <param name="paymentId"></param>
+        /// <param name="isPayed"></param>
         public void changeProperties(int paymentId, bool? isPayed)
         {
             Payment.getById(paymentId).IsPaid = isPayed;
