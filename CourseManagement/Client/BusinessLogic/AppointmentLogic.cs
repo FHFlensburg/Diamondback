@@ -4,6 +4,10 @@ using System.Data;
 
 namespace CourseManagement.Client.BusinessLogic
 {
+    /// <summary>
+    /// Contains all logical operations of a Appointment
+    /// Implements some standard operations from the AbstractLogic
+    /// </summary>
     public class AppointmentLogic:AbstractLogic
     {
         private AppointmentLogic() { }
@@ -24,8 +28,11 @@ namespace CourseManagement.Client.BusinessLogic
         /// Creates a new Appointment by the given parameters.
         /// liability to submit all parameter
         /// </summary>
+        /// <param name="courseNr"></param>
+        /// <param name="roomNr"></param>
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
+        /// <returns></returns>
         public int? create(int courseNr, int roomNr, DateTime startDate, DateTime endDate)
         {
             try
@@ -64,11 +71,10 @@ namespace CourseManagement.Client.BusinessLogic
 
             return row;
         }
-
+        
         /// <summary>
         /// Method for specific AppointmentTable-changes to the default Table-Method in LogicUtils
         /// </summary>
-        /// <param name="table"></param>
         /// <returns></returns>
         private DataTable getNewDataTable()
         {
@@ -154,7 +160,7 @@ namespace CourseManagement.Client.BusinessLogic
         /// <summary>
         /// Get one appointment by id manage the remove from database of this appointment
         /// </summary>
-        /// <param name="courseNr"></param>
+        /// <param name="appointmentNr"></param>
         public override void delete(int appointmentNr)
         {
             try
@@ -170,7 +176,7 @@ namespace CourseManagement.Client.BusinessLogic
         /// <summary>
         /// Return a DataTable containing all Appointments of the submitted course
         /// </summary>
-        /// <param name="roomNr"></param>
+        /// <param name="courseNr"></param>
         /// <returns></returns>
         public DataTable getByCourse(int courseNr)
         {
@@ -214,7 +220,7 @@ namespace CourseManagement.Client.BusinessLogic
         /// <summary>
         /// Return a DataTable containing all Appointments of the submitted Tutor
         /// </summary>
-        /// <param name="roomNr"></param>
+        /// <param name="tutorNr"></param>
         /// <returns></returns>
         public DataTable getByTutor(int tutorNr)
         {
@@ -241,6 +247,8 @@ namespace CourseManagement.Client.BusinessLogic
         /// All Parameters have to be submitted.
         /// </summary>
         /// <param name="idToChange"></param>
+        /// <param name="courseNr"></param>
+        /// <param name="roomNr"></param>
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
         public void changeProperties(int idToChange,int courseNr, int roomNr, DateTime startDate, DateTime endDate)

@@ -4,6 +4,10 @@ using System.Data;
 
 namespace CourseManagement.Client.BusinessLogic
 {
+    /// <summary>
+    /// Contains all logical operations of a Room
+    /// Implements some standard operations from the AbstractLogic
+    /// </summary>
     public class RoomLogic:AbstractLogic
     {
         private RoomLogic() { }
@@ -224,7 +228,7 @@ namespace CourseManagement.Client.BusinessLogic
         /// <summary>
         /// Return a DataTable containing all Rooms of the submitted Student
         /// </summary>
-        /// <param name="tutorNr"></param>
+        /// <param name="studentNr"></param>
         /// <returns></returns>
         public DataTable getByStudent(int studentNr)
         {

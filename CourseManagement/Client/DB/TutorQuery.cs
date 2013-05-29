@@ -8,9 +8,11 @@ using System.Data;
 
 namespace CourseManagement.Client.DB
 {
+    /// <summary>
+    /// All Database Queries for the Entity Tutor
+    /// </summary>
     public static class TutorQuery
     {
- 
         /// <summary>
         /// Get all Users from database.
         /// </summary>

@@ -8,7 +8,11 @@ using System.Threading.Tasks;
 
 namespace CourseManagement.Client.BusinessLogic
 {
-    public class TutorLogic : AbstractLogic
+    /// <summary>
+    /// Contains all logical operations of a Tutor
+    /// Implements some standard operations from the AbstractLogic
+    /// </summary>
+    public class TutorLogic:AbstractLogic
     {
         private TutorLogic() { }
 

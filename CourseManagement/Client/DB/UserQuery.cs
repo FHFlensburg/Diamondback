@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace CourseManagement.Client.DB
 {
+    /// <summary>
+    /// All Database Queries for the Entity User
+    /// </summary>
     public static class UserQuery
     {
         /// <summary>

@@ -11,7 +11,7 @@ using System.Data;
 namespace CourseManagement.Client.DB
 {
     /// <summary>
-    /// All database activities for Students.
+    /// All Database Queries for the Entity Student
     /// </summary>
     public static class StudentQuery
     {

@@ -5,6 +5,9 @@ using System.Reflection;
 
 namespace CourseManagement.Client.BusinessLogic
 {
+    /// <summary>
+    /// Some Utilities for the Logical Operations
+    /// </summary>
     public static class LogicUtils
     {
 

@@ -4,7 +4,10 @@ using System.Data;
 
 namespace CourseManagement.Client.BusinessLogic
 {
-
+    /// <summary>
+    /// Contains all logical operations of a Student
+    /// Implements some standard operations from the AbstractLogic
+    /// </summary>
     public class StudentLogic:AbstractLogic
     {
         private StudentLogic() { }

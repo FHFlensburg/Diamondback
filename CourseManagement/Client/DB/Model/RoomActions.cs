@@ -11,6 +11,9 @@ namespace CourseManagement.Client.DB.Model
     /// </summary>
     public partial class Room
     {
+        /// <summary>
+        /// Calls the Database Query for inserting a Room
+        /// </summary>
         public void addToDB()
         {
             try
@@ -23,6 +26,10 @@ namespace CourseManagement.Client.DB.Model
             }
         }
 
+        /// <summary>
+        /// Calls the Database Query to get all Rooms
+        /// </summary>
+        /// <returns>A List of all Rooms</returns>
         public static List<Room> getAll()
         {
             try
@@ -35,6 +42,9 @@ namespace CourseManagement.Client.DB.Model
             }
         }
 
+        /// <summary>
+        /// Calls the Database Query witch deletes a Room
+        /// </summary>
         public void delete()
         {
             try
@@ -47,6 +57,9 @@ namespace CourseManagement.Client.DB.Model
             }
         }
 
+        /// <summary>
+        /// Calls the Database Query witch updates a Room
+        /// </summary>
         public void update()
         {
             try
@@ -59,6 +72,11 @@ namespace CourseManagement.Client.DB.Model
             }
         }
 
+        /// <summary>
+        /// Calls the Database Query witch get one Room by Id
+        /// </summary>
+        /// <param name="roomId"></param>
+        /// <returns>Room</returns>
         public static Room getById(int roomId)
         {
             try

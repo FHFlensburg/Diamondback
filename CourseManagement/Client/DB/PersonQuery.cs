@@ -9,6 +9,9 @@ using System.Data;
 
 namespace CourseManagement.Client.DB
 {
+    /// <summary>
+    /// All Database Queries for the Entity Person
+    /// </summary>
     public static class PersonQuery
     {
         /// <summary>
