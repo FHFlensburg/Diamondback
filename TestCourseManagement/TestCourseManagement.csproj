@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="TestActiveUser.cs" />
     <Compile Include="TestAppointmentLogic.cs" />
+    <Compile Include="TestCourseLogic.cs" />
     <Compile Include="TestPaymentLogic.cs" />
     <Compile Include="UnitHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

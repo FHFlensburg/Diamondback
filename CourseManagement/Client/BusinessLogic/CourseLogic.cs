@@ -57,7 +57,7 @@ namespace CourseManagement.Client.BusinessLogic
         /// <param name="maxMember"></param>
         /// <param name="minMember"></param>
         /// <param name="validityInMonth"></param>
-        public int create(String title, decimal? amountInEuro, String description, int? maxMember, int? minMember, int? tutorNr,
+        public int create(String title, decimal? amountInEuro, String description, int? maxMember, int? minMember, int tutorNr,
                                          int? validityInMonth)
         {
             try
@@ -72,10 +72,7 @@ namespace CourseManagement.Client.BusinessLogic
                 {
                     course.MaxMember = course.MinMember = null;
                 }
-                if (tutorNr.HasValue)
-                {
-                    course.Tutor = Tutor.getById(tutorNr.Value);
-                }
+                course.Tutor = Tutor.getById(tutorNr);
                 course.ValidityInMonth = validityInMonth;
                 course.addToDB();
                 return course.CourseNr;
