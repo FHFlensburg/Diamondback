@@ -68,6 +68,7 @@ namespace CourseManagement.Client.BusinessLogic
                 {
                     currentUser.Password = newPassword;
                     changed = true;
+                    currentUser.update();
                 }
                 return changed;
             }
@@ -112,7 +113,7 @@ namespace CourseManagement.Client.BusinessLogic
         /// <returns></returns>
         public static bool possiblePassword(string newPassword)
         {
-            return newPassword.Length >= 6;
+            return newPassword.Length >= 5;
         }
 
     }

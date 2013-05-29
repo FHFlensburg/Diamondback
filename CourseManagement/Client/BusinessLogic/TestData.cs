@@ -57,6 +57,7 @@ namespace CourseManagement.Client.BusinessLogic
             }
 
             new User() { UserName = "admin", Password = "admin", Active = true, Admin = true }.addToDB();
+            new User() { UserName = "user", Password = "user", Active = true, Admin = false }.addToDB();
 
         }
     }

@@ -278,9 +278,9 @@ namespace CourseManagement.Client.BusinessLogic
                 foreach (Appointment appointment in Room.getById(roomNr).Appointments)
                 {
                     if ((startDate > endDate) ||
-                        (startDate > appointment.StartDate && startDate < appointment.EndDate) ||
-                        (endDate > appointment.StartDate && endDate < appointment.EndDate) ||
-                        (startDate < appointment.StartDate && endDate > appointment.EndDate))
+                        (startDate >= appointment.StartDate && startDate < appointment.EndDate) ||
+                        (endDate >= appointment.StartDate && endDate <= appointment.EndDate) ||
+                        (startDate <= appointment.StartDate && endDate >= appointment.EndDate))
                     {
                         possible = false;
                     }
@@ -293,9 +293,9 @@ namespace CourseManagement.Client.BusinessLogic
                         foreach (Appointment appointment in course.Appointments)
                         {
                             if ((startDate > endDate) ||
-                                (startDate > appointment.StartDate && startDate < appointment.EndDate) ||
-                                (endDate > appointment.StartDate && endDate < appointment.EndDate) ||
-                                (startDate < appointment.StartDate && endDate > appointment.EndDate))
+                                (startDate >= appointment.StartDate && startDate < appointment.EndDate) ||
+                                (endDate >= appointment.StartDate && endDate <= appointment.EndDate) ||
+                                (startDate <= appointment.StartDate && endDate >= appointment.EndDate))
                             {
                                 possible = false;
                             }
