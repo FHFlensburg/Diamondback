@@ -1,58 +1,48 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CourseManagement.Client.BusinessLogic;
 using CourseManagement.Client.DB;
+using CourseManagement.Client.BusinessLogic;
 using CourseManagement.Client.DB.Model;
-using System.Data;
 
 namespace TestCourseManagement
 {
     [TestClass]
-    public class TestAppointmentLogic
+    public class TestCourseLogic
     {
-        DateTime anfang = new DateTime(1998, 1, 1, 1, 1, 1);
-        DateTime ende = new DateTime(1998, 2, 2, 2, 2, 2);
-        
-
         [TestMethod]
         public void TestCreate()
         {
             DBConfiguration.getContext(UnitHelper.getUnitConnectionString());
             ActiveUser.login("admin", "admin");
-            AppointmentLogic logic = AppointmentLogic.getInstance();
-            int roomNr = Room.getAll()[0].RoomNr;
-            int courseNr = Course.getAll()[0].CourseNr;
-            int? test = logic.create(courseNr, roomNr, anfang, ende);
+            CourseLogic logic = CourseLogic.getInstance();
+            int id = Tutor.getAll()[0].Id;
+            int? test = logic.create("abc", Convert.ToDecimal(12.12), "abc", 12, 5, id, 24);
             Assert.IsNotNull(test);
-            int? test2 = logic.create(courseNr, roomNr, anfang, ende);
-            Assert.IsNull(test2);
             logic.delete(test.Value);
 
             ActiveUser.logout();
-
         }
 
-        [TestMethod]
+        /*[TestMethod]
         public void TestChangeProperties()
         {
             DBConfiguration.getContext(UnitHelper.getUnitConnectionString());
             ActiveUser.login("admin", "admin");
-            int id = Appointment.getAll()[0].Id;
-            Appointment app = Appointment.getById(id);
-            DateTime startDate = app.StartDate;
-            DateTime endDate = app.EndDate;
-            AppointmentLogic.getInstance().changeProperties(id, app.Course.CourseNr, app.Room.RoomNr, anfang, ende);
-            app = Appointment.getById(id);
-            Assert.AreEqual(ende, app.EndDate);
-            Assert.AreEqual(anfang, app.StartDate);
-            AppointmentLogic.getInstance().changeProperties(id, app.Course.CourseNr, app.Room.RoomNr, startDate, endDate);
-            app = Appointment.getById(id);
-            Assert.AreEqual(endDate, app.EndDate);
-            Assert.AreEqual(startDate, app.StartDate);
+            int id = Course.getAll()[0].Id;
+            Course course = Course.getById(id);
+            
+            CourseLogic.getInstance().changeProperties(id, course.Course.CourseNr, course.Room.RoomNr, anfang, ende);
+            course = Appointment.getById(id);
+            Assert.AreEqual(ende, course.EndDate);
+            Assert.AreEqual(anfang, course.StartDate);
+            CourseLogic.getInstance().changeProperties(id, course.Course.CourseNr, course.Room.RoomNr, startDate, endDate);
+            course = Appointment.getById(id);
+            Assert.AreEqual(endDate, course.EndDate);
+            Assert.AreEqual(startDate, course.StartDate);
             ActiveUser.logout();
         }
 
-        [TestMethod]
+        /*[TestMethod]
         public void TestDelete()
         {
             DBConfiguration.getContext(UnitHelper.getUnitConnectionString());
@@ -79,7 +69,6 @@ namespace TestCourseManagement
             Assert.AreEqual(dataTbl.Columns.Count, 5);
             Assert.AreEqual(dataTbl.Rows.Count, 0);
             ActiveUser.logout();
-        }
-
+        }*/
     }
 }
