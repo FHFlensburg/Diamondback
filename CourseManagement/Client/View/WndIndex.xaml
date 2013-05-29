@@ -90,22 +90,22 @@
             <StackPanel Orientation="Horizontal">
                 <StackPanel Margin="5">
                     <Label Width="130" Content="Kurs" />
-                    <ComboBox x:Name="cbxAppointmentCourse" Width="120" SelectionChanged="cbxAppointmentCourse_SelectionChanged" />
+                    <ComboBox x:Name="cbxAppointmentCourse" Width="120"/>
                 </StackPanel>
                 <StackPanel Margin="5">
                     <Label Width="130" Content="Beginn"/>
-                    <DatePicker/>
+                    <DatePicker x:Name="dpBeginOfCourse"/>
                 </StackPanel>
                 <StackPanel Margin="5">
                     <Label Width="130" Content="Ende"/>
-                    <DatePicker />
+                    <DatePicker x:Name="dpEndOfAppointCourse"/>
                 </StackPanel>
                 <StackPanel Margin="5">
                     <Label Width="130" Content="Raum-NR" />
-                        <ComboBox x:Name="cbxAppointmentRoomNumber" Width="120" SelectionChanged="cbxAppointmentRoomNumber_SelectionChanged" />
+                        <ComboBox x:Name="cbxAppointmentRoomNumber" Width="120" />
                     </StackPanel>
                 <StackPanel VerticalAlignment="Bottom" Margin="5">
-                    <Button x:Name="btnAddAppointment" Content="Hinzufügen" Width="130"/>
+                    <Button x:Name="btnAddAppointment" Content="Hinzufügen" Width="130" Click="ButtonAddAppointment_Click"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

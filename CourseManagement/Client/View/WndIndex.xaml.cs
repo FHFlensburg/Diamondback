@@ -199,11 +199,11 @@ namespace CourseManagement.Client.View
             {
                 
                 DataTable temp = CourseLogic.getInstance().getAll();
-                string i = temp.Rows[dgCourse.SelectedIndex][0].ToString();
-                int bla = int.Parse(i);
+                string selectedIndex = temp.Rows[dgCourse.SelectedIndex][0].ToString();
+                int tmp = int.Parse(selectedIndex);
                 try
                 {
-                    CourseLogic.getInstance().delete(bla);
+                    CourseLogic.getInstance().delete(tmp);
                 }
                 catch
                 {
@@ -215,15 +215,23 @@ namespace CourseManagement.Client.View
             }
         }
 
-        private void cbxAppointmentRoomNumber_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ButtonAddAppointment_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: Jan, warum steht die Methode im XAML? Lösche Sie... Sie bringt nichts!
+            if (this.cbxAppointmentCourse.SelectedItem != null && this.cbxAppointmentRoomNumber.SelectedItem != null)
+            {
+                if (this.dpBeginOfCourse.SelectedDate != null)
+                {
+                    MessageBox.Show("Success");
+                }
+                else
+                {
+                    MessageBox.Show("Failure");
+                }
+            }
+            else
+            {
+                
+            }
         }
-
-        private void cbxAppointmentCourse_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //TODO: Jan, warum steht die Methode im XAML? Lösche Sie... Sie bringt nichts!
-        }
-
     }
 }
