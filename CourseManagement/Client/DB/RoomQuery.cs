@@ -8,7 +8,10 @@ using System.Threading.Tasks;
 
 namespace CourseManagement.Client.DB
 {
-    class RoomQuery
+    /// <summary>
+    /// All Database Queries for the Entity Room
+    /// </summary>
+    public static class RoomQuery
     {
         /// <summary>
         /// Get all Rooms from database.

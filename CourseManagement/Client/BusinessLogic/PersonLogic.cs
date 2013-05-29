@@ -9,6 +9,10 @@ using System.Reflection;
 
 namespace CourseManagement.Client.BusinessLogic
 {
+    /// <summary>
+    /// Contains all logical operations of a Person
+    /// Implements some standard operations from the AbstractLogic
+    /// </summary>
     public class PersonLogic:AbstractLogic
     {
         private PersonLogic() { }

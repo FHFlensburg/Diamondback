@@ -8,6 +8,9 @@ using System.Data;
 
 namespace CourseManagement.Client.DB
 {
+    /// <summary>
+    /// All Database Queries for the Entity Course
+    /// </summary>
     public static class CourseQuery
     {
  

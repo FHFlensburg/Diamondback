@@ -243,7 +243,7 @@ namespace CourseManagement.Client.BusinessLogic
         /// <summary>
         /// Return a DataTable containing all Courses of the submitted Tutor
         /// </summary>
-        /// <param name="roomNr"></param>
+        /// <param name="tutorNr"></param>
         /// <returns></returns>
         public DataTable getByTutor(int tutorNr)
         {

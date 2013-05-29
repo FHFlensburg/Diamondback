@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace CourseManagement.Client.DB
 {
+    /// <summary>
+    /// All Database Queries for the Entity Payment
+    /// </summary>
     public static class PaymentQuery
     {
         /// <summary>

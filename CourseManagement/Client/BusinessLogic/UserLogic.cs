@@ -8,7 +8,11 @@ using System.Threading.Tasks;
 
 namespace CourseManagement.Client.BusinessLogic
 {
-    public class UserLogic : AbstractLogic
+    /// <summary>
+    /// Contains all logical operations of a User
+    /// Implements some standard operations from the AbstractLogic
+    /// </summary>
+    public class UserLogic:AbstractLogic
     {
         private UserLogic() { }
 
@@ -213,7 +217,7 @@ namespace CourseManagement.Client.BusinessLogic
         /// <summary>
         /// Get one user by id manage the remove from database of this user
         /// </summary>
-        /// <param name="courseNr"></param>
+        /// <param name="userNr"></param>
         public override void delete(int userNr)
         {
             try
@@ -226,6 +230,12 @@ namespace CourseManagement.Client.BusinessLogic
             }  
         }
 
+        /// <summary>
+        /// Validates the user name
+        /// When a user name is called from Database
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
         public bool isPossibleNewUserName(string userName)
         {
             try

@@ -7,8 +7,14 @@ using CourseManagement.Client.DB.Model;
 
 namespace CourseManagement.Client.BusinessLogic
 {
+    /// <summary>
+    /// Class to create Test Data
+    /// </summary>
     public static class  TestData
     {
+        /// <summary>
+        /// Generates some Data for Testing
+        /// </summary>
         public static void generateTestData()
         {
             

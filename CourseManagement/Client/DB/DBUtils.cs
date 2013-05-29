@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace CourseManagement.Client.DB
 {
+    /// <summary>
+    /// Utilities for all Database Queries
+    /// </summary>
     public static class DBUtils
     {
         /// <summary>

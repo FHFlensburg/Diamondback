@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 namespace CourseManagement.Client.BusinessLogic
 {
+    /// <summary>
+    /// Contains all logical operations of a Payment
+    /// Implements some standard operations from the AbstractLogic
+    /// </summary>
     public class PaymentLogic:AbstractLogic
     {
         private PaymentLogic() { }
