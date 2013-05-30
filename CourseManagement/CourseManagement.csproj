@@ -247,12 +247,6 @@
     <Resource Include="Client\View\Images\todo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="GitHub\270320131730.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="GitHub\170420132231.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Client\View\Images\addParticipant.ico" />
     <Resource Include="Client\View\Images\addRoom.ico" />
     <Resource Include="Client\View\Images\booking.ico" />

@@ -61,8 +61,9 @@ namespace CourseManagement.Client.View
             // Tutors
             for (int i = 0; i < countTutors; i++)
             {
+                //TODO: Man sieht nur die ID, Zugehörigkeit ist schwer.
                 temporaryTutor = string.Empty;
-                temporaryTutor = tutors.Rows[i]["Surname"].ToString();
+                temporaryTutor = tutors.Rows[i]["Id"].ToString();
                 cbTutor.Items.Add(temporaryTutor);
             }
 
@@ -84,17 +85,38 @@ namespace CourseManagement.Client.View
 
         private void insertNewCourseAndValidate()
         {
-            string title = tbCourseTitle.Text;
+
+            try
+            {
+            string titeL = tbCourseTitle.Text;
             string description = tbDescription.Text;
             string costs = tbCosts.Text;
-            string validInMonths = tbValidInMonth.Text;
-            string maxParticipants = cbMaxParticipants.Text;
-            string minParticipants = cbMinParticipants.Text;
-            string tutor = cbTutor.Text;
-            string room = cbRoomNumber.Text;
-            CourseLogic course = CourseLogic.getInstance();
-            //course.create();
-            
+            int validInMonths = Convert.ToInt16(tbValidInMonth.Text);
+            int maxParticipants = Convert.ToInt16(cbMaxParticipants.Text);
+            int minParticipants = Convert.ToInt16(cbMinParticipants.Text);
+            int tutor = Convert.ToInt16(cbTutor.Text);
+        //    int room = Convert.ToInt16(cbRoomNumber.Text);
+            try
+            {
+             CourseLogic course = CourseLogic.getInstance();
+                //GUI = ROOM, DB = VALIDITYinMONTHS
+             course.create(titeL, null, description, maxParticipants, minParticipants, tutor, validInMonths);
+            }
+               catch (Exception err)
+               {
+                  MessageBox.Show("Fehler in der Datenbank. Wenden Sie sich bitte an den Administrator\n" +err.ToString());
+               }
+
+            }
+            catch (OverflowException)
+            {
+                MessageBox.Show("Konvertierte Zahl ist außerhalb der Gültigkeit");
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Konvertierte Zahl hat das falsche Format");
+            }
+
         }     
     }
 }
