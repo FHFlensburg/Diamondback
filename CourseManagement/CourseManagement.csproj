@@ -260,9 +260,6 @@
     <Resource Include="Client\View\Images\help.ico" />
     <Resource Include="Client\View\Images\new.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Client\View\Images\logoPlatzhalter.png" />
-  </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -281,6 +278,7 @@
     <Content Include="Client\DB\Scripte\DiamondbackModel130430-2.edmx.sql" />
     <Content Include="Client\DB\Scripte\DiamondbackModel130430-1.edmx.sql" />
     <Content Include="Client\DB\Scripte\DiamondbackModel130503-1.edmx.sql" />
+    <Resource Include="Client\View\Images\logo.png" />
     <Resource Include="Client\View\Images\change.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

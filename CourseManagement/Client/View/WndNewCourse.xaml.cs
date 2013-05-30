@@ -23,16 +23,21 @@ namespace CourseManagement.Client.View
     public partial class WndNewCourse : Window
     {
 
-        /*
-         * http://dotnet-forum.de/blogs/larsschmitt/archive/2009/11/04/einfache-input-validation-mit-wpf.aspx
-         */
-        private string title, description = string.Empty;
-        private int maxMember, minMember, tutorNr, validityInMonth = 0;
-        private decimal amountInEuro = 0m;
-
         public WndNewCourse()
         {
             InitializeComponent();
+            setGuiValues();
+        }
+
+        private void setGuiValues()
+        {
+//            cboxitem = new ComboBoxItem();
+//cboxitem.Content = "Created with C#";
+//cbox.Items.Add(cboxitem);
+            cbMaxParticipants.Background = Brushes.LightBlue;
+            ComboBoxItem foo = new ComboBoxItem();
+            foo.Content = 1;
+            cbMaxParticipants.Items.Add(foo);
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -44,7 +49,13 @@ namespace CourseManagement.Client.View
 
         private void insertNewCourseAndValidate()
         {
-            this.title = tbCourseTitle.Text.ToString();
+            string title = tbCourseTitle.Text;
+            string description = tbDescription.Text;
+            string costs = tbCosts.Text;
+            string validInMonths = tbValidInMonth.Text;
+            string maxParticipants = cbMaxParticipants.Text;
+            MessageBox.Show(maxParticipants);
+            
         }     
     }
 }

@@ -5,16 +5,16 @@
     <Grid>
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Orientation="Horizontal" Margin="30">
             <StackPanel  Margin="10" Width="100">
-                <Label x:Name="lblUser" Content="Benutzername" Foreground="White"/>
+                <Label x:Name="lblUser" Content="Benutzername" Foreground="White" Opacity="0.5"/>
                 <TextBox x:Name="tbUsername" Margin="2" />
             </StackPanel>
             <StackPanel Margin="10" Width="100">
-                <Label x:Name="lblPassword" Content="Passwort" Background="#FF2D2D30" Foreground="White"  />
+                <Label x:Name="lblPassword" Content="Passwort" Background="#FF2D2D30" Foreground="White" Opacity="0.5"  />
                 <PasswordBox x:Name="pwbPassword" Margin="2"/>
                 <Button x:Name="btnLogin" Content="Login" Click="btnLogin_Click" Margin="10" IsDefault="True"/>
             </StackPanel>
         </StackPanel>
-        <Image x:Name="imgLogo" HorizontalAlignment="Left" Height="100" Margin="56,41,0,0" VerticalAlignment="Top" Width="195" Source="Images/logoPlatzhalter.png" Opacity="0.2"/>
+        <Image x:Name="imgLogo"  Margin="22,48,22,0" VerticalAlignment="Top" Width="250" Source="Images/logo.png" Opacity="0.9" Height="172"/>
         <StatusBar HorizontalAlignment="Left" Height="30" Margin="10" VerticalAlignment="Bottom" Width="274" Background="#FF2D2D30" Foreground="White">
             <TextBox x:Name="tbVersion" Text="Ver. 1.0" Foreground="White" Background="#FF2D2D30" BorderThickness="0"/>
             <Separator/>

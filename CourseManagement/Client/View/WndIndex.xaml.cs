@@ -29,8 +29,7 @@ namespace CourseManagement.Client.View
         
         public WndIndex()
         {
-            dgCourse.ColumnFromDisplayIndex(5);
-            InitializeComponent();
+           InitializeComponent();
         }
 
         private void mainWindow_IsLoaded(object sender, System.EventArgs e)
@@ -302,6 +301,7 @@ namespace CourseManagement.Client.View
             if (this.cbxAppointmentRoomNumber.SelectedItem != null)
             {
                 DataTable chosenRoom = RoomLogic.getInstance().search(cbxAppointmentRoomNumber.SelectedItem.ToString());
+                //TODO: Array durch String ersetzen
                 chosenRoomNr = Int32.Parse(chosenRoom.Rows[0][0].ToString());
                 lblRoomNrNotFilled.Visibility = Visibility.Hidden;
             }

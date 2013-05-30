@@ -8,8 +8,8 @@
             <StackPanel Margin="10">
                 <Label x:Name="lblTitle" Content="Titel" />
                 <TextBox x:Name="tbCourseTitle"  Width="120" HorizontalAlignment="Left"/>
-                <Label x:Name="lblBeschreibung" Content="Beschreibung" />
-                <TextBox x:Name="dpStartDate" Width="120" HorizontalAlignment="Left" />
+                <Label x:Name="lblDescription" Content="Beschreibung" />
+                <TextBox x:Name="tbDescription" Width="120" HorizontalAlignment="Left" />
                 <Label x:Name="lblMaxParticipants" Content="Teilnehmer MAX" />
                 <ComboBox x:Name="cbMaxParticipants" Width="120" HorizontalAlignment="Left"/>
                 <Label x:Name="lblTutor" Content="Tutor" />
