@@ -5,6 +5,7 @@ using Microsoft.Windows.Controls.Ribbon;
 using System.Data;
 using CourseManagement.Client.BusinessLogic;
 using System.Collections.Generic;
+using System;
 
 
 namespace CourseManagement.Client.View
@@ -19,6 +20,13 @@ namespace CourseManagement.Client.View
         {
             
             InitializeComponent();
+        }
+
+        private void mainWindow_IsLoaded(object sender, System.EventArgs e)
+        {
+            refreshDataGrids(this);
+            fillComboBoxCourse();
+            fillComboBoxRoomNumber();
         }
 
         private void Ribbon_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -45,14 +53,12 @@ namespace CourseManagement.Client.View
             aNewRoom.ShowDialog();
         }
 
+        /// <summary>
+        /// Manages which of the DataTables are shown in the datagrid of the view
+        /// </summary>
+        /// <param name="mainWindow"></param>
         private void refreshDataGrids(WndIndex mainWindow)
         {
-            /// <summary>
-            /// Manages which of the DataTables are shown in the datagrid of the view
-            /// 
-            /// </summary>
-            /// <returns></returns>
-            /// 
             DataTable dt4Grid = null;
             if (mainWindow.IsLoaded)
             {
@@ -63,6 +69,7 @@ namespace CourseManagement.Client.View
                         case 0:
                             dt4Grid = CourseLogic.getInstance().getAll();
                             mainWindow.dgCourse.DataContext = dt4Grid;
+                            changeColumnHeaderCourse();
                             break;
                         case 1:
                             dt4Grid = StudentLogic.getInstance().getAll();
@@ -80,6 +87,10 @@ namespace CourseManagement.Client.View
                     DataTable temp = null;
                     temp = AppointmentLogic.getInstance().getAll();
                     this.dgAppointments.DataContext = temp;
+                    dgAppointments.Columns[1].Header = "Kurs";
+                    dgAppointments.Columns[2].Header = "Startdatum";
+                    dgAppointments.Columns[3].Header = "Enddatum";
+                    dgAppointments.Columns[4].Header = "Raum";
                 }
                 catch (System.Exception err)
                 {
@@ -87,6 +98,24 @@ namespace CourseManagement.Client.View
                 }
             }
         }
+
+        private void changeColumnHeaderCourse()
+        {
+            //ToDo ... opporunity to optimize? own method? 
+            //changing column title from the ones the Databases delievers
+            dgCourse.Columns[0].Header = "Kurs-Nr";
+            dgCourse.Columns[1].Header = "Kurs Titel";
+            dgCourse.Columns[2].Header = "Betrag in €";
+            dgCourse.Columns[3].Header = "Beschreibung";
+            dgCourse.Columns[4].Header = "Max Teilnahmer";
+            dgCourse.Columns[5].Header = "Min Teilnahmer";
+            dgCourse.Columns[6].Header = "Tutor";
+            dgCourse.Columns[7].Header = "Gültigkeit in Monate";
+            dgCourse.Columns[8].Header = "Bezahlungen";
+            dgCourse.Columns[9].Header = "Buchungen";
+        }
+
+
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
             OpenWindow2AddParticpant(sender);
@@ -132,13 +161,7 @@ namespace CourseManagement.Client.View
             
         }
 
-        private void mainWindow_IsLoaded(object sender, System.EventArgs e)
-        {
-            refreshDataGrids(this);
-            fillComboBoxCourse();
-            fillComboBoxRoomNumber();
-           
-        }
+      
 
         private void fillComboBoxRoomNumber()
         {
@@ -215,22 +238,82 @@ namespace CourseManagement.Client.View
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonAddAppointment_Click(object sender, RoutedEventArgs e)
         {
-            if (this.cbxAppointmentCourse.SelectedItem != null && this.cbxAppointmentRoomNumber.SelectedItem != null)
+            //getting CourseNumber from Selection
+            if (this.cbxAppointmentCourse.SelectedItem != null)
             {
-                if (this.dpBeginOfCourse.SelectedDate != null)
-                {
-                    MessageBox.Show("Success");
-                }
-                else
-                {
-                    MessageBox.Show("Failure");
-                }
+                //Following does return an empty DataTable which then will cause a exception. 
+                //ToDo Research why the search method does not work properly
+                DataTable choosenCourse = AppointmentLogic.getInstance().search(cbxAppointmentCourse.SelectedItem.ToString());
+                int courseNumber = Int32.Parse(choosenCourse.Rows[1]["courseNr"].ToString());
+                lblCourseNotFilled.Visibility = Visibility.Hidden;
             }
             else
             {
-                
+                this.lblCourseNotFilled.Visibility = Visibility.Visible;
+            }
+
+
+            //getting begin of appointment from selection
+            if (this.dpBeginOfCourse.SelectedDate != null)
+            {
+                DateTime choosenStartDate = (DateTime)dpBeginOfCourse.SelectedDate;
+                lblBeginnDateNotFilled.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                lblBeginnDateNotFilled.Visibility = Visibility.Visible;
+            }
+
+
+            //getting end of Appointment from selection
+            if (this.dpEndOfAppointCourse.SelectedDate != null)
+            {
+                DateTime choosenEndDate = (DateTime)dpEndOfAppointCourse.SelectedDate;
+                lblEndDateNotFilled.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                lblEndDateNotFilled.Visibility = Visibility.Visible;
+            }
+
+            //getting room number for appointment from selection
+            if (this.cbxAppointmentRoomNumber.SelectedItem != null)
+            {
+                DataTable choosenRoom = AppointmentLogic.getInstance().search(cbxAppointmentRoomNumber.SelectedItem.ToString());
+                int choosenRoomNr = Int32.Parse(choosenRoom.Rows[0]["roomNr"].ToString());
+                lblRoomNrNotFilled.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                lblRoomNrNotFilled.Visibility = Visibility.Visible;
+            }
+
+
+            if(dpBeginOfCourse.SelectedDate != null 
+                && dpEndOfAppointCourse.SelectedDate != null 
+                && cbxAppointmentCourse.SelectedItem != null 
+                && cbxAppointmentRoomNumber.SelectedItem != null 
+                && (DateTime)dpBeginOfCourse.SelectedDate < (DateTime)dpEndOfAppointCourse.SelectedDate)
+            {
+                //if(AppointmentLogic.getInstance().isPossibleNewAppointment(courseNumber,choosenStartDate, choosenEndDate,choosenRoomNr)
+                //{
+                //AppointmentLogic.getInstance().create(courseNumber, choosenStartDate, choosenEndDate, ChoosenRoomNr);
+                //}
+
+                refreshDataGrids(this);
+
+                //hiding the error labels again
+                this.lblCourseNotFilled.Visibility = Visibility.Hidden;
+                lblBeginnDateNotFilled.Visibility = Visibility.Hidden;
+                lblEndDateNotFilled.Visibility = Visibility.Hidden;
+                lblRoomNrNotFilled.Visibility = Visibility.Hidden;
             }
         }
     }

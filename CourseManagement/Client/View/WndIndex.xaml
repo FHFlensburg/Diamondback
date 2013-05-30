@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:r="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
-        Height="900" Width="900" Activated="mainWindow_IsLoaded">
+        Height="700" Width="900" Activated="mainWindow_IsLoaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -86,25 +86,29 @@
         </StackPanel>
         <StackPanel Grid.Row="3" VerticalAlignment="Bottom" >
             <Label Content="Buchungen" FontWeight="Bold"/>
-            <DataGrid x:Name="dgAppointments" Margin="10" ItemsSource="{Binding}"/>
-            <StackPanel Orientation="Horizontal">
+            <DataGrid x:Name="dgAppointments" Margin="10" ItemsSource="{Binding}" IsReadOnly="True"  />
+            <StackPanel Orientation="Horizontal" x:Name="spAppointments">
                 <StackPanel Margin="5">
                     <Label Width="130" Content="Kurs" />
                     <ComboBox x:Name="cbxAppointmentCourse" Width="120"/>
-                </StackPanel>
+                        <Label Content="Bitte ausfüllen" x:Name="lblCourseNotFilled" Visibility="Hidden"  Foreground="Red"/>
+                    </StackPanel>
                 <StackPanel Margin="5">
                     <Label Width="130" Content="Beginn"/>
                     <DatePicker x:Name="dpBeginOfCourse"/>
-                </StackPanel>
+                        <Label Content="Bitte ausfüllen" x:Name="lblBeginnDateNotFilled" Visibility="Hidden"  Foreground="Red"/>
+                    </StackPanel>
                 <StackPanel Margin="5">
                     <Label Width="130" Content="Ende"/>
                     <DatePicker x:Name="dpEndOfAppointCourse"/>
-                </StackPanel>
+                        <Label Content="Bitte ausfüllen" x:Name="lblEndDateNotFilled" Visibility="Hidden"  Foreground="Red"/>
+                    </StackPanel>
                 <StackPanel Margin="5">
                     <Label Width="130" Content="Raum-NR" />
                         <ComboBox x:Name="cbxAppointmentRoomNumber" Width="120" />
+                        <Label Content="Bitte ausfüllen" x:Name="lblRoomNrNotFilled" Visibility="Hidden"  Foreground="Red"/>
                     </StackPanel>
-                <StackPanel VerticalAlignment="Bottom" Margin="5">
+                <StackPanel VerticalAlignment="Center" Margin="5">
                     <Button x:Name="btnAddAppointment" Content="Hinzufügen" Width="130" Click="ButtonAddAppointment_Click"/>
                 </StackPanel>
             </StackPanel>
