@@ -20,8 +20,8 @@ namespace CourseManagement.Client.Controller
                 mainWindow.Show();
             }
 
-            Form1 form1 = new Form1();
-            form1.ShowDialog();
+            //Form1 form1 = new Form1();
+            //form1.ShowDialog();
         }
 
         

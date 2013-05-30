@@ -15,10 +15,21 @@ namespace CourseManagement.Client.View
     /// </summary>
     public partial class WndIndex : RibbonWindow
     {
+
+        static string[] columnHeaderTitles = new string[]
+            {
+                "Kurs-Nr","Kurs Titel", "Betrag in €", "Beschreibung", "Max Teilnahmer", "Min Teilnahmer", "Tutor", "Gültigkeit in Monate", "Bezahlungen", "Buchungen"
+            };
+        
+        static string[] personHeaderTitles = new string[]
+        {
+
+        };
+
         
         public WndIndex()
         {
-            
+            dgCourse.ColumnFromDisplayIndex(5);
             InitializeComponent();
         }
 
@@ -69,7 +80,7 @@ namespace CourseManagement.Client.View
                         case 0:
                             dt4Grid = CourseLogic.getInstance().getAll();
                             mainWindow.dgCourse.DataContext = dt4Grid;
-                            changeColumnHeaderCourse();
+                            changeColumnTitleCourse();
                             break;
                         case 1:
                             dt4Grid = StudentLogic.getInstance().getAll();
@@ -99,20 +110,21 @@ namespace CourseManagement.Client.View
             }
         }
 
-        private void changeColumnHeaderCourse()
+        
+        /// <summary>
+        /// Like this for every Header 
+        ///ToDo How to change oder of columns 
+        ///
+        /// </summary>
+        private void changeColumnTitleCourse()
         {
-            //ToDo ... opporunity to optimize? own method? 
-            //changing column title from the ones the Databases delievers
-            dgCourse.Columns[0].Header = "Kurs-Nr";
-            dgCourse.Columns[1].Header = "Kurs Titel";
-            dgCourse.Columns[2].Header = "Betrag in €";
-            dgCourse.Columns[3].Header = "Beschreibung";
-            dgCourse.Columns[4].Header = "Max Teilnahmer";
-            dgCourse.Columns[5].Header = "Min Teilnahmer";
-            dgCourse.Columns[6].Header = "Tutor";
-            dgCourse.Columns[7].Header = "Gültigkeit in Monate";
-            dgCourse.Columns[8].Header = "Bezahlungen";
-            dgCourse.Columns[9].Header = "Buchungen";
+            if(dgCourse.Columns.Count == columnHeaderTitles.Length)
+            {
+                for(int i = 0; i < columnHeaderTitles.Length; i++)
+                {
+                dgCourse.Columns[i].Header = columnHeaderTitles[i];
+                }
+            }
         }
 
 
@@ -172,14 +184,14 @@ namespace CourseManagement.Client.View
             try
             {
                 DataTable courseRoomNumber = null;
-                courseRoomNumber = AppointmentLogic.getInstance().getAll();
+                courseRoomNumber = RoomLogic.getInstance().getAll();
                 string temporaryItem = string.Empty;
                 int temporaryCountIndex = courseRoomNumber.Rows.Count;
 
                 for (int i = 0; i < temporaryCountIndex; i++)
                 {
                     temporaryItem = string.Empty;
-                    temporaryItem = courseRoomNumber.Rows[i]["Room"].ToString();
+                    temporaryItem = courseRoomNumber.Rows[i]["RoomNr"].ToString();
                     cbxAppointmentRoomNumber.Items.Add(temporaryItem);
                     //TODO: Duplizitäten. Wo erfolgt die Validierung?!
                 }       
@@ -245,13 +257,16 @@ namespace CourseManagement.Client.View
         /// <param name="e"></param>
         private void ButtonAddAppointment_Click(object sender, RoutedEventArgs e)
         {
-            //getting CourseNumber from Selection
+            int chosenCourseID = 0;
+            DateTime chosenStartDate = DateTime.MinValue;
+            DateTime chosenEndDate = DateTime.MinValue;
+            int chosenRoomNr = 0;
+
+            //getting CourseNumber from UserSelection (ComboBox)
             if (this.cbxAppointmentCourse.SelectedItem != null)
             {
-                //Following does return an empty DataTable which then will cause a exception. 
-                //ToDo Research why the search method does not work properly
-                DataTable choosenCourse = AppointmentLogic.getInstance().search(cbxAppointmentCourse.SelectedItem.ToString());
-                int courseNumber = Int32.Parse(choosenCourse.Rows[1]["courseNr"].ToString());
+                DataTable chosenCourse = CourseLogic.getInstance().search(cbxAppointmentCourse.SelectedItem.ToString());
+                chosenCourseID = Int32.Parse(chosenCourse.Rows[0][0].ToString());
                 lblCourseNotFilled.Visibility = Visibility.Hidden;
             }
             else
@@ -260,10 +275,10 @@ namespace CourseManagement.Client.View
             }
 
 
-            //getting begin of appointment from selection
+            //getting begin of appointment from userselection
             if (this.dpBeginOfCourse.SelectedDate != null)
             {
-                DateTime choosenStartDate = (DateTime)dpBeginOfCourse.SelectedDate;
+                chosenStartDate = (DateTime)dpBeginOfCourse.SelectedDate;
                 lblBeginnDateNotFilled.Visibility = Visibility.Hidden;
             }
             else
@@ -272,10 +287,10 @@ namespace CourseManagement.Client.View
             }
 
 
-            //getting end of Appointment from selection
+            //getting end of Appointment from userselection
             if (this.dpEndOfAppointCourse.SelectedDate != null)
             {
-                DateTime choosenEndDate = (DateTime)dpEndOfAppointCourse.SelectedDate;
+                chosenEndDate = (DateTime)dpEndOfAppointCourse.SelectedDate;
                 lblEndDateNotFilled.Visibility = Visibility.Hidden;
             }
             else
@@ -283,11 +298,11 @@ namespace CourseManagement.Client.View
                 lblEndDateNotFilled.Visibility = Visibility.Visible;
             }
 
-            //getting room number for appointment from selection
+            //getting room number for appointment from userselection
             if (this.cbxAppointmentRoomNumber.SelectedItem != null)
             {
-                DataTable choosenRoom = AppointmentLogic.getInstance().search(cbxAppointmentRoomNumber.SelectedItem.ToString());
-                int choosenRoomNr = Int32.Parse(choosenRoom.Rows[0]["roomNr"].ToString());
+                DataTable chosenRoom = RoomLogic.getInstance().search(cbxAppointmentRoomNumber.SelectedItem.ToString());
+                chosenRoomNr = Int32.Parse(chosenRoom.Rows[0][0].ToString());
                 lblRoomNrNotFilled.Visibility = Visibility.Hidden;
             }
             else
@@ -296,16 +311,16 @@ namespace CourseManagement.Client.View
             }
 
 
-            if(dpBeginOfCourse.SelectedDate != null 
+            if(cbxAppointmentCourse.SelectedItem != null 
+                && dpBeginOfCourse.SelectedDate != null 
                 && dpEndOfAppointCourse.SelectedDate != null 
-                && cbxAppointmentCourse.SelectedItem != null 
                 && cbxAppointmentRoomNumber.SelectedItem != null 
                 && (DateTime)dpBeginOfCourse.SelectedDate < (DateTime)dpEndOfAppointCourse.SelectedDate)
             {
-                //if(AppointmentLogic.getInstance().isPossibleNewAppointment(courseNumber,choosenStartDate, choosenEndDate,choosenRoomNr)
-                //{
-                //AppointmentLogic.getInstance().create(courseNumber, choosenStartDate, choosenEndDate, ChoosenRoomNr);
-                //}
+                if (AppointmentLogic.getInstance().isPossibleNewAppointment(chosenCourseID, chosenRoomNr, chosenStartDate, chosenEndDate))
+                {
+                    AppointmentLogic.getInstance().create(chosenCourseID, chosenRoomNr, chosenStartDate, chosenEndDate);
+                }
 
                 refreshDataGrids(this);
 
