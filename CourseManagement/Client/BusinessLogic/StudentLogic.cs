@@ -91,11 +91,13 @@ namespace CourseManagement.Client.BusinessLogic
         /// Method for specific StudentRow-changes to the default Row-Method in LogicUtils
         /// </summary>
         /// <param name="table"></param>
-        /// <param name="entity"></param>
+        /// <param name="student"></param>
         /// <returns></returns>
-        private DataRow getNewRow(DataTable table, object entity)
+        private DataRow getNewRow(DataTable table, Student student)
         {
-            return LogicUtils.getNewRow(table, entity);
+            DataRow row = LogicUtils.getNewRow(table, student);
+            row["Payments"] = student.Payments.Count;
+            return row;
         }
 
         /// <summary>
