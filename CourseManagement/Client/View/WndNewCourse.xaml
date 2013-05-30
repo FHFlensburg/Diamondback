@@ -13,7 +13,7 @@
                 <Label x:Name="lblMaxParticipants" Content="Teilnehmer MAX" />
                 <ComboBox x:Name="cbMaxParticipants" Width="120" HorizontalAlignment="Left"/>
                 <Label x:Name="lblTutor" Content="Tutor" />
-                <ComboBox x:Name="tbTutor" Width="120" HorizontalAlignment="Left"/>
+                <ComboBox x:Name="cbTutor" Width="120" HorizontalAlignment="Left"/>
             </StackPanel>
             <StackPanel Margin="10">
                 <Label x:Name="lblCosts" Content="Betrag in €"/>
