@@ -71,7 +71,7 @@
             </r:RibbonTab>
         </r:Ribbon>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <TextBox Name="tbSearch" Width="200" Margin="5"/>
+                <TextBox Name="tbSearch" Width="200" Margin="5" TextChanged="TextBoxSearch_Changed"/>
                 <Button Name="btnSearch" Content="Suchen" Margin="5" Width="100" />
             </StackPanel>
         </StackPanel>

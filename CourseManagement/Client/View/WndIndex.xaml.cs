@@ -331,5 +331,30 @@ namespace CourseManagement.Client.View
                 lblRoomNrNotFilled.Visibility = Visibility.Hidden;
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TextBoxSearch_Changed(object sender, TextChangedEventArgs e)
+        {            
+            switch (mainRibbon.SelectedIndex)
+            {
+                case 0:
+                    dgCourse.DataContext = CourseLogic.getInstance().search(tbSearch.Text);
+                    break;
+                case 1:
+                    dgCourse.DataContext = StudentLogic.getInstance().search(tbSearch.Text);  
+                    break;
+                case 2:
+                    dgCourse.DataContext = RoomLogic.getInstance().search(tbSearch.Text);
+                    break;
+                default:
+                    dgCourse.DataContext = null;
+                    break;
+            }
+            changeColumnTitleCourse();
+        }
     }
 }

@@ -114,7 +114,7 @@ namespace CourseManagement.Client.View
             }
             catch (FormatException)
             {
-                MessageBox.Show("Konvertierte Zahl hat das falsche Format");
+               
             }
 
         }     
