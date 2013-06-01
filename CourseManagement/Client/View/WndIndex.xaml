@@ -42,7 +42,7 @@
                             <r:RibbonButton LargeImageSource="Images\delete.ico" Label="Löschen" Click="RibbonButtonDeleteCourse_Click"  />
                 </r:RibbonGroup>
                 <r:RibbonGroup x:Name="ribbonGroupChange" Header="Bearbeiten">
-                    <r:RibbonButton LargeImageSource="Images\change.ico" Label="Bearbeiten" />
+                    <r:RibbonButton LargeImageSource="Images\change.ico" Label="Bearbeiten" Click="RibbonButtonEditCourse_Click"/>
                 </r:RibbonGroup>
             </r:RibbonTab>
             <!-- Ribbon Tab person: -->

@@ -332,6 +332,27 @@ namespace CourseManagement.Client.View
             }
         }
 
+        private void RibbonButtonEditCourse_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.dgCourse.SelectedIndex != -1)
+            {
+                DataTable temp = CourseLogic.getInstance().getAll();
+                string selectedIndex = temp.Rows[dgCourse.SelectedIndex][0].ToString();
+                int tmp = int.Parse(selectedIndex);
+                try
+                {
+                    WndNewCourse editCourse = new WndNewCourse(CourseLogic.getInstance().getById(tmp));
+                    editCourse.Show(); 
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.ToString());
+                }
+            }
+        }
+
+
+
         /// <summary>
         /// 
         /// </summary>

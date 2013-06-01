@@ -1,5 +1,7 @@
-﻿using System;
+﻿using CourseManagement.Client.BusinessLogic;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,8 +13,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using CourseManagement.Client.BusinessLogic;
-using System.Data;
 
 
 namespace CourseManagement.Client.View
@@ -22,11 +22,33 @@ namespace CourseManagement.Client.View
     /// </summary>
     public partial class WndNewCourse : Window
     {
+        private DataTable dataTable;
+
 
         public WndNewCourse()
         {
             InitializeComponent();
             setGuiValues();
+        }
+
+
+        public WndNewCourse(DataTable dataTable)
+        {
+            InitializeComponent();
+            setGuiValues();
+            this.dataTable = dataTable;
+            tbCourseTitle.Text = dataTable.Rows[0]["Title"].ToString();
+            tbCosts.Text = dataTable.Rows[0]["AmountInEuro"].ToString();
+            tbDescription.Text = dataTable.Rows[0]["Description"].ToString();
+            tbValidInMonth.Text = dataTable.Rows[0]["ValidityInMonth"].ToString();
+
+            string temporaryMaxMember = dataTable.Rows[0]["MaxMember"].ToString();
+            int tempMaxMember = Convert.ToInt32(temporaryMaxMember);
+            cbMaxParticipants.SelectedValue = cbMaxParticipants.Items.IndexOf(temporaryMaxMember);
+  
+            cbMinParticipants.Items.Add(dataTable.Rows[0]["MinMember"].ToString());
+            cbTutor.Items.Add(dataTable.Rows[0]["Tutor"].ToString());
+            cbRoomNumber.Items.Add(dataTable.Rows[0]["CourseNr"].ToString());
         }
 
         private void setGuiValues()
