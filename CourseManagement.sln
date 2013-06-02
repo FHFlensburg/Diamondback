@@ -5,20 +5,50 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseManagement", "CourseM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCourseManagement", "TestCourseManagement\TestCourseManagement.csproj", "{29286010-C259-4C67-8B17-BA5A0E029739}"
 EndProject
+Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "Setup2", "Setup2\Setup2.isproj", "{A6382646-BF75-450F-A02D-8DB82F85C9CB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9FB99E52-08E5-479D-AA7E-91F3CA09B113} = {9FB99E52-08E5-479D-AA7E-91F3CA09B113}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		CD_ROM|Any CPU = CD_ROM|Any CPU
 		Debug|Any CPU = Debug|Any CPU
+		DVD-5|Any CPU = DVD-5|Any CPU
 		Release|Any CPU = Release|Any CPU
+		SingleImage|Any CPU = SingleImage|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9FB99E52-08E5-479D-AA7E-91F3CA09B113}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{9FB99E52-08E5-479D-AA7E-91F3CA09B113}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
 		{9FB99E52-08E5-479D-AA7E-91F3CA09B113}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9FB99E52-08E5-479D-AA7E-91F3CA09B113}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FB99E52-08E5-479D-AA7E-91F3CA09B113}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FB99E52-08E5-479D-AA7E-91F3CA09B113}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
 		{9FB99E52-08E5-479D-AA7E-91F3CA09B113}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FB99E52-08E5-479D-AA7E-91F3CA09B113}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FB99E52-08E5-479D-AA7E-91F3CA09B113}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{9FB99E52-08E5-479D-AA7E-91F3CA09B113}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{29286010-C259-4C67-8B17-BA5A0E029739}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{29286010-C259-4C67-8B17-BA5A0E029739}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
 		{29286010-C259-4C67-8B17-BA5A0E029739}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{29286010-C259-4C67-8B17-BA5A0E029739}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29286010-C259-4C67-8B17-BA5A0E029739}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{29286010-C259-4C67-8B17-BA5A0E029739}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
 		{29286010-C259-4C67-8B17-BA5A0E029739}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29286010-C259-4C67-8B17-BA5A0E029739}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29286010-C259-4C67-8B17-BA5A0E029739}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{29286010-C259-4C67-8B17-BA5A0E029739}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{A6382646-BF75-450F-A02D-8DB82F85C9CB}.CD_ROM|Any CPU.ActiveCfg = CD_ROM
+		{A6382646-BF75-450F-A02D-8DB82F85C9CB}.CD_ROM|Any CPU.Build.0 = CD_ROM
+		{A6382646-BF75-450F-A02D-8DB82F85C9CB}.Debug|Any CPU.ActiveCfg = DVD-5
+		{A6382646-BF75-450F-A02D-8DB82F85C9CB}.Debug|Any CPU.Build.0 = DVD-5
+		{A6382646-BF75-450F-A02D-8DB82F85C9CB}.DVD-5|Any CPU.ActiveCfg = DVD-5
+		{A6382646-BF75-450F-A02D-8DB82F85C9CB}.DVD-5|Any CPU.Build.0 = DVD-5
+		{A6382646-BF75-450F-A02D-8DB82F85C9CB}.Release|Any CPU.ActiveCfg = SingleImage
+		{A6382646-BF75-450F-A02D-8DB82F85C9CB}.Release|Any CPU.Build.0 = SingleImage
+		{A6382646-BF75-450F-A02D-8DB82F85C9CB}.SingleImage|Any CPU.ActiveCfg = SingleImage
+		{A6382646-BF75-450F-A02D-8DB82F85C9CB}.SingleImage|Any CPU.Build.0 = SingleImage
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
