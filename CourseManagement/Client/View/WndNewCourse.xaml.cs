@@ -34,6 +34,24 @@ namespace CourseManagement.Client.View
 
         public WndNewCourse(DataTable dataTable)
         {
+            //Validation NEEDED! TODO:
+
+            // max member
+            string temporaryMaxMember = dataTable.Rows[0]["MaxMember"].ToString();
+            int tempMaxMember = Convert.ToInt32(temporaryMaxMember);
+
+            //min member
+            string temporaryMinMember = dataTable.Rows[0]["MinMember"].ToString();
+            int tempMinMember = Convert.ToInt32(temporaryMinMember);
+
+            //tutor
+         //   string fOoObAr = dataTable.Rows[0]["Tutor"].ToString();
+           // int temporaryTut = Convert.ToInt32(temporaryTutor);
+
+            ////room number
+           // string temporaryRoom = dataTable.Rows[0]["CourseNr"].ToString();
+            //int tempRoom = Convert.ToInt32(temporaryRoom);
+
             InitializeComponent();
             setGuiValues();
             this.dataTable = dataTable;
@@ -42,13 +60,38 @@ namespace CourseManagement.Client.View
             tbDescription.Text = dataTable.Rows[0]["Description"].ToString();
             tbValidInMonth.Text = dataTable.Rows[0]["ValidityInMonth"].ToString();
 
-            string temporaryMaxMember = dataTable.Rows[0]["MaxMember"].ToString();
-            int tempMaxMember = Convert.ToInt32(temporaryMaxMember);
-            cbMaxParticipants.SelectedValue = cbMaxParticipants.Items.IndexOf(temporaryMaxMember);
-  
-            cbMinParticipants.Items.Add(dataTable.Rows[0]["MinMember"].ToString());
-            cbTutor.Items.Add(dataTable.Rows[0]["Tutor"].ToString());
-            cbRoomNumber.Items.Add(dataTable.Rows[0]["CourseNr"].ToString());
+
+            for (int i = 0; i < cbMaxParticipants.Items.Count; i++)
+            {
+                if (i == tempMaxMember)
+                {
+                    cbMaxParticipants.Text = i.ToString();
+                }
+            }
+
+            for (int i = 0; i < cbMinParticipants.Items.Count; i++)
+            {
+                if (i == tempMinMember)
+                {
+                    cbMinParticipants.Text = i.ToString();
+                }
+            }
+
+            //for (int i = 0; i < 100; i++)
+            //{
+            //    if (Convert.ToString(i).Equals(temporaryTutor))
+            //    {
+            //        cbTutor.Text = i.ToString();
+            //    }
+            //}
+
+            //for (int i = 0; i < cbRoomNumber.Items.Count; i++)
+            //{
+            //    if (i == tempRoom)
+            //    {
+            //        cbRoomNumber.Text = i.ToString();
+            //    }
+            //}
         }
 
         private void setGuiValues()
@@ -139,6 +182,12 @@ namespace CourseManagement.Client.View
                
             }
 
+        }
+
+        private void btnAport_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO: testen
+            this.Close();
         }     
     }
 }
