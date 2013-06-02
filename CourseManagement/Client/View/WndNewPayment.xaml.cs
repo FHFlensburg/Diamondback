@@ -21,6 +21,8 @@ namespace CourseManagement.Client.View
     /// </summary>
     public partial class WndNewPayment : Window
     {
+        int selectedTag = 0;
+
         public WndNewPayment()
         {
             InitializeComponent();
@@ -31,10 +33,22 @@ namespace CourseManagement.Client.View
         {
             lblPaymentGrid.Visibility = System.Windows.Visibility.Visible;
             dgPayment.Visibility = System.Windows.Visibility.Visible;
+
+            selectedTag = Convert.ToInt16(((ComboBoxItem)cbPaymentCourse.SelectedItem).Tag);
         }
 
         private void setGuiElements()
         {
+           DataTable datatable = new DataTable
+            {
+                Columns = 
+                     { "ID", 
+                        "Vorname",
+                        "Nachname",
+                        "Bezahlt" 
+                     }
+            };
+
             DataTable course = CourseLogic.getInstance().getAll();
             for(int i = 0; i < course.Rows.Count; i++)
             {
@@ -45,27 +59,15 @@ namespace CourseManagement.Client.View
                 cbPaymentCourse.Items.Add(cbItem);
             }
 
-
-            DataTable datatable = new DataTable
+            DataTable student = StudentLogic.getInstance().getByCourse(26);
+            for (int j = 0; j < student.Rows.Count; j++)
             {
-                Columns = 
-                     { "ID", 
-                        "Vorname",
-                        "Nachname",
-                        "Bezahlt" 
-                     }
-            };
-
-            DataTable student = StudentLogic.getInstance().getAll();
-            for (int i = 0; i < student.Rows.Count; i++)
-            {
-                //DataRow datarow = datatable.NewRow();
-                //datarow["ID"] = course.Rows[i][0].ToString();
-                //datarow["Vorname"] = course.Rows[i]["Vorname"].ToString();
-                //datarow["Nachname"] = course.Rows[i]["Nachname"].ToString();
-                //datarow["Bezahlt"] = course.Rows[i]["Bezahlt"].ToString();
-                //datatable.Rows.Add(datarow);
-                //dgPayment.ItemsSource = datatable.DefaultView;
+                DataRow dataRow = datatable.NewRow();
+                dataRow["ID"] = student.Rows[j][0];
+                dataRow["Vorname"] = student.Rows[j]["Forename"];
+                dataRow["Nachname"] = student.Rows[j]["Surname"];
+                datatable.Rows.Add(dataRow);
+                dgPayment.ItemsSource = datatable.DefaultView;
             }
         }
     }
