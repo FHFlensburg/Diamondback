@@ -260,7 +260,7 @@ namespace CourseManagement.Client.View
                 DataTable courseDatatable = (DataTable)cbxAppointmentCourse.DataContext;
                 //DataRowView row = (DataRowView)courseDatatable.se
                // int index = Convert.ToInt32(courseDatatable.s);
-                DataTable chosenCourse = CourseLogic.getInstance().getById(index);
+                //DataTable chosenCourse = CourseLogic.getInstance().getById(index);
                 lblCourseNotFilled.Visibility = Visibility.Hidden;
             }
             else
@@ -380,6 +380,12 @@ namespace CourseManagement.Client.View
             DataRowView row = (DataRowView)dgCourse.SelectedItems[0];
             dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(Convert.ToInt32(row["CourseNr"].ToString()));
 
+        }
+
+        private void RibbonButtonNewPayment_Click(object sender, RoutedEventArgs e)
+        {
+            WndNewPayment aPaymentWindow = new WndNewPayment();
+            aPaymentWindow.ShowDialog();
         }
     }
 }

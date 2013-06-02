@@ -22,6 +22,17 @@ namespace CourseManagement.Client.View
     public partial class WndNewPayment : Window
     {
         int selectedTag = 0;
+        DataTable course = CourseLogic.getInstance().getAll();
+        DataTable datatable = new DataTable
+        {
+            Columns = 
+                     { "ID", 
+                        "Vorname",
+                        "Nachname",
+                        "Bezahlt" 
+                     }
+        };
+
 
         public WndNewPayment()
         {
@@ -31,44 +42,39 @@ namespace CourseManagement.Client.View
 
         private void cbPaymentCourse_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //dgPayment.
             lblPaymentGrid.Visibility = System.Windows.Visibility.Visible;
             dgPayment.Visibility = System.Windows.Visibility.Visible;
 
-            selectedTag = Convert.ToInt16(((ComboBoxItem)cbPaymentCourse.SelectedItem).Tag);
+            selectedTag = Convert.ToInt32(((ComboBoxItem)cbPaymentCourse.SelectedItem).Tag);
+
+            
+            dgPayment.DataContext = StudentLogic.getInstance().getByCourse(selectedTag);
+            //for (int j = 0; j < student.Rows.Count; j++)
+            //{
+            //    DataRow dataRow = datatable.NewRow();
+            //    dataRow["ID"] = student.Rows[j][0];
+            //    dataRow["Vorname"] = student.Rows[j]["Forename"];
+            //    dataRow["Nachname"] = student.Rows[j]["Surname"];
+            //    datatable.Rows.Add(dataRow);
+            //    dgPayment.ItemsSource = datatable.DefaultView;
+            //}
         }
 
         private void setGuiElements()
         {
-           DataTable datatable = new DataTable
-            {
-                Columns = 
-                     { "ID", 
-                        "Vorname",
-                        "Nachname",
-                        "Bezahlt" 
-                     }
-            };
+           
 
-            DataTable course = CourseLogic.getInstance().getAll();
-            for(int i = 0; i < course.Rows.Count; i++)
-            {
-                ComboBoxItem cbItem = new ComboBoxItem();
-                cbItem.Content = course.Rows[i]["Title"].ToString();
-                cbItem.Tag=course.Rows[i]["CourseNr"].ToString();
+           for (int i = 0; i < course.Rows.Count; i++)
+           {
+               ComboBoxItem cbItem = new ComboBoxItem();
+               cbItem.Content = course.Rows[i]["Title"].ToString();
+               cbItem.Tag = course.Rows[i]["CourseNr"].ToString();
 
-                cbPaymentCourse.Items.Add(cbItem);
-            }
+               cbPaymentCourse.Items.Add(cbItem);
+           }
 
-            DataTable student = StudentLogic.getInstance().getByCourse(26);
-            for (int j = 0; j < student.Rows.Count; j++)
-            {
-                DataRow dataRow = datatable.NewRow();
-                dataRow["ID"] = student.Rows[j][0];
-                dataRow["Vorname"] = student.Rows[j]["Forename"];
-                dataRow["Nachname"] = student.Rows[j]["Surname"];
-                datatable.Rows.Add(dataRow);
-                dgPayment.ItemsSource = datatable.DefaultView;
-            }
+           
         }
     }
 }
