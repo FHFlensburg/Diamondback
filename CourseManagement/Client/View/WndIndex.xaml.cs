@@ -381,5 +381,12 @@ namespace CourseManagement.Client.View
             }
             changeColumnTitleCourse();
         }
+
+
+        private void RibbonButtonNewPayment_Click(object sender, RoutedEventArgs e)
+        {
+            WndNewPayment payment = new WndNewPayment();
+            payment.Show();
+        }
     }
 }
