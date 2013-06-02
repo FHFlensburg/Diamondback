@@ -210,16 +210,8 @@ namespace CourseManagement.Client.View
             this.cbxAppointmentCourse.Items.Clear();
             try
             {
-                DataTable CourseTitle = null;
-                CourseTitle = CourseLogic.getInstance().getAll();
-                string temporaryItem = string.Empty; 
-                int temporaryCountIndex = CourseTitle.Rows.Count;
-                for (int i = 0; i < temporaryCountIndex; i++)
-                {
-                    temporaryItem = string.Empty;
-                    temporaryItem = CourseTitle.Rows[i]["Title"].ToString();
-                    this.cbxAppointmentCourse.Items.Add(temporaryItem);
-                }
+                DataTable courseTitle = CourseLogic.getInstance().getAll();
+                cbxAppointmentCourse.DataContext = courseTitle;
             }
             catch (System.Exception err)
             {
@@ -265,8 +257,10 @@ namespace CourseManagement.Client.View
             //getting CourseNumber from UserSelection (ComboBox)
             if (this.cbxAppointmentCourse.SelectedItem != null)
             {
-                DataTable chosenCourse = CourseLogic.getInstance().search(cbxAppointmentCourse.SelectedItem.ToString());
-                chosenCourseID = Int32.Parse(chosenCourse.Rows[0][0].ToString());
+                DataTable courseDatatable = (DataTable)cbxAppointmentCourse.DataContext;
+                //DataRowView row = (DataRowView)courseDatatable.se
+               // int index = Convert.ToInt32(courseDatatable.s);
+                DataTable chosenCourse = CourseLogic.getInstance().getById(index);
                 lblCourseNotFilled.Visibility = Visibility.Hidden;
             }
             else
@@ -301,9 +295,8 @@ namespace CourseManagement.Client.View
             //getting room number for appointment from userselection
             if (this.cbxAppointmentRoomNumber.SelectedItem != null)
             {
-                DataTable chosenRoom = RoomLogic.getInstance().search(cbxAppointmentRoomNumber.SelectedItem.ToString());
                 //TODO: Array durch String ersetzen
-                chosenRoomNr = Int32.Parse(chosenRoom.Rows[0][0].ToString());
+                chosenRoomNr = Convert.ToInt32(cbxAppointmentRoomNumber.SelectedValue.ToString());
                 lblRoomNrNotFilled.Visibility = Visibility.Hidden;
             }
             else
@@ -382,11 +375,11 @@ namespace CourseManagement.Client.View
             changeColumnTitleCourse();
         }
 
-
-        private void RibbonButtonNewPayment_Click(object sender, RoutedEventArgs e)
+        private void element_SelectCourse(object sender, SelectedCellsChangedEventArgs e)
         {
-            WndNewPayment payment = new WndNewPayment();
-            payment.Show();
+            DataRowView row = (DataRowView)dgCourse.SelectedItems[0];
+            dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(Convert.ToInt32(row["CourseNr"].ToString()));
+
         }
     }
 }

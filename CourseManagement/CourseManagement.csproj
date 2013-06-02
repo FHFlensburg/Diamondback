@@ -290,6 +290,7 @@
     <Content Include="Client\DB\Scripte\DiamondbackModel130430-1.edmx.sql" />
     <Content Include="Client\DB\Scripte\DiamondbackModel130503-1.edmx.sql" />
     <Resource Include="Kursverwaltung.ico" />
+    <Resource Include="Client\View\Images\Kursverwaltung.ico" />
     <Resource Include="Client\View\Images\logo.png" />
     <Resource Include="Client\View\Images\change.ico" />
   </ItemGroup>

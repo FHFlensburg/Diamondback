@@ -45,12 +45,8 @@ namespace CourseManagement.Client.View
             int tempMinMember = Convert.ToInt32(temporaryMinMember);
 
             //tutor
-         //   string fOoObAr = dataTable.Rows[0]["Tutor"].ToString();
+           //string fOoObAr = dataTable.Rows[0]["Tutor"].ToString();
            // int temporaryTut = Convert.ToInt32(temporaryTutor);
-
-            ////room number
-           // string temporaryRoom = dataTable.Rows[0]["CourseNr"].ToString();
-            //int tempRoom = Convert.ToInt32(temporaryRoom);
 
             InitializeComponent();
             setGuiValues();
@@ -85,13 +81,6 @@ namespace CourseManagement.Client.View
             //    }
             //}
 
-            //for (int i = 0; i < cbRoomNumber.Items.Count; i++)
-            //{
-            //    if (i == tempRoom)
-            //    {
-            //        cbRoomNumber.Text = i.ToString();
-            //    }
-            //}
         }
 
         private void setGuiValues()
@@ -131,15 +120,6 @@ namespace CourseManagement.Client.View
                 temporaryTutor = tutors.Rows[i]["Id"].ToString();
                 cbTutor.Items.Add(temporaryTutor);
             }
-
-            // RoomNumber
-            for (int i = 0; i < countRoomNumbers; i++)
-            {
-                temporaryRoomNumber = string.Empty;
-                temporaryRoomNumber = roomNumber.Rows[i]["RoomNr"].ToString();
-                cbRoomNumber.Items.Add(temporaryRoomNumber);
-            }
-    
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
