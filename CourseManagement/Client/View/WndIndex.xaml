@@ -36,8 +36,8 @@
                 </r:RibbonGroup>
                 <r:RibbonGroup x:Name="ribbongroupCourseAdd" Header="Hinzufügen">
                     <r:RibbonButton SmallImageSource="Images\addParticipant.ico" Label="Teilnehmer" Click="RibbonButtonAddParticipant_Click" />
-                    <r:RibbonButton SmallImageSource="Images\addRoom.ico" Label="Raum" />
-                </r:RibbonGroup>
+                            <!--<r:RibbonButton SmallImageSource="Images\addRoom.ico" Label="Raum" /> -->
+                        </r:RibbonGroup>
                 <r:RibbonGroup x:Name="ribbonGroupCourseDelete" Header="Löschen">
                             <r:RibbonButton LargeImageSource="Images\delete.ico" Label="Löschen" Click="RibbonButtonDeleteCourse_Click"  />
                 </r:RibbonGroup>
@@ -72,8 +72,7 @@
         </r:Ribbon>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBox Name="tbSearch" Width="200" Margin="5" TextChanged="TextBoxSearch_Changed"/>
-                <Button Name="btnSearch" Content="Suchen" Margin="5" Width="100" />
-            </StackPanel>
+                </StackPanel>
         </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Vertical" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" >
             <DataGrid x:Name="dgCourse" Margin="10"  ItemsSource="{Binding}" IsReadOnly="True" IsSynchronizedWithCurrentItem="False">

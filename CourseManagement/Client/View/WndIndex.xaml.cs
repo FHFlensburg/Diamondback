@@ -69,7 +69,6 @@ namespace CourseManagement.Client.View
         /// <param name="mainWindow"></param>
         private void refreshDataGrids(WndIndex mainWindow)
         {
-            DataTable dt4Grid = null;
             if (mainWindow.IsLoaded)
             {
                 try
@@ -77,17 +76,17 @@ namespace CourseManagement.Client.View
                     switch (mainWindow.mainRibbon.SelectedIndex)
                     {
                         case 0:
-                            dt4Grid = CourseLogic.getInstance().getAll();
-                            mainWindow.dgCourse.DataContext = dt4Grid;
+                            mainWindow.dgCourse.DataContext = CourseLogic.getInstance().getAll();
                             changeColumnTitleCourse();
                             break;
                         case 1:
-                            dt4Grid = StudentLogic.getInstance().getAll();
-                            mainWindow.dgCourse.DataContext = dt4Grid;
+                            mainWindow.dgCourse.DataContext = StudentLogic.getInstance().getAll();
                             break;
                         case 2:
-                            dt4Grid = RoomLogic.getInstance().getAll();
-                            mainWindow.dgCourse.DataContext = dt4Grid;
+                            mainWindow.dgCourse.DataContext = RoomLogic.getInstance().getAll();
+                            break;
+                        case 3:
+                            mainWindow.dgCourse.DataContext = PaymentLogic.getInstance().getAll();
                             break;
                         default:
                             mainWindow.dgCourse.DataContext = null;
@@ -97,9 +96,10 @@ namespace CourseManagement.Client.View
                     DataTable temp = null;
                     temp = AppointmentLogic.getInstance().getAll();
                     this.dgAppointments.DataContext = temp;
-                    dgAppointments.Columns[1].Header = "Kurs";
-                    dgAppointments.Columns[2].Header = "Startdatum";
-                    dgAppointments.Columns[3].Header = "Enddatum";
+                    
+                    dgAppointments.Columns[1].Header = "Startdatum";
+                    dgAppointments.Columns[2].Header = "Enddatum";
+                    dgAppointments.Columns[3].Header = "Kurs";
                     dgAppointments.Columns[4].Header = "Raum";
                 }
                 catch (System.Exception err)
@@ -134,12 +134,13 @@ namespace CourseManagement.Client.View
 
         private void OpenWindow2AddParticpant(object sender)
         {
+
             if (sender != null)
             {
                 try
                 {
                     WndParticipant2Course aNewAllocation = new WndParticipant2Course();
-                    aNewAllocation.dgParticipant.DataContext = (DataTable)this.dgCourse.DataContext;
+                    //aNewAllocation.dgParticipant.DataContext = (DataTable)this.dgCourse.DataContext;
                     aNewAllocation.ShowDialog();
                 }
                 catch (System.Exception err)
@@ -370,6 +371,9 @@ namespace CourseManagement.Client.View
                     break;
                 case 2:
                     dgCourse.DataContext = RoomLogic.getInstance().search(tbSearch.Text);
+                    break;
+                case 3:
+                    dgCourse.DataContext = PaymentLogic.getInstance().search(tbSearch.Text);
                     break;
                 default:
                     dgCourse.DataContext = null;
