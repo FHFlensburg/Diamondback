@@ -11,7 +11,7 @@
             </StackPanel>
             <StackPanel Margin="10" Width="327">
                 <Label x:Name="lblPaymentGrid" Content="Details" Visibility="Hidden" />
-                <DataGrid x:Name="dgPayment" Visibility="Hidden">
+                <DataGrid x:Name="dgPayment" Visibility="Hidden" ItemsSource="{Binding}">
  
                 </DataGrid>
             </StackPanel>

@@ -374,5 +374,11 @@ namespace CourseManagement.Client.View
         {
 
         }
+
+        private void RibbonButtonNewPayment_Click(object sender, RoutedEventArgs e)
+        {
+            WndNewPayment aPaymentWindow = new WndNewPayment();
+            aPaymentWindow.ShowDialog();
+        }
     }
 }
