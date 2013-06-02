@@ -239,8 +239,17 @@ namespace CourseManagement.Client.View
             if (dgCourse.SelectedItems != null)
             {
                 //cbxAppointmentCourse.
-                DataRowView row = (DataRowView)dgCourse.SelectedItems[0];
-                chosenCourseID = Convert.ToInt32(row.Row["CourseNr"]);
+                try
+                {
+                    DataRowView row = (DataRowView)dgCourse.SelectedItem;
+                    chosenCourseID = Convert.ToInt32(row[0]);
+                }
+                catch (Exception err)
+                {
+
+                    MessageBox.Show(err.ToString());
+                }
+               
             }
             else
             {
