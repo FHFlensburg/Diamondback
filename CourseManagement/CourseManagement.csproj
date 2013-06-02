@@ -97,6 +97,9 @@
     <Compile Include="Client\DB\Model\ActiveUserActions.cs" />
     <Compile Include="Client\DB\Model\PaymentActions.cs" />
     <Compile Include="Client\DB\PaymentQuery.cs" />
+    <Compile Include="Client\View\WndNewPayment.xaml.cs">
+      <DependentUpon>WndNewPayment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Client\View\WndParticipant2Course.xaml.cs">
       <DependentUpon>WndParticipant2Course.xaml</DependentUpon>
     </Compile>
@@ -229,6 +232,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Client\View\WndNewCourse.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Client\View\WndNewPayment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

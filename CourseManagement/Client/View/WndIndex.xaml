@@ -67,7 +67,7 @@
             <!-- Ribbon Tab payment: -->
             <r:RibbonTab x:Name="ribbonPayment" Header="Zahlungen" KeyTip="Z">
                 <r:RibbonGroup x:Name="ribbonGroupPaymentBooking" Header="Buchen">
-                    <r:RibbonButton LargeImageSource="Images/booking.ico" Label="Zahlungen buchen" />
+                    <r:RibbonButton LargeImageSource="Images/booking.ico" Label="Zahlungen buchen" Click="RibbonButtonNewPayment_Click"/>
                 </r:RibbonGroup>
             </r:RibbonTab>
         </r:Ribbon>
