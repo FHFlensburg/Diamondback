@@ -26,6 +26,8 @@ namespace CourseManagement.Client.View
 
             //Nur im Testbetrieb
             tbPasswordStatus.Text = "user: admin, psw: admin";
+            tbUsername.Text = "admin";
+            pwbPassword.Password = "admin";
         }
 
         //Zusammen mit checkPassword auszulagern
