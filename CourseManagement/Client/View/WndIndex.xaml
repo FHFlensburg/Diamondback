@@ -89,8 +89,6 @@
             <DataGrid x:Name="dgAppointments" Margin="10" ItemsSource="{Binding}" IsReadOnly="True"  />
             <StackPanel Orientation="Horizontal" x:Name="spAppointments">
                 <StackPanel Margin="5">
-                    <Label Width="130" Content="Kurs" />
-                    <ComboBox x:Name="cbxAppointmentCourse" Width="120"/>
                         <Label Content="Bitte ausfüllen" x:Name="lblCourseNotFilled" Visibility="Hidden"  Foreground="Red"/>
                     </StackPanel>
                 <StackPanel Margin="5">

@@ -6,7 +6,6 @@ using System.Data;
 using CourseManagement.Client.BusinessLogic;
 using System.Collections.Generic;
 using System;
-using System.Collections;
 
 
 namespace CourseManagement.Client.View
@@ -36,6 +35,7 @@ namespace CourseManagement.Client.View
         private void mainWindow_IsLoaded(object sender, System.EventArgs e)
         {
             refreshDataGrids(this);
+            fillComboBoxCourse();
             fillComboBoxRoomNumber();
         }
 
@@ -203,6 +203,23 @@ namespace CourseManagement.Client.View
             }
         }
 
+        
+
+        private void fillComboBoxCourse()
+        {
+            this.cbxAppointmentCourse.Items.Clear();
+            try
+            {
+                DataTable courseTitle = CourseLogic.getInstance().getAll();
+                cbxAppointmentCourse.DataContext = courseTitle;
+            }
+            catch (System.Exception err)
+            {
+
+                MessageBox.Show(err.ToString());
+            }
+        }
+
         private void RibbonButtonDeleteCourse_Click(object sender, RoutedEventArgs e)
         {
             if (this.dgCourse.SelectedIndex != -1)
@@ -220,6 +237,8 @@ namespace CourseManagement.Client.View
 
                 }
                 refreshDataGrids(this);
+                fillComboBoxCourse();
+                
             }
         }
 
@@ -236,11 +255,13 @@ namespace CourseManagement.Client.View
             int chosenRoomNr = 0;
 
             //getting CourseNumber from UserSelection (ComboBox)
-            if (dgCourse.SelectedItems != null)
+            if (this.cbxAppointmentCourse.SelectedItem != null)
             {
-                //cbxAppointmentCourse.
-                DataRowView row = (DataRowView)dgCourse.SelectedItems[0];
-                chosenCourseID = Convert.ToInt32(row.Row["CourseNr"]);
+                DataTable courseDatatable = (DataTable)cbxAppointmentCourse.DataContext;
+                //DataRowView row = (DataRowView)courseDatatable.se
+               // int index = Convert.ToInt32(courseDatatable.s);
+                DataTable chosenCourse = CourseLogic.getInstance().getById(index);
+                lblCourseNotFilled.Visibility = Visibility.Hidden;
             }
             else
             {
@@ -284,7 +305,7 @@ namespace CourseManagement.Client.View
             }
 
 
-            if (dgCourse.SelectedItems[0] != null 
+            if(cbxAppointmentCourse.SelectedItem != null 
                 && dpBeginOfCourse.SelectedDate != null 
                 && dpEndOfAppointCourse.SelectedDate != null 
                 && cbxAppointmentRoomNumber.SelectedItem != null 
@@ -354,16 +375,19 @@ namespace CourseManagement.Client.View
             changeColumnTitleCourse();
         }
 
+<<<<<<< HEAD
         private void element_SelectCourse(object sender, SelectedCellsChangedEventArgs e)
         {
             DataRowView row = (DataRowView)dgCourse.SelectedItems[0];
             dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(Convert.ToInt32(row["CourseNr"].ToString()));
 
-        }
+=======
 
         private void RibbonButtonNewPayment_Click(object sender, RoutedEventArgs e)
         {
-
+            WndNewPayment payment = new WndNewPayment();
+            payment.Show();
+>>>>>>> 4213d8fc618f2e742c1bf18fad0a59a53122a27e
         }
     }
 }
