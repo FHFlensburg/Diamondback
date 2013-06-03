@@ -274,10 +274,7 @@ namespace CourseManagement.Client.View
             //getting begin of appointment from userselection
             if (this.dpBeginOfCourse.Text != null)
             {
-                //chosenStartDate = (DateTime)dpBeginOfCourse.SelectedDate;
-                chosenStartDate = (DateTime)this.dpBeginOfCourse.Value.Value.ToUniversalTime();
-                //chosenStartDate.AddHours(Convert.ToDouble(cbxAppointmentStartTime.SelectedValue.ToString().Substring(38,2)));
-                //chosenStartDate.AddMinutes(Convert.ToDouble(cbxAppointmentStartTime.Text.ToString().Substring(3, 2)));
+                chosenStartDate = (DateTime)this.dpBeginOfCourse.Value.Value;
                 lblBeginnDateNotFilled.Visibility = Visibility.Hidden;
             }
             else
@@ -311,10 +308,10 @@ namespace CourseManagement.Client.View
 
 
             if (dgCourse.SelectedItems.Count > 0
-                && dpBeginOfCourse.Value.Value.ToUniversalTime() != null 
-                && dpEndOfAppointCourse.Value.Value.ToUniversalTime() != null 
+                && dpBeginOfCourse.Value.Value != null 
+                && dpEndOfAppointCourse.Value.Value != null 
                 && cbxAppointmentRoomNumber.SelectedItem != null
-                && (DateTime)dpBeginOfCourse.Value.Value.ToUniversalTime() < (DateTime)dpEndOfAppointCourse.Value.Value.ToUniversalTime())
+                && (DateTime)dpBeginOfCourse.Value.Value < (DateTime)dpEndOfAppointCourse.Value.Value)
             {
                 if (AppointmentLogic.getInstance().isPossibleNewAppointment(chosenCourseID, chosenRoomNr, chosenStartDate, chosenEndDate))
                 {
