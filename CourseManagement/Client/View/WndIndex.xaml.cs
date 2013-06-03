@@ -142,13 +142,19 @@ namespace CourseManagement.Client.View
 
         private void OpenWindow2AddParticpant(object sender)
         {
-
+            WndParticipant2Course aNewAllocation = null;
             if (sender != null)
             {
                 try
                 {
-                    WndParticipant2Course aNewAllocation = new WndParticipant2Course(29);
-                    //aNewAllocation.dgParticipant.DataContext = (DataTable)this.dgCourse.DataContext;
+                    if (dgCourse.SelectedItems.Count > 0)
+                    {
+                        aNewAllocation = new WndParticipant2Course(29);
+                    }
+                    else
+                    {
+                        aNewAllocation = new WndParticipant2Course(-1);
+                    }
                     aNewAllocation.ShowDialog();
                 }
                 catch (System.Exception err)
@@ -259,7 +265,7 @@ namespace CourseManagement.Client.View
             }
             else
             {
-                this.lblCourseNotFilled.Visibility = Visibility.Visible;
+                lblCourseNotSelected.Visibility = Visibility.Visible;
             }
 
 
@@ -299,7 +305,7 @@ namespace CourseManagement.Client.View
             }
 
 
-            if (dgCourse.SelectedItems[0] != null 
+            if (dgCourse.SelectedItems.Count > 0 
                 && dpBeginOfCourse.SelectedDate != null 
                 && dpEndOfAppointCourse.SelectedDate != null 
                 && cbxAppointmentRoomNumber.SelectedItem != null 
@@ -313,10 +319,10 @@ namespace CourseManagement.Client.View
                 dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(choosenCourseNr);
 
                 //hiding the error labels again
-                this.lblCourseNotFilled.Visibility = Visibility.Hidden;
                 lblBeginnDateNotFilled.Visibility = Visibility.Hidden;
                 lblEndDateNotFilled.Visibility = Visibility.Hidden;
                 lblRoomNrNotFilled.Visibility = Visibility.Hidden;
+                lblCourseNotSelected.Visibility = Visibility.Hidden;
             }
         }
 
