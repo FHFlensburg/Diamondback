@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Data;
 using CourseManagement.Client.BusinessLogic;
 
@@ -26,27 +17,53 @@ namespace CourseManagement.Client.View
         /// to fill the listboxes
         /// </summary>
         DataTable temporaryData = null;
+        
+        int selectedCourse = 0;
+        
+       
 
         public WndParticipant2Course()
         {
-            InitializeComponent();
-
-            fillingListboxeswithData();
+            //this(-1);
 
         }
 
-        private void fillingListboxeswithData()
+        public WndParticipant2Course(int selectedCourse)
         {
+            InitializeComponent();
             temporaryData = CourseLogic.getInstance().getAll();
-            for (int i = 0; i < temporaryData.Rows.Count; i++)
-            {
-                lbxCourses.Items.Add(temporaryData.Rows[i]["Title"]);
-            }
 
-            temporaryData = StudentLogic.getInstance().getAll();
-            for (int i = 0; i < temporaryData.Rows.Count; i++)
+            fillingListboxeswithData();
+
+            if(selectedCourse != -1)
             {
-                lbxPartcicipants.Items.Add(temporaryData.Rows[i]["Surname"]);
+            foreach (ListBoxItem aListboxItem in lbxCourses.Items)
+            {
+                if(Convert.ToInt32(aListboxItem.Tag) == selectedCourse)
+                {
+                    lbxCourses.SelectedItem = aListboxItem;
+                }
+            }
+            }
+        }
+
+        private void fillingListboxeswithData()
+        {            
+            foreach (DataRow aDataRow in temporaryData.Rows)
+            {
+                ListBoxItem ListboxItemCourse = new ListBoxItem();
+                ListboxItemCourse.Content = aDataRow["Title"];
+                ListboxItemCourse.Tag = aDataRow["CourseNr"];
+                lbxCourses.Items.Add(ListboxItemCourse);            
+            }
+            temporaryData = StudentLogic.getInstance().getAll();
+            foreach (DataRow aDataRow in temporaryData.Rows)
+            {
+                ListBoxItem ListBoxItemStudents = new ListBoxItem();
+                string aString = aDataRow["Forename"].ToString() + " " + aDataRow["Surname"].ToString();
+                ListBoxItemStudents.Content = aString;
+                ListBoxItemStudents.Tag = aDataRow["ID"];
+                lbxPartcicipants.Items.Add(ListBoxItemStudents);
             }
         }
 
@@ -55,27 +72,54 @@ namespace CourseManagement.Client.View
             this.Close();
         }
 
-        private void add_Click(object sender, RoutedEventArgs e)
-        {
+        
 
-        }
 
         /// <summary>
-        /// 2late for more today
         /// Idea? Slecting one Course Shows Students of this course in green color in the other listbox or something like this.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void lbxCourses_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DataTable studentsOfSelectedCourse = null;
+            //MessageBox.Show(((ListBoxItem)lbxCourses.SelectedItem).Tag.ToString());
+            selectedCourse = Convert.ToInt32(((ListBoxItem)lbxCourses.SelectedItem).Tag);
+            DataTable studentsFromSelectedCourse = StudentLogic.getInstance().getByCourse(selectedCourse);
 
-            //for (int i = 0; i < lbxPartcicipants.Items.Count;i++)
-            //{
-                
-            //    if(StudentLogic.getInstance().search(lbxCourses.SelectedItem)
+            foreach (ListBoxItem aListBoxItem in lbxPartcicipants.Items)
+            {
+                aListBoxItem.Foreground = Brushes.Black;
+                foreach (DataRow dr in studentsFromSelectedCourse.Rows)
+                {
 
-            //}
+                    if (Convert.ToInt32(dr["ID"]) == Convert.ToInt32(aListBoxItem.Tag))
+                    {
+                        aListBoxItem.Foreground = Brushes.Green;
+                    }
+                }
+            }
         }
+
+        private void ButtonAddPerson2Course_CLick(object sender, RoutedEventArgs e)
+        {
+            if(lbxCourses.SelectedItem != null && lbxPartcicipants.SelectedItems != null)
+            {
+               foreach(ListBoxItem aListBOxItem in lbxPartcicipants.SelectedItems)
+               {
+                   //Jeder Student der grün ist, ist schon in dem Kurs, daher abfangen das er nicht doppelt
+                   //hinzugefügt wird.
+                   //Wie besser und gleich kurz?  So doch schon etwas unsauber
+                   if (aListBOxItem.Foreground != Brushes.Green)  
+                   {
+                       
+                       int i = Convert.ToInt32(((ListBoxItem)aListBOxItem).Tag);
+                       MessageBox.Show(selectedCourse.ToString() + i.ToString());
+                       //PaymentLogic.getInstance().create(selectedCourse, i);
+                   }
+               }
+            }
+        }
+
+
     }
 }

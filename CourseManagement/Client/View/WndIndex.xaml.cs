@@ -160,7 +160,7 @@ namespace CourseManagement.Client.View
             {
                 try
                 {
-                    WndParticipant2Course aNewAllocation = new WndParticipant2Course();
+                    WndParticipant2Course aNewAllocation = new WndParticipant2Course(29);
                     //aNewAllocation.dgParticipant.DataContext = (DataTable)this.dgCourse.DataContext;
                     aNewAllocation.ShowDialog();
                 }
