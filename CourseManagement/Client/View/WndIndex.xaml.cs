@@ -149,7 +149,7 @@ namespace CourseManagement.Client.View
                 {
                     if (dgCourse.SelectedItems.Count > 0)
                     {
-                        aNewAllocation = new WndParticipant2Course(29);
+                        aNewAllocation = new WndParticipant2Course(choosenCourseNr);
                     }
                     else
                     {

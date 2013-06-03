@@ -14,7 +14,7 @@
                 
                 <StackPanel>
                     <Label Content="Studenten" Margin="10,5,10,0"/>
-                    <ListBox x:Name="lbxPartcicipants" Margin="10,5,10,5" IsSynchronizedWithCurrentItem="True"  Width="180"  SelectionMode="Multiple">
+                    <ListBox x:Name="lbxParticipants" Margin="10,5,10,5" IsSynchronizedWithCurrentItem="True"  Width="180"  SelectionMode="Multiple" ToolTip="Jeder grün markierte Student ist bereits dem gewählten Kurs zugeordnet">
                 </ListBox>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="bezahlt?"   Margin="5"  />
@@ -24,6 +24,7 @@
             </StackPanel>
             <!--<DataGrid x:Name="dgParticipant" Margin="10" ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="True"/>-->
             <Button x:Name="addPerson2Course" Content="hinzufügen" Margin="10,5,10,0" Click="ButtonAddPerson2Course_CLick"/>
+            <Button x:Name="removePersonFromCourse" Content="Zuordnung entfernen" Margin="10,5,10,0" Click="ButtonRemovePersonFromCourse_CLick"/>
             <Button x:Name="close" Content="Abrechen" Margin="10,5,10,5" Click="close_Click"/>
         </StackPanel>
 
