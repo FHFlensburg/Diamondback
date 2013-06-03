@@ -10,107 +10,107 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
-        <StackPanel>
-        <r:Ribbon x:Name="mainRibbon"  SelectedIndex="0" SelectionChanged="Ribbon_SelectionChanged">
-            <!-- Help Pane, located at the right-hand side -->
-            <r:Ribbon.HelpPaneContent>
-                <RibbonButton SmallImageSource="Images\help.ico" Click="OpenHelpFile" />
-            </r:Ribbon.HelpPaneContent>
-            <!-- Quick Access Toolbar - located at the upper-left corner -->
-            <r:Ribbon.QuickAccessToolBar>
-                <r:RibbonQuickAccessToolBar>
-                </r:RibbonQuickAccessToolBar>
-            </r:Ribbon.QuickAccessToolBar>
-            <!-- Application Menu, located at the left-hand side (down arrow) -->
-            <r:Ribbon.ApplicationMenu>
-                <r:RibbonApplicationMenu KeyTip="X">
-                    <!--ToDo beta status, real buttons follow-->
-                    <r:RibbonApplicationMenuItem Header="Options" ImageSource="Images\todo.png" />
-                    <r:RibbonApplicationMenuItem Header="Exit" ImageSource="Images\todo.png" />
-                </r:RibbonApplicationMenu>
-            </r:Ribbon.ApplicationMenu>
-            <!-- Ribbon Tab #1: Home -->
-            <r:RibbonTab x:Name="ribbonCourse" Header="Kurse" KeyTip="K" >
-                <!-- Ribbon tab course -->
-                <r:RibbonGroup x:Name="ribbongroupCourseNew" Header="Neu">
-                    <r:RibbonButton LargeImageSource="Images\new.ico" Label="Neuer Kurs" Click="RibbonButtonNewCourse_Click"/>
-                </r:RibbonGroup>
-                <r:RibbonGroup x:Name="ribbongroupCourseAdd" Header="Hinzufügen">
-                    <r:RibbonButton SmallImageSource="Images\addParticipant.ico" Label="Teilnehmer" Click="RibbonButtonAddParticipant_Click" />
+            <StackPanel>
+                <r:Ribbon x:Name="mainRibbon"  SelectedIndex="0" SelectionChanged="Ribbon_SelectionChanged">
+                    <!-- Help Pane, located at the right-hand side -->
+                    <r:Ribbon.HelpPaneContent>
+                        <RibbonButton SmallImageSource="Images\help.ico" Click="OpenHelpFile" />
+                    </r:Ribbon.HelpPaneContent>
+                    <!-- Quick Access Toolbar - located at the upper-left corner -->
+                    <r:Ribbon.QuickAccessToolBar>
+                        <r:RibbonQuickAccessToolBar>
+                        </r:RibbonQuickAccessToolBar>
+                    </r:Ribbon.QuickAccessToolBar>
+                    <!-- Application Menu, located at the left-hand side (down arrow) -->
+                    <r:Ribbon.ApplicationMenu>
+                        <r:RibbonApplicationMenu KeyTip="X">
+                            <!--ToDo beta status, real buttons follow-->
+                            <r:RibbonApplicationMenuItem Header="Options" ImageSource="Images\todo.png" />
+                            <r:RibbonApplicationMenuItem Header="Exit" ImageSource="Images\todo.png" />
+                        </r:RibbonApplicationMenu>
+                    </r:Ribbon.ApplicationMenu>
+                    <!-- Ribbon Tab #1: Home -->
+                    <r:RibbonTab x:Name="ribbonCourse" Header="Kurse" KeyTip="K" >
+                        <!-- Ribbon tab course -->
+                        <r:RibbonGroup x:Name="ribbongroupCourseNew" Header="Neu">
+                            <r:RibbonButton LargeImageSource="Images\new.ico" Label="Neuer Kurs" Click="RibbonButtonNewCourse_Click"/>
+                        </r:RibbonGroup>
+                        <r:RibbonGroup x:Name="ribbongroupCourseAdd" Header="Hinzufügen">
+                            <r:RibbonButton SmallImageSource="Images\addParticipant.ico" Label="Teilnehmer" Click="RibbonButtonAddParticipant_Click" />
                             <!--<r:RibbonButton SmallImageSource="Images\addRoom.ico" Label="Raum" /> -->
                         </r:RibbonGroup>
-                <r:RibbonGroup x:Name="ribbonGroupCourseDelete" Header="Löschen">
+                        <r:RibbonGroup x:Name="ribbonGroupCourseDelete" Header="Löschen">
                             <r:RibbonButton LargeImageSource="Images\delete.ico" Label="Löschen" Click="RibbonButtonDeleteCourse_Click"  />
-                </r:RibbonGroup>
-                <r:RibbonGroup x:Name="ribbonGroupChange" Header="Bearbeiten">
-                    <r:RibbonButton LargeImageSource="Images\change.ico" Label="Bearbeiten" Click="RibbonButtonEditCourse_Click"/>
-                </r:RibbonGroup>
-            </r:RibbonTab>
-            <!-- Ribbon Tab person: -->
-            <r:RibbonTab x:Name="ribbonPerson" Header="Personen" KeyTip="P">
-                <r:RibbonGroup x:Name="ribbonGroupPersonsNew" Header="Neu">
-                    <r:RibbonButton LargeImageSource="Images\addParticipant.ico" Label="Neue Person" Click="RibbonButtonNewPerson_Click"/>
-                </r:RibbonGroup>
-                <r:RibbonGroup x:Name="ribbonGroupPersonsDelete" Header="Löschen">
-                    <r:RibbonButton LargeImageSource="Images\delete.ico" Label="Löschen" />
-                </r:RibbonGroup>
-            </r:RibbonTab>
-            <!-- Ribbon Tab room: -->
-            <r:RibbonTab x:Name="ribbonRoom" Header="Räume" KeyTip="R">
-                <r:RibbonGroup x:Name="ribbonGroupRoomNew" Header="Neu">
-                    <r:RibbonButton LargeImageSource="Images\addRoom.ico" Label="Neuer Raum" Click="RibbonButtonNewRoom_Click"/>
-                </r:RibbonGroup>
-                <r:RibbonGroup x:Name="ribbonGroupRoomDelete" Header="Löschen">
-                    <r:RibbonButton LargeImageSource="Images\delete.ico" Label="Löschen" />
-                </r:RibbonGroup>
-            </r:RibbonTab>
-            <!-- Ribbon Tab payment: -->
-            <r:RibbonTab x:Name="ribbonPayment" Header="Zahlungen" KeyTip="Z">
-                <r:RibbonGroup x:Name="ribbonGroupPaymentBooking" Header="Buchen">
-                    <r:RibbonButton LargeImageSource="Images/booking.ico" Label="Zahlungen buchen" Click="RibbonButtonNewPayment_Click"/>
-                </r:RibbonGroup>
-            </r:RibbonTab>
-        </r:Ribbon>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <TextBox Name="tbSearch" Width="200" Margin="5" TextChanged="TextBoxSearch_Changed"/>
+                        </r:RibbonGroup>
+                        <r:RibbonGroup x:Name="ribbonGroupChange" Header="Bearbeiten">
+                            <r:RibbonButton LargeImageSource="Images\change.ico" Label="Bearbeiten" Click="RibbonButtonEditCourse_Click"/>
+                        </r:RibbonGroup>
+                    </r:RibbonTab>
+                    <!-- Ribbon Tab person: -->
+                    <r:RibbonTab x:Name="ribbonPerson" Header="Personen" KeyTip="P">
+                        <r:RibbonGroup x:Name="ribbonGroupPersonsNew" Header="Neu">
+                            <r:RibbonButton LargeImageSource="Images\addParticipant.ico" Label="Neue Person" Click="RibbonButtonNewPerson_Click"/>
+                        </r:RibbonGroup>
+                        <r:RibbonGroup x:Name="ribbonGroupPersonsDelete" Header="Löschen">
+                            <r:RibbonButton LargeImageSource="Images\delete.ico" Label="Löschen" />
+                        </r:RibbonGroup>
+                    </r:RibbonTab>
+                    <!-- Ribbon Tab room: -->
+                    <r:RibbonTab x:Name="ribbonRoom" Header="Räume" KeyTip="R">
+                        <r:RibbonGroup x:Name="ribbonGroupRoomNew" Header="Neu">
+                            <r:RibbonButton LargeImageSource="Images\addRoom.ico" Label="Neuer Raum" Click="RibbonButtonNewRoom_Click"/>
+                        </r:RibbonGroup>
+                        <r:RibbonGroup x:Name="ribbonGroupRoomDelete" Header="Löschen">
+                            <r:RibbonButton LargeImageSource="Images\delete.ico" Label="Löschen" />
+                        </r:RibbonGroup>
+                    </r:RibbonTab>
+                    <!-- Ribbon Tab payment: -->
+                    <r:RibbonTab x:Name="ribbonPayment" Header="Zahlungen" KeyTip="Z">
+                        <r:RibbonGroup x:Name="ribbonGroupPaymentBooking" Header="Buchen">
+                            <r:RibbonButton LargeImageSource="Images/booking.ico" Label="Zahlungen buchen" Click="RibbonButtonNewPayment_Click"/>
+                        </r:RibbonGroup>
+                    </r:RibbonTab>
+                </r:Ribbon>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <TextBox Name="tbSearch" Width="200" Margin="5" TextChanged="TextBoxSearch_Changed"/>
                 </StackPanel>
-        </StackPanel>
-        <StackPanel Grid.Row="2" Orientation="Vertical" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" >
-            <DataGrid x:Name="dgCourse" Margin="10"  ItemsSource="{Binding}" IsReadOnly="True" IsSynchronizedWithCurrentItem="False" SelectedCellsChanged="element_SelectCourse">
-            <DataGrid.ItemContainerStyle>
-            <Style TargetType="DataGridRow">
-                <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
-            </Style>
-            </DataGrid.ItemContainerStyle>
-        </DataGrid>
-        </StackPanel>
-        <StackPanel Grid.Row="3" VerticalAlignment="Bottom" >
-            <Label Content="Buchungen" FontWeight="Bold"/>
-            <DataGrid x:Name="dgAppointments" Margin="10" ItemsSource="{Binding}" IsReadOnly="True"  />
-            <StackPanel Orientation="Horizontal" x:Name="spAppointments">
-                <StackPanel Margin="5">
+            </StackPanel>
+            <StackPanel Grid.Row="2" Orientation="Vertical" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" >
+                <DataGrid x:Name="dgCourse" Margin="10"  ItemsSource="{Binding}" SelectionChanged="element_SelectCourse" IsReadOnly="True" IsSynchronizedWithCurrentItem="False">
+                    <DataGrid.ItemContainerStyle>
+                        <Style TargetType="DataGridRow">
+                            <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
+                        </Style>
+                    </DataGrid.ItemContainerStyle>
+                </DataGrid>
+            </StackPanel>
+            <StackPanel Grid.Row="3" VerticalAlignment="Bottom" >
+                <Label Content="Buchungen" FontWeight="Bold"/>
+                <DataGrid x:Name="dgAppointments" Margin="10" ItemsSource="{Binding}" IsReadOnly="True"  />
+                <StackPanel Orientation="Horizontal" x:Name="spAppointments" Margin="0,0,-0.4,0">
+                    <StackPanel Margin="5">
                         <Label Content="Bitte ausfüllen" x:Name="lblCourseNotFilled" Visibility="Hidden"  Foreground="Red"/>
                     </StackPanel>
-                <StackPanel Margin="5">
-                    <Label Width="130" Content="Beginn"/>
-                    <DatePicker x:Name="dpBeginOfCourse"/>
+                    <StackPanel Margin="5">
+                        <Label Width="130" Content="Beginn"/>
+                        <DatePicker x:Name="dpBeginOfCourse"/>
                         <Label Content="Bitte ausfüllen" x:Name="lblBeginnDateNotFilled" Visibility="Hidden"  Foreground="Red"/>
                     </StackPanel>
-                <StackPanel Margin="5">
-                    <Label Width="130" Content="Ende"/>
-                    <DatePicker x:Name="dpEndOfAppointCourse"/>
+                    <StackPanel Margin="5">
+                        <Label Width="130" Content="Ende"/>
+                        <DatePicker x:Name="dpEndOfAppointCourse"/>
                         <Label Content="Bitte ausfüllen" x:Name="lblEndDateNotFilled" Visibility="Hidden"  Foreground="Red"/>
                     </StackPanel>
-                <StackPanel Margin="5">
-                    <Label Width="130" Content="Raum-NR" />
+                    <StackPanel Margin="5">
+                        <Label Width="130" Content="Raum-NR" />
                         <ComboBox x:Name="cbxAppointmentRoomNumber" Width="120" />
                         <Label Content="Bitte ausfüllen" x:Name="lblRoomNrNotFilled" Visibility="Hidden"  Foreground="Red"/>
                     </StackPanel>
-                <StackPanel VerticalAlignment="Center" Margin="5">
-                    <Button x:Name="btnAddAppointment" Content="Hinzufügen" Width="130" Click="ButtonAddAppointment_Click"/>
+                    <StackPanel VerticalAlignment="Center" Margin="5">
+                        <Button x:Name="btnAddAppointment" Content="Hinzufügen" Width="130" Click="ButtonAddAppointment_Click"/>
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
-        </StackPanel>
         </StackPanel>
     </Grid>
 </r:RibbonWindow>

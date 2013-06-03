@@ -16,7 +16,8 @@ namespace CourseManagement.Client.View
     /// </summary>
     public partial class WndIndex : RibbonWindow
     {
-
+        DataRowView row;
+        int choosenCourseNr;
         static string[] columnHeaderTitles = new string[]
             {
                 "Kurs-Nr","Kurs Titel", "Betrag in €", "Beschreibung", "Max Teilnahmer", "Min Teilnahmer", "Tutor", "Gültigkeit in Monate", "Bezahlungen", "Buchungen"
@@ -234,20 +235,19 @@ namespace CourseManagement.Client.View
             DateTime chosenStartDate = DateTime.MinValue;
             DateTime chosenEndDate = DateTime.MinValue;
             int chosenRoomNr = 0;
-
+            
             //getting CourseNumber from UserSelection (ComboBox)
             if (dgCourse.SelectedItems != null)
             {
                 //cbxAppointmentCourse.
                 try
                 {
-                    DataRowView row = (DataRowView)dgCourse.SelectedItem;
-                    chosenCourseID = Convert.ToInt32(row[0]);
+                    chosenCourseID = choosenCourseNr;
                 }
-                catch (Exception err)
+                catch (Exception error)
                 {
 
-                    MessageBox.Show(err.ToString());
+                    MessageBox.Show(error.ToString());
                 }
                
             }
@@ -304,7 +304,7 @@ namespace CourseManagement.Client.View
                     AppointmentLogic.getInstance().create(chosenCourseID, chosenRoomNr, chosenStartDate, chosenEndDate);
                 }
 
-                refreshDataGrids(this);
+                dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(choosenCourseNr);
 
                 //hiding the error labels again
                 this.lblCourseNotFilled.Visibility = Visibility.Hidden;
@@ -363,22 +363,17 @@ namespace CourseManagement.Client.View
             changeColumnTitleCourse();
         }
 
-        private void element_SelectCourse(object sender, SelectedCellsChangedEventArgs e)
-        {
-            DataRowView row = (DataRowView)dgCourse.SelectedItems[0];
-            dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(Convert.ToInt32(row["CourseNr"].ToString()));
-
-        }
-
-        private void RibbonButtonNewPayment_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void RibbonButtonNewPayment_Click(object sender, RoutedEventArgs e)
         {
             WndNewPayment aPaymentWindow = new WndNewPayment();
             aPaymentWindow.ShowDialog();
+        }
+
+        private void element_SelectCourse(object sender, SelectionChangedEventArgs e)
+        {
+            row = (DataRowView)dgCourse.SelectedItems[0];
+            choosenCourseNr = Convert.ToInt32(row["CourseNr"].ToString());
+            dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(choosenCourseNr);
         }
     }
 }
