@@ -8,13 +8,13 @@
             <Label Content="Teilnehmer zu Kurs hinzufügen" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <StackPanel>
-                    <Label Content="Studenten" Margin="10,5,10,0"/>
-                <ListBox x:Name="lbxPartcicipants" Margin="10,5,10,5" IsSynchronizedWithCurrentItem="True" Width="180" HorizontalAlignment="Left" SelectionMode="Extended" />
+                    <Label Content="Kurse" Margin="10,5,10,0"/>
+                    <ListBox x:Name="lbxCourses" Margin="10,5,10,5" IsSynchronizedWithCurrentItem="True" Width="180" HorizontalAlignment="Left" SelectionChanged="lbxCourses_SelectionChanged" />
                 </StackPanel>
                 
                 <StackPanel>
-                    <Label Content="Kurse" Margin="10,5,10,0"/>
-                <ListBox x:Name="lbxCourses" Margin="10,5,10,5" IsSynchronizedWithCurrentItem="True" RenderTransformOrigin="0.5,0.5" Width="180" SelectionChanged="lbxCourses_SelectionChanged" SelectionMode="Extended">
+                    <Label Content="Studenten" Margin="10,5,10,0"/>
+                    <ListBox x:Name="lbxPartcicipants" Margin="10,5,10,5" IsSynchronizedWithCurrentItem="True"  Width="180"  SelectionMode="Multiple">
                 </ListBox>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="bezahlt?"   Margin="5"  />
@@ -23,7 +23,7 @@
                 </StackPanel>
             </StackPanel>
             <!--<DataGrid x:Name="dgParticipant" Margin="10" ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="True"/>-->
-            <Button x:Name="addPerson2Course" Content="hinzufügen" Margin="10,5,10,0" Click="add_Click"/>
+            <Button x:Name="addPerson2Course" Content="hinzufügen" Margin="10,5,10,0" Click="ButtonAddPerson2Course_CLick"/>
             <Button x:Name="close" Content="Abrechen" Margin="10,5,10,5" Click="close_Click"/>
         </StackPanel>
 
