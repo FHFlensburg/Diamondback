@@ -44,6 +44,7 @@ namespace CourseManagement.Client.DB
             try
             {
                 DBConfiguration.getContext().Payments.Add(payment);
+                DBConfiguration.getContext().SaveChanges();
             }
             catch (EntityException e)
             {
