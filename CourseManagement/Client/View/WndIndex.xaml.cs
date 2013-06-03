@@ -7,6 +7,7 @@ using CourseManagement.Client.BusinessLogic;
 using System.Collections.Generic;
 using System;
 using System.Collections;
+using System.Windows.Controls.Primitives;
 
 
 namespace CourseManagement.Client.View
@@ -81,7 +82,13 @@ namespace CourseManagement.Client.View
                             changeColumnTitleCourse();
                             break;
                         case 1:
-                            mainWindow.dgCourse.DataContext = StudentLogic.getInstance().getAll();
+                            
+                            mainWindow.dgCourse.DataContext = PersonLogic.getInstance().getAll();
+                            mainWindow.dgCourse.Columns[0].Visibility = Visibility.Hidden;
+                            mainWindow.dgCourse.Columns[1].Visibility = Visibility.Hidden;
+                            mainWindow.dgCourse.Columns[2].Visibility = Visibility.Hidden;
+                            mainWindow.dgCourse.Columns[3].Visibility = Visibility.Hidden;
+                            mainWindow.dgCourse.Columns[4].Visibility = Visibility.Hidden;
                             break;
                         case 2:
                             mainWindow.dgCourse.DataContext = RoomLogic.getInstance().getAll();
@@ -135,13 +142,19 @@ namespace CourseManagement.Client.View
 
         private void OpenWindow2AddParticpant(object sender)
         {
-
+            WndParticipant2Course aNewAllocation = null;
             if (sender != null)
             {
                 try
                 {
-                    WndParticipant2Course aNewAllocation = new WndParticipant2Course(29);
-                    //aNewAllocation.dgParticipant.DataContext = (DataTable)this.dgCourse.DataContext;
+                    if (dgCourse.SelectedItems.Count > 0)
+                    {
+                        aNewAllocation = new WndParticipant2Course(29);
+                    }
+                    else
+                    {
+                        aNewAllocation = new WndParticipant2Course(-1);
+                    }
                     aNewAllocation.ShowDialog();
                 }
                 catch (System.Exception err)
@@ -237,9 +250,8 @@ namespace CourseManagement.Client.View
             int chosenRoomNr = 0;
             
             //getting CourseNumber from UserSelection (ComboBox)
-            if (dgCourse.SelectedItems != null)
+            if (dgCourse.SelectedItems.Count > 0)
             {
-                //cbxAppointmentCourse.
                 try
                 {
                     chosenCourseID = choosenCourseNr;
@@ -253,7 +265,7 @@ namespace CourseManagement.Client.View
             }
             else
             {
-                this.lblCourseNotFilled.Visibility = Visibility.Visible;
+                lblCourseNotSelected.Visibility = Visibility.Visible;
             }
 
 
@@ -293,7 +305,7 @@ namespace CourseManagement.Client.View
             }
 
 
-            if (dgCourse.SelectedItems[0] != null 
+            if (dgCourse.SelectedItems.Count > 0 
                 && dpBeginOfCourse.SelectedDate != null 
                 && dpEndOfAppointCourse.SelectedDate != null 
                 && cbxAppointmentRoomNumber.SelectedItem != null 
@@ -307,10 +319,10 @@ namespace CourseManagement.Client.View
                 dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(choosenCourseNr);
 
                 //hiding the error labels again
-                this.lblCourseNotFilled.Visibility = Visibility.Hidden;
                 lblBeginnDateNotFilled.Visibility = Visibility.Hidden;
                 lblEndDateNotFilled.Visibility = Visibility.Hidden;
                 lblRoomNrNotFilled.Visibility = Visibility.Hidden;
+                lblCourseNotSelected.Visibility = Visibility.Hidden;
             }
         }
 
@@ -363,17 +375,59 @@ namespace CourseManagement.Client.View
             changeColumnTitleCourse();
         }
 
+        /// <summary>
+        /// Creates a new Payment
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RibbonButtonNewPayment_Click(object sender, RoutedEventArgs e)
         {
             WndNewPayment aPaymentWindow = new WndNewPayment();
             aPaymentWindow.ShowDialog();
         }
 
+        /// <summary>
+        /// First check if the Course Tab is selected, then check if only one row in the Datagrid is selcted
+        /// After it set the class variable choosenCourseNr by the selected course and fill the appointment table
+        /// with all appointments from the selected course
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void element_SelectCourse(object sender, SelectionChangedEventArgs e)
         {
-            row = (DataRowView)dgCourse.SelectedItems[0];
-            choosenCourseNr = Convert.ToInt32(row["CourseNr"].ToString());
-            dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(choosenCourseNr);
+            if (this.mainRibbon.SelectedIndex == 0)
+            {
+                if (dgCourse.SelectedItems.Count == 1)
+                {
+                    row = (DataRowView)dgCourse.SelectedItems[0];
+                    choosenCourseNr = Convert.ToInt32(row[0].ToString());
+                    dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(choosenCourseNr);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Fills the Person DataGrid with the selected PersonGroup
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RibbonGallery_SelectionChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            switch (this.cbxPersons.Text)
+            {
+                case "Alle Personen":
+                    this.dgCourse.DataContext = PersonLogic.getInstance().getAll();
+                    break;
+                case "Tutoren":
+                    this.dgCourse.DataContext = TutorLogic.getInstance().getAll();
+                    break;
+                case "Studenten":
+                    this.dgCourse.DataContext = StudentLogic.getInstance().getAll();
+                    break;
+                case "Benutzer":
+                    this.dgCourse.DataContext = UserLogic.getInstance().getAll();
+                    break;
+            }
         }
     }
 }
