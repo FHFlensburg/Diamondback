@@ -7,6 +7,7 @@ using CourseManagement.Client.BusinessLogic;
 using System.Collections.Generic;
 using System;
 using System.Collections;
+using System.Windows.Controls.Primitives;
 
 
 namespace CourseManagement.Client.View
@@ -81,7 +82,26 @@ namespace CourseManagement.Client.View
                             changeColumnTitleCourse();
                             break;
                         case 1:
-                            mainWindow.dgCourse.DataContext = StudentLogic.getInstance().getAll();
+                            switch(this.cbxPersons.SelectionBoxItemStringFormat)
+                            {
+                                case "Alle Personen":
+                                    mainWindow.dgCourse.DataContext = PersonLogic.getInstance().getAll();
+                                    break;
+                                case "Tutoren":
+                                    mainWindow.dgCourse.DataContext = TutorLogic.getInstance().getAll();
+                                    break;
+                                case "Studenten":
+                                    mainWindow.dgCourse.DataContext = StudentLogic.getInstance().getAll();
+                                    break;
+                                case "Benutzer":
+                                    mainWindow.dgCourse.DataContext = UserLogic.getInstance().getAll();
+                                    break;
+                            }
+                            mainWindow.dgCourse.Columns[0].Visibility = Visibility.Hidden;
+                            mainWindow.dgCourse.Columns[1].Visibility = Visibility.Hidden;
+                            mainWindow.dgCourse.Columns[2].Visibility = Visibility.Hidden;
+                            mainWindow.dgCourse.Columns[3].Visibility = Visibility.Hidden;
+                            mainWindow.dgCourse.Columns[4].Visibility = Visibility.Hidden;
                             break;
                         case 2:
                             mainWindow.dgCourse.DataContext = RoomLogic.getInstance().getAll();
@@ -237,9 +257,8 @@ namespace CourseManagement.Client.View
             int chosenRoomNr = 0;
             
             //getting CourseNumber from UserSelection (ComboBox)
-            if (dgCourse.SelectedItems != null)
+            if (dgCourse.SelectedItems.Count > 0)
             {
-                //cbxAppointmentCourse.
                 try
                 {
                     chosenCourseID = choosenCourseNr;
@@ -371,9 +390,15 @@ namespace CourseManagement.Client.View
 
         private void element_SelectCourse(object sender, SelectionChangedEventArgs e)
         {
-            row = (DataRowView)dgCourse.SelectedItems[0];
-            choosenCourseNr = Convert.ToInt32(row["CourseNr"].ToString());
-            dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(choosenCourseNr);
+            if (this.mainRibbon.SelectedIndex == 0)
+            {
+                if (dgCourse.SelectedItems.Count > 0)
+                {
+                    row = (DataRowView)dgCourse.SelectedItems[0];
+                    choosenCourseNr = Convert.ToInt32(row[0].ToString());
+                    dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(choosenCourseNr);
+                }
+            }
         }
     }
 }
