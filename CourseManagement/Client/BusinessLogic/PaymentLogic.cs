@@ -226,13 +226,13 @@ namespace CourseManagement.Client.BusinessLogic
         }
 
         /// <summary>
-        /// Set the payment payed/unpayed
+        /// Set the payment paid/unpaid
         /// </summary>
         /// <param name="paymentId"></param>
-        /// <param name="isPayed"></param>
-        public void changeProperties(int paymentId, bool? isPayed)
+        /// <param name="isPaid"></param>
+        public void changeProperties(int paymentId, bool? isPaid)
         {
-            Payment.getById(paymentId).IsPaid = isPayed;
+            Payment.getById(paymentId).IsPaid = isPaid;
         }
     }
 }
