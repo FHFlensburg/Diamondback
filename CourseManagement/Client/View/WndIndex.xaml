@@ -55,15 +55,19 @@
                             <r:RibbonButton LargeImageSource="Images\delete.ico" Label="Löschen" />
                         </r:RibbonGroup>
                         <r:RibbonGroup x:Name="ribbonGroupPersonsSelect" Header="Auswahl">
-                            <r:RibbonComboBox x:Name="cbxPersons" Label="Personen Auswahl" 
+                            <r:RibbonComboBox x:Name="cbxPersons" Label="Personen Auswahl"
                                 SmallImageSource="Images/logo.png"
                                 SelectionBoxWidth="62"
                                 VerticalAlignment="Center" 
-                                IsEditable="FALSE" >
-                                        <ComboBoxItem>Alle Personen</ComboBoxItem>
-                                        <ComboBoxItem>Tutoren</ComboBoxItem>
-                                        <ComboBoxItem>Studenten</ComboBoxItem>
-                                        <ComboBoxItem>Benutzer</ComboBoxItem>
+                                IsEditable="FALSE">
+                                <r:RibbonGallery SelectedValue="Alle Personen" SelectedValuePath="Content" MaxColumnCount="1" SelectionChanged="RibbonGallery_SelectionChanged">
+                                    <r:RibbonGalleryCategory>
+                                        <r:RibbonGalleryItem Content="Alle Personen" Foreground="Blue"/>
+                                        <r:RibbonGalleryItem Content="Tutoren" Foreground="Green" />
+                                        <r:RibbonGalleryItem Content="Studenten" Foreground="Red" />
+                                        <r:RibbonGalleryItem Content="Benutzer" Foreground="Orange" />
+                                    </r:RibbonGalleryCategory>
+                                </r:RibbonGallery>
                             </r:RibbonComboBox>
                         </r:RibbonGroup>
                     </r:RibbonTab>

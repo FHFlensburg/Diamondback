@@ -82,21 +82,8 @@ namespace CourseManagement.Client.View
                             changeColumnTitleCourse();
                             break;
                         case 1:
-                            switch(this.cbxPersons.SelectionBoxItemStringFormat)
-                            {
-                                case "Alle Personen":
-                                    mainWindow.dgCourse.DataContext = PersonLogic.getInstance().getAll();
-                                    break;
-                                case "Tutoren":
-                                    mainWindow.dgCourse.DataContext = TutorLogic.getInstance().getAll();
-                                    break;
-                                case "Studenten":
-                                    mainWindow.dgCourse.DataContext = StudentLogic.getInstance().getAll();
-                                    break;
-                                case "Benutzer":
-                                    mainWindow.dgCourse.DataContext = UserLogic.getInstance().getAll();
-                                    break;
-                            }
+                            
+                            mainWindow.dgCourse.DataContext = PersonLogic.getInstance().getAll();
                             mainWindow.dgCourse.Columns[0].Visibility = Visibility.Hidden;
                             mainWindow.dgCourse.Columns[1].Visibility = Visibility.Hidden;
                             mainWindow.dgCourse.Columns[2].Visibility = Visibility.Hidden;
@@ -382,22 +369,58 @@ namespace CourseManagement.Client.View
             changeColumnTitleCourse();
         }
 
+        /// <summary>
+        /// Creates a new Payment
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RibbonButtonNewPayment_Click(object sender, RoutedEventArgs e)
         {
             WndNewPayment aPaymentWindow = new WndNewPayment();
             aPaymentWindow.ShowDialog();
         }
 
+        /// <summary>
+        /// First check if the Course Tab is selected, then check if only one row in the Datagrid is selcted
+        /// After it set the class variable choosenCourseNr by the selected course and fill the appointment table
+        /// with all appointments from the selected course
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void element_SelectCourse(object sender, SelectionChangedEventArgs e)
         {
             if (this.mainRibbon.SelectedIndex == 0)
             {
-                if (dgCourse.SelectedItems.Count > 0)
+                if (dgCourse.SelectedItems.Count == 1)
                 {
                     row = (DataRowView)dgCourse.SelectedItems[0];
                     choosenCourseNr = Convert.ToInt32(row[0].ToString());
                     dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(choosenCourseNr);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Fills the Person DataGrid with the selected PersonGroup
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RibbonGallery_SelectionChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            switch (this.cbxPersons.Text)
+            {
+                case "Alle Personen":
+                    this.dgCourse.DataContext = PersonLogic.getInstance().getAll();
+                    break;
+                case "Tutoren":
+                    this.dgCourse.DataContext = TutorLogic.getInstance().getAll();
+                    break;
+                case "Studenten":
+                    this.dgCourse.DataContext = StudentLogic.getInstance().getAll();
+                    break;
+                case "Benutzer":
+                    this.dgCourse.DataContext = UserLogic.getInstance().getAll();
+                    break;
             }
         }
     }
