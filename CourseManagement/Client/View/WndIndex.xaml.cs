@@ -22,7 +22,7 @@ namespace CourseManagement.Client.View
         int choosenCourseNr;
         static string[] columnHeaderTitles = new string[]
             {
-                "Kurs-Nr","Kurs Titel", "Betrag in €", "Beschreibung", "Max Teilnahmer", "Min Teilnahmer", "Tutor", "Gültigkeit in Monate", "Bezahlungen", "Buchungen"
+                "Kurs Titel", "Betrag in €", "Beschreibung", "Max Teilnahmer", "Min Teilnahmer", "Tutor", "Gültigkeit in Monate", "Bezahlungen", "Buchungen"
             };
         
         static string[] personHeaderTitles = new string[]
@@ -144,36 +144,36 @@ namespace CourseManagement.Client.View
 
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-            OpenWindow2AddParticpant(sender);
+            if (mainRibbon.SelectedIndex == 0)
+            {
+                OpenWindow2AddParticpant();
+            }
         }
 
-        private void OpenWindow2AddParticpant(object sender)
+        private void OpenWindow2AddParticpant()
         {
             WndParticipant2Course aNewAllocation = null;
-            if (sender != null)
+            try
             {
-                try
+                if (dgCourse.SelectedItems.Count > 0)
                 {
-                    if (dgCourse.SelectedItems.Count > 0)
-                    {
-                        aNewAllocation = new WndParticipant2Course(choosenCourseNr);
-                    }
-                    else
-                    {
-                        aNewAllocation = new WndParticipant2Course(-1);
-                    }
-                    aNewAllocation.ShowDialog();
+                    aNewAllocation = new WndParticipant2Course(choosenCourseNr);
                 }
-                catch (System.Exception err)
+                else
                 {
-                    System.Windows.MessageBox.Show(err.ToString());
+                    aNewAllocation = new WndParticipant2Course(-1);
                 }
+                aNewAllocation.ShowDialog();
+            }
+            catch (System.Exception err)
+            {
+                System.Windows.MessageBox.Show(err.ToString());
             }
         }
 
         private void RibbonButtonAddParticipant_Click(object sender, RoutedEventArgs e)
         {
-            OpenWindow2AddParticpant(sender);
+            OpenWindow2AddParticpant();
         }
 
         private void OpenHelpFile(object sender, RoutedEventArgs e)
@@ -265,15 +265,9 @@ namespace CourseManagement.Client.View
                 }
                 catch (Exception error)
                 {
-
                     System.Windows.MessageBox.Show(error.ToString());
                 }
-               
             }
-            else
-            {
-            }
-
 
             //getting begin of appointment from userselection
             if (this.dpBeginOfCourse.Text != null)
@@ -309,7 +303,6 @@ namespace CourseManagement.Client.View
             {
                 lblRoomNrNotFilled.Visibility = Visibility.Visible;
             }
-
 
             if (dgCourse.SelectedItems.Count > 0
                 && dpBeginOfCourse.Value.Value != null 
@@ -404,9 +397,9 @@ namespace CourseManagement.Client.View
             {
                 if (dgCourse.SelectedItems.Count == 1)
                 {
-                    //row = (DataRowView)dgCourse.SelectedItems[0];
-                    //choosenCourseNr = Convert.ToInt32(row[0].ToString());
-                    //dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(choosenCourseNr);
+                    row = (DataRowView)dgCourse.SelectedItems[0];
+                    choosenCourseNr = Convert.ToInt32(row["CourseNr"]);
+                    dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(choosenCourseNr);
                     //_dataGrid.DataContext = CourseLogic.getInstance().getAll();
                 }
             }
@@ -440,7 +433,8 @@ namespace CourseManagement.Client.View
 
         /// <summary>
         /// formatting the datagrids
-        /// Each Grid has to have 20% of the Window, no matter how big or small it gets through user input
+        /// Each Grid has to have 25% of the Window, no matter how big or small it gets through user input
+        /// As simple as it could be
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -448,8 +442,6 @@ namespace CourseManagement.Client.View
         {
             dgCourse.Height = this.Height / 4;
             dgAppointments.Height = this.Height / 4;
-
-            
         }
     }
 }
