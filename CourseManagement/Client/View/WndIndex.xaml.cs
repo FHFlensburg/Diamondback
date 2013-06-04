@@ -9,6 +9,7 @@ using System;
 using System.Collections;
 using System.Windows.Controls.Primitives;
 using Xceed.Wpf.Toolkit;
+using System.Windows.Media;
 
 
 namespace CourseManagement.Client.View
@@ -91,6 +92,13 @@ namespace CourseManagement.Client.View
                             dgCourse.Columns[2].Visibility = Visibility.Hidden;
                             dgCourse.Columns[3].Visibility = Visibility.Hidden;
                             dgCourse.Columns[4].Visibility = Visibility.Hidden;
+
+                             cbValues.Items.Clear();
+                            cbValues.Items.Add(new RibbonGalleryItem() { Content = "Alle Personen", Foreground = Brushes.Blue });
+                            cbValues.Items.Add(new RibbonGalleryItem() { Content = "Tutoren", Foreground = Brushes.Green });
+                            cbValues.Items.Add(new RibbonGalleryItem() { Content = "Studenten", Foreground = Brushes.Red });
+                            if (ActiveUser.userIsAdmin()) cbValues.Items.Add(new RibbonGalleryItem() 
+                            { Content = "Benutzer", Foreground = Brushes.Orange });
                             break;
                         case 2:
                             dgCourse.DataContext = RoomLogic.getInstance().getAll();
@@ -410,6 +418,7 @@ namespace CourseManagement.Client.View
         /// <param name="e"></param>
         private void RibbonGallery_SelectionChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
+            Mouse.Capture(cbxPersons);                                          //workaround for buggy combobox-selection in windows-ribbon.
             switch (this.cbxPersons.Text)
             {
                 case "Alle Personen":
@@ -424,7 +433,10 @@ namespace CourseManagement.Client.View
                 case "Benutzer":
                     this.dgCourse.DataContext = UserLogic.getInstance().getAll();
                     break;
+
             }
+            Mouse.Capture(null);                                                //workaround for buggy combobox-selection in windows-ribbon.
+          
         }
 
         

@@ -61,12 +61,9 @@
                                 SelectionBoxWidth="62"
                                 VerticalAlignment="Center" 
                                 IsEditable="FALSE">
-                                <r:RibbonGallery SelectedValue="Alle Personen" SelectedValuePath="Content" MaxColumnCount="1" SelectionChanged="RibbonGallery_SelectionChanged">
-                                    <r:RibbonGalleryCategory>
-                                        <r:RibbonGalleryItem Content="Alle Personen" Foreground="Blue"/>
-                                        <r:RibbonGalleryItem Content="Tutoren" Foreground="Green" />
-                                        <r:RibbonGalleryItem Content="Studenten" Foreground="Red" />
-                                        <r:RibbonGalleryItem Content="Benutzer" Foreground="Orange" />
+                                <r:RibbonGallery Name="rgValue" SelectedValue="Alle Personen" SelectedValuePath="Content" MaxColumnCount="1" SelectionChanged="RibbonGallery_SelectionChanged">
+                                    <r:RibbonGalleryCategory Name="cbValues">
+                                   
                                     </r:RibbonGalleryCategory>
                                 </r:RibbonGallery>
                             </r:RibbonComboBox>
