@@ -344,7 +344,6 @@
 		<row><td>EntityFramework.dll</td><td>{7E87716A-7018-4C9B-89B3-984BB42FB130}</td><td>INSTALLDIR</td><td>2</td><td/><td>entityframework.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>Microsoft.Windows.Shell.dll</td><td>{CA8BA7F8-10A9-457B-A302-08C4A47E6ACE}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.windows.shell.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>RibbonControlsLibrary.dll</td><td>{D469F136-883F-46F3-9342-62AC9182D361}</td><td>INSTALLDIR</td><td>2</td><td/><td>ribboncontrolslibrary.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Xceed.Wpf.DataGrid.dll</td><td>{0532F21D-8C0A-4DA0-BB71-948C2D1313A7}</td><td>INSTALLDIR</td><td>2</td><td/><td>xceed.wpf.datagrid.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>Xceed.Wpf.Toolkit.dll</td><td>{1B3B1A9D-FD39-44EA-9728-4470CD28D0FB}</td><td>INSTALLDIR</td><td>2</td><td/><td>xceed.wpf.toolkit.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
@@ -1867,7 +1866,6 @@
 		<row><td>AlwaysInstall</td><td>EntityFramework.dll</td></row>
 		<row><td>AlwaysInstall</td><td>Microsoft.Windows.Shell.dll</td></row>
 		<row><td>AlwaysInstall</td><td>RibbonControlsLibrary.dll</td></row>
-		<row><td>AlwaysInstall</td><td>Xceed.Wpf.DataGrid.dll</td></row>
 		<row><td>AlwaysInstall</td><td>Xceed.Wpf.Toolkit.dll</td></row>
 	</table>
 
@@ -1887,7 +1885,6 @@
 		<row><td>entityframework.dll</td><td>EntityFramework.dll</td><td>ENTITY~1.DLL|EntityFramework.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\chris_000\Documents\FH-Flensburg\6. Semester\Software-Projekt\Diamondback\Diamondback\CourseManagement\bin\Debug\EntityFramework.dll</td><td>1</td><td/></row>
 		<row><td>microsoft.windows.shell.dll</td><td>Microsoft.Windows.Shell.dll</td><td>MICROS~1.DLL|Microsoft.Windows.Shell.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\chris_000\Documents\FH-Flensburg\6. Semester\Software-Projekt\Diamondback\Diamondback\CourseManagement\bin\Debug\Microsoft.Windows.Shell.dll</td><td>1</td><td/></row>
 		<row><td>ribboncontrolslibrary.dll</td><td>RibbonControlsLibrary.dll</td><td>RIBBON~1.DLL|RibbonControlsLibrary.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\chris_000\Documents\FH-Flensburg\6. Semester\Software-Projekt\Diamondback\Diamondback\CourseManagement\bin\Debug\RibbonControlsLibrary.dll</td><td>1</td><td/></row>
-		<row><td>xceed.wpf.datagrid.dll</td><td>Xceed.Wpf.DataGrid.dll</td><td>XCEEDW~1.DLL|Xceed.Wpf.DataGrid.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\chris_000\Desktop\ExtendedWPFToolkit_Binaries\Xceed.Wpf.DataGrid.dll</td><td>1</td><td/></row>
 		<row><td>xceed.wpf.toolkit.dll</td><td>Xceed.Wpf.Toolkit.dll</td><td>XCEEDW~1.DLL|Xceed.Wpf.Toolkit.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\chris_000\Desktop\ExtendedWPFToolkit_Binaries\Xceed.Wpf.Toolkit.dll</td><td>1</td><td/></row>
 	</table>
 
@@ -2149,7 +2146,6 @@
 		<row><td>EntityFramework.dll</td><td/><td/><td>_B711C06B_F99D_426D_877E_F34EE598BDE6_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>Microsoft.Windows.Shell.dll</td><td/><td/><td>_06FF9EBF_2C83_4CF5_89A0_D4B85CBDAD68_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>RibbonControlsLibrary.dll</td><td/><td/><td>_26039178_9C19_49DE_A892_39F2A52D5169_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Xceed.Wpf.DataGrid.dll</td><td/><td/><td>_47714470_8D10_4012_9A12_E2E554D38203_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>Xceed.Wpf.Toolkit.dll</td><td/><td/><td>_87DFED64_64D5_4CFD_9FD9_645F34BC4386_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 

@@ -104,34 +104,6 @@
                 </DataGrid>
             </StackPanel>
             <StackPanel Grid.Row="3" VerticalAlignment="Bottom" >
-                <Grid>
-                    <Grid.Resources>
-                        <xcdg:DataGridCollectionViewSource x:Key="cvsOrders"
-                                            Source="{Binding}">
-                            <xcdg:DataGridCollectionViewSource.GroupDescriptions>
-                                <PropertyGroupDescription PropertyName="ShipCountry" />
-                                <PropertyGroupDescription PropertyName="ShipCity" />
-                            </xcdg:DataGridCollectionViewSource.GroupDescriptions>
-                        </xcdg:DataGridCollectionViewSource>
-                    </Grid.Resources>
-
-                    <xcdg:DataGridControl x:Name="_dataGrid" 
-                            MaxHeight="400"
-                            ItemsSource="{Binding}" >
-                        <xcdg:DataGridControl.View>
-                            <xcdg:TableflowView FixedColumnCount="2" />
-                        </xcdg:DataGridControl.View>
-
-                        <xcdg:DataGridControl.Columns>
-                            <!--Preconfigure the OrderID Column of the grid with CellValidationRule. -->
-                            <xcdg:Column FieldName="CourseNr"
-                         IsMainColumn="True">
-                                <xcdg:Column.CellValidationRules>
-                                </xcdg:Column.CellValidationRules>
-                            </xcdg:Column>
-                        </xcdg:DataGridControl.Columns>
-                    </xcdg:DataGridControl>
-                </Grid>
                 <Label Content="Buchungen" FontWeight="Bold"/>
                 <DataGrid x:Name="dgAppointments" Margin="10" ItemsSource="{Binding}" IsReadOnly="True"  />
                 <StackPanel Orientation="Horizontal" x:Name="spAppointments" Margin="0,0,-0.4,0">
