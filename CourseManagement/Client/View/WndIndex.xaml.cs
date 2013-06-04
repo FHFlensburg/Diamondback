@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System;
 using System.Collections;
 using System.Windows.Controls.Primitives;
+using Xceed.Wpf.Toolkit;
 
 
 namespace CourseManagement.Client.View
@@ -29,7 +30,9 @@ namespace CourseManagement.Client.View
 
         };
 
-        
+        /// <summary>
+        /// Default Constructor for the Index WPF Window
+        /// </summary>
         public WndIndex()
         {
            InitializeComponent();
@@ -112,7 +115,7 @@ namespace CourseManagement.Client.View
                 }
                 catch (System.Exception err)
                 {
-                    MessageBox.Show(err.ToString());
+                    System.Windows.MessageBox.Show(err.ToString());
                 }
             }
         }
@@ -159,7 +162,7 @@ namespace CourseManagement.Client.View
                 }
                 catch (System.Exception err)
                 {
-                    MessageBox.Show(err.ToString());
+                    System.Windows.MessageBox.Show(err.ToString());
                 }
             }
         }
@@ -182,7 +185,7 @@ namespace CourseManagement.Client.View
             }
             catch (System.Exception err)
             {
-                MessageBox.Show(err.ToString());
+                System.Windows.MessageBox.Show(err.ToString());
             }
             
         }
@@ -213,7 +216,7 @@ namespace CourseManagement.Client.View
             catch (System.Exception err)
             {
 
-                MessageBox.Show(err.ToString());
+                Xceed.Wpf.Toolkit.MessageBox.Show(err.ToString());
             }
         }
 
@@ -250,7 +253,7 @@ namespace CourseManagement.Client.View
             int chosenRoomNr = 0;
             
             //getting CourseNumber from UserSelection (ComboBox)
-            if (dgCourse.SelectedItems.Count > 0)
+            if (dgCourse.SelectedItems.Count == 1)
             {
                 try
                 {
@@ -259,20 +262,19 @@ namespace CourseManagement.Client.View
                 catch (Exception error)
                 {
 
-                    MessageBox.Show(error.ToString());
+                    System.Windows.MessageBox.Show(error.ToString());
                 }
                
             }
             else
             {
-                lblCourseNotSelected.Visibility = Visibility.Visible;
             }
 
 
             //getting begin of appointment from userselection
-            if (this.dpBeginOfCourse.SelectedDate != null)
+            if (this.dpBeginOfCourse.Text != null)
             {
-                chosenStartDate = (DateTime)dpBeginOfCourse.SelectedDate;
+                chosenStartDate = (DateTime)this.dpBeginOfCourse.Value.Value;
                 lblBeginnDateNotFilled.Visibility = Visibility.Hidden;
             }
             else
@@ -282,9 +284,9 @@ namespace CourseManagement.Client.View
 
 
             //getting end of Appointment from userselection
-            if (this.dpEndOfAppointCourse.SelectedDate != null)
+            if (this.dpEndOfAppointCourse.Value.Value.ToUniversalTime() != null)
             {
-                chosenEndDate = (DateTime)dpEndOfAppointCourse.SelectedDate;
+                chosenEndDate = (DateTime)dpEndOfAppointCourse.Value.Value;
                 lblEndDateNotFilled.Visibility = Visibility.Hidden;
             }
             else
@@ -305,11 +307,11 @@ namespace CourseManagement.Client.View
             }
 
 
-            if (dgCourse.SelectedItems.Count > 0 
-                && dpBeginOfCourse.SelectedDate != null 
-                && dpEndOfAppointCourse.SelectedDate != null 
-                && cbxAppointmentRoomNumber.SelectedItem != null 
-                && (DateTime)dpBeginOfCourse.SelectedDate < (DateTime)dpEndOfAppointCourse.SelectedDate)
+            if (dgCourse.SelectedItems.Count > 0
+                && dpBeginOfCourse.Value.Value != null 
+                && dpEndOfAppointCourse.Value.Value != null 
+                && cbxAppointmentRoomNumber.SelectedItem != null
+                && (DateTime)dpBeginOfCourse.Value.Value < (DateTime)dpEndOfAppointCourse.Value.Value)
             {
                 if (AppointmentLogic.getInstance().isPossibleNewAppointment(chosenCourseID, chosenRoomNr, chosenStartDate, chosenEndDate))
                 {
@@ -322,7 +324,6 @@ namespace CourseManagement.Client.View
                 lblBeginnDateNotFilled.Visibility = Visibility.Hidden;
                 lblEndDateNotFilled.Visibility = Visibility.Hidden;
                 lblRoomNrNotFilled.Visibility = Visibility.Hidden;
-                lblCourseNotSelected.Visibility = Visibility.Hidden;
             }
         }
 
@@ -340,7 +341,7 @@ namespace CourseManagement.Client.View
                 }
                 catch (Exception err)
                 {
-                    MessageBox.Show(err.ToString());
+                    System.Windows.MessageBox.Show(err.ToString());
                 }
             }
         }
@@ -402,6 +403,7 @@ namespace CourseManagement.Client.View
                     row = (DataRowView)dgCourse.SelectedItems[0];
                     choosenCourseNr = Convert.ToInt32(row[0].ToString());
                     dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(choosenCourseNr);
+                    _dataGrid.DataContext = CourseLogic.getInstance().getAll();
                 }
             }
         }
@@ -428,6 +430,11 @@ namespace CourseManagement.Client.View
                     this.dgCourse.DataContext = UserLogic.getInstance().getAll();
                     break;
             }
+        }
+
+        private void cbxAppointmentStartTime_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
