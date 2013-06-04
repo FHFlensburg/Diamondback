@@ -403,7 +403,7 @@ namespace CourseManagement.Client.View
                     row = (DataRowView)dgCourse.SelectedItems[0];
                     choosenCourseNr = Convert.ToInt32(row[0].ToString());
                     dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(choosenCourseNr);
-                    //_dataGrid.DataContext = CourseLogic.getInstance().getAll();
+                   // _dataGrid.DataContext = CourseLogic.getInstance().getAll();
                 }
             }
         }
