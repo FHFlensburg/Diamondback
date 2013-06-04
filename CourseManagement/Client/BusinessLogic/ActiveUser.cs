@@ -30,6 +30,8 @@ namespace CourseManagement.Client.BusinessLogic
                 {
                     loginSuccessful = true;
                     currentUser = userToCheck;
+                    currentUser.LastLogin = DateTime.Now;
+                    currentUser.update();
                 }
                 return loginSuccessful;
             }

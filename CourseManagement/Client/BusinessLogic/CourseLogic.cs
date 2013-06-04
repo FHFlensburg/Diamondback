@@ -173,7 +173,9 @@ namespace CourseManagement.Client.BusinessLogic
         /// <returns></returns>
         private DataTable getNewDataTable()
         {
-            return LogicUtils.getNewDataTable(new Course());
+            DataTable table = LogicUtils.getNewDataTable(new Course());
+            table.Columns[0].SetOrdinal(5);
+            return table;
         }
 
         /// <summary>
