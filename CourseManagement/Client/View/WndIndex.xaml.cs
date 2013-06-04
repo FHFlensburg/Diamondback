@@ -22,7 +22,7 @@ namespace CourseManagement.Client.View
         int choosenCourseNr;
         static string[] columnHeaderTitles = new string[]
             {
-                "Kurs Titel", "Betrag in €", "Beschreibung", "Max Teilnahmer", "Min Teilnahmer", "Tutor", "Gültigkeit in Monate", "Bezahlungen", "Buchungen"
+                "Kurs Titel", "Betrag in €", "Beschreibung", "Max Teilnahmer", "Min Teilnahmer", "Kurs-Nr", "Gültigkeit in Monaten", "Tutor", "Bezahlungen", "Buchungen"
             };
         
         static string[] personHeaderTitles = new string[]
@@ -41,11 +41,7 @@ namespace CourseManagement.Client.View
         private void mainWindow_IsLoaded(object sender, System.EventArgs e)
         {
             refreshDataGrids();
-
-            
-
-            fillComboBoxRoomNumber();
-            
+            fillComboBoxRoomNumber();            
         }
 
         private void Ribbon_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -75,7 +71,7 @@ namespace CourseManagement.Client.View
         /// <summary>
         /// Manages which of the DataTables are shown in the datagrid of the view
         /// </summary>
-        /// <param name="mainWindow"></param>
+        /// <param name=""></param>
         private void refreshDataGrids()
         {
             if (this.IsLoaded)
@@ -89,7 +85,6 @@ namespace CourseManagement.Client.View
                             changeColumnTitleCourse();
                             break;
                         case 1:
-                            
                             dgCourse.DataContext = PersonLogic.getInstance().getAll();
                             dgCourse.Columns[0].Visibility = Visibility.Hidden;
                             dgCourse.Columns[1].Visibility = Visibility.Hidden;
@@ -102,16 +97,19 @@ namespace CourseManagement.Client.View
                             break;
                         case 3:
                             dgCourse.DataContext = PaymentLogic.getInstance().getAll();
+                            
                             break;
                         default:
                             dgCourse.DataContext = null;
                             break;
                     }
+                    //sizingColumns();
 
                     DataTable temp = null;
                     temp = AppointmentLogic.getInstance().getAll();
                     dgAppointments.DataContext = temp;
-                    
+
+                    dgAppointments.Columns[0].Header = "Termin-Nr";
                     dgAppointments.Columns[1].Header = "Startdatum";
                     dgAppointments.Columns[2].Header = "Enddatum";
                     dgAppointments.Columns[3].Header = "Kurs";
@@ -127,16 +125,16 @@ namespace CourseManagement.Client.View
         
         /// <summary>
         /// Like this for every Header 
-        ///ToDo How to change oder of columns 
+        /// 
         ///
         /// </summary>
         private void changeColumnTitleCourse()
         {
-            if(dgCourse.Columns.Count == columnHeaderTitles.Length)
+            if (dgCourse.Columns.Count == columnHeaderTitles.Length)
             {
-                for(int i = 0; i < columnHeaderTitles.Length; i++)
+                for (int i = 0; i < columnHeaderTitles.Length; i++)
                 {
-                dgCourse.Columns[i].Header = columnHeaderTitles[i];
+                    dgCourse.Columns[i].Header = columnHeaderTitles[i];
                 }
             }
         }
@@ -144,6 +142,7 @@ namespace CourseManagement.Client.View
 
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
+            //Only in Course tab there should appear the window to add a participant
             if (mainRibbon.SelectedIndex == 0)
             {
                 OpenWindow2AddParticpant();
@@ -442,6 +441,31 @@ namespace CourseManagement.Client.View
         {
             dgCourse.Height = this.Height / 4;
             dgAppointments.Height = this.Height / 4;
+            //if (this.IsLoaded)
+            //{
+            //    sizingColumns();
+            //}
+        }
+
+        /// <summary>
+        /// We needed a a solution that the width of the columns fill all the space of the datagrid and on the other hand
+        /// are sized so that the content fits
+        /// 
+        /// </summary>
+        private void sizingColumns()
+        {
+            //
+            //dgCourse.ColumnWidth = this.Width;
+            dgCourse.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Auto);
+            double sumOfCoulumnsWidth = 0;
+            foreach (DataGridColumn aDataGridColumn in dgCourse.Columns)
+            {
+                sumOfCoulumnsWidth += aDataGridColumn.ActualWidth;
+            }
+            if (sumOfCoulumnsWidth < this.ActualWidth)
+            {
+                dgCourse.MinColumnWidth = this.ActualWidth / dgCourse.Columns.Count;
+            }
         }
     }
 }
