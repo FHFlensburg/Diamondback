@@ -454,17 +454,19 @@ namespace CourseManagement.Client.View
         private void sizingColumns()
         {
             //
-            //dgCourse.ColumnWidth = this.Width;
+            dgCourse.MinColumnWidth = 0;
             dgCourse.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Auto);
             double sumOfCoulumnsWidth = 0;
             foreach (DataGridColumn aDataGridColumn in dgCourse.Columns)
             {
                 sumOfCoulumnsWidth += aDataGridColumn.ActualWidth;
+                
             }
             if (sumOfCoulumnsWidth < this.ActualWidth)
             {
                 dgCourse.MinColumnWidth = this.ActualWidth / dgCourse.Columns.Count;
             }
+            
         }
     }
 }
