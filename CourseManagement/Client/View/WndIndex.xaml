@@ -3,8 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
         xmlns:r="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
-        xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
-        Height="700" Width="900" Activated="mainWindow_IsLoaded"
+        Height="700" Width="900" Activated="mainWindow_IsLoaded" SizeChanged="mainWindow_SizeChanged"
         Icon="Images\Kursverwaltung.ico">
     <Grid>
         <Grid.RowDefinitions>
@@ -95,7 +94,7 @@
                 </StackPanel>
             </StackPanel>
             <StackPanel Grid.Row="2" Orientation="Vertical" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" >
-                <DataGrid x:Name="dgCourse" Margin="10"  ItemsSource="{Binding}" SelectionChanged="element_SelectCourse" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" IsSynchronizedWithCurrentItem="False">
+                <DataGrid x:Name="dgCourse" Margin="10"  ItemsSource="{Binding}" SelectionChanged="element_SelectCourse" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" IsSynchronizedWithCurrentItem="True" >
                     <DataGrid.ItemContainerStyle>
                         <Style TargetType="DataGridRow">
                             <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
@@ -130,82 +129,23 @@
                                 <xcdg:Column.CellValidationRules>
                                 </xcdg:Column.CellValidationRules>
                             </xcdg:Column>
+                ScrollViewer.VerticalScrollBarVisibility="Auto" IsSynchronizedWithCurrentItem="True" MaxHeight="200"
                         </xcdg:DataGridControl.Columns>
                     </xcdg:DataGridControl>
                 </Grid>
                     -->
                 <Label Content="Buchungen" FontWeight="Bold"/>
-                <DataGrid x:Name="dgAppointments" Margin="10" ItemsSource="{Binding}" IsReadOnly="True"  />
-                <StackPanel Orientation="Horizontal" x:Name="spAppointments" Margin="0,0,-0.4,0">
+                <DataGrid x:Name="dgAppointments" Margin="10" ItemsSource="{Binding}" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" IsSynchronizedWithCurrentItem="True"/>
+                <StackPanel Orientation="Horizontal" x:Name="spAppointments" Margin="0,0,-0.4,0" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
                     <StackPanel Margin="5">
                         <Label Width="130" Content="Startdatum"/>
                         <xctk:DateTimePicker Format="FullDateTime" xctk:Name="dpBeginOfCourse" /> 
                         <Label Content="Bitte ausfüllen" x:Name="lblBeginnDateNotFilled" Visibility="Hidden"  Foreground="Red"/>
                     </StackPanel>
                     <StackPanel Margin="5">
-                        <Label Width="130" Content="Uhrzeit Start"/>
-                        <ComboBox x:Name="cbxAppointmentStartTime" Width="120" SelectionChanged="cbxAppointmentStartTime_SelectionChanged">
-                            <ComboBoxItem Name="acht">8:00</ComboBoxItem>
-                            <ComboBoxItem Name="halbneun">8:30</ComboBoxItem>
-                            <ComboBoxItem Name="neun">9:00</ComboBoxItem>
-                            <ComboBoxItem Name="halbzehn">9:30</ComboBoxItem>
-                            <ComboBoxItem Name="zehn">10:00</ComboBoxItem>
-                            <ComboBoxItem Name="halbelf">10:30</ComboBoxItem>
-                            <ComboBoxItem Name="elf">11:00</ComboBoxItem>
-                            <ComboBoxItem Name="halbzwoelf">11:30</ComboBoxItem>
-                            <ComboBoxItem Name="zwoelf">12:00</ComboBoxItem>
-                            <ComboBoxItem Name="halbeins">12:30</ComboBoxItem>
-                            <ComboBoxItem Name="eins">13:00</ComboBoxItem>
-                            <ComboBoxItem Name="halbzwei">13:30</ComboBoxItem>
-                            <ComboBoxItem Name="zwei">14:00</ComboBoxItem>
-                            <ComboBoxItem Name="halbdrei">14:30</ComboBoxItem>
-                            <ComboBoxItem Name="drei">15:00</ComboBoxItem>
-                            <ComboBoxItem Name="halbvier">15:30</ComboBoxItem>
-                            <ComboBoxItem Name="vier">16:00</ComboBoxItem>
-                            <ComboBoxItem Name="halbfuenf">16:30</ComboBoxItem>
-                            <ComboBoxItem Name="fuenf">17:00</ComboBoxItem>
-                            <ComboBoxItem Name="halbsechs">17:30</ComboBoxItem>
-                            <ComboBoxItem Name="sechs">18:00</ComboBoxItem>
-                            <ComboBoxItem Name="halbsieben">18:30</ComboBoxItem>
-                            <ComboBoxItem Name="sieben">19:00</ComboBoxItem>
-                        </ComboBox>
-                        <Label Content="Bitte ausfüllen" x:Name="lblStartTimeNotFilled" Visibility="Hidden"  Foreground="Red"/>
-                    </StackPanel>
-                    <StackPanel Margin="5">
                         <Label Width="130" Content="Ende"/>
                         <xctk:DateTimePicker Format="FullDateTime" xctk:Name="dpEndOfAppointCourse"/>
                         <Label Content="Bitte ausfüllen" x:Name="lblEndDateNotFilled" Visibility="Hidden"  Foreground="Red"/>
-                    </StackPanel>
-                    <StackPanel Margin="5">
-                        <Label Width="130" Content="Uhrzeit Ende"/>
-                        <ComboBox x:Name="cbxAppointmentEndTime" Width="120" >
-                            <ComboBoxItem Name="endeacht">8:00</ComboBoxItem>
-                            <ComboBoxItem Name="endehalbneun">8:30</ComboBoxItem>
-                            <ComboBoxItem Name="endeneun">9:00</ComboBoxItem>
-                            <ComboBoxItem Name="endehalbzehn">9:30</ComboBoxItem>
-                            <ComboBoxItem Name="endezehn">10:00</ComboBoxItem>
-                            <ComboBoxItem Name="endehalbelf">10:30</ComboBoxItem>
-                            <ComboBoxItem Name="endeelf">11:00</ComboBoxItem>
-                            <ComboBoxItem Name="endehalbzwoelf">11:30</ComboBoxItem>
-                            <ComboBoxItem Name="endezwoelf">12:00</ComboBoxItem>
-                            <ComboBoxItem Name="endehalbeins">12:30</ComboBoxItem>
-                            <ComboBoxItem Name="endeeins">13:00</ComboBoxItem>
-                            <ComboBoxItem Name="endehalbzwei">13:30</ComboBoxItem>
-                            <ComboBoxItem Name="endezwei">14:00</ComboBoxItem>
-                            <ComboBoxItem Name="endehalbdrei">14:30</ComboBoxItem>
-                            <ComboBoxItem Name="endedrei">15:00</ComboBoxItem>
-                            <ComboBoxItem Name="endehalbvier">15:30</ComboBoxItem>
-                            <ComboBoxItem Name="endevier">16:00</ComboBoxItem>
-                            <ComboBoxItem Name="endehalbfuenf">16:30</ComboBoxItem>
-                            <ComboBoxItem Name="endefuenf">17:00</ComboBoxItem>
-                            <ComboBoxItem Name="endehalbsechs">17:30</ComboBoxItem>
-                            <ComboBoxItem Name="endesechs">18:00</ComboBoxItem>
-                            <ComboBoxItem Name="endehalbsieben">18:30</ComboBoxItem>
-                            <ComboBoxItem Name="endesieben">19:00</ComboBoxItem>
-                            <ComboBoxItem Name="endehalbacht">19:30</ComboBoxItem>
-                            <ComboBoxItem Name="endezwanzig">20:00</ComboBoxItem>
-                        </ComboBox>
-                        <Label Content="Bitte ausfüllen" x:Name="lblEndTimeNotFilled" Visibility="Hidden"  Foreground="Red"/>
                     </StackPanel>
                     <StackPanel Margin="5">
                         <Label Width="130" Content="Raum-NR" />
@@ -217,9 +157,7 @@
                         <Button x:Name="btnAddAppointment" Content="Hinzufügen" Width="130" Click="ButtonAddAppointment_Click"/>
                         <Label Content="Bitte erst oben Kurs auswählen" x:Name="lblCourseNotSelected" Visibility="Hidden"  Foreground="Red"/>
                     </StackPanel>
-                    
                 </StackPanel>
-                
             </StackPanel>
         </StackPanel>
     </Grid>
