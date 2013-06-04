@@ -70,12 +70,14 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
 <<<<<<< HEAD
-    <Reference Include="Xceed.Wpf.Toolkit">
+    <Reference Include="Xceed.Wpf.Toolkit, Version=2.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\Desktop\ExtendedWPFToolkit_Binaries\Xceed.Wpf.Toolkit.dll</HintPath>
+      <Private>True</Private>
 =======
     <Reference Include="WPFToolkit.Extended">
       <HintPath>..\packages\WPFToolkit.Extended.dll</HintPath>
->>>>>>> f62e28b34198af5c6c2790ee4c3ad729adbcd9c6
+>>>>>>> 14d41e3497f503d25d9a8bb8061df3e61d92c9a8
     </Reference>
   </ItemGroup>
   <ItemGroup>

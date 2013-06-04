@@ -34,7 +34,7 @@ namespace CourseManagement.Client.View
 
         public WndNewCourse(DataTable dataTable)
         {
-            //Validation NEEDED! TODO:
+            
 
             // max member
             string temporaryMaxMember = dataTable.Rows[0]["MaxMember"].ToString();
@@ -55,15 +55,6 @@ namespace CourseManagement.Client.View
             tbCosts.Text = dataTable.Rows[0]["AmountInEuro"].ToString();
             tbDescription.Text = dataTable.Rows[0]["Description"].ToString();
             tbValidInMonth.Text = dataTable.Rows[0]["ValidityInMonth"].ToString();
-
-
-            for (int i = 0; i < cbMaxParticipants.Items.Count; i++)
-            {
-                if (i == tempMaxMember)
-                {
-                    cbMaxParticipants.Text = i.ToString();
-                }
-            }
 
             for (int i = 0; i < cbMinParticipants.Items.Count; i++)
             {
@@ -86,7 +77,7 @@ namespace CourseManagement.Client.View
         private void setGuiValues()
         {
             // 0 Participants allowed in Comboboxes
-            cbMaxParticipants.Items.Clear();
+            tbMaxParticipants.Text = "";
             cbMinParticipants.Items.Clear();
 
             // Values for Tutor
@@ -108,7 +99,7 @@ namespace CourseManagement.Client.View
                 ComboBoxItem minimalParticipants = new ComboBoxItem();
                 maximalParticipants.Content = i;
                 minimalParticipants.Content = i;
-                cbMaxParticipants.Items.Add(maximalParticipants);
+                tbMaxParticipants.Text = maximalParticipants.ToString();
                 cbMinParticipants.Items.Add(minimalParticipants);
             }
 
@@ -136,10 +127,10 @@ namespace CourseManagement.Client.View
             string titeL = tbCourseTitle.Text;
             string description = tbDescription.Text;
             string costs = tbCosts.Text;
-            int validInMonths = Convert.ToInt16(tbValidInMonth.Text);
-            int maxParticipants = Convert.ToInt16(cbMaxParticipants.Text);
-            int minParticipants = Convert.ToInt16(cbMinParticipants.Text);
-            int tutor = Convert.ToInt16(cbTutor.Text);
+            int validInMonths = Convert.ToInt32(tbValidInMonth.Text);
+            int maxParticipants = Convert.ToInt32(tbMaxParticipants.Text);
+            int minParticipants = Convert.ToInt32(cbMinParticipants.Text);
+            int tutor = Convert.ToInt32(cbTutor.Text);
         //    int room = Convert.ToInt16(cbRoomNumber.Text);
             try
             {

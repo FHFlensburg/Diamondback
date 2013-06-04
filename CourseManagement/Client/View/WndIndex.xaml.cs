@@ -223,21 +223,29 @@ namespace CourseManagement.Client.View
             }
         }
 
+        /// <summary>
+        /// Method which Deletes a Course
+        /// 
+        /// Because we do data binding, the structure of the main index and the data tables are the same
+        /// Only thing to do is to look which entry in all courses is the one which was selected to delete. 
+        /// To do this there is the temporary Datatable
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RibbonButtonDeleteCourse_Click(object sender, RoutedEventArgs e)
         {
-            if (this.dgCourse.SelectedIndex != -1)
+            if (dgCourse.SelectedIndex != -1)
             {
                 
-                DataTable temp = CourseLogic.getInstance().getAll();
-                string selectedIndex = temp.Rows[dgCourse.SelectedIndex][0].ToString();
-                int tmp = int.Parse(selectedIndex);
+                DataTable tempDataTable = CourseLogic.getInstance().getAll();
                 try
                 {
-                    CourseLogic.getInstance().delete(tmp);
+                    int selectedIndex = Convert.ToInt32(tempDataTable.Rows[dgCourse.SelectedIndex]["CourseNr"]);
+                    CourseLogic.getInstance().delete(selectedIndex);
                 }
-                catch
+                catch (Exception err)
                 {
-
+                throw new Exception(err.Message);
                 }
                 refreshDataGrids();
             }
@@ -467,6 +475,11 @@ namespace CourseManagement.Client.View
                 dgCourse.MinColumnWidth = this.ActualWidth / dgCourse.Columns.Count;
             }
             
+        }
+
+        private void MainWindowClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
