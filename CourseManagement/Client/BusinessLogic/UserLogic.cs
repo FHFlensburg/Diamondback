@@ -90,7 +90,13 @@ namespace CourseManagement.Client.BusinessLogic
         /// <returns></returns>
         private DataTable getNewDataTable()
         {
-            return LogicUtils.getNewDataTable(new User());
+            DataTable table = LogicUtils.getNewDataTable(new User());
+            table.Columns["UserName"].SetOrdinal(table.Columns.Count - 1);
+            table.Columns["Password"].SetOrdinal(table.Columns.Count - 1);
+            table.Columns["LastLogin"].SetOrdinal(table.Columns.Count - 1);
+            table.Columns["RegistrationDate"].SetOrdinal(table.Columns.Count - 1);
+            table.Columns["Admin"].SetOrdinal(table.Columns.Count - 1);
+            return table;
         }
 
         /// <summary>
@@ -152,6 +158,7 @@ namespace CourseManagement.Client.BusinessLogic
                     user.UserName = username;
                     user.Password = password;
                     user.Admin = admin;
+                    user.RegistrationDate = DateTime.Now;
 
                     user.addToDB();
                     return user.Id;

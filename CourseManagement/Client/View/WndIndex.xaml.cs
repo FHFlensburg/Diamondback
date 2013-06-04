@@ -22,7 +22,7 @@ namespace CourseManagement.Client.View
         int choosenCourseNr;
         static string[] columnHeaderTitles = new string[]
             {
-                "Kurs-Nr","Kurs Titel", "Betrag in €", "Beschreibung", "Max Teilnahmer", "Min Teilnahmer", "Tutor", "Gültigkeit in Monate", "Bezahlungen", "Buchungen"
+                "Kurs Titel", "Betrag in €", "Beschreibung", "Max Teilnahmer", "Min Teilnahmer", "Tutor", "Gültigkeit in Monate", "Bezahlungen", "Buchungen"
             };
         
         static string[] personHeaderTitles = new string[]
@@ -40,13 +40,17 @@ namespace CourseManagement.Client.View
 
         private void mainWindow_IsLoaded(object sender, System.EventArgs e)
         {
-            refreshDataGrids(this);
+            refreshDataGrids();
+
+            
+
             fillComboBoxRoomNumber();
+            
         }
 
         private void Ribbon_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            refreshDataGrids(this);
+            refreshDataGrids();
             //Noch zu überarbeiten und zu prüfen ob sauberer Stil
         }
 
@@ -72,41 +76,41 @@ namespace CourseManagement.Client.View
         /// Manages which of the DataTables are shown in the datagrid of the view
         /// </summary>
         /// <param name="mainWindow"></param>
-        private void refreshDataGrids(WndIndex mainWindow)
+        private void refreshDataGrids()
         {
-            if (mainWindow.IsLoaded)
+            if (this.IsLoaded)
             {
                 try
                 {
-                    switch (mainWindow.mainRibbon.SelectedIndex)
+                    switch (mainRibbon.SelectedIndex)
                     {
                         case 0:
-                            mainWindow.dgCourse.DataContext = CourseLogic.getInstance().getAll();
+                            this.dgCourse.DataContext = CourseLogic.getInstance().getAll();
                             changeColumnTitleCourse();
                             break;
                         case 1:
                             
-                            mainWindow.dgCourse.DataContext = PersonLogic.getInstance().getAll();
-                            mainWindow.dgCourse.Columns[0].Visibility = Visibility.Hidden;
-                            mainWindow.dgCourse.Columns[1].Visibility = Visibility.Hidden;
-                            mainWindow.dgCourse.Columns[2].Visibility = Visibility.Hidden;
-                            mainWindow.dgCourse.Columns[3].Visibility = Visibility.Hidden;
-                            mainWindow.dgCourse.Columns[4].Visibility = Visibility.Hidden;
+                            dgCourse.DataContext = PersonLogic.getInstance().getAll();
+                            dgCourse.Columns[0].Visibility = Visibility.Hidden;
+                            dgCourse.Columns[1].Visibility = Visibility.Hidden;
+                            dgCourse.Columns[2].Visibility = Visibility.Hidden;
+                            dgCourse.Columns[3].Visibility = Visibility.Hidden;
+                            dgCourse.Columns[4].Visibility = Visibility.Hidden;
                             break;
                         case 2:
-                            mainWindow.dgCourse.DataContext = RoomLogic.getInstance().getAll();
+                            dgCourse.DataContext = RoomLogic.getInstance().getAll();
                             break;
                         case 3:
-                            mainWindow.dgCourse.DataContext = PaymentLogic.getInstance().getAll();
+                            dgCourse.DataContext = PaymentLogic.getInstance().getAll();
                             break;
                         default:
-                            mainWindow.dgCourse.DataContext = null;
+                            dgCourse.DataContext = null;
                             break;
                     }
 
                     DataTable temp = null;
                     temp = AppointmentLogic.getInstance().getAll();
-                    this.dgAppointments.DataContext = temp;
+                    dgAppointments.DataContext = temp;
                     
                     dgAppointments.Columns[1].Header = "Startdatum";
                     dgAppointments.Columns[2].Header = "Enddatum";
@@ -140,36 +144,36 @@ namespace CourseManagement.Client.View
 
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-            OpenWindow2AddParticpant(sender);
+            if (mainRibbon.SelectedIndex == 0)
+            {
+                OpenWindow2AddParticpant();
+            }
         }
 
-        private void OpenWindow2AddParticpant(object sender)
+        private void OpenWindow2AddParticpant()
         {
             WndParticipant2Course aNewAllocation = null;
-            if (sender != null)
+            try
             {
-                try
+                if (dgCourse.SelectedItems.Count > 0)
                 {
-                    if (dgCourse.SelectedItems.Count > 0)
-                    {
-                        aNewAllocation = new WndParticipant2Course(choosenCourseNr);
-                    }
-                    else
-                    {
-                        aNewAllocation = new WndParticipant2Course(-1);
-                    }
-                    aNewAllocation.ShowDialog();
+                    aNewAllocation = new WndParticipant2Course(choosenCourseNr);
                 }
-                catch (System.Exception err)
+                else
                 {
-                    System.Windows.MessageBox.Show(err.ToString());
+                    aNewAllocation = new WndParticipant2Course(-1);
                 }
+                aNewAllocation.ShowDialog();
+            }
+            catch (System.Exception err)
+            {
+                System.Windows.MessageBox.Show(err.ToString());
             }
         }
 
         private void RibbonButtonAddParticipant_Click(object sender, RoutedEventArgs e)
         {
-            OpenWindow2AddParticpant(sender);
+            OpenWindow2AddParticpant();
         }
 
         private void OpenHelpFile(object sender, RoutedEventArgs e)
@@ -236,7 +240,7 @@ namespace CourseManagement.Client.View
                 {
 
                 }
-                refreshDataGrids(this);
+                refreshDataGrids();
             }
         }
 
@@ -261,15 +265,9 @@ namespace CourseManagement.Client.View
                 }
                 catch (Exception error)
                 {
-
                     System.Windows.MessageBox.Show(error.ToString());
                 }
-               
             }
-            else
-            {
-            }
-
 
             //getting begin of appointment from userselection
             if (this.dpBeginOfCourse.Text != null)
@@ -305,7 +303,6 @@ namespace CourseManagement.Client.View
             {
                 lblRoomNrNotFilled.Visibility = Visibility.Visible;
             }
-
 
             if (dgCourse.SelectedItems.Count > 0
                 && dpBeginOfCourse.Value.Value != null 
@@ -401,7 +398,7 @@ namespace CourseManagement.Client.View
                 if (dgCourse.SelectedItems.Count == 1)
                 {
                     row = (DataRowView)dgCourse.SelectedItems[0];
-                    choosenCourseNr = Convert.ToInt32(row[0].ToString());
+                    choosenCourseNr = Convert.ToInt32(row["CourseNr"]);
                     dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(choosenCourseNr);
                 }
             }
@@ -431,9 +428,19 @@ namespace CourseManagement.Client.View
             }
         }
 
-        private void cbxAppointmentStartTime_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+        
 
+        /// <summary>
+        /// formatting the datagrids
+        /// Each Grid has to have 25% of the Window, no matter how big or small it gets through user input
+        /// As simple as it could be
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mainWindow_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            dgCourse.Height = this.Height / 4;
+            dgAppointments.Height = this.Height / 4;
         }
     }
 }

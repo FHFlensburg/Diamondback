@@ -7,6 +7,8 @@ using CourseManagement.Client.BusinessLogic;
 using System.Collections.Generic;
 using System;
 using System.Collections;
+using System.Windows.Controls.Primitives;
+using Xceed.Wpf.Toolkit;
 
 
 namespace CourseManagement.Client.View
@@ -16,7 +18,8 @@ namespace CourseManagement.Client.View
     /// </summary>
     public partial class WndIndex : RibbonWindow
     {
-
+        DataRowView row;
+        int choosenCourseNr;
         static string[] columnHeaderTitles = new string[]
             {
                 "Kurs-Nr","Kurs Titel", "Betrag in €", "Beschreibung", "Max Teilnahmer", "Min Teilnahmer", "Tutor", "Gültigkeit in Monate", "Bezahlungen", "Buchungen"
@@ -27,7 +30,9 @@ namespace CourseManagement.Client.View
 
         };
 
-        
+        /// <summary>
+        /// Default Constructor for the Index WPF Window
+        /// </summary>
         public WndIndex()
         {
            InitializeComponent();
@@ -80,7 +85,13 @@ namespace CourseManagement.Client.View
                             changeColumnTitleCourse();
                             break;
                         case 1:
-                            mainWindow.dgCourse.DataContext = StudentLogic.getInstance().getAll();
+                            
+                            mainWindow.dgCourse.DataContext = PersonLogic.getInstance().getAll();
+                            mainWindow.dgCourse.Columns[0].Visibility = Visibility.Hidden;
+                            mainWindow.dgCourse.Columns[1].Visibility = Visibility.Hidden;
+                            mainWindow.dgCourse.Columns[2].Visibility = Visibility.Hidden;
+                            mainWindow.dgCourse.Columns[3].Visibility = Visibility.Hidden;
+                            mainWindow.dgCourse.Columns[4].Visibility = Visibility.Hidden;
                             break;
                         case 2:
                             mainWindow.dgCourse.DataContext = RoomLogic.getInstance().getAll();
@@ -104,7 +115,7 @@ namespace CourseManagement.Client.View
                 }
                 catch (System.Exception err)
                 {
-                    MessageBox.Show(err.ToString());
+                    System.Windows.MessageBox.Show(err.ToString());
                 }
             }
         }
@@ -134,18 +145,24 @@ namespace CourseManagement.Client.View
 
         private void OpenWindow2AddParticpant(object sender)
         {
-
+            WndParticipant2Course aNewAllocation = null;
             if (sender != null)
             {
                 try
                 {
-                    WndParticipant2Course aNewAllocation = new WndParticipant2Course();
-                    //aNewAllocation.dgParticipant.DataContext = (DataTable)this.dgCourse.DataContext;
+                    if (dgCourse.SelectedItems.Count > 0)
+                    {
+                        aNewAllocation = new WndParticipant2Course(choosenCourseNr);
+                    }
+                    else
+                    {
+                        aNewAllocation = new WndParticipant2Course(-1);
+                    }
                     aNewAllocation.ShowDialog();
                 }
                 catch (System.Exception err)
                 {
-                    MessageBox.Show(err.ToString());
+                    System.Windows.MessageBox.Show(err.ToString());
                 }
             }
         }
@@ -168,7 +185,7 @@ namespace CourseManagement.Client.View
             }
             catch (System.Exception err)
             {
-                MessageBox.Show(err.ToString());
+                System.Windows.MessageBox.Show(err.ToString());
             }
             
         }
@@ -199,7 +216,7 @@ namespace CourseManagement.Client.View
             catch (System.Exception err)
             {
 
-                MessageBox.Show(err.ToString());
+                Xceed.Wpf.Toolkit.MessageBox.Show(err.ToString());
             }
         }
 
@@ -234,41 +251,30 @@ namespace CourseManagement.Client.View
             DateTime chosenStartDate = DateTime.MinValue;
             DateTime chosenEndDate = DateTime.MinValue;
             int chosenRoomNr = 0;
-
+            
             //getting CourseNumber from UserSelection (ComboBox)
-            if (dgCourse.SelectedItems != null)
+            if (dgCourse.SelectedItems.Count == 1)
             {
-<<<<<<< HEAD
-                //cbxAppointmentCourse.
                 try
                 {
-                    DataRowView row = (DataRowView)dgCourse.SelectedItem;
-                    chosenCourseID = Convert.ToInt32(row[0]);
+                    chosenCourseID = choosenCourseNr;
                 }
-                catch (Exception err)
+                catch (Exception error)
                 {
 
-                    MessageBox.Show(err.ToString());
+                    System.Windows.MessageBox.Show(error.ToString());
                 }
                
-=======
-                DataTable courseDatatable = (DataTable)cbxAppointmentCourse.DataContext;
-                //DataRowView row = (DataRowView)courseDatatable.se
-               // int index = Convert.ToInt32(courseDatatable.s);
-                //DataTable chosenCourse = CourseLogic.getInstance().getById(index);
-                lblCourseNotFilled.Visibility = Visibility.Hidden;
->>>>>>> 000b1e3e15525f81468fa5ffd167fa33f7cfd2d3
             }
             else
             {
-                this.lblCourseNotFilled.Visibility = Visibility.Visible;
             }
 
 
             //getting begin of appointment from userselection
-            if (this.dpBeginOfCourse.SelectedDate != null)
+            if (this.dpBeginOfCourse.Text != null)
             {
-                chosenStartDate = (DateTime)dpBeginOfCourse.SelectedDate;
+                chosenStartDate = (DateTime)this.dpBeginOfCourse.Value.Value;
                 lblBeginnDateNotFilled.Visibility = Visibility.Hidden;
             }
             else
@@ -278,9 +284,9 @@ namespace CourseManagement.Client.View
 
 
             //getting end of Appointment from userselection
-            if (this.dpEndOfAppointCourse.SelectedDate != null)
+            if (this.dpEndOfAppointCourse.Value.Value.ToUniversalTime() != null)
             {
-                chosenEndDate = (DateTime)dpEndOfAppointCourse.SelectedDate;
+                chosenEndDate = (DateTime)dpEndOfAppointCourse.Value.Value;
                 lblEndDateNotFilled.Visibility = Visibility.Hidden;
             }
             else
@@ -301,21 +307,20 @@ namespace CourseManagement.Client.View
             }
 
 
-            if (dgCourse.SelectedItems[0] != null 
-                && dpBeginOfCourse.SelectedDate != null 
-                && dpEndOfAppointCourse.SelectedDate != null 
-                && cbxAppointmentRoomNumber.SelectedItem != null 
-                && (DateTime)dpBeginOfCourse.SelectedDate < (DateTime)dpEndOfAppointCourse.SelectedDate)
+            if (dgCourse.SelectedItems.Count > 0
+                && dpBeginOfCourse.Value.Value != null 
+                && dpEndOfAppointCourse.Value.Value != null 
+                && cbxAppointmentRoomNumber.SelectedItem != null
+                && (DateTime)dpBeginOfCourse.Value.Value < (DateTime)dpEndOfAppointCourse.Value.Value)
             {
                 if (AppointmentLogic.getInstance().isPossibleNewAppointment(chosenCourseID, chosenRoomNr, chosenStartDate, chosenEndDate))
                 {
                     AppointmentLogic.getInstance().create(chosenCourseID, chosenRoomNr, chosenStartDate, chosenEndDate);
                 }
 
-                refreshDataGrids(this);
+                dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(choosenCourseNr);
 
                 //hiding the error labels again
-                this.lblCourseNotFilled.Visibility = Visibility.Hidden;
                 lblBeginnDateNotFilled.Visibility = Visibility.Hidden;
                 lblEndDateNotFilled.Visibility = Visibility.Hidden;
                 lblRoomNrNotFilled.Visibility = Visibility.Hidden;
@@ -336,7 +341,7 @@ namespace CourseManagement.Client.View
                 }
                 catch (Exception err)
                 {
-                    MessageBox.Show(err.ToString());
+                    System.Windows.MessageBox.Show(err.ToString());
                 }
             }
         }
@@ -371,21 +376,69 @@ namespace CourseManagement.Client.View
             changeColumnTitleCourse();
         }
 
-        private void element_SelectCourse(object sender, SelectedCellsChangedEventArgs e)
-        {
-            DataRowView row = (DataRowView)dgCourse.SelectedItems[0];
-            dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(Convert.ToInt32(row["CourseNr"].ToString()));
-
-        }
-
+        /// <summary>
+        /// Creates a new Payment
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RibbonButtonNewPayment_Click(object sender, RoutedEventArgs e)
         {
-<<<<<<< HEAD
-
-=======
             WndNewPayment aPaymentWindow = new WndNewPayment();
             aPaymentWindow.ShowDialog();
->>>>>>> 000b1e3e15525f81468fa5ffd167fa33f7cfd2d3
+        }
+
+        /// <summary>
+        /// First check if the Course Tab is selected, then check if only one row in the Datagrid is selcted
+        /// After it set the class variable choosenCourseNr by the selected course and fill the appointment table
+        /// with all appointments from the selected course
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void element_SelectCourse(object sender, SelectionChangedEventArgs e)
+        {
+            if (this.mainRibbon.SelectedIndex == 0)
+            {
+                if (dgCourse.SelectedItems.Count == 1)
+                {
+                    row = (DataRowView)dgCourse.SelectedItems[0];
+                    choosenCourseNr = Convert.ToInt32(row[0].ToString());
+                    dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(choosenCourseNr);
+<<<<<<< HEAD
+                    //_dataGrid.DataContext = CourseLogic.getInstance().getAll();
+=======
+                   // _dataGrid.DataContext = CourseLogic.getInstance().getAll();
+>>>>>>> df06540bd57cbb1d4c2c19f8b37defe02732e769
+                }
+            }
+        }
+
+        /// <summary>
+        /// Fills the Person DataGrid with the selected PersonGroup
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RibbonGallery_SelectionChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            switch (this.cbxPersons.Text)
+            {
+                case "Alle Personen":
+                    this.dgCourse.DataContext = PersonLogic.getInstance().getAll();
+                    break;
+                case "Tutoren":
+                    this.dgCourse.DataContext = TutorLogic.getInstance().getAll();
+                    break;
+                case "Studenten":
+                    this.dgCourse.DataContext = StudentLogic.getInstance().getAll();
+                    break;
+                case "Benutzer":
+                    this.dgCourse.DataContext = UserLogic.getInstance().getAll();
+                    break;
+            }
+        }
+
+        private void cbxAppointmentStartTime_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
