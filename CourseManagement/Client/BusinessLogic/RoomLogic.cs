@@ -104,11 +104,13 @@ namespace CourseManagement.Client.BusinessLogic
         /// Method for specific RoomRow-changes to the default Row-Method in LogicUtils
         /// </summary>
         /// <param name="table"></param>
-        /// <param name="entity"></param>
+        /// <param name="room"></param>
         /// <returns></returns>
-        private DataRow getNewRow(DataTable table, object entity)
+        private DataRow getNewRow(DataTable table, Room room)
         {
-            return LogicUtils.getNewRow(table, entity);
+            DataRow row = LogicUtils.getNewRow(table, room);
+            row["Appointments"] = room.Appointments.Count;
+            return row;
         }
 
         /// <summary>

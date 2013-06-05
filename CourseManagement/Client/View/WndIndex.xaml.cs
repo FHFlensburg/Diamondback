@@ -15,8 +15,10 @@ namespace CourseManagement.Client.View
     /// </summary>
     public partial class WndIndex : RibbonWindow
     {
-        DataRowView row;
-        int choosenCourseNr;
+        private DataRowView row;
+        private int choosenCourseNr;
+        private double spAppointmentsHeight;
+        private double dataGridHeight;
 
         /// <summary>
         /// Default Constructor for the Index WPF Window
@@ -24,13 +26,32 @@ namespace CourseManagement.Client.View
         public WndIndex()
         {
            InitializeComponent();
+           spAppointmentsHeight = spAppointments.Height;
+           dataGridHeight = dgCourse.Height;
         }
 
         private void mainWindow_IsLoaded(object sender, System.EventArgs e)
         {
-            refreshCourses();
-            refreshAppointments();
-            fillComboBoxRoomNumber();
+            switch (mainRibbon.SelectedIndex)
+            {
+                case 0:
+                    refreshCourses();
+                    refreshAppointments();
+                    fillComboBoxRoomNumber();
+                    break;
+                case 1:
+                    refreshPersons();
+                    break;
+                case 2:
+                    refreshRooms();
+                    break;
+                case 3:
+                    refreshPayments();
+                    break;
+                default:
+                    dgCourse.DataContext = null;
+                    break;
+            }            
         }
 
         
@@ -76,8 +97,8 @@ namespace CourseManagement.Client.View
                         dgCourse.DataContext = null;
                         break;
                 }
+                dgCourse.Columns[dgCourse.Columns.Count - 1].Width = new DataGridLength(1, DataGridLengthUnitType.Star);
             }
-            //Noch zu überarbeiten und zu prüfen ob sauberer Stil
         }
 
         
@@ -90,29 +111,46 @@ namespace CourseManagement.Client.View
             this.dgCourse.DataContext = CourseLogic.getInstance().getAll();
             changeColumnTitles();
             //2write a better version
+            lblHeadline.Content = "Kursübersicht";
             dgCourse.Columns[3].Visibility = Visibility.Hidden;
-            dgCourse.Columns[9].Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            spAppointments.Height = spAppointmentsHeight;
+            //dgCourse.Height = dgAppointments.Height = dataGridHeight;
         }
 
         private void refreshPersons()
         {
             dgCourse.DataContext = PersonLogic.getInstance().getAll();
+            changeColumnTitles();
+            lblHeadline.Content = "Personenübersicht";
             cbValues.Items.Clear();
             cbValues.Items.Add(new RibbonGalleryItem() { Content = "Alle Personen", Foreground = Brushes.Blue });
             cbValues.Items.Add(new RibbonGalleryItem() { Content = "Tutoren", Foreground = Brushes.Green });
             cbValues.Items.Add(new RibbonGalleryItem() { Content = "Studenten", Foreground = Brushes.Red });
             if (ActiveUser.userIsAdmin()) cbValues.Items.Add(new RibbonGalleryItem() { Content = "Benutzer", Foreground = Brushes.Orange });
+            spAppointments.Height = 0;
+
+            //dgCourse.Height = dgAppointments.Height = dataGridHeight + spAppointmentsHeight / 2;
         }
 
         private void refreshRooms()
         {
             dgCourse.DataContext = RoomLogic.getInstance().getAll();
+            changeColumnTitles();
+            lblHeadline.Content = "Raumübersicht";
+            spAppointments.Height = 0;
+            //dgCourse.MaxHeight = dgAppointments.MaxHeight = dataGridHeight + spAppointmentsHeight / 2;
         }
 
         private void refreshPayments()
         {
             dgCourse.DataContext = StudentLogic.getInstance().getAll();
             dgAppointments.DataContext = PaymentLogic.getInstance().getAll();
+            changeColumnTitles();
+            lblHeadline.Content = "Zahlungsübersicht";
+            spAppointments.Height = 0;
+
+            
+            //dgCourse.Height = dgAppointments.Height = dataGridHeight + spAppointmentsHeight / 2;
         }
 
         private void refreshAppointments()
@@ -121,11 +159,7 @@ namespace CourseManagement.Client.View
             allAppointments = AppointmentLogic.getInstance().getAll();
             dgAppointments.DataContext = allAppointments;
 
-            dgAppointments.Columns[0].Header = "Termin-Nr";
-            dgAppointments.Columns[1].Header = "Startdatum";
-            dgAppointments.Columns[2].Header = "Enddatum";
-            dgAppointments.Columns[3].Header = "Kurs";
-            dgAppointments.Columns[4].Header = "Raum";
+            changeColumnTitles();
         }
 
 
@@ -140,10 +174,6 @@ namespace CourseManagement.Client.View
             if (this.IsLoaded)
             {
                 refreshCourses();
-                refreshPersons();
-                refreshRooms();
-                refreshPayments();
-                refreshAppointments();
             }
         }
 
@@ -156,29 +186,35 @@ namespace CourseManagement.Client.View
         /// </summary>
         private void changeColumnTitles()
         {
-            foreach (DataGridColumn aDGC in dgCourse.Columns)
+            string[,] englishGerman = new string[,] 
             {
-                switch (aDGC.Header.ToString())
+                {"Id","Id"},{"IsPaid","Bezahlt"},{"Student","Student"},{"Course","Kurs"},{"CourseNr","Kurs Nr"},{"Title","Titel"},
+                {"AmountInEuro","Betrag in €"},{"Description","Beschreibung"},{"MaxMember","max. Teilnehmer"},{"MinMember","min. Teilnehmer"},
+                {"ValidityInMonth","Gültigkeit (Monate)"},{"Tutor","Tutor"},{"Payments","Zahlungen"},{"Appointments","Termine"},
+                {"RoomNr","RaumNr"},{"Capacity","Kapazität"},{"Building","Gebäude"},{"Street","Straße"},{"City","Stadt"},{"CityCode","PLZ"},
+                {"StartDate","StartDatum"},{"EndDate","EndDatum"},{"Room","Raum"},{"Surname","Nachname"},{"Forename","Vorname"},
+                {"Birthyear","Geburtsjahr"},{"MobilePhone","HandyNummer"},{"Mail","Mail"},{"Fax","Fax"},{"PrivatePhone","Telefon"},{"Gender","Geschlecht"},
+                {"Active","Aktiv"},{"IBAN","IBAN"},{"BIC","BIC"},{"Depositor","Kontoinhaber"},{"NameOfBank","Bank"},{"UserName","Benutzername"},
+                {"Password","Passwort"},{"LastLogin","LetztesLogin"},{"RegistrationDate","Registrierungsdatum"},  {"Admin","Admin"}
+            };
+           
+            for(int i = 0; i<dgAppointments.Columns.Count;i++)
+            {
+                for (int j = 0; j < englishGerman.GetLength(0); j++)
                 {
-                    case "CourseNr": aDGC.Header = "KursNr"; break;
-                    case "Title": aDGC.Header = "Titel"; break;
-                    case "AmountInEuro":aDGC.Header = "Betrag in €";break;
-                    case "Description":aDGC.Header = "Beschreibung";break;
-                    case "MaxMember":aDGC.Header = "max. Teilnehmer";break;
-                    case "MinMember":aDGC.Header = "min. Teilnehmer";break;
-                    case "ValidityInMonth":aDGC.Header = "Gültigkeit in Monaten";break;
-                    case "Appointments":aDGC.Header = "Termine";break;
+                    if (dgAppointments.Columns[i].Header.ToString() == englishGerman[j, 0]) dgAppointments.Columns[i].Header = englishGerman[j, 1];
                 }
             }
+            for (int i = 0; i < dgCourse.Columns.Count; i++)
+            {
+                for (int j = 0; j < englishGerman.GetLength(0); j++)
+                {
+                    if (dgCourse.Columns[i].Header.ToString() == englishGerman[j, 0]) dgCourse.Columns[i].Header = englishGerman[j, 1];
+                }
+            }
+                
+            }
 
-            //if (dgCourse.Columns.Count == columnHeaderTitles.Length)
-            //{
-            //    for (int i = 0; i < columnHeaderTitles.Length; i++)
-            //    {
-            //        dgCourse.Columns[i].Header = columnHeaderTitles[i];
-            //    }
-            //}
-        }
 
 
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
@@ -341,7 +377,6 @@ namespace CourseManagement.Client.View
             }
             else
             {
-
                 lblInfo.Content = "Bitten oben erst einen Kurs auswählen";
                 lblInfo.Visibility = Visibility.Visible;
             }
@@ -491,6 +526,7 @@ namespace CourseManagement.Client.View
                     dgAppointments.DataContext = PaymentLogic.getInstance().getByStudent(Convert.ToInt32(row["Id"]));
                 }
             }
+            changeColumnTitles();
         }
 
         /// <summary>
@@ -512,6 +548,7 @@ namespace CourseManagement.Client.View
                             row = (DataRowView)dgCourse.SelectedItems[0];
                             choosenCourseNr = Convert.ToInt32(row["CourseNr"]);
                             dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(choosenCourseNr);
+
                             string text = "Termin zu Kurs " + choosenCourseNr.ToString() + " buchen";
                             lblSettingAppointmentToCourse.Content = text;
                             text = "Buchungen zu Kurs " + choosenCourseNr.ToString();
@@ -546,7 +583,9 @@ namespace CourseManagement.Client.View
                         default:
                             dgCourse.DataContext = null;
                             break;
+                            
                     }
+                    changeColumnTitles();
                 }
                 catch (System.Exception err)
                 {
@@ -585,8 +624,9 @@ namespace CourseManagement.Client.View
                 case "Benutzer":
                     this.dgCourse.DataContext = UserLogic.getInstance().getAll();
                     break;
-
+                    
             }
+            changeColumnTitles();
             Mouse.Capture(null);                                                //workaround for buggy combobox-selection in windows-ribbon.
           
         }
@@ -671,7 +711,8 @@ namespace CourseManagement.Client.View
                     case 1:
                 dgAppointments.DataContext = CourseLogic.getInstance().getAll();
                 break;
-            }
+                }
+                changeColumnTitles();
             }
             catch
             {

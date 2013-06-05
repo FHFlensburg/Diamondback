@@ -23,5 +23,27 @@ namespace CourseManagement.Client.View
         {
             InitializeComponent();
         }
+
+        private void ComboBoxRole_SelectonChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //Tutor"/>
+                    //<ComboBoxItem x:Name="cbxiStudent" Content="Student"/>
+                    //<ComboBoxItem x:Name="cbxiUser" Content="User" /
+            if (this.IsLoaded)
+            {
+                spUser.Height = 0;
+                spStudent.Height = 0;
+
+                switch (((ComboBoxItem)cbxRole.SelectedItem).Content.ToString())
+                {
+                    case "Student":
+                        spStudent.Height = Double.NaN;
+                        break;
+                    case "User":
+                        spUser.Height = Double.NaN;
+                        break;
+                }
+            }
+        }
     }
 }
