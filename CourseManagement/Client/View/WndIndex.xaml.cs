@@ -28,9 +28,26 @@ namespace CourseManagement.Client.View
 
         private void mainWindow_IsLoaded(object sender, System.EventArgs e)
         {
-            refreshCourses();
-            refreshAppointments();
-            fillComboBoxRoomNumber();
+            switch (mainRibbon.SelectedIndex)
+            {
+                case 0:
+                    refreshCourses();
+                    refreshAppointments();
+                    fillComboBoxRoomNumber();
+                    break;
+                case 1:
+                    refreshPersons();
+                    break;
+                case 2:
+                    refreshRooms();
+                    break;
+                case 3:
+                    refreshPayments();
+                    break;
+                default:
+                    dgCourse.DataContext = null;
+                    break;
+            }            
         }
 
         
@@ -76,8 +93,8 @@ namespace CourseManagement.Client.View
                         dgCourse.DataContext = null;
                         break;
                 }
+                dgCourse.Columns[dgCourse.Columns.Count - 1].Width = new DataGridLength(1, DataGridLengthUnitType.Star);
             }
-            //Noch zu überarbeiten und zu prüfen ob sauberer Stil
         }
 
         
@@ -90,8 +107,8 @@ namespace CourseManagement.Client.View
             this.dgCourse.DataContext = CourseLogic.getInstance().getAll();
             changeColumnTitles();
             //2write a better version
+            lblHeadline.Content = "Kursübersicht";
             dgCourse.Columns[3].Visibility = Visibility.Hidden;
-            dgCourse.Columns[9].Width = new DataGridLength(1, DataGridLengthUnitType.Star);
             lblSettingAppointmentToCourse.Visibility = Visibility.Visible;
             spAppointments.Visibility = Visibility.Visible;
         }
@@ -100,6 +117,7 @@ namespace CourseManagement.Client.View
         {
             dgCourse.DataContext = PersonLogic.getInstance().getAll();
             changeColumnTitles();
+            lblHeadline.Content = "Personenübersicht";
             cbValues.Items.Clear();
             cbValues.Items.Add(new RibbonGalleryItem() { Content = "Alle Personen", Foreground = Brushes.Blue });
             cbValues.Items.Add(new RibbonGalleryItem() { Content = "Tutoren", Foreground = Brushes.Green });
@@ -113,6 +131,7 @@ namespace CourseManagement.Client.View
         {
             dgCourse.DataContext = RoomLogic.getInstance().getAll();
             changeColumnTitles();
+            lblHeadline.Content = "Raumübersicht";
             lblSettingAppointmentToCourse.Visibility = Visibility.Hidden;
             spAppointments.Visibility = Visibility.Hidden;
         }
@@ -122,6 +141,7 @@ namespace CourseManagement.Client.View
             dgCourse.DataContext = StudentLogic.getInstance().getAll();
             dgAppointments.DataContext = PaymentLogic.getInstance().getAll();
             changeColumnTitles();
+            lblHeadline.Content = "Zahlungsübersicht";
             lblSettingAppointmentToCourse.Visibility = Visibility.Hidden;
             spAppointments.Visibility = Visibility.Hidden;
         }
@@ -193,14 +213,6 @@ namespace CourseManagement.Client.View
             }
                 
             }
-
-            //if (dgCourse.Columns.Count == columnHeaderTitles.Length)
-            //{
-            //    for (int i = 0; i < columnHeaderTitles.Length; i++)
-            //    {
-            //        dgCourse.Columns[i].Header = columnHeaderTitles[i];
-            //    }
-            //}
 
 
 
@@ -364,7 +376,6 @@ namespace CourseManagement.Client.View
             }
             else
             {
-
                 lblInfo.Content = "Bitten oben erst einen Kurs auswählen";
                 lblInfo.Visibility = Visibility.Visible;
             }
@@ -536,6 +547,7 @@ namespace CourseManagement.Client.View
                             row = (DataRowView)dgCourse.SelectedItems[0];
                             choosenCourseNr = Convert.ToInt32(row["CourseNr"]);
                             dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(choosenCourseNr);
+
                             string text = "Termin zu Kurs " + choosenCourseNr.ToString() + " buchen";
                             lblSettingAppointmentToCourse.Content = text;
                             text = "Buchungen zu Kurs " + choosenCourseNr.ToString();
