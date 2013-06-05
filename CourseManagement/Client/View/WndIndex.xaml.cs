@@ -480,8 +480,17 @@ namespace CourseManagement.Client.View
         /// <param name="e"></param>
         private void RibbonButtonNewPayment_Click(object sender, RoutedEventArgs e)
         {
-            WndNewPayment aPaymentWindow = new WndNewPayment();
-            aPaymentWindow.ShowDialog();
+            if (dgAppointments.SelectedItems.Count == 1)
+            {
+                DataRowView selectedRow = (DataRowView)dgAppointments.SelectedItems[0];
+                PaymentLogic.getInstance().changeProperties(Convert.ToInt32(selectedRow["Id"]), true);
+
+                if (dgCourse.SelectedItems.Count == 1)
+                {
+                    DataRowView selectedStudentRow = (DataRowView)dgCourse.SelectedItems[0];
+                    dgAppointments.DataContext = PaymentLogic.getInstance().getByStudent(Convert.ToInt32(row["Id"]));
+                }
+            }
         }
 
         /// <summary>
@@ -503,14 +512,31 @@ namespace CourseManagement.Client.View
                             row = (DataRowView)dgCourse.SelectedItems[0];
                             choosenCourseNr = Convert.ToInt32(row["CourseNr"]);
                             dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(choosenCourseNr);
+                            string text = "Termin zu Kurs " + choosenCourseNr.ToString() + " buchen";
+                            lblSettingAppointmentToCourse.Content = text;
+                            text = "Buchungen zu Kurs " + choosenCourseNr.ToString();
+                            lblAppointmentToCourse.Content = text;
                             break;
                         case 1:
-                             row = (DataRowView)dgCourse.SelectedItems[0];
-                            int id = Convert.ToInt32(row["Id"]);
-                            dgAppointments.DataContext = CourseLogic.getInstance().getByPerson(id);
+                            row = (DataRowView)dgCourse.SelectedItems[0];
+                            choosenCourseNr = Convert.ToInt32(row["Id"]);
+                            if (cbxPersons.Text == "Tutoren")
+                            {
+                                dgAppointments.DataContext = CourseLogic.getInstance().getByTutor(choosenCourseNr);
+                            }
+                            if (cbxPersons.Text == "Studenten")
+                            {
+                                dgAppointments.DataContext = CourseLogic.getInstance().getByStudent(choosenCourseNr);
+                            }
+                            if (cbxPersons.Text == "Alle Personen" || cbxPersons.Text == "Benutzer")
+                            {
+                                dgAppointments.DataContext = CourseLogic.getInstance().getAll();
+                            }
                             break;
                         case 2:
-
+                            row = (DataRowView)dgCourse.SelectedItems[0];
+                            choosenCourseNr = Convert.ToInt32(row["RoomNr"]);
+                            dgAppointments.DataContext = AppointmentLogic.getInstance().getByRoom(choosenCourseNr);
                             break;
                         case 3:
                             row = (DataRowView)dgCourse.SelectedItems[0];
@@ -526,7 +552,11 @@ namespace CourseManagement.Client.View
                 {
                     System.Windows.MessageBox.Show(err.ToString());
                 }
-
+            }
+            else
+            {
+                lblSettingAppointmentToCourse.Content = "Termin buchen";
+                lblAppointmentToCourse.Content = "Alle Buchungen";
             }
                 
            

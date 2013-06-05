@@ -518,20 +518,6 @@ namespace CourseManagement.Client.View
         {
             if (dgCourse.SelectedItems.Count == 1)
             {
-<<<<<<< HEAD
-                switch (this.mainRibbon.SelectedIndex)
-                {
-                    case 0:    
-                            row = (DataRowView)dgCourse.SelectedItems[0];
-                            choosenCourseNr = Convert.ToInt32(row["CourseNr"]);
-                            dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(choosenCourseNr);               
-                        break;
-                    case 1:
-                            row = (DataRowView)dgCourse.SelectedItems[0];
-                            int id = Convert.ToInt32(row["Id"]);
-                            dgAppointments.DataContext = CourseLogic.getInstance().getByPerson(id);
-                            break;
-=======
                 try
                 {
                     switch (mainRibbon.SelectedIndex)
@@ -542,10 +528,27 @@ namespace CourseManagement.Client.View
                             dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(choosenCourseNr);
                             break;
                         case 1:
-                            
+<<<<<<< HEAD
+                            row = (DataRowView)dgCourse.SelectedItems[0];
+                            choosenCourseNr = Convert.ToInt32(row["Id"]);
+                            if (cbxPersons.Text == "Tutoren")
+                            {
+                                dgAppointments.DataContext = CourseLogic.getInstance().getByTutor(choosenCourseNr);
+                            }
+                            if (cbxPersons.Text == "Studenten")
+                            {
+                                dgAppointments.DataContext = CourseLogic.getInstance().getByStudent(choosenCourseNr);
+                            }
+=======
+                             row = (DataRowView)dgCourse.SelectedItems[0];
+                            int id = Convert.ToInt32(row["Id"]);
+                            dgAppointments.DataContext = CourseLogic.getInstance().getByPerson(id);
+>>>>>>> 820e22a7659f17b34b2398253a3a46b3ec5f4d23
                             break;
                         case 2:
-
+                            row = (DataRowView)dgCourse.SelectedItems[0];
+                            choosenCourseNr = Convert.ToInt32(row["RoomNr"]);
+                            dgAppointments.DataContext = AppointmentLogic.getInstance().getByRoom(choosenCourseNr);
                             break;
                         case 3:
                             row = (DataRowView)dgCourse.SelectedItems[0];
@@ -560,7 +563,6 @@ namespace CourseManagement.Client.View
                 catch (System.Exception err)
                 {
                     System.Windows.MessageBox.Show(err.ToString());
->>>>>>> 8a1a7e1e1839b2fc09a40da8258b22fca7306c23
                 }
 
             }

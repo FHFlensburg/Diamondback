@@ -232,7 +232,12 @@ namespace CourseManagement.Client.BusinessLogic
         /// <param name="isPaid"></param>
         public void changeProperties(int paymentId, bool? isPaid)
         {
-            Payment.getById(paymentId).IsPaid = isPaid;
+            Payment payment = Payment.getById(paymentId);
+
+            if (payment.IsPaid != isPaid)
+            {
+                payment.IsPaid = isPaid;
+            }
         }
     }
 }
