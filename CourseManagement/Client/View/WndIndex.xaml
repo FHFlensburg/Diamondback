@@ -4,13 +4,8 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:r="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
         Height="700" Width="900" Activated="mainWindow_IsLoaded" SizeChanged="mainWindow_SizeChanged"
-        Icon="Images\Kursverwaltung.ico">
-    <r:RibbonWindow.Resources>
-        <Color x:Key="Color1">Black</Color>
-        <Color x:Key="Color2">#FF11FF00</Color>
-        <Color x:Key="Color3">#FF279B1E</Color>
-        <Color x:Key="Color4">Black</Color>
-    </r:RibbonWindow.Resources>
+        Icon="Images\Kursverwaltung.ico"
+        Title="Kursverwaltung Version 0.1 Beta">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -24,8 +19,8 @@
                         <RibbonButton  x:Name="rbnButtonHelp" SmallImageSource="Images\help.ico" Click="OpenHelpFile" ToolTip="Hier bekommen Sie Hilfe" />
                     </r:Ribbon.HelpPaneContent>
                     <!-- Application Menu, located at the left-hand side (down arrow) -->
-                    <r:Ribbon.ApplicationMenu>
-                        <r:RibbonApplicationMenu KeyTip="X">
+                    <r:Ribbon.ApplicationMenu >
+                        <r:RibbonApplicationMenu KeyTip="X" >
                             <!--ToDo beta status, real buttons follow-->
                             <r:RibbonApplicationMenuItem Header="Hilfe" ImageSource="Images\help.ico" Click="OpenHelpFile" />
                             <r:RibbonApplicationMenuItem Header="Informationen" ImageSource="Images\logo.png" />
@@ -95,6 +90,8 @@
                 </StackPanel>
             </StackPanel>
             <StackPanel Grid.Row="2" Orientation="Vertical" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" >
+                <Label Content="Kursübersicht" FontWeight="Bold"/>
+
                 <DataGrid x:Name="dgCourse" Margin="10"  ItemsSource="{Binding}" SelectionChanged="element_SelectCourse" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ColumnWidth="auto" CanUserAddRows="False">
                     <DataGrid.ItemContainerStyle>
                         <Style TargetType="DataGridRow">
@@ -102,14 +99,12 @@
                         </Style>
                     </DataGrid.ItemContainerStyle>
                 </DataGrid>
-            </StackPanel>
-            <StackPanel Grid.Row="3" VerticalAlignment="Bottom">
+                <Label x:Name="lblSettingAppointmentToCourse" Content="Termin buchen" FontWeight="Bold"/>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                     <Label Content="Buchungen" FontWeight="Bold" VerticalAlignment="Center"/>
                     <Button x:Name="btnAllAppointments" Content="(Alle)"  FontSize="8" VerticalAlignment="Center" BorderBrush="White" Background="White" Height="14" Foreground="#FF5B8543" RenderTransformOrigin="0.545,0.944" Click="btnAllAppointments_Click" Margin="0,2,0,0" />
                 </StackPanel>
 
-                <DataGrid x:Name="dgAppointments" Margin="10" ItemsSource="{Binding}" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" IsSynchronizedWithCurrentItem="True" ColumnWidth="*" />
                 <StackPanel Orientation="Horizontal" x:Name="spAppointments" Margin="0,0,-0.4,0" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
                     <StackPanel Margin="5">
                         <Label Width="130" Content="Startdatum" HorizontalAlignment="Left"/>
@@ -131,6 +126,11 @@
                         <Button x:Name="btnAddAppointment" Content="Hinzufügen" Width="130" Click="ButtonAddAppointment_Click" ToolTip="Legt einen Termin mit den ausgefüllten Daten an"/>
                         <Label x:Name="lblInfo" Visibility="Hidden"  Foreground="Red"/>
                     </StackPanel>
+                
+            </StackPanel>
+            <StackPanel Grid.Row="3" VerticalAlignment="Bottom">
+                <Label x:Name="lblAppointmentToCourse" Content="Alle Buchungen" FontWeight="Bold"/>
+                <DataGrid x:Name="dgAppointments" Margin="10" ItemsSource="{Binding}" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" IsSynchronizedWithCurrentItem="True" ColumnWidth="*" />
                 </StackPanel>
             </StackPanel>
         </StackPanel>
