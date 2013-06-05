@@ -558,7 +558,11 @@ namespace CourseManagement.Client.View
                 {
                     System.Windows.MessageBox.Show(err.ToString());
                 }
+
             }
+                
+           
+
         }
 
         /// <summary>
@@ -654,6 +658,11 @@ namespace CourseManagement.Client.View
             {
                 deleteAppointment();
             }
+        }
+
+        private void btnAllAppointments_Click(object sender, RoutedEventArgs e)
+        {
+            dgAppointments.DataContext = AppointmentLogic.getInstance().getAll();
         }
     }
 }

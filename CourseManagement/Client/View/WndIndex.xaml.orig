@@ -3,8 +3,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"      
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:r="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
-        Height="700" Width="1000" Activated="mainWindow_IsLoaded" SizeChanged="mainWindow_SizeChanged"
+        Height="700" Width="900" Activated="mainWindow_IsLoaded" SizeChanged="mainWindow_SizeChanged"
+<<<<<<< HEAD
         Icon="Images\Kursverwaltung.ico">
+    <r:RibbonWindow.Resources>
+        <Color x:Key="Color1">Black</Color>
+        <Color x:Key="Color2">#FF11FF00</Color>
+        <Color x:Key="Color3">#FF279B1E</Color>
+        <Color x:Key="Color4">Black</Color>
+    </r:RibbonWindow.Resources>
+=======
+        Icon="Images\Kursverwaltung.ico"
+        Title="Kursverwaltung Version 0.1 Beta">
+>>>>>>> 8a1a7e1e1839b2fc09a40da8258b22fca7306c23
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -18,8 +29,8 @@
                         <RibbonButton  x:Name="rbnButtonHelp" SmallImageSource="Images\help.ico" Click="OpenHelpFile" ToolTip="Hier bekommen Sie Hilfe" />
                     </r:Ribbon.HelpPaneContent>
                     <!-- Application Menu, located at the left-hand side (down arrow) -->
-                    <r:Ribbon.ApplicationMenu>
-                        <r:RibbonApplicationMenu KeyTip="X">
+                    <r:Ribbon.ApplicationMenu >
+                        <r:RibbonApplicationMenu KeyTip="X" >
                             <!--ToDo beta status, real buttons follow-->
                             <r:RibbonApplicationMenuItem Header="Hilfe" ImageSource="Images\help.ico" Click="OpenHelpFile" />
                             <r:RibbonApplicationMenuItem Header="Informationen" ImageSource="Images\logo.png" />
@@ -37,7 +48,7 @@
                             <!--<r:RibbonButton SmallImageSource="Images\addRoom.ico" Label="Raum" /> -->
                         </r:RibbonGroup>
                         <r:RibbonGroup x:Name="ribbonGroupCourseDelete" Header="Löschen">
-                            <r:RibbonButton x:Name="rbnButtonDeleteCourse" LargeImageSource="Images\delete.ico" Label="Löschen" Click="RibbonButtonDeleteCourse_Click" KeyTip="D" ToolTip="Löscht ausgewählten Kurs" />
+                            <r:RibbonButton x:Name="rbnButtonDeleteCourse" LargeImageSource="Images\delete.ico" Label="Löschen" Click="RibbonButtonDeleteCourse_Click" KeyTip="D" ToolTip="Ausgewählten Eintrag löschen" />
                         </r:RibbonGroup>
                         <r:RibbonGroup x:Name="ribbonGroupChange" Header="Bearbeiten">
                             <r:RibbonButton x:Name="rbnButtonChangeCourse" LargeImageSource="Images\change.ico" Label="Bearbeiten" Click="RibbonButtonEditCourse_Click" KeyTip="B" ToolTip="Bearbeitet ausgewählten Kurs"/>
@@ -49,29 +60,19 @@
                             <r:RibbonButton x:Name="rbnButtonNewPerson" LargeImageSource="Images\addParticipant.ico" Label="Neue Person" KeyTip="N" Click="RibbonButtonNewPerson_Click" ToolTip="Neue Person anlegen"/>
                         </r:RibbonGroup>
                         <r:RibbonGroup x:Name="ribbonGroupPersonsDelete" Header="Löschen">
-                            <r:RibbonButton x:Name="rbnButtonDeletePerson" LargeImageSource="Images\delete.ico" Label="Löschen" KeyTip="D" ToolTip="Löscht ausgewählte Person" />
+                            <r:RibbonButton x:Name="rbnButtonDeletePerson" LargeImageSource="Images\delete.ico" Label="Löschen" KeyTip="D" ToolTip="Ausgewählten Eintrag löschen" Click="RibbonButtonDeletePerson_Click" />
                         </r:RibbonGroup>
                         <r:RibbonGroup x:Name="ribbonGroupPersonsSelect" Header="Auswahl">
                             <r:RibbonComboBox x:Name="cbxPersons" Label="Personen Auswahl"
                                 SmallImageSource="Images/logo.png"
                                 SelectionBoxWidth="62"
                                 VerticalAlignment="Center" 
-<<<<<<< HEAD
                                 IsEditable="FALSE"
                                 ToolTip="Auswahl um welche Art von Person es sich handelt"
                                               >
-                                <r:RibbonGallery SelectedValue="Alle Personen" SelectedValuePath="Content" MaxColumnCount="1" SelectionChanged="RibbonGallery_SelectionChanged">
-                                    <r:RibbonGalleryCategory>
-                                        <r:RibbonGalleryItem Content="Alle Personen" Foreground="Blue"/>
-                                        <r:RibbonGalleryItem Content="Tutoren" Foreground="Green" />
-                                        <r:RibbonGalleryItem Content="Studenten" Foreground="Red" />
-                                        <r:RibbonGalleryItem Content="Benutzer" Foreground="Orange" />
-=======
-                                IsEditable="FALSE">
                                 <r:RibbonGallery Name="rgValue" SelectedValue="Alle Personen" SelectedValuePath="Content" MaxColumnCount="1" SelectionChanged="RibbonGallery_SelectionChanged">
                                     <r:RibbonGalleryCategory Name="cbValues">
-                                   
->>>>>>> 5db1785ea79fa803ceaf9dd3edd5bea7eb29e609
+
                                     </r:RibbonGalleryCategory>
                                 </r:RibbonGallery>
                             </r:RibbonComboBox>
@@ -83,7 +84,7 @@
                             <r:RibbonButton x:Name="rbnButtonNewRoom" LargeImageSource="Images\addRoom.ico" Label="Neuer Raum" Click="RibbonButtonNewRoom_Click" KeyTip="N" ToolTip="Neuen Raum anlegen"/>
                         </r:RibbonGroup>
                         <r:RibbonGroup x:Name="ribbonGroupRoomDelete" Header="Löschen">
-                            <r:RibbonButton x:Name="rbnButtonDeleteRoom" LargeImageSource="Images\delete.ico" Label="Löschen" KeyTip="D" ToolTip="Ausgewählte Person löschen"/>
+                            <r:RibbonButton x:Name="rbnButtonDeleteRoom" LargeImageSource="Images\delete.ico" Label="Löschen" KeyTip="D" ToolTip="Ausgewählten Eintrag löschen" Click="RibbonButtonDeleteRoom_Click"/>
                         </r:RibbonGroup>
                     </r:RibbonTab>
                     <!-- Ribbon Tab payment: -->
@@ -99,6 +100,8 @@
                 </StackPanel>
             </StackPanel>
             <StackPanel Grid.Row="2" Orientation="Vertical" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" >
+                <Label Content="Kursübersicht" FontWeight="Bold"/>
+
                 <DataGrid x:Name="dgCourse" Margin="10"  ItemsSource="{Binding}" SelectionChanged="element_SelectCourse" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ColumnWidth="auto" CanUserAddRows="False">
                     <DataGrid.ItemContainerStyle>
                         <Style TargetType="DataGridRow">
@@ -106,19 +109,27 @@
                         </Style>
                     </DataGrid.ItemContainerStyle>
                 </DataGrid>
+<<<<<<< HEAD
             </StackPanel>
             <StackPanel Grid.Row="3" VerticalAlignment="Bottom">
-                <Label Content="Buchungen" FontWeight="Bold"/>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Label Content="Buchungen" FontWeight="Bold" VerticalAlignment="Center"/>
+                    <Button x:Name="btnAllAppointments" Content="(Alle)"  FontSize="8" VerticalAlignment="Center" BorderBrush="White" Background="White" Height="14" Foreground="#FF5B8543" RenderTransformOrigin="0.545,0.944" Click="btnAllAppointments_Click" Margin="0,2,0,0" />
+                </StackPanel>
+
                 <DataGrid x:Name="dgAppointments" Margin="10" ItemsSource="{Binding}" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" IsSynchronizedWithCurrentItem="True" ColumnWidth="*" />
+=======
+                <Label x:Name="lblSettingAppointmentToCourse" Content="Termin buchen" FontWeight="Bold"/>
+>>>>>>> 8a1a7e1e1839b2fc09a40da8258b22fca7306c23
                 <StackPanel Orientation="Horizontal" x:Name="spAppointments" Margin="0,0,-0.4,0" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
                     <StackPanel Margin="5">
-                        <Label Width="130" Content="Startdatum"/>
-                        <xctk:DateTimePicker Format="FullDateTime" xctk:Name="dpBeginOfCourse" ToolTip="Auswahl der Startzeit und des Startdatum des Kurses" /> 
+                        <Label Width="130" Content="Startdatum" HorizontalAlignment="Left"/>
+                        <xctk:DateTimePicker Format="FullDateTime" xctk:Name="dpBeginOfCourse" ToolTip="Auswahl der Startzeit und des Startdatum des Kurses" Width="220"/>
                         <Label Content="Bitte ausfüllen" x:Name="lblBeginnDateNotFilled" Visibility="Hidden"  Foreground="Red"/>
                     </StackPanel>
                     <StackPanel Margin="5">
-                        <Label Width="130" Content="Ende"/>
-                        <xctk:DateTimePicker Format="FullDateTime" xctk:Name="dpEndOfAppointCourse" ToolTip="Auswahl der Startzeit und des Startdatum des Kurses" />
+                        <Label Width="130" HorizontalAlignment="Left" Content="Ende"/>
+                        <xctk:DateTimePicker Format="FullDateTime" xctk:Name="dpEndOfAppointCourse" ToolTip="Auswahl der Startzeit und des Startdatum des Kurses" Width="220"/>
                         <Label Content="Bitte ausfüllen" x:Name="lblEndDateNotFilled" Visibility="Hidden"  Foreground="Red"/>
                     </StackPanel>
                     <StackPanel Margin="5">
@@ -126,11 +137,16 @@
                         <ComboBox x:Name="cbxAppointmentRoomNumber" Width="120" ToolTip="Raum in dem der Kurs statt finden soll"/>
                         <Label Content="Bitte ausfüllen" x:Name="lblRoomNrNotFilled" Visibility="Hidden"  Foreground="Red"/>
                     </StackPanel>
-                    <StackPanel Margin="5">   
+                    <StackPanel Margin="5">
                         <Label Width="130" Content="label2FormatStackpanelRight" Visibility="Hidden"/>
-                        <Button x:Name="btnAddAppointment" Content="Hinzufügen" Width="130" Click="ButtonAddAppointment_Click"/>
-                        <Label Content="Bitte erst oben Kurs auswählen" x:Name="lblCourseNotSelected" Visibility="Hidden"  Foreground="Red"/>
+                        <Button x:Name="btnAddAppointment" Content="Hinzufügen" Width="130" Click="ButtonAddAppointment_Click" ToolTip="Legt einen Termin mit den ausgefüllten Daten an"/>
+                        <Label x:Name="lblInfo" Visibility="Hidden"  Foreground="Red"/>
                     </StackPanel>
+                
+            </StackPanel>
+            <StackPanel Grid.Row="3" VerticalAlignment="Bottom">
+                <Label x:Name="lblAppointmentToCourse" Content="Alle Buchungen" FontWeight="Bold"/>
+                <DataGrid x:Name="dgAppointments" Margin="10" ItemsSource="{Binding}" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" IsSynchronizedWithCurrentItem="True" ColumnWidth="*" />
                 </StackPanel>
             </StackPanel>
         </StackPanel>

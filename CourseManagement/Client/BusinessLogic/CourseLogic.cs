@@ -174,6 +174,7 @@ namespace CourseManagement.Client.BusinessLogic
         private DataTable getNewDataTable()
         {
             DataTable table = LogicUtils.getNewDataTable(new Course());
+            table.Columns["MinMember"].SetOrdinal(4);
             return table;
         }
 
@@ -238,6 +239,29 @@ namespace CourseManagement.Client.BusinessLogic
                     allOfStudent.Rows.Add(getNewRow(allOfStudent, payment.Course));
                 }
                 return allOfStudent;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        /// <summary>
+        ///  Return a DataTable containing all Courses of the submitted Person
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public DataTable getByPerson(int id)
+        {
+            try
+            {
+                Person person = Person.getById(id);
+                DataTable table = getNewDataTable();
+                if (person is Student) table=  getByStudent(id);
+                else if (person is Tutor) table = getByTutor(id);
+                return table;
+
+                
             }
             catch (Exception e)
             {

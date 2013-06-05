@@ -62,7 +62,7 @@
                                               >
                                 <r:RibbonGallery Name="rgValue" SelectedValue="Alle Personen" SelectedValuePath="Content" MaxColumnCount="1" SelectionChanged="RibbonGallery_SelectionChanged">
                                     <r:RibbonGalleryCategory Name="cbValues">
-                                   
+
                                     </r:RibbonGalleryCategory>
                                 </r:RibbonGallery>
                             </r:RibbonComboBox>
@@ -100,6 +100,11 @@
                     </DataGrid.ItemContainerStyle>
                 </DataGrid>
                 <Label x:Name="lblSettingAppointmentToCourse" Content="Termin buchen" FontWeight="Bold"/>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Label Content="Buchungen" FontWeight="Bold" VerticalAlignment="Center"/>
+                    <Button x:Name="btnAllAppointments" Content="(Alle)"  FontSize="8" VerticalAlignment="Center" BorderBrush="White" Background="White" Height="14" Foreground="#FF5B8543" RenderTransformOrigin="0.545,0.944" Click="btnAllAppointments_Click" Margin="0,2,0,0" />
+                </StackPanel>
+
                 <StackPanel Orientation="Horizontal" x:Name="spAppointments" Margin="0,0,-0.4,0" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
                     <StackPanel Margin="5">
                         <Label Width="130" Content="Startdatum" HorizontalAlignment="Left"/>
