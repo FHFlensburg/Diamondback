@@ -532,10 +532,21 @@ namespace CourseManagement.Client.View
                             lblAppointmentToCourse.Content = text;
                             break;
                         case 1:
-
+                            row = (DataRowView)dgCourse.SelectedItems[0];
+                            choosenCourseNr = Convert.ToInt32(row["Id"]);
+                            if (cbxPersons.Text == "Tutoren")
+                            {
+                                dgAppointments.DataContext = CourseLogic.getInstance().getByTutor(choosenCourseNr);
+                            }
+                            if (cbxPersons.Text == "Studenten")
+                            {
+                                dgAppointments.DataContext = CourseLogic.getInstance().getByStudent(choosenCourseNr);
+                            }
                             break;
                         case 2:
-
+                            row = (DataRowView)dgCourse.SelectedItems[0];
+                            choosenCourseNr = Convert.ToInt32(row["RoomNr"]);
+                            dgAppointments.DataContext = AppointmentLogic.getInstance().getByRoom(choosenCourseNr);
                             break;
                         case 3:
                             row = (DataRowView)dgCourse.SelectedItems[0];
@@ -557,6 +568,9 @@ namespace CourseManagement.Client.View
                 lblSettingAppointmentToCourse.Content = "Termin buchen";
                 lblAppointmentToCourse.Content = "Alle Buchungen";
             }
+                
+           
+
         }
 
         /// <summary>
@@ -652,6 +666,11 @@ namespace CourseManagement.Client.View
             {
                 deleteAppointment();
             }
+        }
+
+        private void btnAllAppointments_Click(object sender, RoutedEventArgs e)
+        {
+            dgAppointments.DataContext = AppointmentLogic.getInstance().getAll();
         }
     }
 }
