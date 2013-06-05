@@ -4494,7 +4494,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>PROGMSG_IIS_ROLLBACKWEBSERVICEEXTENSIONS</td><td>##IDS_PROGMSG_IIS_ROLLBACKWEBSERVICEEXTENSIONS##</td><td/></row>
 		<row><td>ProductCode</td><td>{9CAC5381-702E-4781-8978-BF0E46FB1C74}</td><td/></row>
 		<row><td>ProductName</td><td>Kursverwaltung</td><td/></row>
-		<row><td>ProductVersion</td><td>0.1</td><td/></row>
+		<row><td>ProductVersion</td><td>0.2</td><td/></row>
 		<row><td>ProgressType0</td><td>install</td><td/></row>
 		<row><td>ProgressType1</td><td>Installing</td><td/></row>
 		<row><td>ProgressType2</td><td>installed</td><td/></row>
