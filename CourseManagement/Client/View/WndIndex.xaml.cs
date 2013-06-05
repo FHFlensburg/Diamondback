@@ -503,8 +503,17 @@ namespace CourseManagement.Client.View
         /// <param name="e"></param>
         private void RibbonButtonNewPayment_Click(object sender, RoutedEventArgs e)
         {
-            WndNewPayment aPaymentWindow = new WndNewPayment();
-            aPaymentWindow.ShowDialog();
+            if (dgAppointments.SelectedItems.Count == 1)
+            {
+                DataRowView selectedRow = (DataRowView)dgAppointments.SelectedItems[0];
+                PaymentLogic.getInstance().changeProperties(Convert.ToInt32(selectedRow["Id"]), true);
+
+                if (dgCourse.SelectedItems.Count == 1)
+                {
+                    DataRowView selectedStudentRow = (DataRowView)dgCourse.SelectedItems[0];
+                    dgAppointments.DataContext = PaymentLogic.getInstance().getByStudent(Convert.ToInt32(row["Id"]));
+                }
+            }
         }
 
         /// <summary>
