@@ -676,6 +676,9 @@ namespace CourseManagement.Client.View
             {
                 MessageBox.Show("Verbindungs- oder Datenbankfehler");
             }
+
+            lblSettingAppointmentToCourse.Content = "Termin buchen";
+            lblAppointmentToCourse.Content = "Alle Buchungen";
         }
     }
 }
