@@ -5,6 +5,12 @@
         xmlns:r="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
         Height="700" Width="900" Activated="mainWindow_IsLoaded" SizeChanged="mainWindow_SizeChanged"
         Icon="Images\Kursverwaltung.ico">
+    <r:RibbonWindow.Resources>
+        <Color x:Key="Color1">Black</Color>
+        <Color x:Key="Color2">#FF11FF00</Color>
+        <Color x:Key="Color3">#FF279B1E</Color>
+        <Color x:Key="Color4">Black</Color>
+    </r:RibbonWindow.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -61,7 +67,7 @@
                                               >
                                 <r:RibbonGallery Name="rgValue" SelectedValue="Alle Personen" SelectedValuePath="Content" MaxColumnCount="1" SelectionChanged="RibbonGallery_SelectionChanged">
                                     <r:RibbonGalleryCategory Name="cbValues">
-                                   
+
                                     </r:RibbonGalleryCategory>
                                 </r:RibbonGallery>
                             </r:RibbonComboBox>
@@ -98,12 +104,16 @@
                 </DataGrid>
             </StackPanel>
             <StackPanel Grid.Row="3" VerticalAlignment="Bottom">
-                <Label Content="Buchungen" FontWeight="Bold"/>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Label Content="Buchungen" FontWeight="Bold" VerticalAlignment="Center"/>
+                    <Button x:Name="btnAllAppointments" Content="(Alle)"  FontSize="8" VerticalAlignment="Center" BorderBrush="White" Background="White" Height="14" Foreground="#FF5B8543" RenderTransformOrigin="0.545,0.944" Click="btnAllAppointments_Click" Margin="0,2,0,0" />
+                </StackPanel>
+
                 <DataGrid x:Name="dgAppointments" Margin="10" ItemsSource="{Binding}" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" IsSynchronizedWithCurrentItem="True" ColumnWidth="*" />
                 <StackPanel Orientation="Horizontal" x:Name="spAppointments" Margin="0,0,-0.4,0" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
                     <StackPanel Margin="5">
                         <Label Width="130" Content="Startdatum" HorizontalAlignment="Left"/>
-                        <xctk:DateTimePicker Format="FullDateTime" xctk:Name="dpBeginOfCourse" ToolTip="Auswahl der Startzeit und des Startdatum des Kurses" Width="220"/> 
+                        <xctk:DateTimePicker Format="FullDateTime" xctk:Name="dpBeginOfCourse" ToolTip="Auswahl der Startzeit und des Startdatum des Kurses" Width="220"/>
                         <Label Content="Bitte ausfüllen" x:Name="lblBeginnDateNotFilled" Visibility="Hidden"  Foreground="Red"/>
                     </StackPanel>
                     <StackPanel Margin="5">
@@ -116,7 +126,7 @@
                         <ComboBox x:Name="cbxAppointmentRoomNumber" Width="120" ToolTip="Raum in dem der Kurs statt finden soll"/>
                         <Label Content="Bitte ausfüllen" x:Name="lblRoomNrNotFilled" Visibility="Hidden"  Foreground="Red"/>
                     </StackPanel>
-                    <StackPanel Margin="5">   
+                    <StackPanel Margin="5">
                         <Label Width="130" Content="label2FormatStackpanelRight" Visibility="Hidden"/>
                         <Button x:Name="btnAddAppointment" Content="Hinzufügen" Width="130" Click="ButtonAddAppointment_Click" ToolTip="Legt einen Termin mit den ausgefüllten Daten an"/>
                         <Label x:Name="lblInfo" Visibility="Hidden"  Foreground="Red"/>

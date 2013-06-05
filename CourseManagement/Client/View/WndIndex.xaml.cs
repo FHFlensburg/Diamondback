@@ -467,15 +467,26 @@ namespace CourseManagement.Client.View
         /// <param name="e"></param>
         private void element_SelectCourse(object sender, SelectionChangedEventArgs e)
         {
-            if (this.mainRibbon.SelectedIndex == 0)
+            if (dgCourse.SelectedItems.Count == 1)
             {
-                if (dgCourse.SelectedItems.Count == 1)
+                switch (this.mainRibbon.SelectedIndex)
                 {
-                    row = (DataRowView)dgCourse.SelectedItems[0];
-                    choosenCourseNr = Convert.ToInt32(row["CourseNr"]);
-                    dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(choosenCourseNr);
+                    case 0:    
+                            row = (DataRowView)dgCourse.SelectedItems[0];
+                            choosenCourseNr = Convert.ToInt32(row["CourseNr"]);
+                            dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(choosenCourseNr);               
+                        break;
+                    case 1:
+                            row = (DataRowView)dgCourse.SelectedItems[0];
+                            int id = Convert.ToInt32(row["Id"]);
+                            dgAppointments.DataContext = CourseLogic.getInstance().getByPerson(id);
+                            break;
                 }
+
             }
+                
+           
+
         }
 
         /// <summary>
@@ -571,6 +582,11 @@ namespace CourseManagement.Client.View
             {
                 deleteAppointment();
             }
+        }
+
+        private void btnAllAppointments_Click(object sender, RoutedEventArgs e)
+        {
+            dgAppointments.DataContext = AppointmentLogic.getInstance().getAll();
         }
     }
 }
