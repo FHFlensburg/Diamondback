@@ -88,18 +88,22 @@ namespace CourseManagement.Client.BusinessLogic
         /// <returns></returns>
         private DataTable getNewDataTable()
         {
-            return LogicUtils.getNewDataTable(new Tutor());
+            DataTable table = LogicUtils.getNewDataTable(new Tutor());
+            table.Columns["Courses"].SetOrdinal(table.Columns.Count - 1);
+            return table;
         }
 
         /// <summary>
         /// Method for specific TutorRow-changes to the default Row-Method in LogicUtils
         /// </summary>
         /// <param name="table"></param>
-        /// <param name="entity"></param>
+        /// <param name="tutor"></param>
         /// <returns></returns>
-        private DataRow getNewRow(DataTable table, object entity)
+        private DataRow getNewRow(DataTable table, Tutor tutor)
         {
-            return LogicUtils.getNewRow(table, entity);
+            DataRow row = LogicUtils.getNewRow(table, tutor);
+            row["Courses"] = tutor.Courses.Count;
+            return row;
         }
 
 
