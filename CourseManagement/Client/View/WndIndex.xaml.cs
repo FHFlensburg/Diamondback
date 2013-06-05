@@ -136,6 +136,7 @@ namespace CourseManagement.Client.View
         {
             dgCourse.DataContext = RoomLogic.getInstance().getAll();
             changeColumnTitles();
+            lblHeadline.Content = "Raumübersicht";
             spAppointments.Height = 0;
             //dgCourse.MaxHeight = dgAppointments.MaxHeight = dataGridHeight + spAppointmentsHeight / 2;
         }
@@ -145,6 +146,7 @@ namespace CourseManagement.Client.View
             dgCourse.DataContext = StudentLogic.getInstance().getAll();
             dgAppointments.DataContext = PaymentLogic.getInstance().getAll();
             changeColumnTitles();
+            lblHeadline.Content = "Zahlungsübersicht";
             spAppointments.Height = 0;
 
             
