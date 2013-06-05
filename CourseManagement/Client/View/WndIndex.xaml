@@ -102,13 +102,13 @@
                 <DataGrid x:Name="dgAppointments" Margin="10" ItemsSource="{Binding}" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" IsSynchronizedWithCurrentItem="True" ColumnWidth="*" />
                 <StackPanel Orientation="Horizontal" x:Name="spAppointments" Margin="0,0,-0.4,0" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
                     <StackPanel Margin="5">
-                        <Label Width="130" Content="Startdatum"/>
-                        <xctk:DateTimePicker Format="FullDateTime" xctk:Name="dpBeginOfCourse" ToolTip="Auswahl der Startzeit und des Startdatum des Kurses" /> 
+                        <Label Width="130" Content="Startdatum" HorizontalAlignment="Left"/>
+                        <xctk:DateTimePicker Format="FullDateTime" xctk:Name="dpBeginOfCourse" ToolTip="Auswahl der Startzeit und des Startdatum des Kurses" Width="220"/> 
                         <Label Content="Bitte ausfüllen" x:Name="lblBeginnDateNotFilled" Visibility="Hidden"  Foreground="Red"/>
                     </StackPanel>
                     <StackPanel Margin="5">
-                        <Label Width="130" Content="Ende"/>
-                        <xctk:DateTimePicker Format="FullDateTime" xctk:Name="dpEndOfAppointCourse" ToolTip="Auswahl der Startzeit und des Startdatum des Kurses" />
+                        <Label Width="130" HorizontalAlignment="Left" Content="Ende"/>
+                        <xctk:DateTimePicker Format="FullDateTime" xctk:Name="dpEndOfAppointCourse" ToolTip="Auswahl der Startzeit und des Startdatum des Kurses" Width="220"/>
                         <Label Content="Bitte ausfüllen" x:Name="lblEndDateNotFilled" Visibility="Hidden"  Foreground="Red"/>
                     </StackPanel>
                     <StackPanel Margin="5">
@@ -119,7 +119,7 @@
                     <StackPanel Margin="5">   
                         <Label Width="130" Content="label2FormatStackpanelRight" Visibility="Hidden"/>
                         <Button x:Name="btnAddAppointment" Content="Hinzufügen" Width="130" Click="ButtonAddAppointment_Click" ToolTip="Legt einen Termin mit den ausgefüllten Daten an"/>
-                        <Label Content="Bitte erst oben Kurs auswählen" x:Name="lblCourseNotSelected" Visibility="Hidden"  Foreground="Red"/>
+                        <Label x:Name="lblInfo" Visibility="Hidden"  Foreground="Red"/>
                     </StackPanel>
                 </StackPanel>
             </StackPanel>

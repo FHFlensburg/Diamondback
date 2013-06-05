@@ -329,7 +329,9 @@ namespace CourseManagement.Client.View
             }
             else
             {
-                lblCourseNotSelected.Visibility = Visibility.Visible;
+
+                lblInfo.Content = "Bitten oben erst einen Kurs auswählen";
+                lblInfo.Visibility = Visibility.Visible;
             }
 
             //getting begin of appointment from userselection
@@ -377,6 +379,12 @@ namespace CourseManagement.Client.View
                 if (AppointmentLogic.getInstance().isPossibleNewAppointment(chosenCourseID, chosenRoomNr, chosenStartDate, chosenEndDate))
                 {
                     AppointmentLogic.getInstance().create(chosenCourseID, chosenRoomNr, chosenStartDate, chosenEndDate);
+                    lblInfo.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    lblInfo.Visibility = Visibility.Visible;
+                    lblInfo.Content = "Termin nicht möglich";  
                 }
 
                 dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(choosenCourseNr);
@@ -385,7 +393,7 @@ namespace CourseManagement.Client.View
                 lblBeginnDateNotFilled.Visibility = Visibility.Hidden;
                 lblEndDateNotFilled.Visibility = Visibility.Hidden;
                 lblRoomNrNotFilled.Visibility = Visibility.Hidden;
-                lblCourseNotSelected.Visibility = Visibility.Hidden;
+                
             }
         }
 
@@ -557,6 +565,8 @@ namespace CourseManagement.Client.View
 
         private void RibbonButtonDeleteRoom_Click(object sender, RoutedEventArgs e)
         {
+            //ToDo: method stub for deleting room
+
             if (dgAppointments.SelectedIndex != -1)
             {
                 deleteAppointment();
