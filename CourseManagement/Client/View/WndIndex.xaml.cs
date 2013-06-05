@@ -21,15 +21,6 @@ namespace CourseManagement.Client.View
     {
         DataRowView row;
         int choosenCourseNr;
-        static string[] columnHeaderTitles = new string[]
-            {
-                "Kurs Titel", "Betrag in €", "Beschreibung", "Max Teilnahmer", "Min Teilnahmer", "Kurs-Nr", "Gültigkeit in Monaten", "Tutor", "Bezahlungen", "Buchungen"
-            };
-        
-        static string[] personHeaderTitles = new string[]
-        {
-
-        };
 
         /// <summary>
         /// Default Constructor for the Index WPF Window
@@ -133,18 +124,52 @@ namespace CourseManagement.Client.View
         
         /// <summary>
         /// Like this for every Header 
-        /// 
+        /// How the hell can I do it better? 
         ///
         /// </summary>
         private void changeColumnTitleCourse()
         {
-            if (dgCourse.Columns.Count == columnHeaderTitles.Length)
+            foreach (DataGridColumn aDGC in dgCourse.Columns)
             {
-                for (int i = 0; i < columnHeaderTitles.Length; i++)
+                switch (aDGC.Header.ToString())
                 {
-                    dgCourse.Columns[i].Header = columnHeaderTitles[i];
+                    case "CourseNr":
+                        aDGC.Header = "KursNr";
+                        break;
+                    case "Title":
+                        aDGC.Header = "Titel";
+                        break;
+                    case "AmountInEuro":
+                        aDGC.Header = "Betrag";
+                        break;
+                    case "Description":
+                        aDGC.Header = "Beschreibung";
+                        break;
+                    case "MaxMember":
+                        aDGC.Header = "Max Teilnehmer";
+                        break;
+                    case "MinMember":
+                        aDGC.Header = "Min teilnehmer";
+                        break;
+                    case "ValidityInMonth":
+                        aDGC.Header = "Gültigkeit in Monaten";
+                        break;
+                    case "Payments":
+                        aDGC.Header = "Zahlungen";
+                        break;
+                    case "Appointments":
+                        aDGC.Header = "Termine";
+                        break;
                 }
             }
+
+            //if (dgCourse.Columns.Count == columnHeaderTitles.Length)
+            //{
+            //    for (int i = 0; i < columnHeaderTitles.Length; i++)
+            //    {
+            //        dgCourse.Columns[i].Header = columnHeaderTitles[i];
+            //    }
+            //}
         }
 
 
@@ -283,6 +308,10 @@ namespace CourseManagement.Client.View
                     System.Windows.MessageBox.Show(error.ToString());
                 }
             }
+            else
+            {
+                lblCourseNotSelected.Visibility = Visibility.Visible;
+            }
 
             //getting begin of appointment from userselection
             if (this.dpBeginOfCourse.Text != null)
@@ -336,6 +365,7 @@ namespace CourseManagement.Client.View
                 lblBeginnDateNotFilled.Visibility = Visibility.Hidden;
                 lblEndDateNotFilled.Visibility = Visibility.Hidden;
                 lblRoomNrNotFilled.Visibility = Visibility.Hidden;
+                lblCourseNotSelected.Visibility = Visibility.Hidden;
             }
         }
 
@@ -343,13 +373,12 @@ namespace CourseManagement.Client.View
         {
             if (this.dgCourse.SelectedIndex != -1)
             {
-                DataTable temp = CourseLogic.getInstance().getAll();
-                string selectedIndex = temp.Rows[dgCourse.SelectedIndex][0].ToString();
-                int tmp = int.Parse(selectedIndex);
+                DataTable tempDataTable = CourseLogic.getInstance().getAll();
                 try
                 {
-                    WndNewCourse editCourse = new WndNewCourse(CourseLogic.getInstance().getById(tmp));
-                    editCourse.Show(); 
+                    int selectedIndex = Convert.ToInt32(tempDataTable.Rows[dgCourse.SelectedIndex]["CourseNr"]);
+                    WndNewCourse editCourse = new WndNewCourse(CourseLogic.getInstance().getById(selectedIndex));
+                    editCourse.ShowDialog(); 
                 }
                 catch (Exception err)
                 {
