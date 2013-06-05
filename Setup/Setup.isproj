@@ -27,4 +27,10 @@
 		</TaggedOutputs> -->
 	</ItemGroup>
 	<Import Project="$(MSBuildExtensionsPath32)\InstallShield\2012SpringLimited\InstallShield.targets"/>
+	<ItemGroup>
+		<ProjectReference Include="..\CourseManagement\CourseManagement.csproj">
+			<Name>CourseManagement</Name>
+			<Project>{9FB99E52-08E5-479D-AA7E-91F3CA09B113}</Project>
+		</ProjectReference>
+	</ItemGroup>
 </Project>

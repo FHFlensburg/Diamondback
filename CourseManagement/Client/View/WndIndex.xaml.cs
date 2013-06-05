@@ -78,9 +78,7 @@ namespace CourseManagement.Client.View
                             break;
                         case 1:
                             dgCourse.DataContext = PersonLogic.getInstance().getAll();
-       
-
-                             cbValues.Items.Clear();
+                            cbValues.Items.Clear();
                             cbValues.Items.Add(new RibbonGalleryItem() { Content = "Alle Personen", Foreground = Brushes.Blue });
                             cbValues.Items.Add(new RibbonGalleryItem() { Content = "Tutoren", Foreground = Brushes.Green });
                             cbValues.Items.Add(new RibbonGalleryItem() { Content = "Studenten", Foreground = Brushes.Red });
@@ -91,8 +89,8 @@ namespace CourseManagement.Client.View
                             dgCourse.DataContext = RoomLogic.getInstance().getAll();
                             break;
                         case 3:
-                            dgCourse.DataContext = PaymentLogic.getInstance().getAll();
-                            
+                            dgCourse.DataContext = StudentLogic.getInstance().getAll();
+                            dgAppointments.DataContext = PaymentLogic.getInstance().getAll();
                             break;
                         default:
                             dgCourse.DataContext = null;
@@ -432,13 +430,27 @@ namespace CourseManagement.Client.View
                     dgCourse.DataContext = CourseLogic.getInstance().search(tbSearch.Text);
                     break;
                 case 1:
-                    dgCourse.DataContext = StudentLogic.getInstance().search(tbSearch.Text);
+                    switch (this.cbxPersons.Text)
+                    {
+                        case "Alle Personen":
+                            this.dgCourse.DataContext = PersonLogic.getInstance().search(tbSearch.Text);
+                            break;
+                        case "Tutoren":
+                            this.dgCourse.DataContext = TutorLogic.getInstance().search(tbSearch.Text);
+                            break;
+                        case "Studenten":
+                            this.dgCourse.DataContext = StudentLogic.getInstance().search(tbSearch.Text);
+                            break;
+                        case "Benutzer":
+                            this.dgCourse.DataContext = UserLogic.getInstance().search(tbSearch.Text);
+                            break;
+                    }
                     break;
                 case 2:
                     dgCourse.DataContext = RoomLogic.getInstance().search(tbSearch.Text);
                     break;
                 case 3:
-                    dgCourse.DataContext = PaymentLogic.getInstance().search(tbSearch.Text);
+                    dgCourse.DataContext = StudentLogic.getInstance().search(tbSearch.Text);
                     break;
                 default:
                     dgCourse.DataContext = null;
@@ -467,13 +479,36 @@ namespace CourseManagement.Client.View
         /// <param name="e"></param>
         private void element_SelectCourse(object sender, SelectionChangedEventArgs e)
         {
-            if (this.mainRibbon.SelectedIndex == 0)
+            if (dgCourse.SelectedItems.Count == 1)
             {
-                if (dgCourse.SelectedItems.Count == 1)
+                try
                 {
-                    row = (DataRowView)dgCourse.SelectedItems[0];
-                    choosenCourseNr = Convert.ToInt32(row["CourseNr"]);
-                    dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(choosenCourseNr);
+                    switch (mainRibbon.SelectedIndex)
+                    {
+                        case 0:
+                            row = (DataRowView)dgCourse.SelectedItems[0];
+                            choosenCourseNr = Convert.ToInt32(row["CourseNr"]);
+                            dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(choosenCourseNr);
+                            break;
+                        case 1:
+                            
+                            break;
+                        case 2:
+
+                            break;
+                        case 3:
+                            row = (DataRowView)dgCourse.SelectedItems[0];
+                            choosenCourseNr = Convert.ToInt32(row["Id"]);
+                            dgAppointments.DataContext = PaymentLogic.getInstance().getByStudent(choosenCourseNr);
+                            break;
+                        default:
+                            dgCourse.DataContext = null;
+                            break;
+                    }
+                }
+                catch (System.Exception err)
+                {
+                    System.Windows.MessageBox.Show(err.ToString());
                 }
             }
         }
