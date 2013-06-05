@@ -538,6 +538,10 @@ namespace CourseManagement.Client.View
                             {
                                 dgAppointments.DataContext = CourseLogic.getInstance().getByStudent(choosenCourseNr);
                             }
+                            if (cbxPersons.Text == "Alle Personen" || cbxPersons.Text == "Benutzer")
+                            {
+                                dgAppointments.DataContext = CourseLogic.getInstance().getAll();
+                            }
                             break;
                         case 2:
                             row = (DataRowView)dgCourse.SelectedItems[0];
