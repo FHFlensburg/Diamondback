@@ -15,8 +15,10 @@ namespace CourseManagement.Client.View
     /// </summary>
     public partial class WndIndex : RibbonWindow
     {
-        DataRowView row;
-        int choosenCourseNr;
+        private DataRowView row;
+        private int choosenCourseNr;
+        private double spAppointmentsHeight;
+        private double dataGridHeight;
 
         /// <summary>
         /// Default Constructor for the Index WPF Window
@@ -24,6 +26,8 @@ namespace CourseManagement.Client.View
         public WndIndex()
         {
            InitializeComponent();
+           spAppointmentsHeight = spAppointments.Height;
+           dataGridHeight = dgCourse.Height;
         }
 
         private void mainWindow_IsLoaded(object sender, System.EventArgs e)
@@ -92,8 +96,8 @@ namespace CourseManagement.Client.View
             //2write a better version
             dgCourse.Columns[3].Visibility = Visibility.Hidden;
             dgCourse.Columns[9].Width = new DataGridLength(1, DataGridLengthUnitType.Star);
-            lblSettingAppointmentToCourse.Visibility = Visibility.Visible;
-            spAppointments.Visibility = Visibility.Visible;
+            spAppointments.Height = spAppointmentsHeight;
+            //dgCourse.Height = dgAppointments.Height = dataGridHeight;
         }
 
         private void refreshPersons()
@@ -105,16 +109,17 @@ namespace CourseManagement.Client.View
             cbValues.Items.Add(new RibbonGalleryItem() { Content = "Tutoren", Foreground = Brushes.Green });
             cbValues.Items.Add(new RibbonGalleryItem() { Content = "Studenten", Foreground = Brushes.Red });
             if (ActiveUser.userIsAdmin()) cbValues.Items.Add(new RibbonGalleryItem() { Content = "Benutzer", Foreground = Brushes.Orange });
-            lblSettingAppointmentToCourse.Visibility = Visibility.Hidden;
-            spAppointments.Visibility = Visibility.Hidden;
+            spAppointments.Height = 0;
+
+            //dgCourse.Height = dgAppointments.Height = dataGridHeight + spAppointmentsHeight / 2;
         }
 
         private void refreshRooms()
         {
             dgCourse.DataContext = RoomLogic.getInstance().getAll();
             changeColumnTitles();
-            lblSettingAppointmentToCourse.Visibility = Visibility.Hidden;
-            spAppointments.Visibility = Visibility.Hidden;
+            spAppointments.Height = 0;
+            //dgCourse.MaxHeight = dgAppointments.MaxHeight = dataGridHeight + spAppointmentsHeight / 2;
         }
 
         private void refreshPayments()
@@ -122,8 +127,10 @@ namespace CourseManagement.Client.View
             dgCourse.DataContext = StudentLogic.getInstance().getAll();
             dgAppointments.DataContext = PaymentLogic.getInstance().getAll();
             changeColumnTitles();
-            lblSettingAppointmentToCourse.Visibility = Visibility.Hidden;
-            spAppointments.Visibility = Visibility.Hidden;
+            spAppointments.Height = 0;
+
+            
+            //dgCourse.Height = dgAppointments.Height = dataGridHeight + spAppointmentsHeight / 2;
         }
 
         private void refreshAppointments()
@@ -131,8 +138,6 @@ namespace CourseManagement.Client.View
             DataTable allAppointments = null;
             allAppointments = AppointmentLogic.getInstance().getAll();
             dgAppointments.DataContext = allAppointments;
-            lblSettingAppointmentToCourse.Visibility = Visibility.Visible;
-            spAppointments.Visibility = Visibility.Visible;
 
             changeColumnTitles();
         }
@@ -149,10 +154,6 @@ namespace CourseManagement.Client.View
             if (this.IsLoaded)
             {
                 refreshCourses();
-                refreshPersons();
-                refreshRooms();
-                refreshPayments();
-                refreshAppointments();
             }
         }
 
