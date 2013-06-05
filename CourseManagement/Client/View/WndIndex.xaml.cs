@@ -263,7 +263,7 @@ namespace CourseManagement.Client.View
         {
             if (dgCourse.SelectedIndex != -1)
             {
-                
+
                 DataTable tempDataTable = CourseLogic.getInstance().getAll();
                 try
                 {
@@ -272,9 +272,34 @@ namespace CourseManagement.Client.View
                 }
                 catch (Exception err)
                 {
-                throw new Exception(err.Message);
+                    throw new Exception(err.Message);
                 }
                 refreshDataGrids();
+            }
+            else
+            {
+                if (dgAppointments.SelectedIndex != -1)
+                {
+                    deleteAppointment();
+                }
+            }
+        }
+
+        private void deleteAppointment()
+        {
+            if (dgAppointments.SelectedIndex != -1)
+            {
+            DataTable allAppointments = AppointmentLogic.getInstance().getAll();
+            try
+            {
+                int selectedIndex = Convert.ToInt32(allAppointments.Rows[dgAppointments.SelectedIndex]["Id"]);
+                AppointmentLogic.getInstance().delete(selectedIndex);
+            }
+            catch (Exception err)
+            {
+                throw new Exception(err.Message);
+            }
+            refreshDataGrids();
             }
         }
 
@@ -304,7 +329,9 @@ namespace CourseManagement.Client.View
             }
             else
             {
-                lblCourseNotSelected.Visibility = Visibility.Visible;
+
+                lblInfo.Content = "Bitten oben erst einen Kurs auswählen";
+                lblInfo.Visibility = Visibility.Visible;
             }
 
             //getting begin of appointment from userselection
@@ -352,6 +379,12 @@ namespace CourseManagement.Client.View
                 if (AppointmentLogic.getInstance().isPossibleNewAppointment(chosenCourseID, chosenRoomNr, chosenStartDate, chosenEndDate))
                 {
                     AppointmentLogic.getInstance().create(chosenCourseID, chosenRoomNr, chosenStartDate, chosenEndDate);
+                    lblInfo.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    lblInfo.Visibility = Visibility.Visible;
+                    lblInfo.Content = "Termin nicht möglich";  
                 }
 
                 dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(choosenCourseNr);
@@ -360,7 +393,7 @@ namespace CourseManagement.Client.View
                 lblBeginnDateNotFilled.Visibility = Visibility.Hidden;
                 lblEndDateNotFilled.Visibility = Visibility.Hidden;
                 lblRoomNrNotFilled.Visibility = Visibility.Hidden;
-                lblCourseNotSelected.Visibility = Visibility.Hidden;
+                
             }
         }
 
@@ -391,14 +424,15 @@ namespace CourseManagement.Client.View
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void TextBoxSearch_Changed(object sender, TextChangedEventArgs e)
-        {            
+        {
+
             switch (mainRibbon.SelectedIndex)
             {
                 case 0:
                     dgCourse.DataContext = CourseLogic.getInstance().search(tbSearch.Text);
                     break;
                 case 1:
-                    dgCourse.DataContext = StudentLogic.getInstance().search(tbSearch.Text);  
+                    dgCourse.DataContext = StudentLogic.getInstance().search(tbSearch.Text);
                     break;
                 case 2:
                     dgCourse.DataContext = RoomLogic.getInstance().search(tbSearch.Text);
@@ -476,7 +510,7 @@ namespace CourseManagement.Client.View
 
         /// <summary>
         /// formatting the datagrids
-        /// Each Grid has to have 25% of the Window, no matter how big or small it gets through user input
+        /// Each Grid has to have 25% of height of the Window, no matter how big or small it gets through user input
         /// As simple as it could be
         /// </summary>
         /// <param name="sender"></param>
@@ -517,6 +551,26 @@ namespace CourseManagement.Client.View
         private void MainWindowClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void RibbonButtonDeletePerson_Click(object sender, RoutedEventArgs e)
+        {
+            //ToDo: method stub for deleting person
+
+            if (dgAppointments.SelectedIndex != -1)
+            {
+                deleteAppointment();
+            }
+        }
+
+        private void RibbonButtonDeleteRoom_Click(object sender, RoutedEventArgs e)
+        {
+            //ToDo: method stub for deleting room
+
+            if (dgAppointments.SelectedIndex != -1)
+            {
+                deleteAppointment();
+            }
         }
     }
 }

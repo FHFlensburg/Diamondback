@@ -37,7 +37,7 @@
                             <!--<r:RibbonButton SmallImageSource="Images\addRoom.ico" Label="Raum" /> -->
                         </r:RibbonGroup>
                         <r:RibbonGroup x:Name="ribbonGroupCourseDelete" Header="Löschen">
-                            <r:RibbonButton x:Name="rbnButtonDeleteCourse" LargeImageSource="Images\delete.ico" Label="Löschen" Click="RibbonButtonDeleteCourse_Click" KeyTip="D" ToolTip="Löscht ausgewählten Kurs" />
+                            <r:RibbonButton x:Name="rbnButtonDeleteCourse" LargeImageSource="Images\delete.ico" Label="Löschen" Click="RibbonButtonDeleteCourse_Click" KeyTip="D" ToolTip="Ausgewählten Eintrag löschen" />
                         </r:RibbonGroup>
                         <r:RibbonGroup x:Name="ribbonGroupChange" Header="Bearbeiten">
                             <r:RibbonButton x:Name="rbnButtonChangeCourse" LargeImageSource="Images\change.ico" Label="Bearbeiten" Click="RibbonButtonEditCourse_Click" KeyTip="B" ToolTip="Bearbeitet ausgewählten Kurs"/>
@@ -49,7 +49,7 @@
                             <r:RibbonButton x:Name="rbnButtonNewPerson" LargeImageSource="Images\addParticipant.ico" Label="Neue Person" KeyTip="N" Click="RibbonButtonNewPerson_Click" ToolTip="Neue Person anlegen"/>
                         </r:RibbonGroup>
                         <r:RibbonGroup x:Name="ribbonGroupPersonsDelete" Header="Löschen">
-                            <r:RibbonButton x:Name="rbnButtonDeletePerson" LargeImageSource="Images\delete.ico" Label="Löschen" KeyTip="D" ToolTip="Löscht ausgewählte Person" />
+                            <r:RibbonButton x:Name="rbnButtonDeletePerson" LargeImageSource="Images\delete.ico" Label="Löschen" KeyTip="D" ToolTip="Ausgewählten Eintrag löschen" Click="RibbonButtonDeletePerson_Click" />
                         </r:RibbonGroup>
                         <r:RibbonGroup x:Name="ribbonGroupPersonsSelect" Header="Auswahl">
                             <r:RibbonComboBox x:Name="cbxPersons" Label="Personen Auswahl"
@@ -73,7 +73,7 @@
                             <r:RibbonButton x:Name="rbnButtonNewRoom" LargeImageSource="Images\addRoom.ico" Label="Neuer Raum" Click="RibbonButtonNewRoom_Click" KeyTip="N" ToolTip="Neuen Raum anlegen"/>
                         </r:RibbonGroup>
                         <r:RibbonGroup x:Name="ribbonGroupRoomDelete" Header="Löschen">
-                            <r:RibbonButton x:Name="rbnButtonDeleteRoom" LargeImageSource="Images\delete.ico" Label="Löschen" KeyTip="D" ToolTip="Ausgewählte Person löschen"/>
+                            <r:RibbonButton x:Name="rbnButtonDeleteRoom" LargeImageSource="Images\delete.ico" Label="Löschen" KeyTip="D" ToolTip="Ausgewählten Eintrag löschen" Click="RibbonButtonDeleteRoom_Click"/>
                         </r:RibbonGroup>
                     </r:RibbonTab>
                     <!-- Ribbon Tab payment: -->
@@ -102,13 +102,13 @@
                 <DataGrid x:Name="dgAppointments" Margin="10" ItemsSource="{Binding}" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" IsSynchronizedWithCurrentItem="True" ColumnWidth="*" />
                 <StackPanel Orientation="Horizontal" x:Name="spAppointments" Margin="0,0,-0.4,0" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
                     <StackPanel Margin="5">
-                        <Label Width="130" Content="Startdatum"/>
-                        <xctk:DateTimePicker Format="FullDateTime" xctk:Name="dpBeginOfCourse" ToolTip="Auswahl der Startzeit und des Startdatum des Kurses" /> 
+                        <Label Width="130" Content="Startdatum" HorizontalAlignment="Left"/>
+                        <xctk:DateTimePicker Format="FullDateTime" xctk:Name="dpBeginOfCourse" ToolTip="Auswahl der Startzeit und des Startdatum des Kurses" Width="220"/> 
                         <Label Content="Bitte ausfüllen" x:Name="lblBeginnDateNotFilled" Visibility="Hidden"  Foreground="Red"/>
                     </StackPanel>
                     <StackPanel Margin="5">
-                        <Label Width="130" Content="Ende"/>
-                        <xctk:DateTimePicker Format="FullDateTime" xctk:Name="dpEndOfAppointCourse" ToolTip="Auswahl der Startzeit und des Startdatum des Kurses" />
+                        <Label Width="130" HorizontalAlignment="Left" Content="Ende"/>
+                        <xctk:DateTimePicker Format="FullDateTime" xctk:Name="dpEndOfAppointCourse" ToolTip="Auswahl der Startzeit und des Startdatum des Kurses" Width="220"/>
                         <Label Content="Bitte ausfüllen" x:Name="lblEndDateNotFilled" Visibility="Hidden"  Foreground="Red"/>
                     </StackPanel>
                     <StackPanel Margin="5">
@@ -118,8 +118,8 @@
                     </StackPanel>
                     <StackPanel Margin="5">   
                         <Label Width="130" Content="label2FormatStackpanelRight" Visibility="Hidden"/>
-                        <Button x:Name="btnAddAppointment" Content="Hinzufügen" Width="130" Click="ButtonAddAppointment_Click"/>
-                        <Label Content="Bitte erst oben Kurs auswählen" x:Name="lblCourseNotSelected" Visibility="Hidden"  Foreground="Red"/>
+                        <Button x:Name="btnAddAppointment" Content="Hinzufügen" Width="130" Click="ButtonAddAppointment_Click" ToolTip="Legt einen Termin mit den ausgefüllten Daten an"/>
+                        <Label x:Name="lblInfo" Visibility="Hidden"  Foreground="Red"/>
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
