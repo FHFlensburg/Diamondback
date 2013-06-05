@@ -237,18 +237,15 @@ namespace CourseManagement.Client.View
             }
             try
             {
-                DataTable courseRoomNumber = null;
-                courseRoomNumber = RoomLogic.getInstance().getAll();
-                string temporaryItem = string.Empty;
+                DataTable courseRoomNumber = RoomLogic.getInstance().getAll();
                 int temporaryCountIndex = courseRoomNumber.Rows.Count;
 
-                for (int i = 0; i < temporaryCountIndex; i++)
+                foreach (DataRow aDataRow in courseRoomNumber.Rows)
                 {
-                    temporaryItem = string.Empty;
-                    temporaryItem = courseRoomNumber.Rows[i]["RoomNr"].ToString();
-                    cbxAppointmentRoomNumber.Items.Add(temporaryItem);
-                    //TODO: Duplizitäten. Wo erfolgt die Validierung?!
-                }       
+                    ComboBoxItem aComboBoxItem = new ComboBoxItem();
+                    aComboBoxItem.Content = aDataRow["RoomNr"];
+                    cbxAppointmentRoomNumber.Items.Add(aComboBoxItem);
+                }  
             }
             catch (System.Exception err)
             {
@@ -327,7 +324,8 @@ namespace CourseManagement.Client.View
 
 
             //getting end of Appointment from userselection
-            if (this.dpEndOfAppointCourse.Value.Value.ToUniversalTime() != null)
+            //if (this.dpEndOfAppointCourse.Value.Value.ToUniversalTime() != null)
+            if(dpEndOfAppointCourse.Text != null)
             {
                 chosenEndDate = (DateTime)dpEndOfAppointCourse.Value.Value;
                 lblEndDateNotFilled.Visibility = Visibility.Hidden;
@@ -341,7 +339,7 @@ namespace CourseManagement.Client.View
             if (this.cbxAppointmentRoomNumber.SelectedItem != null)
             {
                 //TODO: Array durch String ersetzen
-                chosenRoomNr = Convert.ToInt32(cbxAppointmentRoomNumber.SelectedValue.ToString());
+                chosenRoomNr = Convert.ToInt32(((ComboBoxItem)cbxAppointmentRoomNumber.SelectedItem).Content);
                 lblRoomNrNotFilled.Visibility = Visibility.Hidden;
             }
             else

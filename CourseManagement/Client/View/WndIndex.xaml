@@ -116,6 +116,11 @@
                         <ComboBox x:Name="cbxAppointmentRoomNumber" Width="120" ToolTip="Raum in dem der Kurs statt finden soll"/>
                         <Label Content="Bitte ausfüllen" x:Name="lblRoomNrNotFilled" Visibility="Hidden"  Foreground="Red"/>
                     </StackPanel>
+                    <StackPanel Margin="5">
+                        <Label Width="130" Content="Tutor" />
+                        <ComboBox x:Name="cbxAppointmentTutor" Width="120" ToolTip="Vortragender Tutor"/>
+                        <Label Content="Bitte ausfüllen" x:Name="lblTutorNotFilled" Visibility="Hidden"  Foreground="Red"/>
+                    </StackPanel>
                     <StackPanel Margin="5">   
                         <Label Width="130" Content="label2FormatStackpanelRight" Visibility="Hidden"/>
                         <Button x:Name="btnAddAppointment" Content="Hinzufügen" Width="130" Click="ButtonAddAppointment_Click"/>
