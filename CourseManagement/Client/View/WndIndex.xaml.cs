@@ -666,6 +666,7 @@ namespace CourseManagement.Client.View
             {
                     case 0:
                 dgAppointments.DataContext = AppointmentLogic.getInstance().getAll();
+                lblAppointmentToCourse.Content = "Alle Buchungen";
                 break;
                     case 1:
                 dgAppointments.DataContext = CourseLogic.getInstance().getAll();
