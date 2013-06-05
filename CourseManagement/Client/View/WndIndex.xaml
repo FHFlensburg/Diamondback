@@ -102,7 +102,6 @@
                 <Label x:Name="lblSettingAppointmentToCourse" Content="Termin buchen" FontWeight="Bold"/>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                     <Label Content="Buchungen" FontWeight="Bold" VerticalAlignment="Center"/>
-                    <Button x:Name="btnAllAppointments" Content="(Alle)"  FontSize="8" VerticalAlignment="Center" BorderBrush="White" Background="White" Height="14" Foreground="#FF5B8543" RenderTransformOrigin="0.545,0.944" Click="btnAllAppointments_Click" Margin="0,2,0,0" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" x:Name="spAppointments" Margin="0,0,-0.4,0" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
@@ -129,8 +128,11 @@
                 
             </StackPanel>
             <StackPanel Grid.Row="3" VerticalAlignment="Bottom">
-                <Label x:Name="lblAppointmentToCourse" Content="Alle Buchungen" FontWeight="Bold"/>
-                <DataGrid x:Name="dgAppointments" Margin="10" ItemsSource="{Binding}" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" IsSynchronizedWithCurrentItem="True" ColumnWidth="*" />
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Label x:Name="lblAppointmentToCourse" Content="Alle Buchungen" FontWeight="Bold"/>
+                        <Button x:Name="btnAllAppointments" Content="(von allen)"  FontSize="8" VerticalAlignment="Center" BorderBrush="White" Background="White" Height="14" Foreground="#FF5B8543" RenderTransformOrigin="0.545,0.944" Click="btnAllAppointments_Click" Margin="0,2,0,0" />
+                    </StackPanel>
+                    <DataGrid x:Name="dgAppointments" Margin="10" ItemsSource="{Binding}" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" IsSynchronizedWithCurrentItem="True" ColumnWidth="*" />
                 </StackPanel>
             </StackPanel>
         </StackPanel>

@@ -4,11 +4,7 @@ using System.Windows.Input;
 using Microsoft.Windows.Controls.Ribbon;
 using System.Data;
 using CourseManagement.Client.BusinessLogic;
-using System.Collections.Generic;
 using System;
-using System.Collections;
-using System.Windows.Controls.Primitives;
-using Xceed.Wpf.Toolkit;
 using System.Windows.Media;
 
 
@@ -92,7 +88,7 @@ namespace CourseManagement.Client.View
         private void refreshCourses()
         {
             this.dgCourse.DataContext = CourseLogic.getInstance().getAll();
-            changeColumnTitleCourse();
+            changeColumnTitles();
             //2write a better version
             dgCourse.Columns[3].Visibility = Visibility.Hidden;
             dgCourse.Columns[9].Width = new DataGridLength(1, DataGridLengthUnitType.Star);
@@ -158,39 +154,20 @@ namespace CourseManagement.Client.View
         ///
         /// New idea: Maybe possible with a Hash Map or something like that 
         /// </summary>
-        private void changeColumnTitleCourse()
+        private void changeColumnTitles()
         {
             foreach (DataGridColumn aDGC in dgCourse.Columns)
             {
                 switch (aDGC.Header.ToString())
                 {
-                    case "CourseNr":
-                        aDGC.Header = "KursNr";
-                        break;
-                    case "Title":
-                        aDGC.Header = "Titel";
-                        break;
-                    case "AmountInEuro":
-                        aDGC.Header = "Betrag in €";
-                        break;
-                    case "Description":
-                        aDGC.Header = "Beschreibung";
-                        break;
-                    case "MaxMember":
-                        aDGC.Header = "max. Teilnehmer";
-                        break;
-                    case "MinMember":
-                        aDGC.Header = "min. Teilnehmer";
-                        break;
-                    case "ValidityInMonth":
-                        aDGC.Header = "Gültigkeit in Monaten";
-                        break;
-                    case "Payments":
-                        aDGC.Header = "Zahlungen";
-                        break;
-                    case "Appointments":
-                        aDGC.Header = "Termine";
-                        break;
+                    case "CourseNr": aDGC.Header = "KursNr"; break;
+                    case "Title": aDGC.Header = "Titel"; break;
+                    case "AmountInEuro":aDGC.Header = "Betrag in €";break;
+                    case "Description":aDGC.Header = "Beschreibung";break;
+                    case "MaxMember":aDGC.Header = "max. Teilnehmer";break;
+                    case "MinMember":aDGC.Header = "min. Teilnehmer";break;
+                    case "ValidityInMonth":aDGC.Header = "Gültigkeit in Monaten";break;
+                    case "Appointments":aDGC.Header = "Termine";break;
                 }
             }
 
@@ -493,7 +470,7 @@ namespace CourseManagement.Client.View
                     dgCourse.DataContext = null;
                     break;
             }
-            changeColumnTitleCourse(); 
+            changeColumnTitles(); 
         }
 
         /// <summary>
@@ -653,7 +630,22 @@ namespace CourseManagement.Client.View
 
         private void btnAllAppointments_Click(object sender, RoutedEventArgs e)
         {
-            dgAppointments.DataContext = AppointmentLogic.getInstance().getAll();
+            try
+            {
+                switch (mainRibbon.SelectedIndex)
+            {
+                    case 0:
+                dgAppointments.DataContext = AppointmentLogic.getInstance().getAll();
+                break;
+                    case 1:
+                dgAppointments.DataContext = CourseLogic.getInstance().getAll();
+                break;
+            }
+            }
+            catch
+            {
+                MessageBox.Show("Verbindungs- oder Datenbankfehler");
+            }
         }
     }
 }

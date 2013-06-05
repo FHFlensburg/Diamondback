@@ -40,7 +40,8 @@ namespace CourseManagement.Client.BusinessLogic
 
             foreach (Person person in Person.getAll())
             {
-                allPersons.Rows.Add(getNewRow(allPersons,person));
+
+                if (!(person is User) || ActiveUser.userIsAdmin()) allPersons.Rows.Add(getNewRow(allPersons, person));
             }
 
             return allPersons;
@@ -101,7 +102,7 @@ namespace CourseManagement.Client.BusinessLogic
                     || LogicUtils.notNullAndContains(person.Surname, search)
                     || LogicUtils.notNullAndContains(person.Id, search))
                 {
-                    allPersons.Rows.Add(getNewRow(allPersons,person));
+                    if (!(person is User) || ActiveUser.userIsAdmin()) allPersons.Rows.Add(getNewRow(allPersons, person));
                 }
             }
 
@@ -117,9 +118,9 @@ namespace CourseManagement.Client.BusinessLogic
         {
             DataTable dtPerson = getNewDataTable();
             Person person = Person.getById(personNr);
-            if (person != null)
+            if (person != null && ActiveUser.userIsAdmin())
             {
-                dtPerson.Rows.Add(getNewRow(dtPerson,person));
+                if (!(person is User)||ActiveUser.userIsAdmin()) dtPerson.Rows.Add(getNewRow(dtPerson, person));
             }
             return dtPerson;
 
