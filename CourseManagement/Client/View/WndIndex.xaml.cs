@@ -528,7 +528,9 @@ namespace CourseManagement.Client.View
                             dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(choosenCourseNr);
                             break;
                         case 1:
-                            
+                             row = (DataRowView)dgCourse.SelectedItems[0];
+                            int id = Convert.ToInt32(row["Id"]);
+                            dgAppointments.DataContext = CourseLogic.getInstance().getByPerson(id);
                             break;
                         case 2:
 
