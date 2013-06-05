@@ -526,9 +526,13 @@ namespace CourseManagement.Client.View
                             row = (DataRowView)dgCourse.SelectedItems[0];
                             choosenCourseNr = Convert.ToInt32(row["CourseNr"]);
                             dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(choosenCourseNr);
+                            string text = "Termin zu Kurs " + choosenCourseNr.ToString() + " buchen";
+                            lblSettingAppointmentToCourse.Content = text;
+                            text = "Buchungen zu Kurs " + choosenCourseNr.ToString();
+                            lblAppointmentToCourse.Content = text;
                             break;
                         case 1:
-                            
+
                             break;
                         case 2:
 
@@ -547,6 +551,11 @@ namespace CourseManagement.Client.View
                 {
                     System.Windows.MessageBox.Show(err.ToString());
                 }
+            }
+            else
+            {
+                lblSettingAppointmentToCourse.Content = "Termin buchen";
+                lblAppointmentToCourse.Content = "Alle Buchungen";
             }
         }
 
