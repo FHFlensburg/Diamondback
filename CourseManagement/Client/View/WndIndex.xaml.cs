@@ -126,6 +126,7 @@ namespace CourseManagement.Client.View
         /// Like this for every Header 
         /// How the hell can I do it better? 
         ///
+        /// New idea: Maybe possible with a Hash Map or something like that 
         /// </summary>
         private void changeColumnTitleCourse()
         {
@@ -371,13 +372,14 @@ namespace CourseManagement.Client.View
 
         private void RibbonButtonEditCourse_Click(object sender, RoutedEventArgs e)
         {
-            if (this.dgCourse.SelectedIndex != -1)
+            if (dgCourse.SelectedIndex != -1)
             {
                 DataTable tempDataTable = CourseLogic.getInstance().getAll();
                 try
                 {
                     int selectedIndex = Convert.ToInt32(tempDataTable.Rows[dgCourse.SelectedIndex]["CourseNr"]);
-                    WndNewCourse editCourse = new WndNewCourse(CourseLogic.getInstance().getById(selectedIndex));
+                    DataTable selectedCourse = CourseLogic.getInstance().getById(selectedIndex);
+                    WndNewCourse editCourse = new WndNewCourse(selectedCourse);
                     editCourse.ShowDialog(); 
                 }
                 catch (Exception err)

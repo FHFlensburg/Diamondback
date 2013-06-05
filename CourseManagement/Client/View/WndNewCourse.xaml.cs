@@ -22,7 +22,7 @@ namespace CourseManagement.Client.View
     /// </summary>
     public partial class WndNewCourse : Window
     {
-        private DataTable dataTable;
+        private DataTable selectedCourse = null;
 
 
         public WndNewCourse()
@@ -32,84 +32,58 @@ namespace CourseManagement.Client.View
         }
 
 
-        public WndNewCourse(DataTable dataTable)
+        public WndNewCourse(DataTable selectedCourse)
         {
-            
-
-            // max member
-            string temporaryMaxMember = dataTable.Rows[0]["MaxMember"].ToString();
-            int tempMaxMember = Convert.ToInt32(temporaryMaxMember);
-
-            //min member
-            string temporaryMinMember = dataTable.Rows[0]["MinMember"].ToString();
-            int tempMinMember = Convert.ToInt32(temporaryMinMember);
-
-            //tutor
-           //string fOoObAr = dataTable.Rows[0]["Tutor"].ToString();
-           // int temporaryTut = Convert.ToInt32(temporaryTutor);
-
             InitializeComponent();
             setGuiValues();
-            this.dataTable = dataTable;
-            tbCourseTitle.Text = dataTable.Rows[0]["Title"].ToString();
-            tbCosts.Text = dataTable.Rows[0]["AmountInEuro"].ToString();
-            tbDescription.Text = dataTable.Rows[0]["Description"].ToString();
-            tbValidInMonth.Text = dataTable.Rows[0]["ValidityInMonth"].ToString();
 
-            for (int i = 0; i < cbMinParticipants.Items.Count; i++)
+            this.selectedCourse = selectedCourse;
+            lblCourse.Content = "Kurs bearbeiten";       
+
+            // max member
+            tbMaxParticipants.Text = selectedCourse.Rows[0]["MaxMember"].ToString();
+
+            //min member
+            int tempMinMember = Convert.ToInt32(selectedCourse.Rows[0]["MinMember"]);
+
+            foreach (ComboBoxItem aComboBoxItem in cbMinParticipants.Items)
             {
-                if (i == tempMinMember)
+
+                if(Convert.ToInt32(aComboBoxItem.Content) == Convert.ToInt32(selectedCourse.Rows[0]["MinMember"]))
                 {
-                    cbMinParticipants.Text = i.ToString();
+                    cbMinParticipants.SelectedItem = aComboBoxItem;
                 }
             }
 
-            //for (int i = 0; i < 100; i++)
-            //{
-            //    if (Convert.ToString(i).Equals(temporaryTutor))
-            //    {
-            //        cbTutor.Text = i.ToString();
-            //    }
-            //}
+            tbCourseTitle.Text = selectedCourse.Rows[0]["Title"].ToString();
+            tbCosts.Text = selectedCourse.Rows[0]["AmountInEuro"].ToString();
+            tbDescription.Text = selectedCourse.Rows[0]["Description"].ToString();
+            tbValidInMonth.Text = selectedCourse.Rows[0]["ValidityInMonth"].ToString();
 
         }
 
         private void setGuiValues()
         {
-            // 0 Participants allowed in Comboboxes
-            tbMaxParticipants.Text = "";
-            cbMinParticipants.Items.Clear();
 
-            // Values for Tutor
-            DataTable tutors = null;
-            tutors = TutorLogic.getInstance().getAll();
-            string temporaryTutor = string.Empty;
-            int countTutors = tutors.Rows.Count;
+            lblCourse.Content = "Neuer Kurs";
 
-            // Values for RoomNumber
-            DataTable roomNumber = null;
-            roomNumber = RoomLogic.getInstance().getAll();
-            string temporaryRoomNumber = string.Empty;
-            int countRoomNumbers = roomNumber.Rows.Count;
+           // Values for Tutor
+            DataTable allTutors = TutorLogic.getInstance().getAll();
+            foreach (DataRow aDataRow in allTutors.Rows)
+            {
+                ComboBoxItem aComboBoxItem = new ComboBoxItem();
+                string name = aDataRow["Forename"].ToString() + " " + aDataRow["Surname"].ToString();
+                aComboBoxItem.Content = name;
+                aComboBoxItem.Tag = aDataRow["Id"];
+                cbTutor.Items.Add(aComboBoxItem);
+            }
 
             // Participants
             for (int i = 0; i < 51; i++)
             {
-                ComboBoxItem maximalParticipants = new ComboBoxItem();
                 ComboBoxItem minimalParticipants = new ComboBoxItem();
-                maximalParticipants.Content = i;
                 minimalParticipants.Content = i;
-                tbMaxParticipants.Text = maximalParticipants.ToString();
                 cbMinParticipants.Items.Add(minimalParticipants);
-            }
-
-            // Tutors
-            for (int i = 0; i < countTutors; i++)
-            {
-                //TODO: Man sieht nur die ID, Zugehörigkeit ist schwer.
-                temporaryTutor = string.Empty;
-                temporaryTutor = tutors.Rows[i]["Id"].ToString();
-                cbTutor.Items.Add(temporaryTutor);
             }
         }
 
@@ -121,43 +95,51 @@ namespace CourseManagement.Client.View
 
         private void insertNewCourseAndValidate()
         {
+            string titeL = "";
+            string description = "";
+            int validInMonths = 0;
+            int maxParticipants = 0;
+            int minParticipants = 0;
+            int tutor = 0;
+            decimal amountInEuro = 0;
 
             try
             {
-            string titeL = tbCourseTitle.Text;
-            string description = tbDescription.Text;
-            string costs = tbCosts.Text;
-            int validInMonths = Convert.ToInt32(tbValidInMonth.Text);
-            int maxParticipants = Convert.ToInt32(tbMaxParticipants.Text);
-            int minParticipants = Convert.ToInt32(cbMinParticipants.Text);
-            int tutor = Convert.ToInt32(cbTutor.Text);
-        //    int room = Convert.ToInt16(cbRoomNumber.Text);
+                titeL = tbCourseTitle.Text;
+                amountInEuro = Convert.ToDecimal(tbCosts.Text);
+                description = tbDescription.Text;
+                maxParticipants = Convert.ToInt32(tbMaxParticipants.Text);
+                minParticipants = Convert.ToInt32(((ComboBoxItem)cbMinParticipants.SelectedItem).Tag);
+                tutor = Convert.ToInt32(((ComboBoxItem)cbTutor.SelectedItem).Tag);
+                validInMonths = Convert.ToInt32(tbValidInMonth.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Eingaben haben nicht das richtige Format");
+            }
+
             try
             {
-             CourseLogic course = CourseLogic.getInstance();
-                //GUI = ROOM, DB = VALIDITYinMONTHS
-             course.create(titeL, null, description, maxParticipants, minParticipants, tutor, validInMonths);
+
+            if(selectedCourse == null)
+            {
+            CourseLogic.getInstance().create(titeL, amountInEuro, description, maxParticipants, minParticipants, tutor, validInMonths);
+            }
+            else
+            {
+                int CourseNr = Convert.ToInt32(selectedCourse.Rows[0]["CourseNr"]);
+                CourseLogic.getInstance().changeProperties(CourseNr, titeL, amountInEuro, description, maxParticipants, minParticipants, tutor, validInMonths);
+            }
             }
                catch (Exception err)
                {
                   MessageBox.Show("Fehler in der Datenbank. Wenden Sie sich bitte an den Administrator\n" +err.ToString());
                }
 
-            }
-            catch (OverflowException)
-            {
-                MessageBox.Show("Konvertierte Zahl ist außerhalb der Gültigkeit");
-            }
-            catch (FormatException)
-            {
-               
-            }
-
         }
 
         private void btnAport_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: testen
             this.Close();
         }     
     }
