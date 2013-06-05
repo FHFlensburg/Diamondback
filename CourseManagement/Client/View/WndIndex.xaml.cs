@@ -528,10 +528,21 @@ namespace CourseManagement.Client.View
                             dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(choosenCourseNr);
                             break;
                         case 1:
-                            
+                            row = (DataRowView)dgCourse.SelectedItems[0];
+                            choosenCourseNr = Convert.ToInt32(row["Id"]);
+                            if (cbxPersons.Text == "Tutoren")
+                            {
+                                dgAppointments.DataContext = CourseLogic.getInstance().getByTutor(choosenCourseNr);
+                            }
+                            if (cbxPersons.Text == "Studenten")
+                            {
+                                dgAppointments.DataContext = CourseLogic.getInstance().getByStudent(choosenCourseNr);
+                            }
                             break;
                         case 2:
-
+                            row = (DataRowView)dgCourse.SelectedItems[0];
+                            choosenCourseNr = Convert.ToInt32(row["RoomNr"]);
+                            dgAppointments.DataContext = AppointmentLogic.getInstance().getByRoom(choosenCourseNr);
                             break;
                         case 3:
                             row = (DataRowView)dgCourse.SelectedItems[0];
