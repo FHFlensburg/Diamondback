@@ -17,7 +17,7 @@
         </StackPanel>
         <Image x:Name="imgLogo"  Margin="22,48,22,0" VerticalAlignment="Top" Width="250" Source="Images/logo.png" Opacity="0.9" Height="172"/>
         <StatusBar HorizontalAlignment="Left" Height="30" Margin="10" VerticalAlignment="Bottom" Width="274" Background="#FF2D2D30" Foreground="White">
-            <TextBox x:Name="tbVersion" Text="Ver. 1.0" Foreground="White" Background="#FF2D2D30" BorderThickness="0"/>
+            <TextBox x:Name="tbVersion" Text="Ver. 0.1" Foreground="White" Background="#FF2D2D30" BorderThickness="0"/>
             <Separator/>
             <TextBlock x:Name="tbPasswordStatus"/>
         </StatusBar>
