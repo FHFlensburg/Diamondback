@@ -16,10 +16,6 @@
                     <Label Content="Studenten" Margin="10,5,10,0"/>
                     <ListBox x:Name="lbxParticipants" Margin="10,5,10,5" IsSynchronizedWithCurrentItem="True"  Width="180"  SelectionMode="Multiple" ToolTip="Jeder grün markierte Student ist bereits dem gewählten Kurs zugeordnet">
                 </ListBox>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="bezahlt?"   Margin="5"  />
-                        <CheckBox HorizontalAlignment="Center" VerticalAlignment="Center"  />
-                    </StackPanel>
                 </StackPanel>
             </StackPanel>
             <!--<DataGrid x:Name="dgParticipant" Margin="10" ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="True"/>-->

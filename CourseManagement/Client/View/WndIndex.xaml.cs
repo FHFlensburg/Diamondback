@@ -33,7 +33,7 @@ namespace CourseManagement.Client.View
         private void mainWindow_IsLoaded(object sender, System.EventArgs e)
         {
             refreshDataGrids();
-            fillComboBoxRoomNumber();            
+            fillComboBoxRoomNumber();
         }
 
         private void Ribbon_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -78,11 +78,7 @@ namespace CourseManagement.Client.View
                             break;
                         case 1:
                             dgCourse.DataContext = PersonLogic.getInstance().getAll();
-                            dgCourse.Columns[0].Visibility = Visibility.Hidden;
-                            dgCourse.Columns[1].Visibility = Visibility.Hidden;
-                            dgCourse.Columns[2].Visibility = Visibility.Hidden;
-                            dgCourse.Columns[3].Visibility = Visibility.Hidden;
-                            dgCourse.Columns[4].Visibility = Visibility.Hidden;
+       
 
                              cbValues.Items.Clear();
                             cbValues.Items.Add(new RibbonGalleryItem() { Content = "Alle Personen", Foreground = Brushes.Blue });
@@ -227,7 +223,7 @@ namespace CourseManagement.Client.View
             
         }
 
-      
+
 
         private void fillComboBoxRoomNumber()
         {
