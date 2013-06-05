@@ -20,7 +20,7 @@
                     </r:Ribbon.HelpPaneContent>
                     <!-- Application Menu, located at the left-hand side (down arrow) -->
                     <r:Ribbon.ApplicationMenu >
-                        <r:RibbonApplicationMenu KeyTip="X" >
+                        <r:RibbonApplicationMenu KeyTip="X" SmallImageSource="Images\ribbonapplicationmenuIcon.png">
                             <!--ToDo beta status, real buttons follow-->
                             <r:RibbonApplicationMenuItem Header="Hilfe" ImageSource="Images\help.ico" Click="OpenHelpFile" />
                             <r:RibbonApplicationMenuItem Header="Informationen" ImageSource="Images\logo.png" />
@@ -100,9 +100,6 @@
                     </DataGrid.ItemContainerStyle>
                 </DataGrid>
                 <Label x:Name="lblSettingAppointmentToCourse" Content="Termin buchen" FontWeight="Bold"/>
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <Label Content="Buchungen" FontWeight="Bold" VerticalAlignment="Center"/>
-                </StackPanel>
 
                 <StackPanel Orientation="Horizontal" x:Name="spAppointments" Margin="0,0,-0.4,0" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
                     <StackPanel Margin="5">
