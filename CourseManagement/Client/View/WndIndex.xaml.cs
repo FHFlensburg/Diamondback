@@ -115,7 +115,8 @@ namespace CourseManagement.Client.View
 
         private void refreshPayments()
         {
-            dgCourse.DataContext = PaymentLogic.getInstance().getAll();
+            dgCourse.DataContext = StudentLogic.getInstance().getAll();
+            dgAppointments.DataContext = PaymentLogic.getInstance().getAll();
         }
 
         private void refreshAppointments()
