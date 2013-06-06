@@ -23,5 +23,10 @@ namespace CourseManagement.Client.View
         {
             InitializeComponent();
         }
+
+        private void ButtonAport_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
