@@ -526,6 +526,10 @@ namespace CourseManagement.Client.View
                 {
                     DataRowView selectedStudentRow = (DataRowView)dgCourse.SelectedItems[0];
                     dgAppointments.DataContext = PaymentLogic.getInstance().getByStudent(Convert.ToInt32(row["Id"]));
+                    row = (DataRowView)dgCourse.SelectedItems[0];
+                    choosenCourseNr = Convert.ToInt32(row["Id"]);
+                    lblStudentName.Content = "Saldo von " + row["Forename"] + " " + row["Surname"] + ":";
+                    lblStudentHasToPay.Content = PaymentLogic.getInstance().getStudentBalance(choosenCourseNr).ToString();
                 }
             }
             changeColumnTitles();
@@ -762,6 +766,10 @@ namespace CourseManagement.Client.View
                 {
                     DataRowView selectedStudentRow = (DataRowView)dgCourse.SelectedItems[0];
                     dgAppointments.DataContext = PaymentLogic.getInstance().getByStudent(Convert.ToInt32(row["Id"]));
+                    row = (DataRowView)dgCourse.SelectedItems[0];
+                    choosenCourseNr = Convert.ToInt32(row["Id"]);
+                    lblStudentName.Content = "Saldo von " + row["Forename"] + " " + row["Surname"] + ":";
+                    lblStudentHasToPay.Content = PaymentLogic.getInstance().getStudentBalance(choosenCourseNr).ToString();
                 }
             }
             changeColumnTitles();
