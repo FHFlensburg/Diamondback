@@ -5,7 +5,7 @@
         Icon="Images\Kursverwaltung.ico" SizeToContent="Height">
     <Grid>
         <StackPanel ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
-            <Label x:Name="lblNewPerson" Content="Neue Person" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="lblPerson" Content="Neue Person" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
             <StackPanel Margin="10">
                 <StackPanel Margin="10">
                 <Label x:Name="lblRole" FontWeight="Bold" Content="Rolle"/>
@@ -19,7 +19,7 @@
             <StackPanel Orientation="Horizontal" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
                 <StackPanel Margin="10">
                     <Label x:Name="lblTitle" Content="Titel" />
-                    <ComboBox x:Name="cbxbTitle" Width="120">
+                    <ComboBox x:Name="chbxTitle" Width="120">
                         <ComboBoxItem x:Name="cbxidoctor" Content="Doktor"/>
                         <ComboBoxItem x:Name="cbxiProf" Content="Professor"/>
                     </ComboBox>
@@ -81,12 +81,12 @@
                 </StackPanel>
                 <StackPanel Margin="10">
                     <Label x:Name="lblAdmin" Content="Admin" />
-                    <CheckBox x:Name="cbxAdmin" Width="120" HorizontalAlignment="Left"/>
+                    <CheckBox x:Name="chbxAdmin" Width="120" HorizontalAlignment="Left"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel Margin="10" Orientation="Horizontal">
-            <Button x:Name="btnSave" Content="Speichern" Margin="5" Width="75"/>
-            <Button x:Name="btnAport" Content="Abbrechen" Margin="5" Width="75"/>
+            <Button x:Name="btnSave" Content="Speichern" Margin="5" Width="75" Click="ButtonSavePerson_Click"/>
+            <Button x:Name="btnAport" Content="Abbrechen" Margin="5" Width="75" Click="ButtonApoprtPerson_Click"/>
             </StackPanel>
             
         </StackPanel>

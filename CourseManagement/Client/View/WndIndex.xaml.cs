@@ -157,6 +157,16 @@ namespace CourseManagement.Client.View
             dgAppointments.DataContext = allAppointments;
 
             changeColumnTitles();
+
+            //ID der Appointments ausgeblendet
+            if (dgAppointments.Columns[0].Header.ToString() == "Id")
+            {
+                dgAppointments.Columns[0].Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                dgAppointments.Columns[0].Visibility = Visibility.Visible;
+            }
         }
 
 
@@ -810,6 +820,11 @@ namespace CourseManagement.Client.View
                 }
             }
             refreshRooms();
+        }
+
+        private void RibbonButtonEditPerson_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

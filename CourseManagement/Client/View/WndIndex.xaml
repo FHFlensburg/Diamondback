@@ -65,6 +65,9 @@
                                 </r:RibbonGallery>
                             </r:RibbonComboBox>
                         </r:RibbonGroup>
+                        <r:RibbonGroup x:Name="ribbonGroupPersonChange" Header="Bearbeiten">
+                            <r:RibbonButton x:Name="rbnButtonChangePerson" LargeImageSource="Images\change.ico" Label="Bearbeiten" Click="RibbonButtonEditPerson_Click" KeyTip="B" ToolTip="Bearbeitet ausgewählten Kurs"/>
+                        </r:RibbonGroup>
                     </r:RibbonTab>
                     <!-- Ribbon Tab room: -->
                     <r:RibbonTab x:Name="ribbonRoom" Header="Räume" KeyTip="R" ToolTip="Reiter mit Raumfunktionalitäten">
@@ -109,7 +112,7 @@
                 
                 <StackPanel Orientation="Horizontal" Margin="5,5,5,0" HorizontalAlignment="Right">
                     <Label Name="lblHeadline" Content="Kursübersicht" FontWeight="Bold" Width="632"/>
-                    <Label Name="search" Content="Suche"/>
+                    <Label Name="search" Content="Suchen"/>
                     <TextBox Name="tbSearch" Width="200" Margin="5" TextChanged="TextBoxSearch_Changed" />
                 </StackPanel>
 
