@@ -60,7 +60,7 @@ namespace CourseManagement.Client.View
             {
                 try
                 {
-                    if (selectedRoom != null & roomNr != 0)
+                    if (selectedRoom != null && roomNr == 0)
                     {
                         RoomLogic.getInstance().create(building, capacity, city, cityCode, street);
                     }

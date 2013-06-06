@@ -724,8 +724,8 @@ namespace CourseManagement.Client.View
 
             if (dgCourse.SelectedItems.Count == 1)
             {
-                DataRowView selectedRow = (DataRowView)dgCourse.SelectedItems[0];
-                RoomLogic.getInstance().delete(Convert.ToInt32(selectedRow["roomNr"]));
+                DataRowView selectedRoomRow = (DataRowView)dgCourse.SelectedItems[0];
+                RoomLogic.getInstance().delete(Convert.ToInt32(selectedRoomRow["roomNr"]));
                 refreshRooms();
             }
             if (dgAppointments.SelectedIndex != -1)
@@ -796,10 +796,10 @@ namespace CourseManagement.Client.View
         {
             if (dgCourse.SelectedIndex != -1)
             {
-                DataTable tempDataTable = RoomLogic.getInstance().getAll();
                 try
                 {
-                    int selectedIndex = Convert.ToInt32(tempDataTable.Rows[dgCourse.SelectedIndex]["RoomNr"]);
+                    DataRowView selectedRoomRow = (DataRowView)dgCourse.SelectedItems[0];
+                    int selectedIndex = Convert.ToInt32((selectedRoomRow["roomNr"]));
                     DataTable selectedRoom = RoomLogic.getInstance().getById(selectedIndex);
                     WndNewRoom editCourse = new WndNewRoom(selectedRoom);
                     editCourse.ShowDialog();
@@ -809,6 +809,7 @@ namespace CourseManagement.Client.View
                     System.Windows.MessageBox.Show(err.ToString());
                 }
             }
+            refreshRooms();
         }
     }
 }
