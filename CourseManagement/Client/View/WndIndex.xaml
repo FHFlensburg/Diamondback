@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"      
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:r="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
-        Height="700" Width="900" Activated="mainWindow_IsLoaded"  SizeChanged="mainWindow_SizeChanged"
+        Height="700" Width="900" Activated="mainWindow_IsLoaded"  SizeChanged="mainWindow_SizeChanged" SizeToContent="Height" MinHeight="700"
         Icon="Images\Kursverwaltung.ico"
         Title="Kursverwaltung Version 0.2 Beta">
     <Grid>
@@ -113,14 +113,15 @@
                     <TextBox Name="tbSearch" Width="200" Margin="5" TextChanged="TextBoxSearch_Changed" />
                 </StackPanel>
 
-
-                <DataGrid Height ="175" x:Name="dgCourse" Margin="10"  ItemsSource="{Binding}" SelectionChanged="element_SelectCourse" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ColumnWidth="Auto" CanUserAddRows="False">
+                <UniformGrid>
+                <DataGrid Height ="175" x:Name="dgCourse" Margin="10" ItemsSource="{Binding}" SelectionChanged="element_SelectCourse" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ColumnWidth="Auto" CanUserAddRows="False">
                     <DataGrid.ItemContainerStyle>
                         <Style TargetType="DataGridRow">
                             <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
                         </Style>
                     </DataGrid.ItemContainerStyle>
                 </DataGrid>
+                </UniformGrid >
                 <StackPanel Name="spAppointments">
                     <Label x:Name="lblSettingAppointmentToCourse" Content="Termin buchen" FontWeight="Bold"/>
 

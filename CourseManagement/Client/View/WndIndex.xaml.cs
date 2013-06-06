@@ -39,6 +39,7 @@ namespace CourseManagement.Client.View
                 refreshAppointments();
                 fillComboBoxRoomNumber();
             }
+            dgCourse.Columns[dgCourse.Columns.Count - 1].Width = new DataGridLength(1, DataGridLengthUnitType.Star);
             
         }
         
@@ -809,7 +810,5 @@ namespace CourseManagement.Client.View
                 }
             }
         }
-
-
     }
 }
