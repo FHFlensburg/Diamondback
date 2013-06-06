@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseManagement.Client.BusinessLogic;
+using System;
 using System.Data;
 using System.Windows;
 using System.Windows.Controls;
@@ -42,6 +43,7 @@ namespace CourseManagement.Client.View
         public wndNewPerson()
         {
             InitializeComponent();
+            if (ActiveUser.userIsAdmin() == false) cbxRole.Items.RemoveAt(2) ;
             lblPerson.Content = "Neue Person";
         }
 
