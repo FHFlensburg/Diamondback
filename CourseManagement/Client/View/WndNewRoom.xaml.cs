@@ -17,8 +17,9 @@ namespace CourseManagement.Client.View
         private int capacity = 0;
         private string building = null;
         private string street = null;
-        private string postCode = null;
+        private string cityCode = null;
         private string city = null;
+        private int roomNr = 0;
 
         /// <summary>
         /// default constructor for window newRoom
@@ -29,22 +30,17 @@ namespace CourseManagement.Client.View
             lblNewRoom.Content = "Kurs bearbeiten";
         }
 
+        /// <summary>
+        /// Custom Constructor beeing called if user wants to change a room
+        /// </summary>
+        /// <param name="selectedRoom"></param>
         public WndNewRoom(DataTable selectedRoom)
         {
             InitializeComponent();
 
             this.selectedRoom = selectedRoom;
 
-            lblNewRoom.Content = "Kurs bearbeiten";
-
-            tbCapacity.Text = selectedRoom.Rows[0]["capacity"].ToString();
-        }
-
-
-        private void btnSaveRoom_Click(object sender, RoutedEventArgs e)
-        {
-            insertNewRoom();
-            this.Close();
+            setGuiElemntsToselectedCourseData(selectedRoom);
         }
 
         private void ButtonRoomAport_Click(object sender, RoutedEventArgs e)
@@ -52,13 +48,21 @@ namespace CourseManagement.Client.View
             this.Close();
         }
 
-        private void insertNewRoom()
+        private void btnSaveRoom_Click(object sender, RoutedEventArgs e)
+        {
+            insertRoom();
+            this.Close();
+        }
+
+        private void insertRoom()
         {
             if (validateDataFields())
             {
                 try
                 {
-                    RoomLogic.getInstance().create(building, capacity, city, postCode, street);
+                    if (selectedRoom != null & roomNr != 0)
+                        RoomLogic.getInstance().create(building, capacity, city, cityCode, street);
+                    else RoomLogic.getInstance().changeProperties(roomNr, building, capacity, city, cityCode, street);
                 }
                 catch (Exception e)
                 {
@@ -70,6 +74,25 @@ namespace CourseManagement.Client.View
             {
                 lblWrongUserInput.Visibility = Visibility.Visible;
             }
+        }
+
+        private void setGuiElemntsToselectedCourseData(DataTable selectedRoom)
+        {
+            lblNewRoom.Content = "Kurs bearbeiten";
+
+            roomNr = Convert.ToInt32(selectedRoom.Rows[0]["roomNr"]);
+            tbCapacity.Text = selectedRoom.Rows[0]["capacity"].ToString();
+            foreach (ComboBoxItem aComboBoxItem in cbBuilding.Items)
+            {
+                if (aComboBoxItem.Content.ToString() == selectedRoom.Rows[0]["building"].ToString())
+                {
+                    cbBuilding.SelectedItem = aComboBoxItem;
+                }
+            }
+
+            tbStreet.Text = selectedRoom.Rows[0]["street"].ToString();
+            tbCityCode.Text = selectedRoom.Rows[0]["citycode"].ToString();
+            tbCity.Text = selectedRoom.Rows[0]["city"].ToString();
         }
 
         #region validate and fill variables with the data from the datafields
@@ -147,7 +170,7 @@ namespace CourseManagement.Client.View
             try
             {
                 street = tbStreet.Text.ToString();
-                postCode = tbPostCode.Text.ToString();
+                cityCode = tbCityCode.Text.ToString();
                 city = tbCity.Text.ToString();
                 validate = true;
             }
