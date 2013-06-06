@@ -99,6 +99,7 @@ namespace CourseManagement.Client.View
         {
             this.dgCourse.DataContext = CourseLogic.getInstance().getAll();
             changeColumnTitles();
+            dgCourse.Columns[8].Header = "Teilnehmer";
             //2write a better version
             lblHeadline.Content = "Kursübersicht";
             dgCourse.Columns[3].Visibility = Visibility.Hidden;
@@ -138,7 +139,8 @@ namespace CourseManagement.Client.View
 
         private void refreshPayments()
         {
-            dgCourse.DataContext = CourseLogic.getInstance().getAll();
+            DataTable table = CourseLogic.getInstance().getAll();
+            dgCourse.DataContext = table;
             dgAppointments.DataContext = PaymentLogic.getInstance().getAll();
             changeColumnTitles();
             lblHeadline.Content = "Zahlungsübersicht";
@@ -192,7 +194,8 @@ namespace CourseManagement.Client.View
                 {"StartDate","StartDatum"},{"EndDate","EndDatum"},{"Room","Raum"},{"Surname","Nachname"},{"Forename","Vorname"},
                 {"Birthyear","Geburtsjahr"},{"MobilePhone","HandyNummer"},{"Mail","Mail"},{"Fax","Fax"},{"PrivatePhone","Telefon"},{"Gender","Geschlecht"},
                 {"Active","Aktiv"},{"IBAN","IBAN"},{"BIC","BIC"},{"Depositor","Kontoinhaber"},{"NameOfBank","Bank"},{"UserName","Benutzername"},
-                {"Password","Passwort"},{"LastLogin","LetztesLogin"},{"RegistrationDate","Registrierungsdatum"},  {"Admin","Admin"}
+                {"Password","Passwort"},{"LastLogin","LetztesLogin"},{"RegistrationDate","Registrierungsdatum"},  {"Admin","Admin"}, {"Courses","Kurse"},
+                {"StudentName","StudentenName"}
             };
            
             for(int i = 0; i<dgAppointments.Columns.Count;i++)
@@ -638,6 +641,7 @@ namespace CourseManagement.Client.View
                     break;
                 case "Studenten":
                     this.dgCourse.DataContext = StudentLogic.getInstance().getAll();
+                    dgCourse.Columns[18].Header = "Kurse";
                     break;
                 case "Benutzer":
                     this.dgCourse.DataContext = UserLogic.getInstance().getAll();

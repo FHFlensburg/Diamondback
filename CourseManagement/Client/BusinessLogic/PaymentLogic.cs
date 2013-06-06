@@ -36,7 +36,7 @@ namespace CourseManagement.Client.BusinessLogic
         {
             try
             {
-                return LogicUtils.getNewDataTable(new Payment());
+                return LogicUtils.getNewDataTable(new Payment(),"StudentName");
             }
             catch (Exception e)
             {
@@ -114,6 +114,9 @@ namespace CourseManagement.Client.BusinessLogic
             DataRow row = LogicUtils.getNewRow(table, payment);
             row["Course"] = payment.Course.CourseNr;
             row["Student"] = payment.Student.Id;
+            row["StudentName"] = payment.Student.Forename + " " + payment.Student.Surname;
+            if (row["IsPaid"].ToString() == "True") row["IsPaid"] = "ja";
+            else if (row["IsPaid"].ToString() == "False") row["IsPaid"] = "nein";
             return row;
 
         }
