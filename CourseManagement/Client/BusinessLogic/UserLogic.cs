@@ -260,7 +260,8 @@ namespace CourseManagement.Client.BusinessLogic
         {
             try
             {
-                User.getById(userNr).delete();
+                User user = User.getById(userNr);
+                if (user != null) user.delete();
             }
             catch (Exception e)
             {

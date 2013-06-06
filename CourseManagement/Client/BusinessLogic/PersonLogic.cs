@@ -182,7 +182,12 @@ namespace CourseManagement.Client.BusinessLogic
         {
             try
             {
-                Student.getById(personNr).delete();
+                Person person = Person.getById(personNr);
+               
+                    if ((person is User && ActiveUser.userIsAdmin())|| 
+                     (person is Student && (person as Student).Payments.Count == 0) ||
+                    (person is Tutor && (person as Tutor).Courses.Count == 0)) person.delete();
+
             }
             catch (Exception e)
             {

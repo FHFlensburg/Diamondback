@@ -12,7 +12,7 @@ namespace CourseManagement.Client.BusinessLogic
     /// Contains all logical operations of a Payment
     /// Implements some standard operations from the AbstractLogic
     /// </summary>
-    public class PaymentLogic:AbstractLogic
+    public class PaymentLogic : AbstractLogic
     {
         private PaymentLogic() { }
 
@@ -126,7 +126,8 @@ namespace CourseManagement.Client.BusinessLogic
         {
             try
             {
-                Payment.getById(paymentId).delete();
+                Payment payment = Payment.getById(paymentId);
+                if (payment != null) payment.delete();
             }
             catch (Exception e)
             {
@@ -199,7 +200,7 @@ namespace CourseManagement.Client.BusinessLogic
                     Course course = aPayment.Course;
                     sum += (decimal)course.AmountInEuro;
                 }
-            } 
+            }
             return sum + " €";
         }
 
@@ -237,6 +238,28 @@ namespace CourseManagement.Client.BusinessLogic
             if (payment.IsPaid != isPaid)
             {
                 payment.IsPaid = isPaid;
+            }
+        }
+
+        /// <summary>
+        /// Get one Payment by courseNr, studentNr and manage the remove from database of this Payment
+        /// </summary>
+        /// <param name="courseNr"></param>
+        /// <param name="studentNr"></param>
+        public void delete(int courseNr, int studentNr)
+        {
+            try
+            {
+                Payment tmp = null;
+                foreach (Payment payment in Payment.getAll())
+                {
+                    if (payment.Course.CourseNr == courseNr && payment.Student.Id == studentNr) tmp = payment;
+                }
+                if(tmp!=null) tmp.delete();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
         }
     }

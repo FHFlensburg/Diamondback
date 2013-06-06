@@ -165,7 +165,8 @@ namespace CourseManagement.Client.BusinessLogic
         {
             try
             {
-                Appointment.getById(appointmentNr).delete();
+                Appointment appointment = Appointment.getById(appointmentNr);
+                if (appointment != null) appointment.delete();
             }
             catch (Exception e)
             {

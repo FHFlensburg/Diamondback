@@ -27,16 +27,19 @@ namespace CourseManagement.Client.View
         {
            InitializeComponent();
            spAppointmentsHeight = spAppointments.Height;
-           dataGridHeight = dgCourse.Height;
+           dataGridHeight = dgAppointments.Height;
+
         }
 
         private void mainWindow_IsLoaded(object sender, System.EventArgs e)
         {
-            refreshCourses();
-            refreshAppointments();
-            fillComboBoxRoomNumber();
+            if (!dgCourse.HasItems)
+            {
+                refreshCourses();
+                refreshAppointments();
+                fillComboBoxRoomNumber();
+            }
         }
-
         
 
         private void RibbonButtonNewCourse_Click(object sender, RoutedEventArgs e)
@@ -66,6 +69,7 @@ namespace CourseManagement.Client.View
                 {
                     case 0:
                         refreshCourses();
+                        refreshAppointments();
                         break;
                     case 1:
                         refreshPersons();
@@ -97,12 +101,16 @@ namespace CourseManagement.Client.View
             dgCourse.Columns[3].Visibility = Visibility.Hidden;
             dgCourse.Columns[9].Width = new DataGridLength(1, DataGridLengthUnitType.Star);
             spAppointments.Height = spAppointmentsHeight;
-            //dgCourse.Height = dgAppointments.Height = dataGridHeight;
+            lblUebersicht.Content = "Kursübersicht";
+            lblAppointmentToCourse.Content = "Alle Buchungen";
+            dgCourse.Height = dgAppointments.Height = dataGridHeight;
+
         }
 
         private void refreshPersons()
         {
             dgCourse.DataContext = PersonLogic.getInstance().getAll();
+            dgAppointments.DataContext = CourseLogic.getInstance().getAll();
             changeColumnTitles();
             cbValues.Items.Clear();
             cbValues.Items.Add(new RibbonGalleryItem() { Content = "Alle Personen", Foreground = Brushes.Blue });
@@ -110,8 +118,10 @@ namespace CourseManagement.Client.View
             cbValues.Items.Add(new RibbonGalleryItem() { Content = "Studenten", Foreground = Brushes.Red });
             if (ActiveUser.userIsAdmin()) cbValues.Items.Add(new RibbonGalleryItem() { Content = "Benutzer", Foreground = Brushes.Orange });
             spAppointments.Height = 0;
+            lblUebersicht.Content = "Personenübersicht";
+            lblAppointmentToCourse.Content = "Gebuchte Kurse";
 
-            //dgCourse.Height = dgAppointments.Height = dataGridHeight + spAppointmentsHeight / 2;
+            dgCourse.Height = dgAppointments.Height = dataGridHeight + 55;
         }
 
         private void refreshRooms()
@@ -119,7 +129,7 @@ namespace CourseManagement.Client.View
             dgCourse.DataContext = RoomLogic.getInstance().getAll();
             changeColumnTitles();
             spAppointments.Height = 0;
-            //dgCourse.MaxHeight = dgAppointments.MaxHeight = dataGridHeight + spAppointmentsHeight / 2;
+            dgCourse.Height = dgAppointments.Height = dataGridHeight + 55;
         }
 
         private void refreshPayments()
@@ -129,8 +139,8 @@ namespace CourseManagement.Client.View
             changeColumnTitles();
             spAppointments.Height = 0;
 
-            
-            //dgCourse.Height = dgAppointments.Height = dataGridHeight + spAppointmentsHeight / 2;
+
+            dgCourse.Height = dgAppointments.Height = dataGridHeight + 55;
         }
 
         private void refreshAppointments()
@@ -553,9 +563,10 @@ namespace CourseManagement.Client.View
                             {
                                 dgAppointments.DataContext = CourseLogic.getInstance().getByStudent(choosenCourseNr);
                             }
-                            if (cbxPersons.Text == "Alle Personen" || cbxPersons.Text == "Benutzer")
+                            if ( cbxPersons.SelectionBoxItem.ToString() == "Alle Personen" 
+                                || cbxPersons.Text == "Benutzer")
                             {
-                                dgAppointments.DataContext = CourseLogic.getInstance().getAll();
+                                dgAppointments.DataContext = CourseLogic.getInstance().getByPerson(choosenCourseNr);
                             }
                             break;
                         case 2:
@@ -583,7 +594,7 @@ namespace CourseManagement.Client.View
             else
             {
                 lblSettingAppointmentToCourse.Content = "Termin buchen";
-                lblAppointmentToCourse.Content = "Alle Buchungen";
+                //lblAppointmentToCourse.Content = "Alle Buchungen";
             }
                 
            
@@ -668,12 +679,24 @@ namespace CourseManagement.Client.View
 
         private void RibbonButtonDeletePerson_Click(object sender, RoutedEventArgs e)
         {
-            //ToDo: method stub for deleting person
 
-            if (dgAppointments.SelectedIndex != -1)
+            if (dgAppointments.SelectedItems.Count==1  && dgCourse.SelectedItems.Count == 1)
             {
-                deleteAppointment();
+                int courseNr = Convert.ToInt32(((DataRowView)dgAppointments.SelectedItem)["CourseNr"]);
+                int studentNr = Convert.ToInt32(((DataRowView)dgCourse.SelectedItem)["Id"]);
+                PaymentLogic.getInstance().delete(courseNr, studentNr);
+                dgAppointments.DataContext = CourseLogic.getInstance().getByPerson(studentNr);
+                changeColumnTitles();
             }
+
+            else if (dgCourse.SelectedIndex != -1)
+            {
+                int id = Convert.ToInt32(((DataRowView)dgCourse.SelectedItem)["Id"]);
+                PersonLogic.getInstance().delete(id);
+                RibbonGallery_SelectionChanged(null, null);
+            }
+            
+            
         }
 
         private void RibbonButtonDeleteRoom_Click(object sender, RoutedEventArgs e)
@@ -710,5 +733,7 @@ namespace CourseManagement.Client.View
             lblSettingAppointmentToCourse.Content = "Termin buchen";
             lblAppointmentToCourse.Content = "Alle Buchungen";
         }
+
+
     }
 }

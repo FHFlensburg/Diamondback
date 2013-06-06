@@ -233,7 +233,8 @@ namespace CourseManagement.Client.BusinessLogic
         {
             try
             {
-                Tutor.getById(tutorNr).delete();
+                Tutor tutor = Tutor.getById(tutorNr);
+                if (tutor != null) tutor.delete();
             }
             catch (Exception e)
             {

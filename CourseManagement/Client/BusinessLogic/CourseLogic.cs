@@ -216,7 +216,8 @@ namespace CourseManagement.Client.BusinessLogic
         {
             try
             {
-                Course.getById(courseNr).delete();
+                Course course = Course.getById(courseNr);
+                if (course != null) course.delete();
             }
             catch (Exception e)
             {

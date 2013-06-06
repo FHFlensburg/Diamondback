@@ -199,7 +199,8 @@ namespace CourseManagement.Client.BusinessLogic
         {
             try
             {
-                Room.getById(roomNr).delete();
+                Room room = Room.getById(roomNr);
+                if (room != null) room.delete();
             }
             catch (Exception e)
             {

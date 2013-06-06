@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"      
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:r="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
-        Height="700" Width="900" Activated="mainWindow_IsLoaded" SizeChanged="mainWindow_SizeChanged"
+        Height="700" Width="900" Activated="mainWindow_IsLoaded"  SizeChanged="mainWindow_SizeChanged"
         Icon="Images\Kursverwaltung.ico"
         Title="Kursverwaltung Version 0.1 Beta">
     <Grid>
@@ -84,15 +84,18 @@
                         </r:RibbonGroup>
                     </r:RibbonTab>
                 </r:Ribbon>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+               
+            </StackPanel>
+            
+            <StackPanel Grid.Row="2" Orientation="Vertical" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" >
+                
+                <StackPanel Orientation="Horizontal" Margin="5,5,5,0" HorizontalAlignment="Right">
+                    <Label Name="lblUebersicht" Content="Kursübersicht" FontWeight="Bold" Width="637"/>
                     <Label Name="search" Content="Suche"/>
                     <TextBox Name="tbSearch" Width="200" Margin="5" TextChanged="TextBoxSearch_Changed" />
                 </StackPanel>
-            </StackPanel>
-            <StackPanel Grid.Row="2" Orientation="Vertical" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" >
-                <Label Content="Kursübersicht" FontWeight="Bold"/>
 
-                <DataGrid x:Name="dgCourse" Margin="10"  ItemsSource="{Binding}" SelectionChanged="element_SelectCourse" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ColumnWidth="Auto" CanUserAddRows="False">
+                <DataGrid Height ="175" x:Name="dgCourse" Margin="10"  ItemsSource="{Binding}" SelectionChanged="element_SelectCourse" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ColumnWidth="Auto" CanUserAddRows="False">
                     <DataGrid.ItemContainerStyle>
                         <Style TargetType="DataGridRow">
                             <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
@@ -131,7 +134,7 @@
                         <Label x:Name="lblAppointmentToCourse" Content="Alle Buchungen" FontWeight="Bold"/>
                         <Button x:Name="btnAllAppointments" Content="(von allen)"  FontSize="8" VerticalAlignment="Center" BorderBrush="White" Background="White" Height="14" Foreground="#FF5B8543" RenderTransformOrigin="0.545,0.944" Click="btnAllAppointments_Click" Margin="0,2,0,0" />
                     </StackPanel>
-                    <DataGrid x:Name="dgAppointments" Margin="10" ItemsSource="{Binding}" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" IsSynchronizedWithCurrentItem="True" ColumnWidth="*" />
+                    <DataGrid Height ="175" x:Name="dgAppointments" Margin="10" ItemsSource="{Binding}" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" IsSynchronizedWithCurrentItem="True" ColumnWidth="*" />
                 </StackPanel>
             </StackPanel>
         </StackPanel>
