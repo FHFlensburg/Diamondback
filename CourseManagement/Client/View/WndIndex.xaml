@@ -124,35 +124,38 @@
                 <StackPanel Name="spAppointments">
                     <Label x:Name="lblSettingAppointmentToCourse" Content="Termin buchen" FontWeight="Bold"/>
 
-                    <StackPanel Orientation="Horizontal"  Margin="0,0,-0.4,0" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
-                        <StackPanel Margin="5">
-                            <Label Width="130" Content="Startdatum" HorizontalAlignment="Left"/>
-                            <xctk:DateTimePicker Format="FullDateTime" xctk:Name="dpBeginOfCourse" ToolTip="Auswahl der Startzeit und des Startdatum des Kurses" Width="220"/>
+                    <UniformGrid  Margin="10" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                        <UniformGrid Rows="1">
+                        <StackPanel Margin="5" HorizontalAlignment="Stretch">
+                            <Label Content="Startdatum" HorizontalAlignment="Left"/>
+                            <xctk:DateTimePicker Format="FullDateTime" xctk:Name="dpBeginOfCourse" ToolTip="Auswahl der Startzeit und des Startdatum des Kurses"  />
                             <Label Content="Bitte ausfüllen" x:Name="lblBeginnDateNotFilled" Visibility="Hidden"  Foreground="Red"/>
                         </StackPanel>
                         <StackPanel Margin="5">
-                            <Label Width="130" HorizontalAlignment="Left" Content="Ende"/>
-                            <xctk:DateTimePicker Format="FullDateTime" xctk:Name="dpEndOfAppointCourse" ToolTip="Auswahl der Startzeit und des Startdatum des Kurses" Width="220"/>
+                            <Label HorizontalAlignment="Left" Content="Ende"/>
+                            <xctk:DateTimePicker Format="FullDateTime" xctk:Name="dpEndOfAppointCourse" ToolTip="Auswahl der Startzeit und des Startdatum des Kurses" />
                             <Label Content="Bitte ausfüllen" x:Name="lblEndDateNotFilled" Visibility="Hidden"  Foreground="Red"/>
                         </StackPanel>
                         <StackPanel Margin="5">
-                            <Label Width="130" Content="Raum-NR" />
-                            <ComboBox x:Name="cbxAppointmentRoomNumber" Width="120" ToolTip="Raum in dem der Kurs statt finden soll"/>
+                            <Label  Content="Raum-NR" />
+                            <ComboBox x:Name="cbxAppointmentRoomNumber"  ToolTip="Raum in dem der Kurs statt finden soll" />
                             <Label Content="Bitte ausfüllen" x:Name="lblRoomNrNotFilled" Visibility="Hidden"  Foreground="Red"/>
                         </StackPanel>
                         <StackPanel Margin="5">
-                            <Label Width="130" Content="label2FormatStackpanelRight" Visibility="Hidden"/>
-                            <Button x:Name="btnAddAppointment" Content="Hinzufügen" Width="130" Click="ButtonAddAppointment_Click" ToolTip="Legt einen Termin mit den ausgefüllten Daten an"/>
+                            <Label  Content="label2FormatStackpanelRight" Visibility="Hidden"/>
+                            <Button x:Name="btnAddAppointment" Content="Hinzufügen"  Click="ButtonAddAppointment_Click" ToolTip="Legt einen Termin mit den ausgefüllten Daten an"/>
                             <Label x:Name="lblInfo" Visibility="Hidden"  Foreground="Red"/>
                         </StackPanel>
-                    </StackPanel>
+                        </UniformGrid>
+                    </UniformGrid>
 
                 </StackPanel>
                 <StackPanel Grid.Row="3" VerticalAlignment="Bottom">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <Label x:Name="lblAppointmentToCourse" Content="Alle Buchungen" FontWeight="Bold"/>
                         <Label x:Name="lblStudentName"/>
-                        <Label x:Name="lblStudentHasToPay" Content="Test"/>
+                        <!-- deleted content so doku team can make Screenshots-->
+                        <Label x:Name="lblStudentHasToPay" Content=""/>
                         <Button x:Name="btnAllAppointments" Content="(von allen)"  FontSize="8" VerticalAlignment="Center" BorderBrush="White" Background="White" Height="14" Foreground="#FF5B8543" RenderTransformOrigin="0.545,0.944" Click="btnAllAppointments_Click" Margin="0,2,0,0" />
                     </StackPanel>
                     <DataGrid Height ="175" x:Name="dgAppointments" Margin="10" ItemsSource="{Binding}" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" IsSynchronizedWithCurrentItem="True" ColumnWidth="*" />

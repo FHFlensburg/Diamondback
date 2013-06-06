@@ -14,7 +14,7 @@
                 
                 <StackPanel>
                     <Label Content="Studenten" Margin="10,5,10,0"/>
-                    <ListBox x:Name="lbxParticipants" Margin="10,5,10,5" IsSynchronizedWithCurrentItem="True"  Width="180"  SelectionMode="Multiple" ToolTip="Jeder grün markierte Student ist bereits dem gewählten Kurs zugeordnet">
+                    <ListBox x:Name="lbxParticipants" Margin="10,5,10,5" IsSynchronizedWithCurrentItem="True" MaxHeight="500" Width="180"  SelectionMode="Multiple" ToolTip="Jeder grün markierte Student ist bereits dem gewählten Kurs zugeordnet">
                 </ListBox>
                 </StackPanel>
             </StackPanel>

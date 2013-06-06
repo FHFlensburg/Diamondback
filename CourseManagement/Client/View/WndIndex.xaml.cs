@@ -39,6 +39,7 @@ namespace CourseManagement.Client.View
                 refreshAppointments();
                 fillComboBoxRoomNumber();
             }
+            
         }
         
 
@@ -295,6 +296,8 @@ namespace CourseManagement.Client.View
         }
 
         /// <summary>
+        /// ToDo Method from Christian is beetter, change 
+        /// 
         /// Method which Deletes a Course
         /// 
         /// Because we do data binding, the structure of the main index and the data tables are the same
@@ -332,13 +335,12 @@ namespace CourseManagement.Client.View
 
         private void deleteAppointment()
         {
-            if (dgAppointments.SelectedIndex != -1)
+            if (dgAppointments.SelectedItems.Count == 1)
             {
-            DataTable allAppointments = AppointmentLogic.getInstance().getAll();
             try
             {
-                int selectedIndex = Convert.ToInt32(allAppointments.Rows[dgAppointments.SelectedIndex]["Id"]);
-                AppointmentLogic.getInstance().delete(selectedIndex);
+                DataRowView selectedRow = (DataRowView)dgAppointments.SelectedItems[0];
+                PaymentLogic.getInstance().delete(Convert.ToInt32(selectedRow["Id"]));
             }
             catch (Exception err)
             {
@@ -650,7 +652,7 @@ namespace CourseManagement.Client.View
 
         /// <summary>
         /// formatting the datagrids
-        /// Each Grid has to have 25% of height of the Window, no matter how big or small it gets through user input
+        /// Each Grid has to have a certain % of height of the Window, no matter how big or small it gets through user input
         /// As simple as it could be
         /// </summary>
         /// <param name="sender"></param>
@@ -668,7 +670,7 @@ namespace CourseManagement.Client.View
         /// <summary>
         /// We needed a a solution that the width of the columns fill all the space of the datagrid and on the other hand
         /// are sized so that the content fits
-        /// 
+        /// not in use at this moment
         /// </summary>
         private void sizingColumns()
         {
@@ -719,6 +721,12 @@ namespace CourseManagement.Client.View
         {
             //ToDo: method stub for deleting room
 
+            if (dgCourse.SelectedItems.Count == 1)
+            {
+                DataRowView selectedRow = (DataRowView)dgCourse.SelectedItems[0];
+                RoomLogic.getInstance().delete(Convert.ToInt32(selectedRow["roomNr"]));
+                refreshRooms();
+            }
             if (dgAppointments.SelectedIndex != -1)
             {
                 deleteAppointment();
