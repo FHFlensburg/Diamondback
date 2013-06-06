@@ -765,6 +765,7 @@ namespace CourseManagement.Client.View
 
         private void pgValue_SelectionChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
+            Mouse.Capture(cbxPaymentGroups);                                            //workaround for buggy combobox-selection in windows-ribbon.
             if (cbxPaymentGroups.Text == "Studenten")
             {
                 dgCourse.DataContext = StudentLogic.getInstance().getAll();
@@ -773,6 +774,7 @@ namespace CourseManagement.Client.View
             {
                 dgCourse.DataContext = CourseLogic.getInstance().getAll();
             }
+            Mouse.Capture(null);                                                         //workaround for buggy combobox-selection in windows-ribbon.
         }
 
         private void rbnButtonUnbookPayment_Click(object sender, RoutedEventArgs e)
