@@ -58,11 +58,9 @@
                                 SelectionBoxWidth="62"
                                 VerticalAlignment="Center" 
                                 IsEditable="FALSE"
-                                ToolTip="Auswahl um welche Art von Person es sich handelt"
-                                              >
+                                ToolTip="Auswahl um welche Art von Person es sich handelt">
                                 <r:RibbonGallery Name="rgValue" SelectedValue="Alle Personen" SelectedValuePath="Content" MaxColumnCount="1" SelectionChanged="RibbonGallery_SelectionChanged">
                                     <r:RibbonGalleryCategory Name="cbValues">
-
                                     </r:RibbonGalleryCategory>
                                 </r:RibbonGallery>
                             </r:RibbonComboBox>
@@ -81,6 +79,22 @@
                     <r:RibbonTab x:Name="ribbonPayment" Header="Zahlungen" KeyTip="Z" ToolTip="Reiter mit Zahlungsfunktionalitäten">
                         <r:RibbonGroup x:Name="ribbonGroupPaymentBooking" Header="Buchen">
                             <r:RibbonButton x:Name="rbnButtonNewPayment" LargeImageSource="Images/booking.ico" Label="Zahlungen buchen" KeyTip="B" Click="RibbonButtonNewPayment_Click" ToolTip="Zahlungsbuchung"/>
+                        </r:RibbonGroup>
+                        <r:RibbonGroup x:Name="ribbonGroupPaymentUnbooking" Header="Stornieren">
+                            <r:RibbonButton x:Name="rbnButtonUnbookPayment" LargeImageSource="Images/booking.ico" Label="Zahlungen stornieren" KeyTip="B" Click="rbnButtonUnbookPayment_Click" ToolTip="Zahlungsbuchung"/>
+                        </r:RibbonGroup>
+                        <r:RibbonGroup x:Name="ribbonGroupPaymentGroupSelect" Header="Kurse/Studenten">
+                            <r:RibbonComboBox x:Name="cbxPaymentGroups" Label="Kurse/Studenten Auswahl"
+                                SmallImageSource="Images/logo.png"
+                                SelectionBoxWidth="62"
+                                VerticalAlignment="Center" 
+                                IsEditable="FALSE"
+                                ToolTip="Zahlungen für Studenten oder Kurse auswählen">
+                                <r:RibbonGallery Name="pgValue" SelectedValue="Kurse" SelectedValuePath="Content" MaxColumnCount="1" SelectionChanged="pgValue_SelectionChanged">
+                                    <r:RibbonGalleryCategory Name="cbPaymentGroupsValues">
+                                    </r:RibbonGalleryCategory>
+                                </r:RibbonGallery>
+                            </r:RibbonComboBox>
                         </r:RibbonGroup>
                     </r:RibbonTab>
                 </r:Ribbon>
@@ -129,6 +143,8 @@
                 <StackPanel Grid.Row="3" VerticalAlignment="Bottom">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <Label x:Name="lblAppointmentToCourse" Content="Alle Buchungen" FontWeight="Bold"/>
+                        <Label x:Name="lblStudentName"/>
+                        <Label x:Name="lblStudentHasToPay" Content="Test"/>
                         <Button x:Name="btnAllAppointments" Content="(von allen)"  FontSize="8" VerticalAlignment="Center" BorderBrush="White" Background="White" Height="14" Foreground="#FF5B8543" RenderTransformOrigin="0.545,0.944" Click="btnAllAppointments_Click" Margin="0,2,0,0" />
                     </StackPanel>
                     <DataGrid x:Name="dgAppointments" Margin="10" ItemsSource="{Binding}" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" IsSynchronizedWithCurrentItem="True" ColumnWidth="*" />

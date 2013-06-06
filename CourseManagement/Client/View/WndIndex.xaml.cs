@@ -143,12 +143,14 @@ namespace CourseManagement.Client.View
 
         private void refreshPayments()
         {
-            dgCourse.DataContext = StudentLogic.getInstance().getAll();
+            dgCourse.DataContext = CourseLogic.getInstance().getAll();
             dgAppointments.DataContext = PaymentLogic.getInstance().getAll();
             changeColumnTitles();
             lblHeadline.Content = "Zahlungsübersicht";
             spAppointments.Height = 0;
-
+            cbPaymentGroupsValues.Items.Clear();
+            cbPaymentGroupsValues.Items.Add(new RibbonGalleryItem() { Content = "Kurse", Foreground = Brushes.Blue });
+            cbPaymentGroupsValues.Items.Add(new RibbonGalleryItem() { Content = "Studenten", Foreground = Brushes.Green });
             
             //dgCourse.Height = dgAppointments.Height = dataGridHeight + spAppointmentsHeight / 2;
         }
@@ -576,9 +578,22 @@ namespace CourseManagement.Client.View
                             dgAppointments.DataContext = AppointmentLogic.getInstance().getByRoom(choosenCourseNr);
                             break;
                         case 3:
-                            row = (DataRowView)dgCourse.SelectedItems[0];
-                            choosenCourseNr = Convert.ToInt32(row["Id"]);
-                            dgAppointments.DataContext = PaymentLogic.getInstance().getByStudent(choosenCourseNr);
+                            if (cbxPaymentGroups.Text == "Studenten")
+                            {
+                                row = (DataRowView)dgCourse.SelectedItems[0];
+                                choosenCourseNr = Convert.ToInt32(row["Id"]);
+                                dgAppointments.DataContext = PaymentLogic.getInstance().getByStudent(choosenCourseNr);
+                                lblStudentName.Content = "Saldo von " + row["Forename"] + " " + row["Surname"] + ":";
+                                lblStudentHasToPay.Content = PaymentLogic.getInstance().getStudentBalance(choosenCourseNr).ToString();
+                            }
+                            if (cbxPaymentGroups.Text == "Kurse")
+                            {
+                                row = (DataRowView)dgCourse.SelectedItems[0];
+                                choosenCourseNr = Convert.ToInt32(row["CourseNr"]);
+                                dgAppointments.DataContext = StudentLogic.getInstance().getByCourse(choosenCourseNr);
+                                lblStudentName.Content = "Forderungen: " + CourseLogic.getInstance().getOverAllAmount(choosenCourseNr).ToString();
+                                lblStudentHasToPay.Content = "Noch zu zahlen: " + CourseLogic.getInstance().getBalance(choosenCourseNr).ToString();
+                            }
                             break;
                         default:
                             dgCourse.DataContext = null;
@@ -721,6 +736,35 @@ namespace CourseManagement.Client.View
 
             lblSettingAppointmentToCourse.Content = "Termin buchen";
             lblAppointmentToCourse.Content = "Alle Buchungen";
+        }
+
+        private void pgValue_SelectionChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (cbxPaymentGroups.Text == "Studenten")
+            {
+                dgCourse.DataContext = StudentLogic.getInstance().getAll();
+            }
+            if (cbxPaymentGroups.Text == "Kurse")
+            {
+                dgCourse.DataContext = CourseLogic.getInstance().getAll();
+            }
+        }
+
+        private void rbnButtonUnbookPayment_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (dgAppointments.SelectedItems.Count == 1)
+            {
+                DataRowView selectedRow = (DataRowView)dgAppointments.SelectedItems[0];
+                PaymentLogic.getInstance().changeProperties(Convert.ToInt32(selectedRow["Id"]), false);
+
+                if (dgCourse.SelectedItems.Count == 1)
+                {
+                    DataRowView selectedStudentRow = (DataRowView)dgCourse.SelectedItems[0];
+                    dgAppointments.DataContext = PaymentLogic.getInstance().getByStudent(Convert.ToInt32(row["Id"]));
+                }
+            }
+            changeColumnTitles();
         }
     }
 }

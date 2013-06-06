@@ -290,5 +290,61 @@ namespace CourseManagement.Client.BusinessLogic
                 throw new Exception(e.Message);
             }
         }
+
+        /// <summary>
+        /// Calculates the overall amount from the selected course
+        /// </summary>
+        /// <param name="courseNr"></param>
+        /// <returns></returns>
+        public String getOverAllAmount(int courseNr)
+        {
+            try
+            {
+                decimal overallAmount = 0.0M;
+                Course course = Course.getById(courseNr);
+
+                overallAmount += (decimal)course.AmountInEuro;
+                overallAmount *= course.Payments.Count;
+                course.update();
+
+                return overallAmount + " €";
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Calculates the amount of the selected course
+        /// </summary>
+        /// <param name="coursrNr"></param>
+        /// <returns></returns>
+        public String getBalance(int coursrNr)
+        {
+            try
+            {
+                decimal paidAmount = 0.0M;
+                Course course = Course.getById(coursrNr);
+                decimal courseAmount = (decimal)course.AmountInEuro;
+                paidAmount += (courseAmount * course.Payments.Count);
+
+
+                foreach (Payment payment in course.Payments)
+                {
+                    if (payment.IsPaid == true)
+                    {
+                        paidAmount -= courseAmount;
+                        course.update();
+                    }
+                }
+
+                return paidAmount + " €";
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }
