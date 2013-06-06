@@ -40,7 +40,7 @@
                         <r:RibbonGroup x:Name="ribbonGroupCourseDelete" Header="Löschen">
                             <r:RibbonButton x:Name="rbnButtonDeleteCourse" LargeImageSource="Images\delete.ico" Label="Löschen" Click="RibbonButtonDeleteCourse_Click" KeyTip="D" ToolTip="Ausgewählten Eintrag löschen" />
                         </r:RibbonGroup>
-                        <r:RibbonGroup x:Name="ribbonGroupChange" Header="Bearbeiten">
+                        <r:RibbonGroup x:Name="ribbonGroupCourseChange" Header="Bearbeiten">
                             <r:RibbonButton x:Name="rbnButtonChangeCourse" LargeImageSource="Images\change.ico" Label="Bearbeiten" Click="RibbonButtonEditCourse_Click" KeyTip="B" ToolTip="Bearbeitet ausgewählten Kurs"/>
                         </r:RibbonGroup>
                     </r:RibbonTab>
@@ -73,6 +73,9 @@
                         </r:RibbonGroup>
                         <r:RibbonGroup x:Name="ribbonGroupRoomDelete" Header="Löschen">
                             <r:RibbonButton x:Name="rbnButtonDeleteRoom" LargeImageSource="Images\delete.ico" Label="Löschen" KeyTip="D" ToolTip="Ausgewählten Eintrag löschen" Click="RibbonButtonDeleteRoom_Click"/>
+                        </r:RibbonGroup>
+                        <r:RibbonGroup x:Name="ribbonGroupRoomChange" Header="Bearbeiten">
+                            <r:RibbonButton x:Name="rbnButtonChangeRoom" LargeImageSource="Images\change.ico" Label="Bearbeiten" Click="RibbonButtonEditRoom_Click" KeyTip="B" ToolTip="Bearbeitet ausgewählten Raum"/>
                         </r:RibbonGroup>
                     </r:RibbonTab>
                     <!-- Ribbon Tab payment: -->

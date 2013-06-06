@@ -1,18 +1,8 @@
 ﻿using CourseManagement.Client.BusinessLogic;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 
 namespace CourseManagement.Client.View
@@ -20,11 +10,20 @@ namespace CourseManagement.Client.View
     /// <summary>
     /// Interaktionslogik für WndNewCourse.xaml
     /// </summary>
-    public partial class WndNewCourse : Window
+    public partial class WndNewCourse : Window 
     {
         private DataTable selectedCourse = null;
+        private string titeL = "";
+        private string description = "";
+        private int validInMonths = 0;
+        private int maxParticipants = 0;
+        private int minParticipants = 0;
+        private int tutor = 0;
+        private decimal amountInEuro = 0;
 
-
+        /// <summary>
+        /// standard constructor for window newCourse
+        /// </summary>
         public WndNewCourse()
         {
             InitializeComponent();
@@ -71,22 +70,10 @@ namespace CourseManagement.Client.View
             }
         }
 
-        private void btnSave_Click(object sender, RoutedEventArgs e)
-        {
-            insertNewCourseAndValidate();
-            this.Close();
-        }
+
 
         private void insertNewCourseAndValidate()
         {
-            string titeL = "";
-            string description = "";
-            int validInMonths = 0;
-            int maxParticipants = 0;
-            int minParticipants = 0;
-            int tutor = 0;
-            decimal amountInEuro = 0;
-
             try
             {
                 titeL = tbCourseTitle.Text;
@@ -114,9 +101,17 @@ namespace CourseManagement.Client.View
 
         }
 
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            insertNewCourseAndValidate();
+            this.Close();
+        }
+
         private void btnAport_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }     
+        }
+
+        
     }
 }

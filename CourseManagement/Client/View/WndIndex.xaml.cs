@@ -221,6 +221,11 @@ namespace CourseManagement.Client.View
             }
         }
 
+        private void RibbonButtonAddParticipant_Click(object sender, RoutedEventArgs e)
+        {
+            OpenWindow2AddParticpant();
+        }
+
         private void OpenWindow2AddParticpant()
         {
             WndParticipant2Course aNewAllocation = null;
@@ -242,10 +247,7 @@ namespace CourseManagement.Client.View
             }
         }
 
-        private void RibbonButtonAddParticipant_Click(object sender, RoutedEventArgs e)
-        {
-            OpenWindow2AddParticpant();
-        }
+        
 
         private void OpenHelpFile(object sender, RoutedEventArgs e)
         {
@@ -779,6 +781,11 @@ namespace CourseManagement.Client.View
                 }
             }
             changeColumnTitles();
+        }
+
+        private void RibbonButtonEditRoom_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
 
