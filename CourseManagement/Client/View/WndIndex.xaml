@@ -5,7 +5,7 @@
         xmlns:r="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
         Height="700" Width="900" Activated="mainWindow_IsLoaded"  SizeChanged="mainWindow_SizeChanged"
         Icon="Images\Kursverwaltung.ico"
-        Title="Kursverwaltung Version 0.1 Beta">
+        Title="Kursverwaltung Version 0.2 Beta">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -58,11 +58,9 @@
                                 SelectionBoxWidth="62"
                                 VerticalAlignment="Center" 
                                 IsEditable="FALSE"
-                                ToolTip="Auswahl um welche Art von Person es sich handelt"
-                                              >
+                                ToolTip="Auswahl um welche Art von Person es sich handelt">
                                 <r:RibbonGallery Name="rgValue" SelectedValue="Alle Personen" SelectedValuePath="Content" MaxColumnCount="1" SelectionChanged="RibbonGallery_SelectionChanged">
                                     <r:RibbonGalleryCategory Name="cbValues">
-
                                     </r:RibbonGalleryCategory>
                                 </r:RibbonGallery>
                             </r:RibbonComboBox>
@@ -82,6 +80,22 @@
                         <r:RibbonGroup x:Name="ribbonGroupPaymentBooking" Header="Buchen">
                             <r:RibbonButton x:Name="rbnButtonNewPayment" LargeImageSource="Images/booking.ico" Label="Zahlungen buchen" KeyTip="B" Click="RibbonButtonNewPayment_Click" ToolTip="Zahlungsbuchung"/>
                         </r:RibbonGroup>
+                        <r:RibbonGroup x:Name="ribbonGroupPaymentUnbooking" Header="Stornieren">
+                            <r:RibbonButton x:Name="rbnButtonUnbookPayment" LargeImageSource="Images/booking.ico" Label="Zahlungen stornieren" KeyTip="B" Click="rbnButtonUnbookPayment_Click" ToolTip="Zahlungsbuchung"/>
+                        </r:RibbonGroup>
+                        <r:RibbonGroup x:Name="ribbonGroupPaymentGroupSelect" Header="Kurse/Studenten">
+                            <r:RibbonComboBox x:Name="cbxPaymentGroups" Label="Kurse/Studenten Auswahl"
+                                SmallImageSource="Images/logo.png"
+                                SelectionBoxWidth="62"
+                                VerticalAlignment="Center" 
+                                IsEditable="FALSE"
+                                ToolTip="Zahlungen für Studenten oder Kurse auswählen">
+                                <r:RibbonGallery Name="pgValue" SelectedValue="Kurse" SelectedValuePath="Content" MaxColumnCount="1" SelectionChanged="pgValue_SelectionChanged">
+                                    <r:RibbonGalleryCategory Name="cbPaymentGroupsValues">
+                                    </r:RibbonGalleryCategory>
+                                </r:RibbonGallery>
+                            </r:RibbonComboBox>
+                        </r:RibbonGroup>
                     </r:RibbonTab>
                 </r:Ribbon>
                
@@ -90,10 +104,11 @@
             <StackPanel Grid.Row="2" Orientation="Vertical" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" >
                 
                 <StackPanel Orientation="Horizontal" Margin="5,5,5,0" HorizontalAlignment="Right">
-                    <Label Name="lblUebersicht" Content="Kursübersicht" FontWeight="Bold" Width="637"/>
+                    <Label Name="lblHeadline" Content="Kursübersicht" FontWeight="Bold" Width="632"/>
                     <Label Name="search" Content="Suche"/>
                     <TextBox Name="tbSearch" Width="200" Margin="5" TextChanged="TextBoxSearch_Changed" />
                 </StackPanel>
+
 
                 <DataGrid Height ="175" x:Name="dgCourse" Margin="10"  ItemsSource="{Binding}" SelectionChanged="element_SelectCourse" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ColumnWidth="Auto" CanUserAddRows="False">
                     <DataGrid.ItemContainerStyle>
@@ -132,6 +147,8 @@
                 <StackPanel Grid.Row="3" VerticalAlignment="Bottom">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <Label x:Name="lblAppointmentToCourse" Content="Alle Buchungen" FontWeight="Bold"/>
+                        <Label x:Name="lblStudentName"/>
+                        <Label x:Name="lblStudentHasToPay" Content="Test"/>
                         <Button x:Name="btnAllAppointments" Content="(von allen)"  FontSize="8" VerticalAlignment="Center" BorderBrush="White" Background="White" Height="14" Foreground="#FF5B8543" RenderTransformOrigin="0.545,0.944" Click="btnAllAppointments_Click" Margin="0,2,0,0" />
                     </StackPanel>
                     <DataGrid Height ="175" x:Name="dgAppointments" Margin="10" ItemsSource="{Binding}" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" IsSynchronizedWithCurrentItem="True" ColumnWidth="*" />

@@ -194,11 +194,7 @@ namespace CourseManagement.Client.BusinessLogic
                 {
                     Course course = aPayment.Course;
                     sum -= (decimal)course.AmountInEuro;
-                }
-                else
-                {
-                    Course course = aPayment.Course;
-                    sum += (decimal)course.AmountInEuro;
+                    course.update();
                 }
             }
             return sum + " €";
