@@ -53,9 +53,9 @@
                             <r:RibbonButton x:Name="rbnButtonDeletePerson" LargeImageSource="Images\delete.ico" Label="Löschen" KeyTip="D" ToolTip="Ausgewählten Eintrag löschen" Click="RibbonButtonDeletePerson_Click" />
                         </r:RibbonGroup>
                         <r:RibbonGroup x:Name="ribbonGroupPersonsSelect" Header="Auswahl">
-                            <r:RibbonComboBox x:Name="cbxPersons" Label="Personen Auswahl"
-                                SmallImageSource="Images/logo.png"
-                                SelectionBoxWidth="62"
+                            <r:RibbonTwoLineText Text="Personen Auswahl"></r:RibbonTwoLineText>
+                            <r:RibbonComboBox x:Name="cbxPersons" 
+                                SelectionBoxWidth="80"
                                 VerticalAlignment="Center" 
                                 IsEditable="FALSE"
                                 ToolTip="Auswahl um welche Art von Person es sich handelt">
@@ -84,9 +84,10 @@
                             <r:RibbonButton x:Name="rbnButtonUnbookPayment" LargeImageSource="Images/booking.ico" Label="Zahlungen stornieren" KeyTip="B" Click="rbnButtonUnbookPayment_Click" ToolTip="Zahlungsbuchung"/>
                         </r:RibbonGroup>
                         <r:RibbonGroup x:Name="ribbonGroupPaymentGroupSelect" Header="Kurse/Studenten">
-                            <r:RibbonComboBox x:Name="cbxPaymentGroups" Label="Kurse/Studenten Auswahl"
-                                SmallImageSource="Images/logo.png"
-                                SelectionBoxWidth="62"
+
+                            <r:RibbonTwoLineText Text="Kurse/Studenten Auswahl"></r:RibbonTwoLineText>
+                            <r:RibbonComboBox x:Name="cbxPaymentGroups" 
+                                SelectionBoxWidth="80"
                                 VerticalAlignment="Center" 
                                 IsEditable="FALSE"
                                 ToolTip="Zahlungen für Studenten oder Kurse auswählen">

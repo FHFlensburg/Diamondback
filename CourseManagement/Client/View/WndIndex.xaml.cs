@@ -729,11 +729,12 @@ namespace CourseManagement.Client.View
             {
                 switch (mainRibbon.SelectedIndex)
             {
-                    case 0:
-                dgAppointments.DataContext = AppointmentLogic.getInstance().getAll();
-                lblAppointmentToCourse.Content = "Alle Buchungen";
-                break;
-                    case 1:
+                case 0:
+                    dgAppointments.DataContext = AppointmentLogic.getInstance().getAll();
+                    lblSettingAppointmentToCourse.Content = "Termin buchen";
+                    lblAppointmentToCourse.Content = "Alle Buchungen";
+                    break;
+                case 1:
                 dgAppointments.DataContext = CourseLogic.getInstance().getAll();
                 break;
                 }
@@ -744,8 +745,7 @@ namespace CourseManagement.Client.View
                 MessageBox.Show("Verbindungs- oder Datenbankfehler");
             }
 
-            lblSettingAppointmentToCourse.Content = "Termin buchen";
-            lblAppointmentToCourse.Content = "Alle Buchungen";
+            
         }
 
         private void pgValue_SelectionChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
