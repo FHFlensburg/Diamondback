@@ -413,13 +413,19 @@ namespace CourseManagement.Client.View
                 switch (mainRibbon.SelectedIndex)
                 {
                     case 0:
+                        this.lblStudentHasToPay.Content = "";
+                        this.lblStudentName.Content = "";
                         refreshCourses();
                         refreshAppointments();
                         break;
                     case 1:
+                        this.lblStudentHasToPay.Content = "";
+                        this.lblStudentName.Content = "";
                         refreshPersons();
                         break;
                     case 2:
+                        this.lblStudentHasToPay.Content = "";
+                        this.lblStudentName.Content = "";
                         refreshRooms();
                         break;
                     case 3:
@@ -883,10 +889,14 @@ namespace CourseManagement.Client.View
             Mouse.Capture(cbxPaymentGroups);                                            //workaround for buggy combobox-selection in windows-ribbon.
             if (cbxPaymentGroups.Text == "Studenten")
             {
+                this.rbnButtonNewPayment.IsEnabled = true;
+                this.rbnButtonUnbookPayment.IsEnabled = true;
                 dgMainData.DataContext = StudentLogic.getInstance().getAll();
             }
             if (cbxPaymentGroups.Text == "Kurse")
             {
+                this.rbnButtonNewPayment.IsEnabled = false;
+                this.rbnButtonUnbookPayment.IsEnabled = false;
                 dgMainData.DataContext = CourseLogic.getInstance().getAll();
             }
             Mouse.Capture(null);                                                         //workaround for buggy combobox-selection in windows-ribbon.
@@ -902,27 +912,7 @@ namespace CourseManagement.Client.View
             btnAllAppointments.Width = btnAddAppointment.ActualWidth;
         }
 
-        private void RibbonButtonDeletePerson_Click(object sender, RoutedEventArgs e)
-        {
-
-            if (dgAppointments.SelectedItems.Count==1  && dgCourse.SelectedItems.Count == 1)
-            {
-                int courseNr = Convert.ToInt32(((DataRowView)dgAppointments.SelectedItem)["CourseNr"]);
-                int studentNr = Convert.ToInt32(((DataRowView)dgCourse.SelectedItem)["Id"]);
-                PaymentLogic.getInstance().delete(courseNr, studentNr);
-                dgAppointments.DataContext = CourseLogic.getInstance().getByPerson(studentNr);
-                changeColumnTitles();
-            }
-
-            else if (dgCourse.SelectedIndex != -1)
-            {
-                int id = Convert.ToInt32(((DataRowView)dgCourse.SelectedItem)["Id"]);
-                PersonLogic.getInstance().delete(id);
-                RibbonGallery_SelectionChanged(null, null);
-            }
-            
-            
-        }
+      
         private void dg_Selected(object sender, RoutedEventArgs e)
         {
             lastfocusedDG = (DataGrid)sender;
@@ -940,102 +930,6 @@ namespace CourseManagement.Client.View
 
         
 
-        private void RibbonButtonDeleteRoom_Click(object sender, RoutedEventArgs e)
-        {
-            //ToDo: method stub for deleting room
-
-            if (dgCourse.SelectedItems.Count == 1)
-            {
-                DataRowView selectedRoomRow = (DataRowView)dgCourse.SelectedItems[0];
-                RoomLogic.getInstance().delete(Convert.ToInt32(selectedRoomRow["roomNr"]));
-                refreshRooms();
-            }
-            if (dgAppointments.SelectedIndex != -1)
-            {
-                deleteAppointment();
-            }
-        }
-
-        private void btnAllAppointments_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                switch (mainRibbon.SelectedIndex)
-            {
-                case 0:
-                    dgAppointments.DataContext = AppointmentLogic.getInstance().getAll();
-                    lblSettingAppointmentToCourse.Content = "Termin buchen";
-                    lblAppointmentToCourse.Content = "Alle Buchungen";
-                    break;
-                case 1:
-                dgAppointments.DataContext = CourseLogic.getInstance().getAll();
-                break;
-                }
-                changeColumnTitles();
-            }
-            catch
-            {
-                MessageBox.Show("Verbindungs- oder Datenbankfehler");
-            }
-
-            
-        }
-
-        private void pgValue_SelectionChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        {
-            if (cbxPaymentGroups.Text == "Studenten")
-            {
-                rbnButtonNewPayment.IsEnabled = true;
-                rbnButtonUnbookPayment.IsEnabled = true;
-                dgCourse.DataContext = StudentLogic.getInstance().getAll();
-            }
-            if (cbxPaymentGroups.Text == "Kurse")
-            {
-                rbnButtonNewPayment.IsEnabled = false;
-                rbnButtonUnbookPayment.IsEnabled = false;
-                dgCourse.DataContext = CourseLogic.getInstance().getAll();
-            }
-        }
-
-        private void rbnButtonUnbookPayment_Click(object sender, RoutedEventArgs e)
-        {
-
-            if (dgAppointments.SelectedItems.Count == 1)
-            {
-                DataRowView selectedRow = (DataRowView)dgAppointments.SelectedItems[0];
-                PaymentLogic.getInstance().changeProperties(Convert.ToInt32(selectedRow["Id"]), false);
-
-                if (dgCourse.SelectedItems.Count == 1)
-                {
-                    DataRowView selectedStudentRow = (DataRowView)dgCourse.SelectedItems[0];
-                    dgAppointments.DataContext = PaymentLogic.getInstance().getByStudent(Convert.ToInt32(row["Id"]));
-                    row = (DataRowView)dgCourse.SelectedItems[0];
-                    choosenCourseNr = Convert.ToInt32(row["Id"]);
-                    lblStudentName.Content = "Saldo von " + row["Forename"] + " " + row["Surname"] + ":";
-                    lblStudentHasToPay.Content = PaymentLogic.getInstance().getStudentBalance(choosenCourseNr).ToString();
-                }
-            }
-            changeColumnTitles();
-        }
-
-        private void RibbonButtonEditRoom_Click(object sender, RoutedEventArgs e)
-        {
-            if (dgCourse.SelectedIndex != -1)
-            {
-                try
-                {
-                    DataRowView selectedRoomRow = (DataRowView)dgCourse.SelectedItems[0];
-                    int selectedIndex = Convert.ToInt32((selectedRoomRow["roomNr"]));
-                    DataTable selectedRoom = RoomLogic.getInstance().getById(selectedIndex);
-                    WndNewRoom editCourse = new WndNewRoom(selectedRoom);
-                    editCourse.ShowDialog();
-                }
-                catch (Exception err)
-                {
-                    System.Windows.MessageBox.Show(err.ToString());
-                }
-            }
-            refreshRooms();
-        }
+   
     }
 }

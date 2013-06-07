@@ -5,7 +5,7 @@
         xmlns:r="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
         Height="700" Width="900" Activated="mainWindow_IsLoaded"  SizeChanged="mainWindow_SizeChanged" SizeToContent="Height" MinHeight="700"
         Icon="Images\Kursverwaltung.ico"
-        Title="Kursverwaltung Version 0.2 Beta">
+        Title="Kursverwaltung Version 0.3 Beta">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
