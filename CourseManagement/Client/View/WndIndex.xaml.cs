@@ -761,6 +761,8 @@ namespace CourseManagement.Client.View
                     dgAppointments.Columns[0].Visibility = Visibility.Hidden;
                     lblSettingAppointmentToCourse.Content = "Termin buchen";
                     lblAppointmentToCourse.Content = "Buchungen";
+                   //if not deselecting the top grid, there will be a course marked but all appointments are shown
+                    dgCourse.SelectedIndex = -1;
                     break;
                 case 1:
                 dgAppointments.DataContext = CourseLogic.getInstance().getAll();

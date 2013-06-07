@@ -34,7 +34,7 @@
                             <r:RibbonButton x:Name="rbnButtonNewCourse" LargeImageSource="Images\new.ico" Label="Neuer Kurs" Click="RibbonButtonNewCourse_Click" KeyTip="N" ToolTip="Neuen Kurs anlegen" />
                         </r:RibbonGroup>
                         <r:RibbonGroup x:Name="ribbongroupCourseAdd" Header="Hinzufügen">
-                            <r:RibbonButton x:Name="rbnButtonAddParticipant" SmallImageSource="Images\addParticipant.ico" Label="Teilnehmer" Click="RibbonButtonAddParticipant_Click" KeyTip="T" ToolTip="Teilnehmer zu Kurs hinzufügen" />
+                            <r:RibbonButton x:Name="rbnButtonAddParticipant" LargeImageSource="Images\addParticipant.ico" Label="Teilnehmer hinzufügen" Click="RibbonButtonAddParticipant_Click" KeyTip="T" ToolTip="Teilnehmer zu Kurs hinzufügen" />
                             <!--<r:RibbonButton SmallImageSource="Images\addRoom.ico" Label="Raum" /> -->
                         </r:RibbonGroup>
                         <r:RibbonGroup x:Name="ribbonGroupCourseDelete" Header="Löschen">
