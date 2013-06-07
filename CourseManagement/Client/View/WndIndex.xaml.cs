@@ -45,7 +45,7 @@ namespace CourseManagement.Client.View
             
         }
 
-        private void MainWindowClose_Click(object sender, RoutedEventArgs e)
+        private void mainWindowClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
@@ -137,20 +137,20 @@ namespace CourseManagement.Client.View
             }
         }
 
-        private void RibbonButtonNewCourse_Click(object sender, RoutedEventArgs e)
+        private void ribbonButtonNewCourse_Click(object sender, RoutedEventArgs e)
         {
             WndNewCourse aNewCourse = new WndNewCourse();
             aNewCourse.ShowDialog();
         }
 
 
-        private void RibbonButtonAddParticipant_Click(object sender, RoutedEventArgs e)
+        private void ribbonButtonAddParticipant_Click(object sender, RoutedEventArgs e)
         {
-            OpenWindow2AddParticpant();
+            openWindow2AddParticpant();
         }
 
 
-        private void OpenWindow2AddParticpant()
+        private void openWindow2AddParticpant()
         {
             WndParticipant2Course aNewAllocation = null;
             try
@@ -172,7 +172,7 @@ namespace CourseManagement.Client.View
         }
 
 
-        private void RibbonButtonEditCourse_Click(object sender, RoutedEventArgs e)
+        private void ribbonButtonEditCourse_Click(object sender, RoutedEventArgs e)
         {
             if (dgMainData.SelectedIndex != -1)
             {
@@ -202,7 +202,7 @@ namespace CourseManagement.Client.View
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void RibbonButtonDeleteCourse_Click(object sender, RoutedEventArgs e)
+        private void ribbonButtonDeleteCourse_Click(object sender, RoutedEventArgs e)
         {
             if (dgMainData.SelectedIndex != -1 && lastfocusedDG == dgMainData)
             {
@@ -232,13 +232,13 @@ namespace CourseManagement.Client.View
 
         #region Office Ribbon Person Tab
 
-        private void RibbonButtonNewPerson_Click(object sender, RoutedEventArgs e)
+        private void ribbonButtonNewPerson_Click(object sender, RoutedEventArgs e)
         {
             wndNewPerson aNewPerson = new wndNewPerson();
             aNewPerson.ShowDialog();
         }
 
-        private void RibbonButtonDeletePerson_Click(object sender, RoutedEventArgs e)
+        private void ribbonButtonDeletePerson_Click(object sender, RoutedEventArgs e)
         {
 
             if (dgAppointments.SelectedItems.Count == 1 && dgMainData.SelectedItems.Count == 1)
@@ -254,13 +254,13 @@ namespace CourseManagement.Client.View
             {
                 int id = Convert.ToInt32(((DataRowView)dgMainData.SelectedItem)["Id"]);
                 PersonLogic.getInstance().delete(id);
-                RibbonGallery_SelectionChanged(null, null);
+                ribbonGallery_SelectionChanged(null, null);
             }
 
 
         }
 
-        private void RibbonButtonEditPerson_Click(object sender, RoutedEventArgs e)
+        private void ribbonButtonEditPerson_Click(object sender, RoutedEventArgs e)
         {
             int selectedIndex = -1;
             DataTable selectedPerson = null;
@@ -310,13 +310,13 @@ namespace CourseManagement.Client.View
 
         #region Office Ribbon Room tab
 
-        private void RibbonButtonNewRoom_Click(object sender, RoutedEventArgs e)
+        private void ribbonButtonNewRoom_Click(object sender, RoutedEventArgs e)
         {
             WndNewRoom aNewRoom = new WndNewRoom();
             aNewRoom.ShowDialog();
         }
 
-        private void RibbonButtonDeleteRoom_Click(object sender, RoutedEventArgs e)
+        private void ribbonButtonDeleteRoom_Click(object sender, RoutedEventArgs e)
         {
             //ToDo: method stub for deleting room
 
@@ -332,7 +332,7 @@ namespace CourseManagement.Client.View
             }
         }
 
-        private void RibbonButtonEditRoom_Click(object sender, RoutedEventArgs e)
+        private void ribbonButtonEditRoom_Click(object sender, RoutedEventArgs e)
         {
             if (dgMainData.SelectedIndex != -1)
             {
@@ -361,7 +361,7 @@ namespace CourseManagement.Client.View
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void RibbonButtonNewPayment_Click(object sender, RoutedEventArgs e)
+        private void ribbonButtonNewPayment_Click(object sender, RoutedEventArgs e)
         {
             if (dgAppointments.SelectedItems.Count == 1)
             {
@@ -405,7 +405,7 @@ namespace CourseManagement.Client.View
 
         #endregion
 
-        private void Ribbon_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ribbon_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             
             if (this.IsLoaded)
@@ -582,12 +582,12 @@ namespace CourseManagement.Client.View
 
 
 
-        private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
+        private void row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
             //Only in Course tab there should appear the window to add a participant
             if (mainRibbon.SelectedIndex == 0)
             {
-                OpenWindow2AddParticpant();
+                openWindow2AddParticpant();
             }
         }
 
@@ -607,7 +607,7 @@ namespace CourseManagement.Client.View
             }
         }
 
-        private void RibbonHelpButton_Click(object sender, RoutedEventArgs e)
+        private void ribbonHelpButton_Click(object sender, RoutedEventArgs e)
         {
             openHelp();
         }
@@ -681,7 +681,7 @@ namespace CourseManagement.Client.View
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ButtonAddAppointment_Click(object sender, RoutedEventArgs e)
+        private void buttonAddAppointment_Click(object sender, RoutedEventArgs e)
         {
             int chosenCourseID = 0;
             DateTime chosenStartDate = DateTime.MinValue;
@@ -804,7 +804,7 @@ namespace CourseManagement.Client.View
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void TextBoxSearch_Changed(object sender, TextChangedEventArgs e)
+        private void textBoxSearch_Changed(object sender, TextChangedEventArgs e)
         {
 
             switch (mainRibbon.SelectedIndex)
@@ -852,7 +852,7 @@ namespace CourseManagement.Client.View
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void RibbonGallery_SelectionChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        private void ribbonGallery_SelectionChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             Mouse.Capture(cbxPersons);                                          //workaround for buggy combobox-selection in windows-ribbon.
             switch (this.cbxPersons.Text)
