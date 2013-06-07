@@ -201,5 +201,66 @@ namespace CourseManagement.Client.BusinessLogic
                 throw new Exception(e.Message);
             }
         }
+
+
+        /// <summary>
+        /// Check if the given Person is a Tutor
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool isTutor(int id)
+        {
+            try
+            {
+                bool tmp = false;
+                if (Person.getById(id) is Tutor) tmp = true;
+                return tmp;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+        }
+
+        // <summary>
+        /// Check if the given Person is a Student
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool isStudent(int id)
+        {
+            try
+            {
+                bool tmp = false;
+                if (Person.getById(id) is Student) tmp = true;
+                return tmp;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+        }
+
+        // <summary>
+        /// Check if the given Person is a User
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool isUser(int id)
+        {
+            try
+            {
+                bool tmp = false;
+                if (Person.getById(id) is User) tmp = true;
+                return tmp;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+        }
     }
 }
