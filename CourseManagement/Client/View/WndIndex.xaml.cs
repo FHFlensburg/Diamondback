@@ -293,7 +293,7 @@ namespace CourseManagement.Client.View
 
         private void ribbonButtonEditPerson_Click(object sender, RoutedEventArgs e)
         {
-            int selectedIndex = -1;
+            int personID = -1;
             DataTable selectedPerson = null;
             int kindOfPerson = 0;
 
@@ -304,28 +304,30 @@ namespace CourseManagement.Client.View
                     if (this.IsLoaded)
                     {
                         DataRowView selectedPersonRow = (DataRowView)dgMainData.SelectedItems[0];
-                        selectedIndex = Convert.ToInt32(selectedPersonRow["Id"]);
-                        switch (this.cbxPersons.Text)
-                        {
-                            case "Studenten":
-                                selectedPerson = StudentLogic.getInstance().getById(selectedIndex);
-                                kindOfPerson = 1;
-                                break;
-                            case "Benutzer":
-                                selectedPerson = UserLogic.getInstance().getById(selectedIndex);
-                                kindOfPerson = 2;
-                                break;
-                            case "Tutoren":
-                                //selectedIndex = Convert.ToInt32(selectedPersonRow["Id"]);
-                                selectedPerson = TutorLogic.getInstance().getById(selectedIndex);
-                                kindOfPerson = 3;
-                                break;
-                            default:
-                                selectedPerson = PersonLogic.getInstance().getById(selectedIndex);
-                                kindOfPerson = 0;
-                                break;
-                        }
+                        personID = Convert.ToInt32(selectedPersonRow["Id"]);
 
+                        if (PersonLogic.getInstance().isStudent(personID))
+                        {
+                            selectedPerson = StudentLogic.getInstance().getById(personID);
+                            kindOfPerson = 1;
+                        }
+                        else
+                        {
+                            if (PersonLogic.getInstance().isUser(personID))
+                            {
+                                selectedPerson = UserLogic.getInstance().getById(personID);
+                                kindOfPerson = 2;
+                            }
+                            else
+                            {
+                                if (PersonLogic.getInstance().isTutor(personID))
+                                {
+                                    selectedPerson = TutorLogic.getInstance().getById(personID);
+                                    kindOfPerson = 3;
+                                }
+                                else { MessageBox.Show("Error: Keine gültige Person"); }
+                            }
+                        }
                         wndNewPerson editPerson = new wndNewPerson(selectedPerson, kindOfPerson);
                         editPerson.ShowDialog();
                     }
