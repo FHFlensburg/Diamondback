@@ -19,7 +19,7 @@
             <StackPanel Orientation="Horizontal" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
                 <StackPanel Margin="10">
                     <Label x:Name="lblTitle" Content="Titel" />
-                    <ComboBox x:Name="chbxTitle" Width="120">
+                    <ComboBox x:Name="cbxTitle" Width="120">
                         <ComboBoxItem x:Name="cbxidoctor" Content="Doktor"/>
                         <ComboBoxItem x:Name="cbxiProf" Content="Professor"/>
                     </ComboBox>
@@ -31,8 +31,8 @@
                     <TextBox x:Name="tbEmail" Width="120"/>
                 </StackPanel>
                 <StackPanel Margin="10">
-                    <Label x:Name="lblFirstname" Content="Vorname"/>
-                    <TextBox x:Name="tbFirstname" Width="120"/>
+                    <Label x:Name="lblForename" Content="Vorname"/>
+                    <TextBox x:Name="tbForename" Width="120"/>
                     <Label x:Name="lblCityCode" Content="Postleitzahl" />
                     <TextBox x:Name="tbCityCode" Width="120"/>
                     <Label x:Name="lblPhone" Content="Telefonnummer" />
@@ -44,8 +44,8 @@
                     </ComboBox>
                 </StackPanel>
                 <StackPanel Margin="10">
-                    <Label x:Name="lblLastname" Content="Nachname" />
-                    <TextBox x:Name="tbLastname" Width="120"/>
+                    <Label x:Name="lblSurname" Content="Nachname" />
+                    <TextBox x:Name="tbSurname" Width="120"/>
                     <Label x:Name="lblCity" Content="Stadt" />
                     <TextBox x:Name="tbCity" Width="120"/>
                     <Label x:Name="lblFax" Content="FaxNummer" />
@@ -60,8 +60,8 @@
                 <StackPanel Margin="10">
                     <Label x:Name="lblIBAN" Content="IBAN" />
                     <TextBox x:Name="tbIBAN" Width="120" HorizontalAlignment="Left"/>
-                    <Label x:Name="lblDebitor" Content="Kontoinhaber" />
-                    <TextBox x:Name="tbDebitor" Width="120" HorizontalAlignment="Left"/>
+                    <Label x:Name="lblDepositor" Content="Kontoinhaber" />
+                    <TextBox x:Name="tbDepositor" Width="120" HorizontalAlignment="Left"/>
                 </StackPanel>
                 <StackPanel Margin="10">
                     <Label x:Name="lblBIC" Content="BIC" />
@@ -84,6 +84,7 @@
                     <CheckBox x:Name="chbxAdmin" Width="120" HorizontalAlignment="Left"/>
                 </StackPanel>
             </StackPanel>
+            <Label x:Name="lblWrongUserInput" Content="Bitte die rot markierten Felder korrekt ausfüllen" Visibility="Hidden" Foreground="Red"/>
             <StackPanel Margin="10" Orientation="Horizontal">
             <Button x:Name="btnSave" Content="Speichern" Margin="5" Width="75" Click="ButtonSavePerson_Click"/>
             <Button x:Name="btnAport" Content="Abbrechen" Margin="5" Width="75" Click="ButtonApoprtPerson_Click"/>
