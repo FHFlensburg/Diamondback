@@ -52,7 +52,7 @@ namespace CourseManagement.Client.View
 
         #region Office Ribbin Button pressed Eevents
 
-        #region tab Course
+        #region Office Ribbon tab Course
         /// <summary>
         /// First check if the Course Tab is selected, then check if only one row in the Datagrid is selcted
         /// After it set the class variable choosenCourseNr by the selected course and fill the appointment table
@@ -230,7 +230,7 @@ namespace CourseManagement.Client.View
         }
         #endregion
 
-        #region Person Tab
+        #region Office Ribbon Person Tab
 
         private void RibbonButtonNewPerson_Click(object sender, RoutedEventArgs e)
         {
@@ -308,7 +308,7 @@ namespace CourseManagement.Client.View
 
         #endregion
 
-        #region Room tab
+        #region Office Ribbon Room tab
 
         private void RibbonButtonNewRoom_Click(object sender, RoutedEventArgs e)
         {
@@ -354,7 +354,7 @@ namespace CourseManagement.Client.View
 
         #endregion
 
-        #region payment tab
+        #region Office Ribbon payment tab
 
         /// <summary>
         /// Creates a new Payment
@@ -660,7 +660,8 @@ namespace CourseManagement.Client.View
         }
 
         /// <summary>
-        /// 
+        /// takes a startdate, enddate, roomNr from the booking controls and the course selected in the upper data grid.
+        /// trys to book a appointment with it and shows error labels if needed data is missing
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -671,7 +672,7 @@ namespace CourseManagement.Client.View
             DateTime chosenEndDate = DateTime.MinValue;
             int chosenRoomNr = 0;
             
-            //getting CourseNumber from UserSelection (ComboBox)
+            
             if (dgMainData.SelectedItems.Count == 1)
             {
                 try
@@ -689,7 +690,7 @@ namespace CourseManagement.Client.View
                 lblInfo.Visibility = Visibility.Visible;
             }
 
-            //getting begin of appointment from userselection
+            
             if (this.dpBeginOfCourse.Text != null)
             {
                 chosenStartDate = (DateTime)this.dpBeginOfCourse.Value.Value;
@@ -701,8 +702,7 @@ namespace CourseManagement.Client.View
             }
 
 
-            //getting end of Appointment from userselection
-            //if (this.dpEndOfAppointCourse.Value.Value.ToUniversalTime() != null)
+            
             if(dpEndOfAppointCourse.Text != null)
             {
                 chosenEndDate = (DateTime)dpEndOfAppointCourse.Value.Value;
@@ -713,10 +713,10 @@ namespace CourseManagement.Client.View
                 lblEndDateNotFilled.Visibility = Visibility.Visible;
             }
 
-            //getting room number for appointment from userselection
+            
             if (this.cbxAppointmentRoomNumber.SelectedItem != null)
             {
-                //TODO: Array durch String ersetzen
+                
                 chosenRoomNr = Convert.ToInt32(((ComboBoxItem)cbxAppointmentRoomNumber.SelectedItem).Content);
                 lblRoomNrNotFilled.Visibility = Visibility.Hidden;
             }
@@ -780,7 +780,7 @@ namespace CourseManagement.Client.View
         #endregion
 
 
-        #region search function and helper clases
+        #region search function and helper/formating clases
 
 
         /// <summary>
