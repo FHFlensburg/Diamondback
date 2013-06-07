@@ -200,7 +200,7 @@ namespace CourseManagement.Client.BusinessLogic
             try
             {
                 Room room = Room.getById(roomNr);
-                if (room != null) room.delete();
+                if (room != null && room.Appointments.Count==0) room.delete();
             }
             catch (Exception e)
             {

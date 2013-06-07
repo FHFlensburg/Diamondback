@@ -118,7 +118,7 @@
                     </UniformGrid>
                 </UniformGrid>
                 <UniformGrid>
-                    <DataGrid Height ="175" x:Name="dgCourse" Margin="10" ItemsSource="{Binding}" SelectionChanged="element_SelectCourse" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ColumnWidth="Auto" CanUserAddRows="False">
+                    <DataGrid Height ="175" x:Name="dgCourse" Margin="10" ItemsSource="{Binding}" SelectionChanged="element_SelectCourse" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ColumnWidth="Auto" CanUserAddRows="False"  GotFocus="dg_Selected">
                         <DataGrid.ItemContainerStyle>
                             <Style TargetType="DataGridRow">
                                 <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
@@ -163,7 +163,7 @@
                         <Label x:Name="lblStudentHasToPay" Content=""/>
                         <Button x:Name="btnAllAppointments" Content="Alle Buchungen anzeigen" HorizontalAlignment="Right"  Click="btnAllAppointments_Click" Margin="5" />
                     </UniformGrid>
-                    <DataGrid Height ="175" x:Name="dgAppointments" Margin="10" ItemsSource="{Binding}" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto"  ColumnWidth="*" />
+                    <DataGrid Height ="175" x:Name="dgAppointments" Margin="10" ItemsSource="{Binding}" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" IsSynchronizedWithCurrentItem="True" ColumnWidth="*"  GotFocus="dg_Selected"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

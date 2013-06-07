@@ -19,6 +19,7 @@ namespace CourseManagement.Client.View
         private int choosenCourseNr;
         private double spAppointmentsHeight;
         private double dataGridHeight;
+        private DataGrid lastfocusedDG;
 
         /// <summary>
         /// Default Constructor for the Index WPF Window
@@ -322,7 +323,7 @@ namespace CourseManagement.Client.View
         /// <param name="e"></param>
         private void RibbonButtonDeleteCourse_Click(object sender, RoutedEventArgs e)
         {
-            if (dgCourse.SelectedIndex != -1)
+            if (dgCourse.SelectedIndex != -1&&lastfocusedDG==dgCourse)
             {
 
                 DataTable tempDataTable = CourseLogic.getInstance().getAll();
@@ -349,7 +350,7 @@ namespace CourseManagement.Client.View
 
         private void deleteAppointment()
         {
-            if (dgAppointments.SelectedItems.Count == 1)
+            if (dgAppointments.SelectedItems.Count == 1&&lastfocusedDG==dgAppointments)
             {
             try
             {
@@ -556,6 +557,7 @@ namespace CourseManagement.Client.View
         /// <param name="e"></param>
         private void element_SelectCourse(object sender, SelectionChangedEventArgs e)
         {
+            
             if (dgCourse.SelectedItems.Count == 1)
             {
                 try
@@ -757,6 +759,7 @@ namespace CourseManagement.Client.View
             {
                 case 0:
                     dgAppointments.DataContext = AppointmentLogic.getInstance().getAll();
+                    dgAppointments.Columns[0].Visibility = Visibility.Hidden;
                     lblSettingAppointmentToCourse.Content = "Termin buchen";
                     lblAppointmentToCourse.Content = "Buchungen";
                     break;
@@ -843,5 +846,14 @@ namespace CourseManagement.Client.View
         {
             btnAllAppointments.Width = btnAddAppointment.ActualWidth;
         }
+
+
+
+        private void dg_Selected(object sender, RoutedEventArgs e)
+        {
+            lastfocusedDG = (DataGrid)sender;
+        }
+
+
     }
 }
