@@ -84,6 +84,7 @@ namespace CourseManagement.Client.View
 
         private void insertPerson()
         {
+            fillingNonMandatoryFields();
             try
             {
                 switch (((ComboBoxItem)cbxRole.SelectedItem).Content.ToString())
@@ -307,7 +308,7 @@ namespace CourseManagement.Client.View
             privatePhone = tbPhone.Text.ToString();
             gender = tbGender.Text.ToString();
             isActive = (bool)chbxIsActive.IsChecked;
-            title = ((ComboBoxItem)cbxTitle.SelectedItem).Content.ToString();
+            if (cbxTitle.SelectedItem != null) { title = ((ComboBoxItem)cbxTitle.SelectedItem).Content.ToString(); }
             city = tbCity.Text.ToString();
             cityCode = tbCityCode.Text.ToString();
 
