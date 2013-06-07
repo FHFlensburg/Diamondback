@@ -15,6 +15,7 @@ namespace CourseManagement.Client.View
         private DataTable selectedPerson = null;
         private int studentNr = 0;
         private int kindOfPerson = 0;
+        private int tutorNr = 0;
         private string surname = null;
         private string forename = null;
         private string birthyear = "";
@@ -60,6 +61,180 @@ namespace CourseManagement.Client.View
 
             fillingDataFieldsWithProvidedData();
 
+            checkKindofPerson();
+        }
+
+        
+
+        private void wndPerson_Loaded(object sender, RoutedEventArgs e)
+        {
+            changingRole();
+        }
+
+        private void ButtonSavePerson_Click(object sender, RoutedEventArgs e)
+        {
+            insertPerson();
+        }
+
+        private void insertPerson()
+        {
+            fillingNonMandatoryFields();
+            if (cbxRole.SelectedIndex != -1)
+            {
+                try
+                {
+                    switch (((ComboBoxItem)cbxRole.SelectedItem).Content.ToString())
+                    {
+                        case "Student":
+                            if (validateDatafields())
+                            {
+                                if (selectedPerson == null && studentNr == 0)
+                                {
+                                    StudentLogic.getInstance().create(surname,
+                                        forename,
+                                        birthyear,
+                                        street,
+                                        mobilePhone,
+                                        mail,
+                                        fax,
+                                        privatePhone,
+                                        gender,
+                                        isActive,
+                                        title,
+                                        city,
+                                        cityCode,
+                                        iban,
+                                        bic,
+                                        depositor,
+                                        nameOfBank);
+                                }
+                                else
+                                {
+                                    StudentLogic.getInstance().changeProperties(studentNr,
+                                        surname,
+                                        forename,
+                                        birthyear,
+                                        street,
+                                        mobilePhone,
+                                        mail,
+                                        fax,
+                                        privatePhone,
+                                        gender,
+                                        isActive,
+                                        title,
+                                        city,
+                                        cityCode,
+                                        iban,
+                                        bic,
+                                        depositor,
+                                        nameOfBank);
+                                }
+                            }
+                            break;
+                        case "User":
+                            if (validateDatafields() & validateUsername())
+                            {
+                                if (selectedPerson == null & userNr == 0)
+                                {
+                                    UserLogic.getInstance().create(surname,
+                                        forename,
+                                        birthyear,
+                                        street,
+                                        mobilePhone,
+                                        mail,
+                                        fax,
+                                        privatePhone,
+                                        gender,
+                                        isActive,
+                                        title,
+                                        city,
+                                        cityCode,
+                                        username,
+                                        password,
+                                        isAdmin);
+                                }
+                                else
+                                {
+                                    UserLogic.getInstance().changeProperties(userNr,
+                                        surname,
+                                        forename,
+                                        birthyear,
+                                        street,
+                                        mobilePhone,
+                                        mail,
+                                        fax,
+                                        privatePhone,
+                                        gender,
+                                        isActive,
+                                        title,
+                                        city,
+                                        cityCode,
+                                        username,
+                                        password,
+                                        isAdmin);
+                                }
+                            }
+                            break;
+                        case "Tutor":
+                            if (validateDatafields())
+                            {
+                                if (selectedPerson == null & tutorNr == 0)
+                                {
+                                    TutorLogic.getInstance().create(surname,
+                                        forename,
+                                        birthyear,
+                                        street,
+                                        mobilePhone,
+                                        mail,
+                                        fax,
+                                        privatePhone,
+                                        gender,
+                                        isActive,
+                                        title,
+                                        city,
+                                        cityCode);
+                                }
+                                else
+                                {
+                                    TutorLogic.getInstance().changeProperties(tutorNr,
+                                        surname,
+                                        forename,
+                                        birthyear,
+                                        street,
+                                        mobilePhone,
+                                        mail,
+                                        fax,
+                                        privatePhone,
+                                        gender,
+                                        isActive,
+                                        title,
+                                        city,
+                                        cityCode);
+                                }
+                            }
+                            break;
+                    }
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Netzwerk oder Datenbankfehler /nException: " + e.Message);
+                }
+                lblErrorKindOfPerson.Visibility = Visibility.Hidden;
+                this.Close();
+            }
+            else
+            {
+                lblErrorKindOfPerson.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void ButtonApoprtPerson_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void checkKindofPerson()
+        {
             switch (kindOfPerson)
             {
                 case 0:
@@ -67,132 +242,27 @@ namespace CourseManagement.Client.View
                     break;
                 case 1:
                     cbxRole.SelectedItem = (ComboBoxItem)cbxiStudent;
+                    fillingdataFieldsWithStudentData();
                     break;
                 case 2:
                     cbxRole.SelectedItem = (ComboBoxItem)cbxiUser;
+                    fillingdataFieldsWithUserData();
                     break;
                 case 3:
-                    if(ActiveUser.userIsAdmin() == true){cbxRole.SelectedItem = (ComboBoxItem)cbxiTutor;}
+                    if (ActiveUser.userIsAdmin() == true)
+                    {
+                        cbxRole.SelectedItem = (ComboBoxItem)cbxiTutor;
+                        try
+                        {
+                            tutorNr = Convert.ToInt32(selectedPerson.Rows[0]["tutorNr"]);
+                        }
+                        catch (Exception e)
+                        {
+                            MessageBox.Show(e.Message);
+                        }
+                    }
                     break;
             }
-            //changingRole();
-        }
-
-        private void ButtonSavePerson_Click(object sender, RoutedEventArgs e)
-        {
-            insertPerson();
-            this.Close();
-        }
-
-        private void insertPerson()
-        {
-            fillingNonMandatoryFields();
-            try
-            {
-                switch (((ComboBoxItem)cbxRole.SelectedItem).Content.ToString())
-                {
-                    case "Student":
-                        if (validateDatafields())
-                        {
-                            if(selectedPerson == null & studentNr == 0)
-                            {
-                            StudentLogic.getInstance().create(surname,
-                                forename,
-                                birthyear,
-                                street,
-                                mobilePhone,
-                                mail,
-                                fax,
-                                privatePhone,
-                                gender,
-                                isActive,
-                                title,
-                                city,
-                                cityCode,
-                                iban,
-                                bic,
-                                depositor,
-                                nameOfBank);
-                            }
-                            else
-                            {
-                                StudentLogic.getInstance().changeProperties(studentNr,
-                                    surname,
-                                    forename,
-                                    birthyear,
-                                    street,
-                                    mobilePhone,
-                                    mail,
-                                    fax,
-                                    privatePhone,
-                                    gender,
-                                    isActive,
-                                    title,
-                                    city,
-                                    cityCode,
-                                    iban,
-                                    bic,
-                                    depositor,
-                                    nameOfBank);
-                            }
-                            }        
-                        break;
-                    case "User":
-                        
-                        if (validateDatafields() & validateUsername())
-                        {
-                            if (selectedPerson == null & userNr == 0)
-                            {
-                                UserLogic.getInstance().create(surname,
-                                    forename,
-                                    birthyear,
-                                    street,
-                                    mobilePhone,
-                                    mail,
-                                    fax,
-                                    privatePhone,
-                                    gender,
-                                    isActive,
-                                    title,
-                                    city,
-                                    cityCode,
-                                    username,
-                                    password,
-                                    isAdmin);
-                            }
-                            else
-                            {
-                                UserLogic.getInstance().changeProperties(userNr,
-                                    surname,
-                                    forename,
-                                    birthyear,
-                                    street,
-                                    mobilePhone,
-                                    mail,
-                                    fax,
-                                    privatePhone,
-                                    gender,
-                                    isActive,
-                                    title,
-                                    city,
-                                    cityCode,
-                                    username,
-                                    password,
-                                    isAdmin);
-                            }
-                        }
-                        break;
-                }
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Netzwerk oder Datenbankfehler /nException: " + e.Message); 
-            }
-        }
-
-        private void ButtonApoprtPerson_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
 
         private void fillingDataFieldsWithProvidedData()
@@ -288,21 +358,6 @@ namespace CourseManagement.Client.View
 
         #region filling variables and doing validation for mandatory fields. 
 
-        
-
-        private bool validateDatafields()
-        {
-            bool validate = false;
-
-            if (validateForename()
-                & validateSurname())
-            {
-                validate = true;
-            }
-
-            return validate;
-        }
-
         private void fillingNonMandatoryFields()
         {
             birthyear = tbBirthyear.Text.ToString();
@@ -325,6 +380,21 @@ namespace CourseManagement.Client.View
             password = pwbPassword.Password.ToString();
             isAdmin = (bool)chbxAdmin.IsChecked;
         }
+
+        private bool validateDatafields()
+        {
+            bool validate = false;
+
+            if (validateForename()
+                & validateSurname())
+            {
+                validate = true;
+            }
+
+            return validate;
+        }
+
+        
 
         /// <summary>
         /// At least for and surname shouls be mandatory, so we dont have empty user
@@ -384,10 +454,7 @@ namespace CourseManagement.Client.View
 
         #endregion
 
-        private void WndPerson_Loaded(object sender, RoutedEventArgs e)
-        {
-            changingRole();
-        }
+        
 
 
 
