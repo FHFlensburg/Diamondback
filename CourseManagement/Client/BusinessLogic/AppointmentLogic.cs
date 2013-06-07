@@ -80,7 +80,6 @@ namespace CourseManagement.Client.BusinessLogic
         private DataTable getNewDataTable()
         {
             DataTable table = LogicUtils.getNewDataTable(new Appointment(),"CourseName");
-            table.Columns["CourseName"].SetOrdinal(4);
             return table;
         }
 

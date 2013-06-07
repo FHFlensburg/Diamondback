@@ -116,8 +116,6 @@ namespace CourseManagement.Client.BusinessLogic
             row["Student"] = payment.Student.Forename + " " + payment.Student.Surname;
             row["StudentNr"] = payment.Student.Id;
             row["CourseNr"] = payment.Course.CourseNr;
-            if (row["IsPaid"].ToString() == "True") row["IsPaid"] = "ja";
-            else if (row["IsPaid"].ToString() == "False") row["IsPaid"] = "nein";
             return row;
 
         }

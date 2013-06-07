@@ -174,7 +174,7 @@ namespace CourseManagement.Client.BusinessLogic
         private DataTable getNewDataTable()
         {
             DataTable table = LogicUtils.getNewDataTable(new Course());
-            table.Columns["MinMember"].SetOrdinal(4);
+            
             return table;
         }
 

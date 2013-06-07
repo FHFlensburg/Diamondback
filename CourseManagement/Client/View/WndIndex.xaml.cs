@@ -27,9 +27,9 @@ namespace CourseManagement.Client.View
         public WndIndex()
         {
            InitializeComponent();
+
            spAppointmentsHeight = spAppointments.Height;
            dataGridHeight = dgAppointments.Height;
-
         }
 
 
@@ -478,6 +478,7 @@ namespace CourseManagement.Client.View
 
         private void refreshCourses()
         {
+            //SpecificTables.changeDgCourse(CourseLogic.getInstance().getAll(), dgMainData);
             this.dgMainData.DataContext = CourseLogic.getInstance().getAll();
             changeColumnTitles();
             dgMainData.Columns[8].Header = "Teilnehmer";

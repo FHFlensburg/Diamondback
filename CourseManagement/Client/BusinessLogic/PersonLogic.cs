@@ -60,7 +60,7 @@ namespace CourseManagement.Client.BusinessLogic
                 {
                     table.Columns.Add(pi.Name);
                 }
-                table.Columns["Title"].SetOrdinal(1);
+                
                 return table;
             }
             catch (Exception e)
@@ -83,8 +83,7 @@ namespace CourseManagement.Client.BusinessLogic
                 {
                     row[names[i]] = entity.GetType().GetProperty(names[i]).GetMethod.Invoke(entity, null);
                 }
-                if (row["Active"].ToString() == "True") row["Active"] = "ja";
-                else if (row["Active"].ToString() == "False") row["Active"] = "nein";
+                
                 return row;
             }
             catch (Exception e)

@@ -85,12 +85,7 @@ namespace CourseManagement.Client.BusinessLogic
         private DataTable getNewDataTable()
         {
             DataTable table = LogicUtils.getNewDataTable(new Student());
-            table.Columns["IBAN"].SetOrdinal(table.Columns.Count-1);
-            table.Columns["BIC"].SetOrdinal(table.Columns.Count - 1);
-            table.Columns["Depositor"].SetOrdinal(table.Columns.Count - 1);
-            table.Columns["NameOfBank"].SetOrdinal(table.Columns.Count - 1);
-            table.Columns["Payments"].SetOrdinal(table.Columns.Count - 1);
-            table.Columns["Title"].SetOrdinal(1);
+
             return table;
             
         }
