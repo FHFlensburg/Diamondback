@@ -262,11 +262,11 @@ namespace CourseManagement.Client.View
                 case "Benutzer":
                     this.dgMainData.DataContext = UserLogic.getInstance().getAll();
                     break;
-
+                    
             }
             changeColumnTitles();
             Mouse.Capture(null);                                                //workaround for buggy combobox-selection in windows-ribbon.
-
+          
         }
 
         private void ribbonButtonDeletePerson_Click(object sender, RoutedEventArgs e)

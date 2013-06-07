@@ -254,7 +254,7 @@ namespace CourseManagement.Client.View
                         cbxRole.SelectedItem = (ComboBoxItem)cbxiTutor;
                         try
                         {
-                            tutorNr = Convert.ToInt32(selectedPerson.Rows[0]["tutorNr"]);
+                            tutorNr = Convert.ToInt32(selectedPerson.Rows[0]["Id"]);
                         }
                         catch (Exception e)
                         {
@@ -282,10 +282,10 @@ namespace CourseManagement.Client.View
                 tbPhone.Text = selectedPerson.Rows[0]["privatePhone"].ToString();
                 tbGender.Text = selectedPerson.Rows[0]["gender"].ToString();
 
-                //if (Convert.ToBoolean(selectedPerson.Rows[0]["isActive"]))
-                //{
-                //    chbxIsActive.IsChecked = true;
-                //}
+                if (selectedPerson.Rows[0]["Active"].ToString() == "ja")
+                {
+                    chbxIsActive.IsChecked = true;
+                }
 
                 switch (selectedPerson.Rows[0]["Title"].ToString())
                 {
@@ -322,7 +322,8 @@ namespace CourseManagement.Client.View
         private void fillingdataFieldsWithUserData()
         {
             userNr = Convert.ToInt32(selectedPerson.Rows[0]["Id"]);
-            if (Convert.ToBoolean(selectedPerson.Rows[0]["admin"]))
+
+            if (selectedPerson.Rows[0]["admin"].ToString() == "ja")
             {
                 chbxAdmin.IsChecked = true;
             }
