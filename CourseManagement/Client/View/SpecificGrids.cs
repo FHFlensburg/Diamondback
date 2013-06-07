@@ -20,7 +20,7 @@ namespace CourseManagement.Client.View
         /// <param name="table"></param>
         /// <param name="datagrid"></param>
         /// <returns></returns>
-        public static void changeDgPerson(DataTable table, DataGrid datagrid)
+        public static void changeDgPerson( DataGrid datagrid, DataTable table)
         {
 
             table.Columns["Title"].SetOrdinal(1);
@@ -43,7 +43,7 @@ namespace CourseManagement.Client.View
         /// <param name="table"></param>
         /// <param name="datagrid"></param>
         /// <returns></returns>
-        public static void changeDgStudent(DataTable table, DataGrid datagrid)
+        public static void changeDgStudent(DataGrid datagrid, DataTable table)
         {
             table.Columns["IBAN"].SetOrdinal(table.Columns.Count - 1);
             table.Columns["BIC"].SetOrdinal(table.Columns.Count - 1);
@@ -71,7 +71,7 @@ namespace CourseManagement.Client.View
         /// <param name="table"></param>
         /// <param name="datagrid"></param>
         /// <returns></returns>
-        public static void changeDgUser(DataTable table, DataGrid datagrid)
+        public static void changeDgUser(DataGrid datagrid, DataTable table)
         {
             table.Columns["UserName"].SetOrdinal(table.Columns.Count - 1);
             table.Columns["Password"].SetOrdinal(table.Columns.Count - 1);
@@ -99,7 +99,7 @@ namespace CourseManagement.Client.View
         /// <param name="table"></param>
         /// <param name="datagrid"></param>
         /// <returns></returns>
-        public static void changeDgAppointment(DataTable table, DataGrid datagrid)
+        public static void changeDgAppointment(DataGrid datagrid, DataTable table)
         {
             table.Columns["CourseName"].SetOrdinal(4);  
  
@@ -117,7 +117,7 @@ namespace CourseManagement.Client.View
         /// <param name="table"></param>
         /// <param name="datagrid"></param>
         /// <returns></returns>
-        public static void changeDgCourse(DataTable table, DataGrid datagrid)
+        public static void changeDgCourse(DataGrid datagrid, DataTable table)
         {
             table.Columns["MinMember"].SetOrdinal(4);
 
@@ -135,7 +135,7 @@ namespace CourseManagement.Client.View
         /// <param name="table"></param>
         /// <param name="datagrid"></param>
         /// <returns></returns>
-        public static void changeDgPayment(DataTable table, DataGrid datagrid)
+        public static void changeDgPayment(DataGrid datagrid, DataTable table)
         {
             for (int i = 0; i < table.Rows.Count; i++)
             {
@@ -154,7 +154,7 @@ namespace CourseManagement.Client.View
         /// <param name="table"></param>
         /// <param name="datagrid"></param>
         /// <returns></returns>
-        public static void changeDgRoom(DataTable table, DataGrid datagrid)
+        public static void changeDgRoom(DataGrid datagrid, DataTable table)
         {
             datagrid.DataContext = table;
 
@@ -169,7 +169,7 @@ namespace CourseManagement.Client.View
         /// <param name="table"></param>
         /// <param name="datagrid"></param>
         /// <returns></returns>
-        public static void changeDgTutor(DataTable table, DataGrid datagrid)
+        public static void changeDgTutor(DataGrid datagrid, DataTable table)
         {
             table.Columns["Title"].SetOrdinal(1);
 
