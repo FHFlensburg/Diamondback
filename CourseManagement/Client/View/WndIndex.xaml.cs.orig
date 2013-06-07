@@ -19,6 +19,7 @@ namespace CourseManagement.Client.View
         private int choosenCourseNr;
         private double spAppointmentsHeight;
         private double dataGridHeight;
+        private DataGrid lastfocusedDG;
 
         /// <summary>
         /// Default Constructor for the Index WPF Window
@@ -33,35 +34,14 @@ namespace CourseManagement.Client.View
 
         private void mainWindow_IsLoaded(object sender, System.EventArgs e)
         {
-<<<<<<< HEAD
             if (!dgCourse.HasItems)
             {
                 refreshCourses();
                 refreshAppointments();
                 fillComboBoxRoomNumber();
             }
-=======
-            switch (mainRibbon.SelectedIndex)
-            {
-                case 0:
-                    refreshCourses();
-                    refreshAppointments();
-                    fillComboBoxRoomNumber();
-                    break;
-                case 1:
-                    refreshPersons();
-                    break;
-                case 2:
-                    refreshRooms();
-                    break;
-                case 3:
-                    refreshPayments();
-                    break;
-                default:
-                    dgCourse.DataContext = null;
-                    break;
-            }            
->>>>>>> 6d5d8abf585d5583173cd408fe9ca9534ce3790f
+            dgCourse.Columns[dgCourse.Columns.Count - 1].Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            
         }
         
 
@@ -120,12 +100,13 @@ namespace CourseManagement.Client.View
         {
             this.dgCourse.DataContext = CourseLogic.getInstance().getAll();
             changeColumnTitles();
+            dgCourse.Columns[8].Header = "Teilnehmer";
             //2write a better version
             lblHeadline.Content = "Kursübersicht";
             dgCourse.Columns[3].Visibility = Visibility.Hidden;
             spAppointments.Height = spAppointmentsHeight;
-            lblUebersicht.Content = "Kursübersicht";
-            lblAppointmentToCourse.Content = "Alle Buchungen";
+        
+            lblAppointmentToCourse.Content = "Buchungen";
             dgCourse.Height = dgAppointments.Height = dataGridHeight;
 
         }
@@ -142,7 +123,7 @@ namespace CourseManagement.Client.View
             cbValues.Items.Add(new RibbonGalleryItem() { Content = "Studenten", Foreground = Brushes.Red });
             if (ActiveUser.userIsAdmin()) cbValues.Items.Add(new RibbonGalleryItem() { Content = "Benutzer", Foreground = Brushes.Orange });
             spAppointments.Height = 0;
-            lblUebersicht.Content = "Personenübersicht";
+           
             lblAppointmentToCourse.Content = "Gebuchte Kurse";
 
             dgCourse.Height = dgAppointments.Height = dataGridHeight + 55;
@@ -159,22 +140,17 @@ namespace CourseManagement.Client.View
 
         private void refreshPayments()
         {
-            dgCourse.DataContext = CourseLogic.getInstance().getAll();
+            DataTable table = CourseLogic.getInstance().getAll();
+            dgCourse.DataContext = table;
             dgAppointments.DataContext = PaymentLogic.getInstance().getAll();
             changeColumnTitles();
             lblHeadline.Content = "Zahlungsübersicht";
             spAppointments.Height = 0;
-<<<<<<< HEAD
-
-
-            dgCourse.Height = dgAppointments.Height = dataGridHeight + 55;
-=======
             cbPaymentGroupsValues.Items.Clear();
             cbPaymentGroupsValues.Items.Add(new RibbonGalleryItem() { Content = "Kurse", Foreground = Brushes.Blue });
             cbPaymentGroupsValues.Items.Add(new RibbonGalleryItem() { Content = "Studenten", Foreground = Brushes.Green });
-            
-            //dgCourse.Height = dgAppointments.Height = dataGridHeight + spAppointmentsHeight / 2;
->>>>>>> 6d5d8abf585d5583173cd408fe9ca9534ce3790f
+
+            dgCourse.Height = dgAppointments.Height = dataGridHeight + 55;
         }
 
         private void refreshAppointments()
@@ -184,6 +160,16 @@ namespace CourseManagement.Client.View
             dgAppointments.DataContext = allAppointments;
 
             changeColumnTitles();
+
+            //ID der Appointments ausgeblendet
+            if (dgAppointments.Columns[0].Header.ToString() == "Id")
+            {
+                dgAppointments.Columns[0].Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                dgAppointments.Columns[0].Visibility = Visibility.Visible;
+            }
         }
 
 
@@ -212,14 +198,15 @@ namespace CourseManagement.Client.View
         {
             string[,] englishGerman = new string[,] 
             {
-                {"Id","Id"},{"IsPaid","Bezahlt"},{"Student","Student"},{"Course","Kurs"},{"CourseNr","Kurs Nr"},{"Title","Titel"},
+                {"Id","Id"},{"IsPaid","Bezahlt"},{"Student","Student"},{"Course","Kurs Nr"},{"CourseNr","Kurs Nr"},{"Title","Titel"},
                 {"AmountInEuro","Betrag in €"},{"Description","Beschreibung"},{"MaxMember","max. Teilnehmer"},{"MinMember","min. Teilnehmer"},
                 {"ValidityInMonth","Gültigkeit (Monate)"},{"Tutor","Tutor"},{"Payments","Zahlungen"},{"Appointments","Termine"},
                 {"RoomNr","RaumNr"},{"Capacity","Kapazität"},{"Building","Gebäude"},{"Street","Straße"},{"City","Stadt"},{"CityCode","PLZ"},
                 {"StartDate","StartDatum"},{"EndDate","EndDatum"},{"Room","Raum"},{"Surname","Nachname"},{"Forename","Vorname"},
                 {"Birthyear","Geburtsjahr"},{"MobilePhone","HandyNummer"},{"Mail","Mail"},{"Fax","Fax"},{"PrivatePhone","Telefon"},{"Gender","Geschlecht"},
                 {"Active","Aktiv"},{"IBAN","IBAN"},{"BIC","BIC"},{"Depositor","Kontoinhaber"},{"NameOfBank","Bank"},{"UserName","Benutzername"},
-                {"Password","Passwort"},{"LastLogin","LetztesLogin"},{"RegistrationDate","Registrierungsdatum"},  {"Admin","Admin"}
+                {"Password","Passwort"},{"LastLogin","LetztesLogin"},{"RegistrationDate","Registrierungsdatum"},  {"Admin","Admin"}, {"Courses","Kurse"},
+                {"StudentName","StudentenName"}
             };
            
             for(int i = 0; i<dgAppointments.Columns.Count;i++)
@@ -250,6 +237,11 @@ namespace CourseManagement.Client.View
             }
         }
 
+        private void RibbonButtonAddParticipant_Click(object sender, RoutedEventArgs e)
+        {
+            OpenWindow2AddParticpant();
+        }
+
         private void OpenWindow2AddParticpant()
         {
             WndParticipant2Course aNewAllocation = null;
@@ -271,10 +263,7 @@ namespace CourseManagement.Client.View
             }
         }
 
-        private void RibbonButtonAddParticipant_Click(object sender, RoutedEventArgs e)
-        {
-            OpenWindow2AddParticpant();
-        }
+        
 
         private void OpenHelpFile(object sender, RoutedEventArgs e)
         {
@@ -322,6 +311,8 @@ namespace CourseManagement.Client.View
         }
 
         /// <summary>
+        /// ToDo Method from Christian is beetter, change 
+        /// 
         /// Method which Deletes a Course
         /// 
         /// Because we do data binding, the structure of the main index and the data tables are the same
@@ -332,7 +323,7 @@ namespace CourseManagement.Client.View
         /// <param name="e"></param>
         private void RibbonButtonDeleteCourse_Click(object sender, RoutedEventArgs e)
         {
-            if (dgCourse.SelectedIndex != -1)
+            if (dgCourse.SelectedIndex != -1&&lastfocusedDG==dgCourse)
             {
 
                 DataTable tempDataTable = CourseLogic.getInstance().getAll();
@@ -359,13 +350,16 @@ namespace CourseManagement.Client.View
 
         private void deleteAppointment()
         {
-            if (dgAppointments.SelectedIndex != -1)
+            if (dgAppointments.SelectedItems.Count == 1&&lastfocusedDG==dgAppointments)
             {
-            DataTable allAppointments = AppointmentLogic.getInstance().getAll();
             try
             {
-                int selectedIndex = Convert.ToInt32(allAppointments.Rows[dgAppointments.SelectedIndex]["Id"]);
-                AppointmentLogic.getInstance().delete(selectedIndex);
+                DataRowView selectedRow = (DataRowView)dgAppointments.SelectedItems[0];
+                AppointmentLogic.getInstance().delete(Convert.ToInt32(selectedRow["Id"]));
+<<<<<<< HEAD
+                MessageBox.Show(selectedRow["Id"].ToString());
+=======
+>>>>>>> a8ac84a912e6d5d518806c7cdf61bc6572fc8f53
             }
             catch (Exception err)
             {
@@ -566,6 +560,7 @@ namespace CourseManagement.Client.View
         /// <param name="e"></param>
         private void element_SelectCourse(object sender, SelectionChangedEventArgs e)
         {
+            
             if (dgCourse.SelectedItems.Count == 1)
             {
                 try
@@ -637,7 +632,7 @@ namespace CourseManagement.Client.View
             else
             {
                 lblSettingAppointmentToCourse.Content = "Termin buchen";
-                //lblAppointmentToCourse.Content = "Alle Buchungen";
+                //lblAppointmentToCourse.Content = "Buchungen";
             }
                 
            
@@ -662,6 +657,7 @@ namespace CourseManagement.Client.View
                     break;
                 case "Studenten":
                     this.dgCourse.DataContext = StudentLogic.getInstance().getAll();
+                    dgCourse.Columns[18].Header = "Kurse";
                     break;
                 case "Benutzer":
                     this.dgCourse.DataContext = UserLogic.getInstance().getAll();
@@ -677,7 +673,7 @@ namespace CourseManagement.Client.View
 
         /// <summary>
         /// formatting the datagrids
-        /// Each Grid has to have 25% of height of the Window, no matter how big or small it gets through user input
+        /// Each Grid has to have a certain % of height of the Window, no matter how big or small it gets through user input
         /// As simple as it could be
         /// </summary>
         /// <param name="sender"></param>
@@ -695,7 +691,7 @@ namespace CourseManagement.Client.View
         /// <summary>
         /// We needed a a solution that the width of the columns fill all the space of the datagrid and on the other hand
         /// are sized so that the content fits
-        /// 
+        /// not in use at this moment
         /// </summary>
         private void sizingColumns()
         {
@@ -746,6 +742,12 @@ namespace CourseManagement.Client.View
         {
             //ToDo: method stub for deleting room
 
+            if (dgCourse.SelectedItems.Count == 1)
+            {
+                DataRowView selectedRoomRow = (DataRowView)dgCourse.SelectedItems[0];
+                RoomLogic.getInstance().delete(Convert.ToInt32(selectedRoomRow["roomNr"]));
+                refreshRooms();
+            }
             if (dgAppointments.SelectedIndex != -1)
             {
                 deleteAppointment();
@@ -758,11 +760,13 @@ namespace CourseManagement.Client.View
             {
                 switch (mainRibbon.SelectedIndex)
             {
-                    case 0:
-                dgAppointments.DataContext = AppointmentLogic.getInstance().getAll();
-                lblAppointmentToCourse.Content = "Alle Buchungen";
-                break;
-                    case 1:
+                case 0:
+                    dgAppointments.DataContext = AppointmentLogic.getInstance().getAll();
+                    dgAppointments.Columns[0].Visibility = Visibility.Hidden;
+                    lblSettingAppointmentToCourse.Content = "Termin buchen";
+                    lblAppointmentToCourse.Content = "Buchungen";
+                    break;
+                case 1:
                 dgAppointments.DataContext = CourseLogic.getInstance().getAll();
                 break;
                 }
@@ -773,15 +777,12 @@ namespace CourseManagement.Client.View
                 MessageBox.Show("Verbindungs- oder Datenbankfehler");
             }
 
-            lblSettingAppointmentToCourse.Content = "Termin buchen";
-            lblAppointmentToCourse.Content = "Alle Buchungen";
+            
         }
 
-<<<<<<< HEAD
-
-=======
         private void pgValue_SelectionChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
+            Mouse.Capture(cbxPaymentGroups);                                            //workaround for buggy combobox-selection in windows-ribbon.
             if (cbxPaymentGroups.Text == "Studenten")
             {
                 dgCourse.DataContext = StudentLogic.getInstance().getAll();
@@ -790,6 +791,7 @@ namespace CourseManagement.Client.View
             {
                 dgCourse.DataContext = CourseLogic.getInstance().getAll();
             }
+            Mouse.Capture(null);                                                         //workaround for buggy combobox-selection in windows-ribbon.
         }
 
         private void rbnButtonUnbookPayment_Click(object sender, RoutedEventArgs e)
@@ -812,6 +814,51 @@ namespace CourseManagement.Client.View
             }
             changeColumnTitles();
         }
->>>>>>> 6d5d8abf585d5583173cd408fe9ca9534ce3790f
+
+        private void RibbonButtonEditRoom_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgCourse.SelectedIndex != -1)
+            {
+                try
+                {
+                    DataRowView selectedRoomRow = (DataRowView)dgCourse.SelectedItems[0];
+                    int selectedIndex = Convert.ToInt32((selectedRoomRow["roomNr"]));
+                    DataTable selectedRoom = RoomLogic.getInstance().getById(selectedIndex);
+                    WndNewRoom editCourse = new WndNewRoom(selectedRoom);
+                    editCourse.ShowDialog();
+                }
+                catch (Exception err)
+                {
+                    System.Windows.MessageBox.Show(err.ToString());
+                }
+            }
+            refreshRooms();
+        }
+
+        private void RibbonButtonEditPerson_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+<<<<<<< HEAD
+        /// <summary>
+        /// buttons should allways have the same size, no matter how big/small the window gets
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonAddAppointment_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            btnAllAppointments.Width = btnAddAppointment.ActualWidth;
+        }
+=======
+
+
+        private void dg_Selected(object sender, RoutedEventArgs e)
+        {
+            lastfocusedDG = (DataGrid)sender;
+        }
+
+
+>>>>>>> a8ac84a912e6d5d518806c7cdf61bc6572fc8f53
     }
 }

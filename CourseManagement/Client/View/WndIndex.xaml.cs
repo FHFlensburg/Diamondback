@@ -356,7 +356,6 @@ namespace CourseManagement.Client.View
             {
                 DataRowView selectedRow = (DataRowView)dgAppointments.SelectedItems[0];
                 AppointmentLogic.getInstance().delete(Convert.ToInt32(selectedRow["Id"]));
-                MessageBox.Show(selectedRow["Id"].ToString());
             }
             catch (Exception err)
             {
