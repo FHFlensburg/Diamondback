@@ -106,7 +106,7 @@ namespace CourseManagement.Client.View
         /// Calls all validate methods and returns true if all user inputs were made correct
         /// </summary>
         /// <returns></returns>
-        public bool validateDataFields()
+        private bool validateDataFields()
         {
             bool validate = false;
 

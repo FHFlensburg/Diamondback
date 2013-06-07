@@ -109,6 +109,10 @@ namespace CourseManagement.Client.BusinessLogic
         {
             DataRow row = LogicUtils.getNewRow(table, user);
             row["Password"] = "***";
+            if (row["Active"].ToString() == "True") row["Active"] = "ja";
+            else if (row["Active"].ToString() == "False") row["Active"] = "nein";
+            if (row["Admin"].ToString() == "True") row["Admin"] = "ja";
+            else if (row["Admin"].ToString() == "False") row["Admin"] = "nein";
             return row;
         }
         
