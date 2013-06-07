@@ -90,6 +90,7 @@ namespace CourseManagement.Client.BusinessLogic
         {
             DataTable table = LogicUtils.getNewDataTable(new Tutor());
             table.Columns["Courses"].SetOrdinal(table.Columns.Count - 1);
+            table.Columns["Title"].SetOrdinal(1);
             return table;
         }
 

@@ -90,6 +90,7 @@ namespace CourseManagement.Client.BusinessLogic
             table.Columns["Depositor"].SetOrdinal(table.Columns.Count - 1);
             table.Columns["NameOfBank"].SetOrdinal(table.Columns.Count - 1);
             table.Columns["Payments"].SetOrdinal(table.Columns.Count - 1);
+            table.Columns["Title"].SetOrdinal(1);
             return table;
             
         }

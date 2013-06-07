@@ -47,6 +47,10 @@ namespace CourseManagement.Client.BusinessLogic
             return allPersons;
         }
 
+        /// <summary>
+        /// Creates a new Datatable for Persons
+        /// </summary>
+        /// <returns></returns>
         private DataTable getNewDataTable()
         {
             try
@@ -56,6 +60,7 @@ namespace CourseManagement.Client.BusinessLogic
                 {
                     table.Columns.Add(pi.Name);
                 }
+                table.Columns["Title"].SetOrdinal(1);
                 return table;
             }
             catch (Exception e)

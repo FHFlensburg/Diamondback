@@ -160,7 +160,7 @@ namespace CourseManagement.Client.BusinessLogic
         private DataRow getNewRow(DataTable table, Course course)
         {
                 DataRow row = LogicUtils.getNewRow(table,course);
-                row["Tutor"] = course.Tutor.Forename + " " +course.Tutor.Surname;
+                row["Tutor"] = course.Tutor.Surname + ", " + course.Tutor.Forename;
                 row["Payments"] = course.Payments.Count;
                 row["Appointments"] = course.Appointments.Count;
 

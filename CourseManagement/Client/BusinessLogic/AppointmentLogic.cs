@@ -66,9 +66,9 @@ namespace CourseManagement.Client.BusinessLogic
         private DataRow getNewRow(DataTable table, Appointment appointment)
         {
             DataRow row = LogicUtils.getNewRow(table, appointment);
-            row["Course"] = appointment.Course.Title;
+            row["Course"] = appointment.Course.CourseNr;
             row["Room"] = appointment.Room.RoomNr;
-            row["CourseNr"] = appointment.Course.CourseNr;
+            row["CourseName"] = appointment.Course.Title;
 
             return row;
         }
@@ -79,8 +79,8 @@ namespace CourseManagement.Client.BusinessLogic
         /// <returns></returns>
         private DataTable getNewDataTable()
         {
-            DataTable table = LogicUtils.getNewDataTable(new Appointment(),"CourseNr");
-            table.Columns["CourseNr"].SetOrdinal(4);
+            DataTable table = LogicUtils.getNewDataTable(new Appointment(),"CourseName");
+            table.Columns["CourseName"].SetOrdinal(4);
             return table;
         }
 

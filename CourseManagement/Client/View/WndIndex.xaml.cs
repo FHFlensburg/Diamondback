@@ -73,7 +73,7 @@ namespace CourseManagement.Client.View
                             row = (DataRowView)dgMainData.SelectedItems[0];
                             choosenCourseNr = Convert.ToInt32(row["CourseNr"]);
                             dgAppointments.DataContext = AppointmentLogic.getInstance().getByCourse(choosenCourseNr);
-
+                            dgAppointments.Columns[0].Visibility = Visibility.Hidden;
                             string text = "Termin zu Kurs " + choosenCourseNr.ToString() + " buchen";
                             lblSettingAppointmentToCourse.Content = text;
                             text = "Buchungen zu Kurs " + choosenCourseNr.ToString();
@@ -552,7 +552,7 @@ namespace CourseManagement.Client.View
         {
             string[,] englishGerman = new string[,] 
             {
-                {"Id","Id"},{"IsPaid","Bezahlt"},{"Student","Student"},{"Course","Kurs Nr"},{"CourseNr","Kurs Nr"},{"Title","Titel"},
+                {"Id","Id"},{"IsPaid","Bezahlt"},{"Student","Student"},{"Course","Kurs-Nr."},{"CourseNr","Kurs-Nr."},{"Title","Titel"},
                 {"AmountInEuro","Betrag in €"},{"Description","Beschreibung"},{"MaxMember","max. Teilnehmer"},{"MinMember","min. Teilnehmer"},
                 {"ValidityInMonth","Gültigkeit (Monate)"},{"Tutor","Tutor"},{"Payments","Zahlungen"},{"Appointments","Termine"},
                 {"RoomNr","RaumNr"},{"Capacity","Kapazität"},{"Building","Gebäude"},{"Street","Straße"},{"City","Stadt"},{"CityCode","PLZ"},
@@ -560,7 +560,7 @@ namespace CourseManagement.Client.View
                 {"Birthyear","Geburtsjahr"},{"MobilePhone","HandyNummer"},{"Mail","Mail"},{"Fax","Fax"},{"PrivatePhone","Telefon"},{"Gender","Geschlecht"},
                 {"Active","Aktiv"},{"IBAN","IBAN"},{"BIC","BIC"},{"Depositor","Kontoinhaber"},{"NameOfBank","Bank"},{"UserName","Benutzername"},
                 {"Password","Passwort"},{"LastLogin","LetztesLogin"},{"RegistrationDate","Registrierungsdatum"},  {"Admin","Admin"}, {"Courses","Kurse"},
-                {"StudentName","StudentenName"}
+                {"StudentName","StudentenName"}, {"CourseName","Kursbezeichnung"}
             };
            
             for(int i = 0; i<dgAppointments.Columns.Count;i++)

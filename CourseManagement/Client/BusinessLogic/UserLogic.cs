@@ -44,7 +44,7 @@ namespace CourseManagement.Client.BusinessLogic
                     allUsers.Rows.Add(getNewRow(allUsers,user));
                 }
 
-
+                
                 return allUsers;
             }
             catch (Exception e)
@@ -96,6 +96,7 @@ namespace CourseManagement.Client.BusinessLogic
             table.Columns["LastLogin"].SetOrdinal(table.Columns.Count - 1);
             table.Columns["RegistrationDate"].SetOrdinal(table.Columns.Count - 1);
             table.Columns["Admin"].SetOrdinal(table.Columns.Count - 1);
+            table.Columns["Title"].SetOrdinal(1);
             return table;
         }
 
