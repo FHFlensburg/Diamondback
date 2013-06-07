@@ -234,6 +234,7 @@ namespace CourseManagement.Client.BusinessLogic
             if (payment.IsPaid != isPaid)
             {
                 payment.IsPaid = isPaid;
+                payment.update();
             }
         }
 

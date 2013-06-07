@@ -146,7 +146,6 @@ namespace CourseManagement.Client.View
             cbPaymentGroupsValues.Items.Clear();
             cbPaymentGroupsValues.Items.Add(new RibbonGalleryItem() { Content = "Kurse", Foreground = Brushes.Blue });
             cbPaymentGroupsValues.Items.Add(new RibbonGalleryItem() { Content = "Studenten", Foreground = Brushes.Green });
-
             dgCourse.Height = dgAppointments.Height = dataGridHeight + 55;
         }
 
@@ -260,7 +259,9 @@ namespace CourseManagement.Client.View
 
             try
             {
-                System.Diagnostics.Process.Start(@"C:\path-to-chm-file.chm");
+                this.mainRibbon.SelectedIndex = 0;
+
+                System.Diagnostics.Process.Start("..\\..\\Help_Kursverwaltung.chm");
             }
             catch (System.Exception err)
             {
@@ -526,6 +527,7 @@ namespace CourseManagement.Client.View
                     dgAppointments.DataContext = PaymentLogic.getInstance().getByStudent(Convert.ToInt32(row["Id"]));
                     row = (DataRowView)dgCourse.SelectedItems[0];
                     choosenCourseNr = Convert.ToInt32(row["Id"]);
+                    
                     lblStudentName.Content = "Saldo von " + row["Forename"] + " " + row["Surname"] + ":";
                     lblStudentHasToPay.Content = PaymentLogic.getInstance().getStudentBalance(choosenCourseNr).ToString();
                 }
@@ -763,10 +765,14 @@ namespace CourseManagement.Client.View
         {
             if (cbxPaymentGroups.Text == "Studenten")
             {
+                rbnButtonNewPayment.IsEnabled = true;
+                rbnButtonUnbookPayment.IsEnabled = true;
                 dgCourse.DataContext = StudentLogic.getInstance().getAll();
             }
             if (cbxPaymentGroups.Text == "Kurse")
             {
+                rbnButtonNewPayment.IsEnabled = false;
+                rbnButtonUnbookPayment.IsEnabled = false;
                 dgCourse.DataContext = CourseLogic.getInstance().getAll();
             }
         }

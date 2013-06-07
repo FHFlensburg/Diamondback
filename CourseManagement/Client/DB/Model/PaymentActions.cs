@@ -74,6 +74,19 @@ namespace CourseManagement.Client.DB.Model
             }
         }
 
-        
+        /// <summary>
+        /// Calls the Database Query which updates the selected Payment
+        /// </summary>
+        public virtual void update()
+        {
+            try
+            {
+                PaymentQuery.update(this);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }
