@@ -591,19 +591,29 @@ namespace CourseManagement.Client.View
             }
         }
 
-        
 
-        
-
-        
-
-        private void OpenHelpFile(object sender, RoutedEventArgs e)
+        #region help function
+        private void ribbonButtonHelp_Click(object sender, RoutedEventArgs e)
         {
-            //opening a generated Help File
-            //Made a Word File and converted it. Test chm file in the Image Folder
-            //
-            //ToDo Change so it works with relative paths
+            openHelp();
+        }
 
+
+        private void mainWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F1)
+            {
+                openHelp();
+            }
+        }
+
+        private void RibbonHelpButton_Click(object sender, RoutedEventArgs e)
+        {
+            openHelp();
+        }
+
+        private void openHelp()
+        {
             try
             {
                 this.mainRibbon.SelectedIndex = 0;
@@ -614,12 +624,11 @@ namespace CourseManagement.Client.View
             {
                 System.Windows.MessageBox.Show(err.ToString());
             }
-            
         }
 
+        #endregion
 
 
-        
 
         #region methods and events of lower datagrid (Appointments)
 
@@ -907,7 +916,7 @@ namespace CourseManagement.Client.View
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ButtonAddAppointment_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void buttonAddAppointment_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             btnAllAppointments.Width = btnAddAppointment.ActualWidth;
         }
@@ -919,6 +928,12 @@ namespace CourseManagement.Client.View
         }
 
         #endregion
+
+        
+
+   
+
+        
 
         
 
