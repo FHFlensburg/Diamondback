@@ -59,9 +59,9 @@ namespace CourseManagement.Client.View
             foreach (DataRow aDataRow in temporaryData.Rows)
             {
                 ListBoxItem ListBoxItemStudents = new ListBoxItem();
-                string aString = aDataRow["Forename"].ToString() + " " + aDataRow["Surname"].ToString();
+                string aString = aDataRow["Surname"].ToString() + " " + aDataRow["Forename"].ToString();
                 ListBoxItemStudents.Content = aString;
-                ListBoxItemStudents.Tag = aDataRow["ID"];
+                ListBoxItemStudents.Tag = aDataRow["Id"];
                 lbxParticipants.Items.Add(ListBoxItemStudents);
             }
         }
@@ -128,7 +128,7 @@ namespace CourseManagement.Client.View
                 {
                     foreach (ListBoxItem aListBoxItem in lbxParticipants.SelectedItems)
                     {
-                        if (Convert.ToInt32(aDataRow["Student"]) == Convert.ToInt32(((ListBoxItem)aListBoxItem).Tag))
+                        if (Convert.ToInt32(aDataRow["StudentNr"]) == Convert.ToInt32((aListBoxItem).Tag))
                         {
                             //at this point eventually check if the student has allready paid? 
                             // reason is that a student who has paid will not be removed from course without another user input

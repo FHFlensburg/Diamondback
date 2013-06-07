@@ -16,7 +16,7 @@
                 <r:Ribbon x:Name="mainRibbon"  SelectedIndex="0" SelectionChanged="Ribbon_SelectionChanged">
                     <!-- Help Pane, located at the right-hand side -->
                     <r:Ribbon.HelpPaneContent>
-                        <RibbonButton  x:Name="rbnButtonHelp" SmallImageSource="Images\help.ico" Click="OpenHelpFile" ToolTip="Hier bekommen Sie Hilfe" />
+                        <RibbonButton  x:Name="rbnButtonHelp" SmallImageSource="Images\help.ico" Click="OpenHelpFile" ToolTip="Hier bekommen Sie Hilfe" KeyTip="" />
                     </r:Ribbon.HelpPaneContent>
                     <!-- Application Menu, located at the left-hand side (down arrow) -->
                     <r:Ribbon.ApplicationMenu >
