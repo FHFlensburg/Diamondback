@@ -3,6 +3,7 @@ using System;
 using System.Data;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 
 namespace CourseManagement.Client.View
@@ -37,15 +38,20 @@ namespace CourseManagement.Client.View
             setGuiValues();
 
             this.selectedCourse = selectedCourse;
-            lblCourse.Content = "Kurs bearbeiten";       
+            lblCourse.Content = "Kurs bearbeiten";
 
-            
+
+            fillingDataFieldsWithProvidedData(selectedCourse);
+        }
+
+        private void fillingDataFieldsWithProvidedData(DataTable selectedCourse)
+        {
             tbMaxParticipants.Text = selectedCourse.Rows[0]["MaxMember"].ToString();
-           
+
             tbMinParticipants.Text = selectedCourse.Rows[0]["MinMember"].ToString();
-            
+
             tbCourseTitle.Text = selectedCourse.Rows[0]["Title"].ToString();
-            
+
             tbCosts.Text = selectedCourse.Rows[0]["AmountInEuro"].ToString();
 
             tbDescription.Text = selectedCourse.Rows[0]["Description"].ToString();
@@ -112,6 +118,43 @@ namespace CourseManagement.Client.View
             this.Close();
         }
 
-        
+        #region validate mandatory fields and filling variables of the none mandatory
+
+        private void fillingNonMandatoryDataFields()
+        {
+            titeL = tbCourseTitle.Text;
+            amountInEuro = Convert.ToDecimal(tbCosts.Text);
+            description = tbDescription.Text;
+            maxParticipants = Convert.ToInt32(tbMaxParticipants.Text);
+            minParticipants = Convert.ToInt32(tbMinParticipants.Text);
+            tutor = Convert.ToInt32(((ComboBoxItem)cbTutor.SelectedItem).Tag);
+            validInMonths = Convert.ToInt32(tbValidInMonth.Text);
+        }
+
+        private bool validateAndFillTitle()
+        {
+            bool validate = false;
+            if (tbCosts.Text != null)
+            {
+                try
+                {
+                amountInEuro = Convert.ToInt32(tbCosts.Text);
+                lblCosts.Foreground = Brushes.Black;
+                validate = true;
+                }
+                catch
+                {
+                    validate = false;
+                    lblCosts.Foreground = Brushes.Red;
+                }
+            }
+            else
+            {
+                lblCosts.Foreground = Brushes.Red;
+                validate = false;
+            }
+            return validate;
+        }
+        #endregion
     }
 }

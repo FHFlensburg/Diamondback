@@ -60,20 +60,22 @@ namespace CourseManagement.Client.View
 
             fillingDataFieldsWithProvidedData();
 
-            if (kindOfPerson == 1)
+            switch (kindOfPerson)
             {
-                fillingdataFieldsWithStudentData();
-                cbxRole.SelectedItem = cbxiStudent;
+                case 0:
+                    cbxRole.SelectedIndex = -1;
+                    break;
+                case 1:
+                    cbxRole.SelectedItem = (ComboBoxItem)cbxiStudent;
+                    break;
+                case 2:
+                    cbxRole.SelectedItem = (ComboBoxItem)cbxiUser;
+                    break;
+                case 3:
+                    if(ActiveUser.userIsAdmin() == true){cbxRole.SelectedItem = (ComboBoxItem)cbxiTutor;}
+                    break;
             }
-            if (kindOfPerson == 2) 
-            {
-                fillingdataFieldsWithUserData();
-                cbxRole.SelectedItem = cbxiUser;
-            }
-
-            changingRole();
-                
-
+            //changingRole();
         }
 
         private void ButtonSavePerson_Click(object sender, RoutedEventArgs e)
@@ -215,7 +217,7 @@ namespace CourseManagement.Client.View
                 //    chbxIsActive.IsChecked = true;
                 //}
 
-                switch (selectedPerson.Rows[0]["title"].ToString())
+                switch (selectedPerson.Rows[0]["Title"].ToString())
                 {
                     case "Professor":
                         cbxTitle.SelectedItem = cbxiProf;
@@ -269,14 +271,17 @@ namespace CourseManagement.Client.View
                 spUser.Height = 0;
                 spStudent.Height = 0;
 
-                switch (((ComboBoxItem)cbxRole.SelectedItem).Content.ToString())
+                if (cbxRole.SelectedItem != null)
                 {
-                    case "Student":
-                        spStudent.Height = Double.NaN;
-                        break;
-                    case "User":
-                        spUser.Height = Double.NaN;
-                        break;
+                    switch (((ComboBoxItem)cbxRole.SelectedItem).Content.ToString())
+                    {
+                        case "Student":
+                            spStudent.Height = Double.NaN;
+                            break;
+                        case "User":
+                            spUser.Height = Double.NaN;
+                            break;
+                    }
                 }
             }
         }
@@ -378,6 +383,11 @@ namespace CourseManagement.Client.View
         }
 
         #endregion
+
+        private void WndPerson_Loaded(object sender, RoutedEventArgs e)
+        {
+            changingRole();
+        }
 
 
 

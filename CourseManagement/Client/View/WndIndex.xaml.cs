@@ -188,6 +188,7 @@ namespace CourseManagement.Client.View
                 {
                     System.Windows.MessageBox.Show(err.ToString());
                 }
+                refreshCourses();
             }
         }
 
@@ -276,17 +277,18 @@ namespace CourseManagement.Client.View
                         selectedIndex = Convert.ToInt32(selectedPersonRow["Id"]);
                         switch (this.cbxPersons.Text)
                         {
-                            case "Tutoren":
-                                selectedPerson = TutorLogic.getInstance().getById(selectedIndex);
-                                break;
                             case "Studenten":
                                 selectedPerson = StudentLogic.getInstance().getById(selectedIndex);
                                 kindOfPerson = 1;
                                 break;
                             case "Benutzer":
-                                //selectedIndex = Convert.ToInt32(selectedPersonRow["Id"]);
                                 selectedPerson = UserLogic.getInstance().getById(selectedIndex);
                                 kindOfPerson = 2;
+                                break;
+                            case "Tutoren":
+                                //selectedIndex = Convert.ToInt32(selectedPersonRow["Id"]);
+                                selectedPerson = TutorLogic.getInstance().getById(selectedIndex);
+                                kindOfPerson = 3;
                                 break;
                             default:
                                 selectedPerson = PersonLogic.getInstance().getById(selectedIndex);
@@ -882,7 +884,7 @@ namespace CourseManagement.Client.View
         /// <summary>
         /// formatting the datagrids
         /// Each Grid has to have a certain % of height of the Window, no matter how big or small it gets through user input
-        /// As simple as it could be
+        /// realised as simple as it could be
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
