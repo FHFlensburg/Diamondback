@@ -239,6 +239,36 @@ namespace CourseManagement.Client.View
             aNewPerson.ShowDialog();
         }
 
+        /// <summary>
+        /// Fills the Person DataGrid with the selected PersonGroup
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ribbonGallery_SelectionChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            Mouse.Capture(cbxPersons);                                          //workaround for buggy combobox-selection in windows-ribbon.
+            switch (this.cbxPersons.Text)
+            {
+                case "Alle Personen":
+                    this.dgMainData.DataContext = PersonLogic.getInstance().getAll();
+                    break;
+                case "Tutoren":
+                    this.dgMainData.DataContext = TutorLogic.getInstance().getAll();
+                    break;
+                case "Studenten":
+                    this.dgMainData.DataContext = StudentLogic.getInstance().getAll();
+                    dgMainData.Columns[18].Header = "Kurse";
+                    break;
+                case "Benutzer":
+                    this.dgMainData.DataContext = UserLogic.getInstance().getAll();
+                    break;
+
+            }
+            changeColumnTitles();
+            Mouse.Capture(null);                                                //workaround for buggy combobox-selection in windows-ribbon.
+
+        }
+
         private void ribbonButtonDeletePerson_Click(object sender, RoutedEventArgs e)
         {
 
@@ -849,35 +879,7 @@ namespace CourseManagement.Client.View
 
         
 
-        /// <summary>
-        /// Fills the Person DataGrid with the selected PersonGroup
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ribbonGallery_SelectionChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        {
-            Mouse.Capture(cbxPersons);                                          //workaround for buggy combobox-selection in windows-ribbon.
-            switch (this.cbxPersons.Text)
-            {
-                case "Alle Personen":
-                    this.dgMainData.DataContext = PersonLogic.getInstance().getAll();
-                    break;
-                case "Tutoren":
-                    this.dgMainData.DataContext = TutorLogic.getInstance().getAll();
-                    break;
-                case "Studenten":
-                    this.dgMainData.DataContext = StudentLogic.getInstance().getAll();
-                    dgMainData.Columns[18].Header = "Kurse";
-                    break;
-                case "Benutzer":
-                    this.dgMainData.DataContext = UserLogic.getInstance().getAll();
-                    break;
-                    
-            }
-            changeColumnTitles();
-            Mouse.Capture(null);                                                //workaround for buggy combobox-selection in windows-ribbon.
-          
-        }
+        
 
         
 
