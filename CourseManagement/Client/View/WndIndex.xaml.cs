@@ -105,7 +105,7 @@ namespace CourseManagement.Client.View
             dgCourse.Columns[3].Visibility = Visibility.Hidden;
             spAppointments.Height = spAppointmentsHeight;
         
-            lblAppointmentToCourse.Content = "Alle Buchungen";
+            lblAppointmentToCourse.Content = "Buchungen";
             dgCourse.Height = dgAppointments.Height = dataGridHeight;
 
         }
@@ -197,7 +197,7 @@ namespace CourseManagement.Client.View
         {
             string[,] englishGerman = new string[,] 
             {
-                {"Id","Id"},{"IsPaid","Bezahlt"},{"Student","Student"},{"Course","Kurs"},{"CourseNr","Kurs Nr"},{"Title","Titel"},
+                {"Id","Id"},{"IsPaid","Bezahlt"},{"Student","Student"},{"Course","Kurs Nr"},{"CourseNr","Kurs Nr"},{"Title","Titel"},
                 {"AmountInEuro","Betrag in €"},{"Description","Beschreibung"},{"MaxMember","max. Teilnehmer"},{"MinMember","min. Teilnehmer"},
                 {"ValidityInMonth","Gültigkeit (Monate)"},{"Tutor","Tutor"},{"Payments","Zahlungen"},{"Appointments","Termine"},
                 {"RoomNr","RaumNr"},{"Capacity","Kapazität"},{"Building","Gebäude"},{"Street","Straße"},{"City","Stadt"},{"CityCode","PLZ"},
@@ -354,7 +354,8 @@ namespace CourseManagement.Client.View
             try
             {
                 DataRowView selectedRow = (DataRowView)dgAppointments.SelectedItems[0];
-                PaymentLogic.getInstance().delete(Convert.ToInt32(selectedRow["Id"]));
+                AppointmentLogic.getInstance().delete(Convert.ToInt32(selectedRow["Id"]));
+                MessageBox.Show(selectedRow["Id"].ToString());
             }
             catch (Exception err)
             {
@@ -626,7 +627,7 @@ namespace CourseManagement.Client.View
             else
             {
                 lblSettingAppointmentToCourse.Content = "Termin buchen";
-                //lblAppointmentToCourse.Content = "Alle Buchungen";
+                //lblAppointmentToCourse.Content = "Buchungen";
             }
                 
            
@@ -757,7 +758,7 @@ namespace CourseManagement.Client.View
                 case 0:
                     dgAppointments.DataContext = AppointmentLogic.getInstance().getAll();
                     lblSettingAppointmentToCourse.Content = "Termin buchen";
-                    lblAppointmentToCourse.Content = "Alle Buchungen";
+                    lblAppointmentToCourse.Content = "Buchungen";
                     break;
                 case 1:
                 dgAppointments.DataContext = CourseLogic.getInstance().getAll();
@@ -831,6 +832,16 @@ namespace CourseManagement.Client.View
         private void RibbonButtonEditPerson_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        /// <summary>
+        /// buttons should allways have the same size, no matter how big/small the window gets
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonAddAppointment_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            btnAllAppointments.Width = btnAddAppointment.ActualWidth;
         }
     }
 }
