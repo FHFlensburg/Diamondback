@@ -102,12 +102,6 @@
   <ItemGroup>
     <Compile Include="Client\BusinessLogic\AppointmentLogic.cs" />
     <Compile Include="Client\BusinessLogic\CourseLogic.cs" />
-    <Compile Include="Client\BusinessLogic\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Client\BusinessLogic\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Client\BusinessLogic\AbstractLogic.cs" />
     <Compile Include="Client\BusinessLogic\LogicUtils.cs" />
     <Compile Include="Client\BusinessLogic\PaymentLogic.cs" />
@@ -216,9 +210,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Client\BusinessLogic\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
