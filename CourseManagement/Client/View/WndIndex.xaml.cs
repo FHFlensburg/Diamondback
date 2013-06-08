@@ -126,19 +126,19 @@ namespace CourseManagement.Client.View
                         case 3:
                             if (cbxPaymentGroups.Text == "Studenten")
                             {
+                                this.lblHeadline.Content = "Studenten";
                                 row = (DataRowView)dgMainData.SelectedItems[0];
                                 choosenCourseNr = Convert.ToInt32(row["Id"]);
                                 SpecificTables.changeDgPayment(dgSecondary, PaymentLogic.getInstance().getByStudent(choosenCourseNr));
-                                lblStudentName.Content = "Saldo von " + row["Forename"] + " " + row["Surname"] + ":";
-                                lblStudentHasToPay.Content = PaymentLogic.getInstance().getStudentBalance(choosenCourseNr).ToString();
+                                getStudentBalance(row);
                             }
                             if (cbxPaymentGroups.Text == "Kurse")
                             {
+                                this.lblHeadline.Content = "Kurse";
                                 row = (DataRowView)dgMainData.SelectedItems[0];
                                 choosenCourseNr = Convert.ToInt32(row["CourseNr"]);
-                                SpecificTables.changeDgStudent(dgSecondary, StudentLogic.getInstance().getByCourse(choosenCourseNr));
-                                lblStudentName.Content = "Forderungen: " + CourseLogic.getInstance().getOverAllAmount(choosenCourseNr).ToString();
-                                lblStudentHasToPay.Content = "Noch zu zahlen: " + CourseLogic.getInstance().getBalance(choosenCourseNr).ToString();
+                                SpecificTables.changeDgPayment(dgSecondary, PaymentLogic.getInstance().getByCourse(choosenCourseNr));
+                                getCourseBalance(row);
                             }
                             break;
                         default:
@@ -453,6 +453,26 @@ namespace CourseManagement.Client.View
         #region Office Ribbon payment tab
 
         /// <summary>
+        /// Writes the Student Name and the Balance to a label in the payment view
+        /// </summary>
+        /// <param name="row"></param>
+        public void getStudentBalance(DataRowView row)
+        {
+            lblStudentName.Content = "Saldo von " + row["Forename"] + " " + row["Surname"] + ":";
+            lblStudentHasToPay.Content = PaymentLogic.getInstance().getStudentBalance(choosenCourseNr).ToString();
+        }
+
+        /// <summary>
+        /// Writes the Course Balance to a label in the payment view
+        /// </summary>
+        /// <param name="row"></param>
+        public void getCourseBalance(DataRowView row)
+        {
+            lblStudentName.Content = "Forderungen: " + CourseLogic.getInstance().getOverAllAmount(choosenCourseNr).ToString();
+            lblStudentHasToPay.Content = "Noch zu zahlen: " + CourseLogic.getInstance().getBalance(choosenCourseNr).ToString();
+        }
+
+        /// <summary>
         /// Creates a new Payment
         /// </summary>
         /// <param name="sender"></param>
@@ -461,6 +481,8 @@ namespace CourseManagement.Client.View
         {
             try
             {
+                this.lblHeadline.Content = "Kurse";
+                this.lblAppointmentToCourse.Content = "Zahlungen";
                 if (dgSecondary.SelectedItems.Count == 1)
                 {
                     DataRowView selectedRow = (DataRowView)dgSecondary.SelectedItems[0];
@@ -468,12 +490,22 @@ namespace CourseManagement.Client.View
 
                     if (dgMainData.SelectedItems.Count == 1)
                     {
-                        DataRowView selectedStudentRow = (DataRowView)dgMainData.SelectedItems[0];
-                        SpecificTables.changeDgPayment(dgSecondary, PaymentLogic.getInstance().getByStudent(Convert.ToInt32(row["Id"])));
-                        row = (DataRowView)dgMainData.SelectedItems[0];
-                        choosenCourseNr = Convert.ToInt32(row["Id"]);
-                        lblStudentName.Content = "Saldo von " + row["Forename"] + " " + row["Surname"] + ":";
-                        lblStudentHasToPay.Content = PaymentLogic.getInstance().getStudentBalance(choosenCourseNr).ToString();
+                        if (cbxPaymentGroups.Text == "Studenten")
+                        {
+                            DataRowView selectedStudentRow = (DataRowView)dgMainData.SelectedItems[0];
+                            SpecificTables.changeDgPayment(dgSecondary, PaymentLogic.getInstance().getByStudent(Convert.ToInt32(row["Id"])));
+                            row = (DataRowView)dgMainData.SelectedItems[0];
+                            choosenCourseNr = Convert.ToInt32(row["Id"]);
+                            getStudentBalance(row);
+                        }
+                        else
+                        {
+                            DataRowView selectedStudentRow = (DataRowView)dgMainData.SelectedItems[0];
+                            SpecificTables.changeDgPayment(dgSecondary, PaymentLogic.getInstance().getByCourse(Convert.ToInt32(row["CourseNr"])));
+                            row = (DataRowView)dgMainData.SelectedItems[0];
+                            choosenCourseNr = Convert.ToInt32(row["CourseNr"]);
+                            getCourseBalance(row);
+                        }
                     }
                 }
             }
@@ -495,12 +527,22 @@ namespace CourseManagement.Client.View
 
                     if (dgMainData.SelectedItems.Count == 1)
                     {
-                        DataRowView selectedStudentRow = (DataRowView)dgMainData.SelectedItems[0];
-                        SpecificTables.changeDgPayment(dgSecondary, PaymentLogic.getInstance().getByStudent(Convert.ToInt32(row["Id"])));
-                        row = (DataRowView)dgMainData.SelectedItems[0];
-                        choosenCourseNr = Convert.ToInt32(row["Id"]);
-                        lblStudentName.Content = "Saldo von " + row["Forename"] + " " + row["Surname"] + ":";
-                        lblStudentHasToPay.Content = PaymentLogic.getInstance().getStudentBalance(choosenCourseNr).ToString();
+                        if (cbxPaymentGroups.Text == "Studenten")
+                        {
+                            DataRowView selectedStudentRow = (DataRowView)dgMainData.SelectedItems[0];
+                            SpecificTables.changeDgPayment(dgSecondary, PaymentLogic.getInstance().getByStudent(Convert.ToInt32(row["Id"])));
+                            row = (DataRowView)dgMainData.SelectedItems[0];
+                            choosenCourseNr = Convert.ToInt32(row["Id"]);
+                            getStudentBalance(row);
+                        }
+                        else
+                        {
+                            DataRowView selectedStudentRow = (DataRowView)dgMainData.SelectedItems[0];
+                            SpecificTables.changeDgPayment(dgSecondary, PaymentLogic.getInstance().getByCourse(Convert.ToInt32(row["CourseNr"])));
+                            row = (DataRowView)dgMainData.SelectedItems[0];
+                            choosenCourseNr = Convert.ToInt32(row["CourseNr"]);
+                            getCourseBalance(row);
+                        }
                     }
                 }
             }
@@ -626,9 +668,15 @@ namespace CourseManagement.Client.View
         {
             try
             {
+                if (cbxPaymentGroups.Text == "Kurse")
+                {
+                    this.lblHeadline.Content = "Kursübersicht";
+                }
+                else
+                    this.lblHeadline.Content = "Studentenübersicht";
+                this.lblAppointmentToCourse.Content = "Zahlungen";
                 SpecificTables.changeDgCourse(dgMainData, CourseLogic.getInstance().getAll());
                 SpecificTables.changeDgPayment(dgSecondary, PaymentLogic.getInstance().getAll());
-                lblHeadline.Content = "Zahlungsübersicht";
                 spAppointments.Height = 0;
                 cbPaymentGroupsValues.Items.Clear();
                 cbPaymentGroupsValues.Items.Add(new RibbonGalleryItem() { Content = "Kurse", Foreground = Brushes.Blue });
@@ -977,14 +1025,12 @@ namespace CourseManagement.Client.View
                 Mouse.Capture(cbxPaymentGroups);                                            //workaround for buggy combobox-selection in windows-ribbon.
                 if (cbxPaymentGroups.Text == "Studenten")
                 {
-                    this.rbnButtonNewPayment.IsEnabled = true;
-                    this.rbnButtonUnbookPayment.IsEnabled = true;
+                    this.lblHeadline.Content = "Studentenübersicht";
                     SpecificTables.changeDgStudent(dgMainData, StudentLogic.getInstance().getAll());
                 }
                 if (cbxPaymentGroups.Text == "Kurse")
                 {
-                    this.rbnButtonNewPayment.IsEnabled = false;
-                    this.rbnButtonUnbookPayment.IsEnabled = false;
+                    this.lblHeadline.Content = "Kursübersicht";
                     SpecificTables.changeDgCourse(dgMainData, CourseLogic.getInstance().getAll());
                 }
                 Mouse.Capture(null);                                                         //workaround for buggy combobox-selection in windows-ribbon.

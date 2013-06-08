@@ -207,6 +207,7 @@ namespace CourseManagement.Client.BusinessLogic
         /// </summary>
         /// <param name="courseNr"></param>
         /// <returns></returns>
+        /// public DataTable getByCourse(int courseNr)
         public DataTable getByCourse(int courseNr)
         {
             try

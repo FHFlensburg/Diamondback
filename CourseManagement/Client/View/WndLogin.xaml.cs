@@ -20,14 +20,12 @@ namespace CourseManagement.Client.View
     /// </summary>
     public partial class WndLogin : Window
     {
+        /// <summary>
+        /// Default Constructor
+        /// </summary>
         public WndLogin()
         {
             InitializeComponent(); 
-
-            //Nur im Testbetrieb
-            tbPasswordStatus.Text = "user: admin, psw: admin";
-            tbUsername.Text = "admin";
-            pwbPassword.Password = "admin";
         }
 
         //Zusammen mit checkPassword auszulagern

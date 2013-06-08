@@ -100,10 +100,10 @@
                     <!-- Ribbon Tab payment: -->
                     <r:RibbonTab x:Name="ribbonPayment" Header="Zahlungen" KeyTip="Z" ToolTip="Reiter mit Zahlungsfunktionalitäten" >
                         <r:RibbonGroup x:Name="ribbonGroupPaymentBooking" Header="Buchen">
-                            <r:RibbonButton IsEnabled="False" x:Name="rbnButtonNewPayment" LargeImageSource="Images/booking.ico" Label="Zahlungen buchen" KeyTip="B" Click="ribbonButtonNewPayment_Click" ToolTip="Zahlungsbuchung"/>
+                            <r:RibbonButton x:Name="rbnButtonNewPayment" LargeImageSource="Images/booking.ico" Label="Zahlungen buchen" KeyTip="B" Click="ribbonButtonNewPayment_Click" ToolTip="Zahlungsbuchung"/>
                         </r:RibbonGroup>
                         <r:RibbonGroup x:Name="ribbonGroupPaymentUnbooking" Header="Stornieren">
-                            <r:RibbonButton IsEnabled="False" x:Name="rbnButtonUnbookPayment" LargeImageSource="Images/booking.ico" Label="Zahlungen stornieren" KeyTip="B" Click="rbnButtonUnbookPayment_Click" ToolTip="Zahlungsbuchung"/>
+                            <r:RibbonButton x:Name="rbnButtonUnbookPayment" LargeImageSource="Images/booking.ico" Label="Zahlungen stornieren" KeyTip="B" Click="rbnButtonUnbookPayment_Click" ToolTip="Zahlungsbuchung"/>
                         </r:RibbonGroup>
                         <r:RibbonGroup x:Name="ribbonGroupPaymentGroupSelect" Header="Kurse/Studenten">
 
