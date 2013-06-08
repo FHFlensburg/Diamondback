@@ -1,13 +1,13 @@
-﻿using System.Windows;
+﻿using CourseManagement.Client.BusinessLogic;
+using Microsoft.Win32;
+using Microsoft.Windows.Controls.Ribbon;
+using System;
+using System.Data;
+using System.Diagnostics;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Microsoft.Windows.Controls.Ribbon;
-using System.Data;
-using CourseManagement.Client.BusinessLogic;
-using System;
 using System.Windows.Media;
-using Microsoft.Win32;
-using System.Diagnostics;
 
 
 namespace CourseManagement.Client.View
@@ -889,7 +889,7 @@ namespace CourseManagement.Client.View
             }
             catch (Exception err)
             {
-                throw new Exception(err.Message);
+               throw new Exception(err.Message);
             }
         }
 

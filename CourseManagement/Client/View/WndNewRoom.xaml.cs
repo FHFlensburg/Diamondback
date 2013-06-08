@@ -1,9 +1,7 @@
-﻿using System;
+﻿using CourseManagement.Client.BusinessLogic;
+using System;
 using System.Data;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-using CourseManagement.Client.BusinessLogic;
 
 namespace CourseManagement.Client.View
 {
