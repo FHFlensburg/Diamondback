@@ -11,7 +11,7 @@ namespace CourseManagement.Client.DB
     /// <summary>
     /// All Database Queries for the Entity Appointment
     /// </summary>
-    public class AppointmentQuery
+    public static class AppointmentQuery
     {
  
         /// <summary>

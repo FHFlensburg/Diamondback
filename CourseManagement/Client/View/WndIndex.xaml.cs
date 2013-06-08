@@ -38,14 +38,20 @@ namespace CourseManagement.Client.View
 
         private void mainWindow_IsLoaded(object sender, System.EventArgs e)
         {
-            if (!dgMainData.HasItems)
+            try
             {
-                refreshCourses();
-                refreshAppointments();
-                fillComboBoxRoomNumber();
+                if (!dgMainData.HasItems)
+                {
+                    refreshCourses();
+                    refreshAppointments();
+                    fillComboBoxRoomNumber();
+                }
+                dgMainData.Columns[dgMainData.Columns.Count - 1].Width = new DataGridLength(1, DataGridLengthUnitType.Star);
             }
-            dgMainData.Columns[dgMainData.Columns.Count - 1].Width = new DataGridLength(1, DataGridLengthUnitType.Star);
-            
+            catch (Exception err)
+            {
+                MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
+            }
         }
 
         private void mainWindowClose_Click(object sender, RoutedEventArgs e)
@@ -142,9 +148,9 @@ namespace CourseManagement.Client.View
                     }
                     
                 }
-                catch (System.Exception err)
+                catch (Exception err)
                 {
-                    System.Windows.MessageBox.Show(err.ToString());
+                    System.Windows.MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
                 }
             }
             else
@@ -155,9 +161,16 @@ namespace CourseManagement.Client.View
 
         private void ribbonButtonNewCourse_Click(object sender, RoutedEventArgs e)
         {
-            WndNewCourse aNewCourse = new WndNewCourse();
-            aNewCourse.ShowDialog();
-            refreshCourses();
+            try
+            {
+                WndNewCourse aNewCourse = new WndNewCourse();
+                aNewCourse.ShowDialog();
+                refreshCourses();
+            }
+            catch (Exception err)
+            {
+                System.Windows.MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
+            }
         }
 
 
@@ -170,8 +183,7 @@ namespace CourseManagement.Client.View
         private void openWindow2AddParticpant()
         {
             WndParticipant2Course aNewAllocation = null;
-            try
-            {
+
                 if (dgMainData.SelectedItems.Count > 0)
                 {
                     aNewAllocation = new WndParticipant2Course(choosenCourseNr);
@@ -181,11 +193,8 @@ namespace CourseManagement.Client.View
                     aNewAllocation = new WndParticipant2Course(-1);
                 }
                 aNewAllocation.ShowDialog();
-            }
-            catch (System.Exception err)
-            {
-                System.Windows.MessageBox.Show(err.ToString());
-            }
+            
+ 
         }
 
 
@@ -193,19 +202,20 @@ namespace CourseManagement.Client.View
         {
             if (dgMainData.SelectedIndex != -1)
             {
-                DataTable tempDataTable = CourseLogic.getInstance().getAll();
+
                 try
                 {
+                    DataTable tempDataTable = CourseLogic.getInstance().getAll();
                     int selectedIndex = Convert.ToInt32(tempDataTable.Rows[dgMainData.SelectedIndex]["CourseNr"]);
                     DataTable selectedCourse = CourseLogic.getInstance().getById(selectedIndex);
                     WndNewCourse editCourse = new WndNewCourse(selectedCourse);
                     editCourse.ShowDialog();
+                    refreshCourses();
                 }
                 catch (Exception err)
                 {
-                    System.Windows.MessageBox.Show(err.ToString());
+                    System.Windows.MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
                 }
-                refreshCourses();
             }
         }
 
@@ -222,39 +232,42 @@ namespace CourseManagement.Client.View
         /// <param name="e"></param>
         private void ribbonButtonDeleteCourse_Click(object sender, RoutedEventArgs e)
         {
-            if (dgMainData.SelectedIndex != -1 && lastfocusedDG == dgMainData)
+            try
             {
-
-                DataTable tempDataTable = CourseLogic.getInstance().getAll();
-                try
+                if (dgMainData.SelectedIndex != -1 && lastfocusedDG == dgMainData)
                 {
+
+                    DataTable tempDataTable = CourseLogic.getInstance().getAll();
+
                     int selectedIndex = Convert.ToInt32(tempDataTable.Rows[dgMainData.SelectedIndex]["CourseNr"]);
                     CourseLogic.getInstance().delete(selectedIndex);
+                    refreshCourses();
+
+
                 }
-                catch (Exception err)
+                else
                 {
-                    throw new Exception(err.Message);
+                    if (dgSecondary.SelectedIndex != -1 && cbCourse.Text == "Termine")
+                    {
+                        deleteAppointment();
+
+                    }
+                    else if (dgSecondary.SelectedIndex != -1 && dgMainData.SelectedIndex != -1 && cbCourse.Text == "Teilnehmer")
+                    {
+                        int index = dgMainData.SelectedIndex;
+                        int person = Convert.ToInt16(((DataRowView)dgSecondary.SelectedItem)["Id"]);
+                        int course = Convert.ToInt16(((DataRowView)dgMainData.SelectedItem)["CourseNr"]);
+                        PaymentLogic.getInstance().delete(course, person);
+                        SpecificTables.changeDgCourse(dgMainData, CourseLogic.getInstance().getAll());
+                        dgMainData.SelectedIndex = index;
+                        SpecificTables.changeDgStudent(dgSecondary, StudentLogic.getInstance().getByCourse(course));
+                    }
+
                 }
-                refreshCourses();
             }
-            else
+            catch (Exception err)
             {
-                if (dgSecondary.SelectedIndex != -1 && cbCourse.Text == "Termine")
-                {
-                    deleteAppointment();
-
-                }
-                else if (dgSecondary.SelectedIndex != -1 && dgMainData.SelectedIndex != -1 && cbCourse.Text == "Teilnehmer")
-                {
-                    int index = dgMainData.SelectedIndex;
-                    int person = Convert.ToInt16(((DataRowView)dgSecondary.SelectedItem)["Id"]);
-                    int course = Convert.ToInt16(((DataRowView)dgMainData.SelectedItem)["CourseNr"]);
-                    PaymentLogic.getInstance().delete(course, person);
-                    SpecificTables.changeDgCourse(dgMainData, CourseLogic.getInstance().getAll());
-                    dgMainData.SelectedIndex = index;
-                    SpecificTables.changeDgStudent(dgSecondary, StudentLogic.getInstance().getByCourse(course));
-                }
-
+                System.Windows.MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
             }
         }
         #endregion
@@ -274,45 +287,56 @@ namespace CourseManagement.Client.View
         /// <param name="e"></param>
         private void ribbonGallery_SelectionChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            Mouse.Capture(cbxPersons);                                          //workaround for buggy combobox-selection in windows-ribbon.
-            switch (this.cbxPersons.Text)
+            try
             {
-                case "Alle Personen":
-                    SpecificTables.changeDgPerson(dgMainData, PersonLogic.getInstance().getAll());
-                    break;
-                case "Tutoren":
-                    SpecificTables.changeDgTutor(dgMainData, TutorLogic.getInstance().getAll());
-                    break;
-                case "Studenten":
-                    SpecificTables.changeDgStudent(dgMainData, StudentLogic.getInstance().getAll());
-                    break;
-                case "Benutzer":
-                    SpecificTables.changeDgUser(dgMainData, UserLogic.getInstance().getAll());
-                    break;
-                    
+                Mouse.Capture(cbxPersons);                                          //workaround for buggy combobox-selection in windows-ribbon.
+                switch (this.cbxPersons.Text)
+                {
+                    case "Alle Personen":
+                        SpecificTables.changeDgPerson(dgMainData, PersonLogic.getInstance().getAll());
+                        break;
+                    case "Tutoren":
+                        SpecificTables.changeDgTutor(dgMainData, TutorLogic.getInstance().getAll());
+                        break;
+                    case "Studenten":
+                        SpecificTables.changeDgStudent(dgMainData, StudentLogic.getInstance().getAll());
+                        break;
+                    case "Benutzer":
+                        SpecificTables.changeDgUser(dgMainData, UserLogic.getInstance().getAll());
+                        break;
+
+                }
+                Mouse.Capture(null);                                                //workaround for buggy combobox-selection in windows-ribbon.
             }
-            Mouse.Capture(null);                                                //workaround for buggy combobox-selection in windows-ribbon.
-          
+            catch (Exception err)
+            {
+                System.Windows.MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
+            }
         }
 
         private void ribbonButtonDeletePerson_Click(object sender, RoutedEventArgs e)
         {
-
-            if (dgSecondary.SelectedItems.Count == 1 && dgMainData.SelectedItems.Count == 1 && lastfocusedDG==dgSecondary)
+            try
             {
-                int courseNr = Convert.ToInt32(((DataRowView)dgSecondary.SelectedItem)["CourseNr"]);
-                int studentNr = Convert.ToInt32(((DataRowView)dgMainData.SelectedItem)["Id"]);
-                PaymentLogic.getInstance().delete(courseNr, studentNr);
-                SpecificTables.changeDgCourse(dgSecondary, CourseLogic.getInstance().getByPerson(studentNr));
-            }
+                if (dgSecondary.SelectedItems.Count == 1 && dgMainData.SelectedItems.Count == 1 && lastfocusedDG == dgSecondary)
+                {
+                    int courseNr = Convert.ToInt32(((DataRowView)dgSecondary.SelectedItem)["CourseNr"]);
+                    int studentNr = Convert.ToInt32(((DataRowView)dgMainData.SelectedItem)["Id"]);
+                    PaymentLogic.getInstance().delete(courseNr, studentNr);
+                    SpecificTables.changeDgCourse(dgSecondary, CourseLogic.getInstance().getByPerson(studentNr));
+                }
 
-            else if (dgMainData.SelectedIndex != -1 && lastfocusedDG==dgMainData)
+                else if (dgMainData.SelectedIndex != -1 && lastfocusedDG == dgMainData)
+                {
+                    int id = Convert.ToInt32(((DataRowView)dgMainData.SelectedItem)["Id"]);
+                    PersonLogic.getInstance().delete(id);
+                    ribbonGallery_SelectionChanged(null, null);
+                }
+            }
+            catch (Exception err)
             {
-                int id = Convert.ToInt32(((DataRowView)dgMainData.SelectedItem)["Id"]);
-                PersonLogic.getInstance().delete(id);
-                ribbonGallery_SelectionChanged(null, null);
+                System.Windows.MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
             }
-
 
         }
 
@@ -321,11 +345,11 @@ namespace CourseManagement.Client.View
             int personID = -1;
             DataTable selectedPerson = null;
             int kindOfPerson = 0;
-
-            if (dgMainData.SelectedIndex != -1)
+            try
             {
-                try
+                if (dgMainData.SelectedIndex != -1)
                 {
+
                     if (this.IsLoaded)
                     {
                         DataRowView selectedPersonRow = (DataRowView)dgMainData.SelectedItems[0];
@@ -357,12 +381,14 @@ namespace CourseManagement.Client.View
                         editPerson.ShowDialog();
                     }
                 }
-                catch (Exception err)
-                {
-                    System.Windows.MessageBox.Show(err.ToString());
-                }
+
+
+                refreshPersons();
             }
-            refreshPersons();
+            catch (Exception err)
+            {
+                System.Windows.MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
+            }
         }
 
         #endregion
@@ -379,38 +405,47 @@ namespace CourseManagement.Client.View
 
         private void ribbonButtonDeleteRoom_Click(object sender, RoutedEventArgs e)
         {
-            //ToDo: method stub for deleting room
+            try
+            {
 
-            if (dgMainData.SelectedItems.Count == 1)
-            {
-                DataRowView selectedRoomRow = (DataRowView)dgMainData.SelectedItems[0];
-                RoomLogic.getInstance().delete(Convert.ToInt32(selectedRoomRow["roomNr"]));
-                refreshRooms();
+                if (dgMainData.SelectedItems.Count == 1)
+                {
+                    DataRowView selectedRoomRow = (DataRowView)dgMainData.SelectedItems[0];
+                    RoomLogic.getInstance().delete(Convert.ToInt32(selectedRoomRow["roomNr"]));
+                    refreshRooms();
+                }
+                if (dgSecondary.SelectedIndex != -1)
+                {
+                    deleteAppointment();
+                }
             }
-            if (dgSecondary.SelectedIndex != -1)
+            catch (Exception err)
             {
-                deleteAppointment();
+                System.Windows.MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
             }
         }
 
         private void ribbonButtonEditRoom_Click(object sender, RoutedEventArgs e)
         {
-            if (dgMainData.SelectedIndex != -1)
+            try
             {
-                try
+                if (dgMainData.SelectedIndex != -1)
                 {
+
                     DataRowView selectedRoomRow = (DataRowView)dgMainData.SelectedItems[0];
                     int selectedIndex = Convert.ToInt32((selectedRoomRow["roomNr"]));
                     DataTable selectedRoom = RoomLogic.getInstance().getById(selectedIndex);
                     WndNewRoom editCourse = new WndNewRoom(selectedRoom);
                     editCourse.ShowDialog();
                 }
-                catch (Exception err)
-                {
-                    System.Windows.MessageBox.Show(err.ToString());
-                }
+
+
+                refreshRooms();
             }
-            refreshRooms();
+            catch (Exception err)
+            {
+                System.Windows.MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
+            }
         }
 
         #endregion
@@ -424,41 +459,54 @@ namespace CourseManagement.Client.View
         /// <param name="e"></param>
         private void ribbonButtonNewPayment_Click(object sender, RoutedEventArgs e)
         {
-            if (dgSecondary.SelectedItems.Count == 1)
+            try
             {
-                DataRowView selectedRow = (DataRowView)dgSecondary.SelectedItems[0];
-                PaymentLogic.getInstance().changeProperties(Convert.ToInt32(selectedRow["Id"]), true);
-
-                if (dgMainData.SelectedItems.Count == 1)
+                if (dgSecondary.SelectedItems.Count == 1)
                 {
-                    DataRowView selectedStudentRow = (DataRowView)dgMainData.SelectedItems[0];
-                    SpecificTables.changeDgPayment(dgSecondary, PaymentLogic.getInstance().getByStudent(Convert.ToInt32(row["Id"])));
-                    row = (DataRowView)dgMainData.SelectedItems[0];
-                    choosenCourseNr = Convert.ToInt32(row["Id"]);
-                    lblStudentName.Content = "Saldo von " + row["Forename"] + " " + row["Surname"] + ":";
-                    lblStudentHasToPay.Content = PaymentLogic.getInstance().getStudentBalance(choosenCourseNr).ToString();
+                    DataRowView selectedRow = (DataRowView)dgSecondary.SelectedItems[0];
+                    PaymentLogic.getInstance().changeProperties(Convert.ToInt32(selectedRow["Id"]), true);
+
+                    if (dgMainData.SelectedItems.Count == 1)
+                    {
+                        DataRowView selectedStudentRow = (DataRowView)dgMainData.SelectedItems[0];
+                        SpecificTables.changeDgPayment(dgSecondary, PaymentLogic.getInstance().getByStudent(Convert.ToInt32(row["Id"])));
+                        row = (DataRowView)dgMainData.SelectedItems[0];
+                        choosenCourseNr = Convert.ToInt32(row["Id"]);
+                        lblStudentName.Content = "Saldo von " + row["Forename"] + " " + row["Surname"] + ":";
+                        lblStudentHasToPay.Content = PaymentLogic.getInstance().getStudentBalance(choosenCourseNr).ToString();
+                    }
                 }
+            }
+            catch (Exception err)
+            {
+                System.Windows.MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
             }
         }
 
 
         private void rbnButtonUnbookPayment_Click(object sender, RoutedEventArgs e)
         {
-
-            if (dgSecondary.SelectedItems.Count == 1)
+            try
             {
-                DataRowView selectedRow = (DataRowView)dgSecondary.SelectedItems[0];
-                PaymentLogic.getInstance().changeProperties(Convert.ToInt32(selectedRow["Id"]), false);
-
-                if (dgMainData.SelectedItems.Count == 1)
+                if (dgSecondary.SelectedItems.Count == 1)
                 {
-                    DataRowView selectedStudentRow = (DataRowView)dgMainData.SelectedItems[0];
-                    SpecificTables.changeDgPayment(dgSecondary, PaymentLogic.getInstance().getByStudent(Convert.ToInt32(row["Id"])));
-                    row = (DataRowView)dgMainData.SelectedItems[0];
-                    choosenCourseNr = Convert.ToInt32(row["Id"]);
-                    lblStudentName.Content = "Saldo von " + row["Forename"] + " " + row["Surname"] + ":";
-                    lblStudentHasToPay.Content = PaymentLogic.getInstance().getStudentBalance(choosenCourseNr).ToString();
+                    DataRowView selectedRow = (DataRowView)dgSecondary.SelectedItems[0];
+                    PaymentLogic.getInstance().changeProperties(Convert.ToInt32(selectedRow["Id"]), false);
+
+                    if (dgMainData.SelectedItems.Count == 1)
+                    {
+                        DataRowView selectedStudentRow = (DataRowView)dgMainData.SelectedItems[0];
+                        SpecificTables.changeDgPayment(dgSecondary, PaymentLogic.getInstance().getByStudent(Convert.ToInt32(row["Id"])));
+                        row = (DataRowView)dgMainData.SelectedItems[0];
+                        choosenCourseNr = Convert.ToInt32(row["Id"]);
+                        lblStudentName.Content = "Saldo von " + row["Forename"] + " " + row["Surname"] + ":";
+                        lblStudentHasToPay.Content = PaymentLogic.getInstance().getStudentBalance(choosenCourseNr).ToString();
+                    }
                 }
+            }
+            catch (Exception err)
+            {
+                System.Windows.MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
             }
         }
 
@@ -466,39 +514,45 @@ namespace CourseManagement.Client.View
 
         private void ribbon_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
-            if (this.IsLoaded)
+            try
             {
-                switch (mainRibbon.SelectedIndex)
+                if (this.IsLoaded)
                 {
-                    case 0:
-                        this.lblStudentHasToPay.Content = "";
-                        this.lblStudentName.Content = "";
-                        refreshCourses();
-                        refreshAppointments();
-                        break;
-                    case 1:
-                        this.lblStudentHasToPay.Content = "";
-                        this.lblStudentName.Content = "";
-                        refreshPersons();
-                        break;
-                    case 2:
-                        this.lblStudentHasToPay.Content = "";
-                        this.lblStudentName.Content = "";
-                        refreshRooms();
-                        break;
-                    case 3:
-                        refreshPayments();
-                        break;
-                    default:
-                        dgMainData.DataContext = null;
-                        break;
-                }
+                    switch (mainRibbon.SelectedIndex)
+                    {
+                        case 0:
+                            this.lblStudentHasToPay.Content = "";
+                            this.lblStudentName.Content = "";
+                            refreshCourses();
+                            refreshAppointments();
+                            break;
+                        case 1:
+                            this.lblStudentHasToPay.Content = "";
+                            this.lblStudentName.Content = "";
+                            refreshPersons();
+                            break;
+                        case 2:
+                            this.lblStudentHasToPay.Content = "";
+                            this.lblStudentName.Content = "";
+                            refreshRooms();
+                            break;
+                        case 3:
+                            refreshPayments();
+                            break;
+                        default:
+                            dgMainData.DataContext = null;
+                            break;
+                    }
 
-                pgValue.SelectedValue = "Kurse";
-                rgValue.SelectedValue = "Studenten";
-                rgCourse.SelectedValue = "Termine";
-                
+                    pgValue.SelectedValue = "Kurse";
+                    rgValue.SelectedValue = "Studenten";
+                    rgCourse.SelectedValue = "Termine";
+                }
+            }
+
+            catch (Exception err)
+            {
+                MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
             }
         }
 
@@ -509,8 +563,15 @@ namespace CourseManagement.Client.View
 
         private void refreshCourses()
         {
-            SpecificTables.changeDgCourse(dgMainData, CourseLogic.getInstance().getAll());
-            //2write a better version
+            try
+            {
+                SpecificTables.changeDgCourse(dgMainData, CourseLogic.getInstance().getAll());
+            }
+            catch (Exception err)
+            {
+                throw new Exception(err.Message);
+            }
+
             lblHeadline.Content = "Kursübersicht";
             spAppointments.Height = spAppointmentsHeight;
         
@@ -522,62 +583,79 @@ namespace CourseManagement.Client.View
 
         private void refreshPersons()
         {
-            SpecificTables.changeDgStudent(dgMainData, StudentLogic.getInstance().getAll());
-            SpecificTables.changeDgCourse(dgSecondary,CourseLogic.getInstance().getAll());
-            lblHeadline.Content = "Personenübersicht";
-            cbValues.Items.Clear();
-            cbValues.Items.Add(new RibbonGalleryItem() { Content = "Studenten", Foreground = Brushes.Red });
-            cbValues.Items.Add(new RibbonGalleryItem() { Content = "Tutoren", Foreground = Brushes.Green });
-            if (ActiveUser.userIsAdmin()) cbValues.Items.Add(new RibbonGalleryItem() { Content = "Benutzer", Foreground = Brushes.Orange });
-            cbValues.Items.Add(new RibbonGalleryItem() { Content = "Alle Personen", Foreground = Brushes.Blue });
-            spAppointments.Height = 0;
-           
-            lblAppointmentToCourse.Content = "Gebuchte Kurse";
+            try
+            {
+                SpecificTables.changeDgStudent(dgMainData, StudentLogic.getInstance().getAll());
+                SpecificTables.changeDgCourse(dgSecondary, CourseLogic.getInstance().getAll());
+                lblHeadline.Content = "Personenübersicht";
+                cbValues.Items.Clear();
+                cbValues.Items.Add(new RibbonGalleryItem() { Content = "Studenten", Foreground = Brushes.Red });
+                cbValues.Items.Add(new RibbonGalleryItem() { Content = "Tutoren", Foreground = Brushes.Green });
+                if (ActiveUser.userIsAdmin()) cbValues.Items.Add(new RibbonGalleryItem() { Content = "Benutzer", Foreground = Brushes.Orange });
+                cbValues.Items.Add(new RibbonGalleryItem() { Content = "Alle Personen", Foreground = Brushes.Blue });
+                spAppointments.Height = 0;
 
-            dgMainData.Height = dgSecondary.Height = dataGridHeight + 55;
+                lblAppointmentToCourse.Content = "Gebuchte Kurse";
+
+                dgMainData.Height = dgSecondary.Height = dataGridHeight + 55;
+            }
+            catch (Exception err)
+            {
+                throw new Exception(err.Message);
+            }
         }
 
 
         private void refreshRooms()
         {
-            SpecificTables.changeDgRoom(dgMainData, RoomLogic.getInstance().getAll());
-            lblHeadline.Content = "Raumübersicht";
-            spAppointments.Height = 0;
-            dgMainData.Height = dgSecondary.Height = dataGridHeight + 55;
+            try
+            {
+                SpecificTables.changeDgRoom(dgMainData, RoomLogic.getInstance().getAll());
+                lblHeadline.Content = "Raumübersicht";
+                spAppointments.Height = 0;
+                dgMainData.Height = dgSecondary.Height = dataGridHeight + 55;
+            }
+            catch (Exception err)
+            {
+                throw new Exception(err.Message);
+            }
         }
 
 
         private void refreshPayments()
         {
-            SpecificTables.changeDgCourse(dgMainData, CourseLogic.getInstance().getAll());
-            SpecificTables.changeDgPayment(dgSecondary, PaymentLogic.getInstance().getAll());
-            lblHeadline.Content = "Zahlungsübersicht";
-            spAppointments.Height = 0;
-            cbPaymentGroupsValues.Items.Clear();
-            cbPaymentGroupsValues.Items.Add(new RibbonGalleryItem() { Content = "Kurse", Foreground = Brushes.Blue });
-            cbPaymentGroupsValues.Items.Add(new RibbonGalleryItem() { Content = "Studenten", Foreground = Brushes.Green });
-            dgMainData.Height = dgSecondary.Height = dataGridHeight + 55;
+            try
+            {
+                SpecificTables.changeDgCourse(dgMainData, CourseLogic.getInstance().getAll());
+                SpecificTables.changeDgPayment(dgSecondary, PaymentLogic.getInstance().getAll());
+                lblHeadline.Content = "Zahlungsübersicht";
+                spAppointments.Height = 0;
+                cbPaymentGroupsValues.Items.Clear();
+                cbPaymentGroupsValues.Items.Add(new RibbonGalleryItem() { Content = "Kurse", Foreground = Brushes.Blue });
+                cbPaymentGroupsValues.Items.Add(new RibbonGalleryItem() { Content = "Studenten", Foreground = Brushes.Green });
+                dgMainData.Height = dgSecondary.Height = dataGridHeight + 55;
+            }
+            catch (Exception err)
+            {
+                throw new Exception(err.Message);
+            }
         }
 
 
         private void refreshAppointments()
         {
-            SpecificTables.changeDgAppointment(dgSecondary, AppointmentLogic.getInstance().getAll());
-        }
-
-
-        /// <summary>
-        /// Runs every refreshDatagrid
-        /// Should't be needed anymore
-        /// </summary>
-        /// <param name=""></param>
-        private void refreshDataGrids()
-        {
-            if (this.IsLoaded)
+            try
             {
-                refreshCourses();
+                SpecificTables.changeDgAppointment(dgSecondary, AppointmentLogic.getInstance().getAll());
+            }
+            catch (Exception err)
+            {
+                throw new Exception(err.Message);
             }
         }
+
+
+     
 
         #endregion
 
@@ -631,7 +709,7 @@ namespace CourseManagement.Client.View
             }
             catch (System.Exception err)
             {
-                System.Windows.MessageBox.Show(err.ToString());
+                throw new Exception(err.Message);
             }
         }
 
@@ -673,9 +751,9 @@ namespace CourseManagement.Client.View
                         break;
                 }
             }
-            catch
+            catch (Exception err)
             {
-                MessageBox.Show("Verbindungs- oder Datenbankfehler");
+                MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
             }
         }
 
@@ -687,12 +765,13 @@ namespace CourseManagement.Client.View
             {
                 DataRowView selectedRow = (DataRowView)dgSecondary.SelectedItems[0];
                 AppointmentLogic.getInstance().delete(Convert.ToInt32(selectedRow["Id"]));
+                refreshAppointments();
             }
             catch (Exception err)
             {
                 throw new Exception(err.Message);
             }
-            refreshAppointments();
+            
             }
         }
 
@@ -704,87 +783,89 @@ namespace CourseManagement.Client.View
         /// <param name="e"></param>
         private void buttonAddAppointment_Click(object sender, RoutedEventArgs e)
         {
-            int chosenCourseID = 0;
-            DateTime chosenStartDate = DateTime.MinValue;
-            DateTime chosenEndDate = DateTime.MinValue;
-            int chosenRoomNr = 0;
-            
-            
-            if (dgMainData.SelectedItems.Count == 1)
+            try
             {
-                try
+                int chosenCourseID = 0;
+                DateTime chosenStartDate = DateTime.MinValue;
+                DateTime chosenEndDate = DateTime.MinValue;
+                int chosenRoomNr = 0;
+
+
+                if (dgMainData.SelectedItems.Count == 1)
                 {
+
                     chosenCourseID = choosenCourseNr;
-                }
-                catch (Exception error)
-                {
-                    System.Windows.MessageBox.Show(error.ToString());
-                }
-            }
-            else
-            {
-                lblInfo.Content = "Bitten oben erst einen Kurs auswählen";
-                lblInfo.Visibility = Visibility.Visible;
-            }
 
-            
-            if (this.dpBeginOfCourse.Text != null)
-            {
-                chosenStartDate = (DateTime)this.dpBeginOfCourse.Value.Value;
-                lblBeginnDateNotFilled.Visibility = Visibility.Hidden;
-            }
-            else
-            {
-                lblBeginnDateNotFilled.Visibility = Visibility.Visible;
-            }
-
-
-            
-            if(dpEndOfAppointCourse.Text != null)
-            {
-                chosenEndDate = (DateTime)dpEndOfAppointCourse.Value.Value;
-                lblEndDateNotFilled.Visibility = Visibility.Hidden;
-            }
-            else
-            {
-                lblEndDateNotFilled.Visibility = Visibility.Visible;
-            }
-
-            
-            if (this.cbxAppointmentRoomNumber.SelectedItem != null)
-            {
-                
-                chosenRoomNr = Convert.ToInt32(((ComboBoxItem)cbxAppointmentRoomNumber.SelectedItem).Content);
-                lblRoomNrNotFilled.Visibility = Visibility.Hidden;
-            }
-            else
-            {
-                lblRoomNrNotFilled.Visibility = Visibility.Visible;
-            }
-
-            if (dgMainData.SelectedItems.Count > 0
-                && dpBeginOfCourse.Value.Value != null 
-                && dpEndOfAppointCourse.Value.Value != null 
-                && cbxAppointmentRoomNumber.SelectedItem != null
-                && (DateTime)dpBeginOfCourse.Value.Value < (DateTime)dpEndOfAppointCourse.Value.Value)
-            {
-                if (AppointmentLogic.getInstance().isPossibleNewAppointment(chosenCourseID, chosenRoomNr, chosenStartDate, chosenEndDate))
-                {
-                    AppointmentLogic.getInstance().create(chosenCourseID, chosenRoomNr, chosenStartDate, chosenEndDate);
-                    lblInfo.Visibility = Visibility.Hidden;
                 }
                 else
                 {
+                    lblInfo.Content = "Bitten oben erst einen Kurs auswählen";
                     lblInfo.Visibility = Visibility.Visible;
-                    lblInfo.Content = "Termin nicht möglich";  
                 }
 
-                
-                SpecificTables.changeDgAppointment(dgSecondary, AppointmentLogic.getInstance().getByCourse(choosenCourseNr));
-                //hiding the error labels again
-                lblBeginnDateNotFilled.Visibility = Visibility.Hidden;
-                lblEndDateNotFilled.Visibility = Visibility.Hidden;
-                lblRoomNrNotFilled.Visibility = Visibility.Hidden;
+
+                if (this.dpBeginOfCourse.Text != null)
+                {
+                    chosenStartDate = (DateTime)this.dpBeginOfCourse.Value.Value;
+                    lblBeginnDateNotFilled.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    lblBeginnDateNotFilled.Visibility = Visibility.Visible;
+                }
+
+
+
+                if (dpEndOfAppointCourse.Text != null)
+                {
+                    chosenEndDate = (DateTime)dpEndOfAppointCourse.Value.Value;
+                    lblEndDateNotFilled.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    lblEndDateNotFilled.Visibility = Visibility.Visible;
+                }
+
+
+                if (this.cbxAppointmentRoomNumber.SelectedItem != null)
+                {
+
+                    chosenRoomNr = Convert.ToInt32(((ComboBoxItem)cbxAppointmentRoomNumber.SelectedItem).Content);
+                    lblRoomNrNotFilled.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    lblRoomNrNotFilled.Visibility = Visibility.Visible;
+                }
+
+                if (dgMainData.SelectedItems.Count > 0
+                    && dpBeginOfCourse.Value.Value != null
+                    && dpEndOfAppointCourse.Value.Value != null
+                    && cbxAppointmentRoomNumber.SelectedItem != null
+                    && (DateTime)dpBeginOfCourse.Value.Value < (DateTime)dpEndOfAppointCourse.Value.Value)
+                {
+                    if (AppointmentLogic.getInstance().isPossibleNewAppointment(chosenCourseID, chosenRoomNr, chosenStartDate, chosenEndDate))
+                    {
+                        AppointmentLogic.getInstance().create(chosenCourseID, chosenRoomNr, chosenStartDate, chosenEndDate);
+                        lblInfo.Visibility = Visibility.Hidden;
+                    }
+                    else
+                    {
+                        lblInfo.Visibility = Visibility.Visible;
+                        lblInfo.Content = "Termin nicht möglich";
+                    }
+
+
+                    SpecificTables.changeDgAppointment(dgSecondary, AppointmentLogic.getInstance().getByCourse(choosenCourseNr));
+                    //hiding the error labels again
+                    lblBeginnDateNotFilled.Visibility = Visibility.Hidden;
+                    lblEndDateNotFilled.Visibility = Visibility.Hidden;
+                    lblRoomNrNotFilled.Visibility = Visibility.Hidden;
+                }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
             }
         }
 
@@ -806,10 +887,9 @@ namespace CourseManagement.Client.View
                     cbxAppointmentRoomNumber.Items.Add(aComboBoxItem);
                 }
             }
-            catch (System.Exception err)
+            catch (Exception err)
             {
-
-                MessageBox.Show(err.ToString());
+                throw new Exception(err.Message);
             }
         }
 
@@ -826,38 +906,44 @@ namespace CourseManagement.Client.View
         /// <param name="e"></param>
         private void textBoxSearch_Changed(object sender, TextChangedEventArgs e)
         {
-
-            switch (mainRibbon.SelectedIndex)
+            try
             {
-                case 0:
-                    SpecificTables.changeDgCourse(dgMainData, CourseLogic.getInstance().search(tbSearch.Text));
-                    break;
-                case 1:
-                    switch (this.cbxPersons.Text)
-                    {
-                        case "Alle Personen":
-                            SpecificTables.changeDgPerson(dgMainData, PersonLogic.getInstance().search(tbSearch.Text));
-                            break;
-                        case "Tutoren":
-                            SpecificTables.changeDgTutor(dgMainData, TutorLogic.getInstance().search(tbSearch.Text));
-                            break;
-                        case "Studenten":
-                            SpecificTables.changeDgStudent(dgMainData, StudentLogic.getInstance().search(tbSearch.Text));
-                            break;
-                        case "Benutzer":
-                            SpecificTables.changeDgUser(dgMainData, UserLogic.getInstance().search(tbSearch.Text));
-                            break;
-                    }
-                    break;
-                case 2:
-                    SpecificTables.changeDgRoom(dgMainData, RoomLogic.getInstance().search(tbSearch.Text));
-                    break;
-                case 3:
-                    SpecificTables.changeDgStudent(dgMainData, StudentLogic.getInstance().search(tbSearch.Text));
-                    break;
-                default:
-                    dgMainData.DataContext = null;
-                    break;
+                switch (mainRibbon.SelectedIndex)
+                {
+                    case 0:
+                        SpecificTables.changeDgCourse(dgMainData, CourseLogic.getInstance().search(tbSearch.Text));
+                        break;
+                    case 1:
+                        switch (this.cbxPersons.Text)
+                        {
+                            case "Alle Personen":
+                                SpecificTables.changeDgPerson(dgMainData, PersonLogic.getInstance().search(tbSearch.Text));
+                                break;
+                            case "Tutoren":
+                                SpecificTables.changeDgTutor(dgMainData, TutorLogic.getInstance().search(tbSearch.Text));
+                                break;
+                            case "Studenten":
+                                SpecificTables.changeDgStudent(dgMainData, StudentLogic.getInstance().search(tbSearch.Text));
+                                break;
+                            case "Benutzer":
+                                SpecificTables.changeDgUser(dgMainData, UserLogic.getInstance().search(tbSearch.Text));
+                                break;
+                        }
+                        break;
+                    case 2:
+                        SpecificTables.changeDgRoom(dgMainData, RoomLogic.getInstance().search(tbSearch.Text));
+                        break;
+                    case 3:
+                        SpecificTables.changeDgStudent(dgMainData, StudentLogic.getInstance().search(tbSearch.Text));
+                        break;
+                    default:
+                        dgMainData.DataContext = null;
+                        break;
+                }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
             }
         }
 
@@ -886,20 +972,27 @@ namespace CourseManagement.Client.View
 
         private void pgValue_SelectionChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            Mouse.Capture(cbxPaymentGroups);                                            //workaround for buggy combobox-selection in windows-ribbon.
-            if (cbxPaymentGroups.Text == "Studenten")
+            try
             {
-                this.rbnButtonNewPayment.IsEnabled = true;
-                this.rbnButtonUnbookPayment.IsEnabled = true;
-                SpecificTables.changeDgStudent(dgMainData, StudentLogic.getInstance().getAll());
+                Mouse.Capture(cbxPaymentGroups);                                            //workaround for buggy combobox-selection in windows-ribbon.
+                if (cbxPaymentGroups.Text == "Studenten")
+                {
+                    this.rbnButtonNewPayment.IsEnabled = true;
+                    this.rbnButtonUnbookPayment.IsEnabled = true;
+                    SpecificTables.changeDgStudent(dgMainData, StudentLogic.getInstance().getAll());
+                }
+                if (cbxPaymentGroups.Text == "Kurse")
+                {
+                    this.rbnButtonNewPayment.IsEnabled = false;
+                    this.rbnButtonUnbookPayment.IsEnabled = false;
+                    SpecificTables.changeDgCourse(dgMainData, CourseLogic.getInstance().getAll());
+                }
+                Mouse.Capture(null);                                                         //workaround for buggy combobox-selection in windows-ribbon.
             }
-            if (cbxPaymentGroups.Text == "Kurse")
+            catch (Exception err)
             {
-                this.rbnButtonNewPayment.IsEnabled = false;
-                this.rbnButtonUnbookPayment.IsEnabled = false;
-                SpecificTables.changeDgCourse(dgMainData, CourseLogic.getInstance().getAll());
+                MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
             }
-            Mouse.Capture(null);                                                         //workaround for buggy combobox-selection in windows-ribbon.
         }
 
         /// <summary>
@@ -922,46 +1015,53 @@ namespace CourseManagement.Client.View
 
         private void cbCourse_SelectionChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            Mouse.Capture(cbCourse);
-            if (cbCourse.Text == "Termine")
+            try
             {
-                dgMainData.Height = dgSecondary.Height = dataGridHeight;
-                spAppointments.Height = spAppointmentsHeight;
-                if (dgMainData.SelectedItems.Count == 1)
+                Mouse.Capture(cbCourse);
+                if (cbCourse.Text == "Termine")
                 {
-                    int auswahl = Convert.ToInt16(((DataRowView)dgMainData.SelectedItems[0])["CourseNr"]);
-                    SpecificTables.changeDgAppointment(dgSecondary, AppointmentLogic.getInstance().getByCourse(auswahl));
-                    lblAppointmentToCourse.Content = "Teilnehmer zu Kurs " + auswahl;
+                    dgMainData.Height = dgSecondary.Height = dataGridHeight;
+                    spAppointments.Height = spAppointmentsHeight;
+                    if (dgMainData.SelectedItems.Count == 1)
+                    {
+                        int auswahl = Convert.ToInt16(((DataRowView)dgMainData.SelectedItems[0])["CourseNr"]);
+                        SpecificTables.changeDgAppointment(dgSecondary, AppointmentLogic.getInstance().getByCourse(auswahl));
+                        lblAppointmentToCourse.Content = "Teilnehmer zu Kurs " + auswahl;
+                    }
+                    else
+                    {
+                        SpecificTables.changeDgAppointment(dgSecondary, AppointmentLogic.getInstance().getAll());
+                        lblAppointmentToCourse.Content = "Termine";
+                    }
+
                 }
-                else
+                else if (cbCourse.Text == "Teilnehmer")
                 {
-                    SpecificTables.changeDgAppointment(dgSecondary, AppointmentLogic.getInstance().getAll());
-                    lblAppointmentToCourse.Content = "Termine";
-                }
-                
-            }
-            else if (cbCourse.Text == "Teilnehmer" )
-            {
-                dgMainData.Height = dgSecondary.Height = dataGridHeight + 55;
-                spAppointments.Height = 0;
-                if (dgMainData.SelectedItems.Count == 1)
-                {
-                    int auswahl = Convert.ToInt16(((DataRowView)dgMainData.SelectedItems[0])["CourseNr"]);
-                    SpecificTables.changeDgStudent(dgSecondary, StudentLogic.getInstance().getByCourse(auswahl));
-                    lblAppointmentToCourse.Content = "Teilnehmer zu Kurs " + auswahl;
-                }
-                else
-                {
-                    //empty Grid
-                    SpecificTables.changeDgStudent(dgSecondary, StudentLogic.getInstance().getAll());
-                    lblAppointmentToCourse.Content = "Teilnehmer";
+                    dgMainData.Height = dgSecondary.Height = dataGridHeight + 55;
+                    spAppointments.Height = 0;
+                    if (dgMainData.SelectedItems.Count == 1)
+                    {
+                        int auswahl = Convert.ToInt16(((DataRowView)dgMainData.SelectedItems[0])["CourseNr"]);
+                        SpecificTables.changeDgStudent(dgSecondary, StudentLogic.getInstance().getByCourse(auswahl));
+                        lblAppointmentToCourse.Content = "Teilnehmer zu Kurs " + auswahl;
+                    }
+                    else
+                    {
+                        //empty Grid
+                        SpecificTables.changeDgStudent(dgSecondary, StudentLogic.getInstance().getAll());
+                        lblAppointmentToCourse.Content = "Teilnehmer";
+                    }
+
+
+
                 }
 
-            
-                
+                Mouse.Capture(null);
             }
-            
-            Mouse.Capture(null);
+            catch (Exception err)
+            {
+                MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
+            }
         }
 
         private void changePsw_Click(object sender, RoutedEventArgs e)
