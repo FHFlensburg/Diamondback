@@ -57,6 +57,14 @@ namespace CourseManagement.Client.View
             tbDescription.Text = selectedCourse.Rows[0]["Description"].ToString();
 
             tbValidInMonth.Text = selectedCourse.Rows[0]["ValidityInMonth"].ToString();
+
+            foreach (ComboBoxItem cbItem in cbTutor.Items)
+            {
+                if(selectedCourse.Rows[0]["Tutor"].ToString()==cbItem.Content.ToString())
+                {
+                    cbTutor.SelectedItem = cbItem;
+                }
+            }
         }
 
         private void setGuiValues()
@@ -69,7 +77,7 @@ namespace CourseManagement.Client.View
             foreach (DataRow aDataRow in allTutors.Rows)
             {
                 ComboBoxItem aComboBoxItem = new ComboBoxItem();
-                string name = aDataRow["Forename"].ToString() + " " + aDataRow["Surname"].ToString();
+                string name = aDataRow["Surname"].ToString() + ", " + aDataRow["Forename"].ToString();
                 aComboBoxItem.Content = name;
                 aComboBoxItem.Tag = aDataRow["Id"];
                 cbTutor.Items.Add(aComboBoxItem);

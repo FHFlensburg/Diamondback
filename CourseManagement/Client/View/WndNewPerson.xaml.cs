@@ -58,7 +58,7 @@ namespace CourseManagement.Client.View
 
             this.kindOfPerson = kindOfPerson;
             this.selectedPerson = selectedPerson;
-
+            //cbxRole.Items.
             fillingDataFieldsWithProvidedData();
 
             checkKindofPerson();
@@ -263,6 +263,7 @@ namespace CourseManagement.Client.View
                     }
                     break;
             }
+            cbxRole.IsEnabled = false;
         }
 
         private void fillingDataFieldsWithProvidedData()
@@ -282,7 +283,7 @@ namespace CourseManagement.Client.View
                 tbPhone.Text = selectedPerson.Rows[0]["privatePhone"].ToString();
                 tbGender.Text = selectedPerson.Rows[0]["gender"].ToString();
 
-                if (selectedPerson.Rows[0]["Active"].ToString() == "ja")
+                if (selectedPerson.Rows[0]["Active"].ToString() == "True")
                 {
                     chbxIsActive.IsChecked = true;
                 }

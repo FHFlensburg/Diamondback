@@ -1,7 +1,7 @@
 ﻿<Window x:Class="CourseManagement.Client.View.WndNewPayment"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="WndNewPayment" Height="345.775" Width="618.632">
+        Title="WndNewPayment" Height="345.775" Width="618.632" WindowStartupLocation="CenterScreen">
     <Grid>
         <Label x:Name="lblNewPayment" Content="Bezahlung" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <StackPanel Orientation="Horizontal" Margin="10,45" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">

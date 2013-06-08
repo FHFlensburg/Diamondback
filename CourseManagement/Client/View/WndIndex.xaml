@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"      
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:r="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
-        Height="700" Width="900" Activated="mainWindow_IsLoaded"  SizeChanged="mainWindow_SizeChanged" KeyDown="mainWindow_KeyDown" SizeToContent="Height" MinHeight="700"
+        Height="700" Width="900" WindowStartupLocation="CenterScreen" Activated="mainWindow_IsLoaded"  SizeChanged="mainWindow_SizeChanged" KeyDown="mainWindow_KeyDown" SizeToContent="Height" MinHeight="700"
         Icon="Images\Kursverwaltung.ico"
         Title="Kursverwaltung Version 1.0">
     <Grid>
@@ -39,6 +39,21 @@
                         </r:RibbonGroup>
                         <r:RibbonGroup x:Name="ribbonGroupCourseDelete" Header="Löschen">
                             <r:RibbonButton x:Name="rbnButtonDeleteCourse" LargeImageSource="Images\delete.ico" Label="Löschen" Click="ribbonButtonDeleteCourse_Click" KeyTip="D" ToolTip="Ausgewählten Eintrag löschen" />
+                        </r:RibbonGroup>
+                        <r:RibbonGroup Header="Auswahl">
+                            <r:RibbonTwoLineText Text="Termine/Teilnehmer"></r:RibbonTwoLineText>
+                            <r:RibbonComboBox Name="cbCourse"
+                                SelectionBoxWidth="80"
+                                VerticalAlignment="Center" 
+                                IsEditable="FALSE"
+                                ToolTip="Auswahl ob Termine oder Personen zum Kurs angezeigt werden.">
+                                <r:RibbonGallery Name="rgCourse" SelectedValue="Termine" SelectedValuePath="Content" MaxColumnCount="1" SelectionChanged="cbCourse_SelectionChanged">
+                                    <r:RibbonGalleryCategory >
+                                        <r:RibbonGalleryItem Content="Termine" Foreground="Blue"></r:RibbonGalleryItem>
+                                        <r:RibbonGalleryItem Content="Teilnehmer" Foreground="Green"></r:RibbonGalleryItem>
+                                    </r:RibbonGalleryCategory>
+                                </r:RibbonGallery>
+                            </r:RibbonComboBox>
                         </r:RibbonGroup>
                         <r:RibbonGroup x:Name="ribbonGroupCourseChange" Header="Bearbeiten">
                             <r:RibbonButton x:Name="rbnButtonChangeCourse" LargeImageSource="Images\change.ico" Label="Bearbeiten" Click="ribbonButtonEditCourse_Click" KeyTip="B" ToolTip="Bearbeitet ausgewählten Kurs"/>
@@ -157,13 +172,13 @@
                 </StackPanel>
                 <StackPanel Grid.Row="3" VerticalAlignment="Bottom">
                     <UniformGrid Rows="1" Margin="10,0,10,0">
-                        <Label x:Name="lblAppointmentToCourse" Content="Buchungen"  FontWeight="Bold"/>
+                        <Label x:Name="lblAppointmentToCourse" Content="Termine"  FontWeight="Bold"/>
                         <Label x:Name="lblStudentName"/>
                         <!-- deleted content so doku team can make Screenshots-->
                         <Label x:Name="lblStudentHasToPay" Content=""/>
-                        <Button x:Name="btnAllAppointments" Content="Alle Buchungen anzeigen" HorizontalAlignment="Right"  Click="btnAllAppointments_Click" Margin="5"/>
+                        <Button x:Name="btnAllAppointments" Content="Alle anzeigen" HorizontalAlignment="Right"  Click="btnAllAppointments_Click" Margin="5"/>
                     </UniformGrid>
-                    <DataGrid Height ="175" x:Name="dgAppointments" Margin="10" ItemsSource="{Binding}" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" IsSynchronizedWithCurrentItem="True" ColumnWidth="*"  GotFocus="dg_Selected"/>
+                    <DataGrid Height ="175" x:Name="dgSecondary" Margin="10" ItemsSource="{Binding}" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" IsSynchronizedWithCurrentItem="True" ColumnWidth="*"  GotFocus="dg_Selected"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

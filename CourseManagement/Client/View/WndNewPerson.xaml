@@ -40,8 +40,8 @@
                     <TextBox x:Name="tbPhone" Width="120"/>
                     <Label x:Name="lblGender" Content="Geschlecht"/>
                     <ComboBox x:Name="tbGender" Width="120">
-                        <ComboBoxItem x:Name="cbxiMale" Content="männlich"/>
-                        <ComboBoxItem x:Name="cbxiFemale" Content="weiblich"/>
+                        <ComboBoxItem x:Name="cbxiMale" Content="Mann"/>
+                        <ComboBoxItem x:Name="cbxiFemale" Content="Frau"/>
                     </ComboBox>
                 </StackPanel>
                 <StackPanel Margin="10">

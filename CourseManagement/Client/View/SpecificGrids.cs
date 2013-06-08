@@ -34,7 +34,8 @@ namespace CourseManagement.Client.View
             datagrid.DataContext = table;
            
             changeColumnTitles(datagrid);
- 
+
+            datagrid.Columns[datagrid.Columns.Count - 1].Width = new DataGridLength(1, DataGridLengthUnitType.Star);
         }
 
         /// <summary>
@@ -63,6 +64,8 @@ namespace CourseManagement.Client.View
             changeColumnTitles(datagrid);
 
             datagrid.Columns[18].Header = "Kurse";
+
+            datagrid.Columns[datagrid.Columns.Count - 1].Width = new DataGridLength(1, DataGridLengthUnitType.Star);
         }
 
         /// <summary>
@@ -91,6 +94,8 @@ namespace CourseManagement.Client.View
             datagrid.DataContext = table;
 
             changeColumnTitles(datagrid);
+
+            datagrid.Columns[datagrid.Columns.Count - 1].Width = new DataGridLength(1, DataGridLengthUnitType.Star);
         }
 
         /// <summary>
@@ -108,7 +113,8 @@ namespace CourseManagement.Client.View
             changeColumnTitles(datagrid);
 
             datagrid.Columns[0].Visibility = Visibility.Hidden;
-          
+
+            datagrid.Columns[datagrid.Columns.Count - 1].Width = new DataGridLength(1, DataGridLengthUnitType.Star);
         }
 
         /// <summary>
@@ -127,6 +133,8 @@ namespace CourseManagement.Client.View
 
             datagrid.Columns[8].Header = "Teilnehmer";
             datagrid.Columns[3].Visibility = Visibility.Hidden;
+
+            datagrid.Columns[datagrid.Columns.Count - 1].Width = new DataGridLength(1, DataGridLengthUnitType.Star);
         }
 
         /// <summary>
@@ -146,6 +154,8 @@ namespace CourseManagement.Client.View
             datagrid.DataContext = table;
 
             changeColumnTitles(datagrid);
+
+            datagrid.Columns[datagrid.Columns.Count - 1].Width = new DataGridLength(1, DataGridLengthUnitType.Star);
         }
 
         /// <summary>
@@ -161,6 +171,8 @@ namespace CourseManagement.Client.View
             changeColumnTitles(datagrid);
 
             datagrid.Columns[2].Visibility = Visibility.Hidden;
+
+            datagrid.Columns[datagrid.Columns.Count - 1].Width = new DataGridLength(1, DataGridLengthUnitType.Star);
         }
 
         /// <summary>
@@ -182,6 +194,8 @@ namespace CourseManagement.Client.View
             datagrid.DataContext = table;
 
             changeColumnTitles(datagrid);
+
+            datagrid.Columns[datagrid.Columns.Count - 1].Width = new DataGridLength(1, DataGridLengthUnitType.Star);
         }
 
         /// <summary>

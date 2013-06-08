@@ -87,13 +87,7 @@ namespace CourseManagement.Client.View
 
             roomNr = Convert.ToInt32(selectedRoom.Rows[0]["roomNr"]);
             tbCapacity.Text = selectedRoom.Rows[0]["capacity"].ToString();
-            foreach (ComboBoxItem aComboBoxItem in cbBuilding.Items)
-            {
-                if (aComboBoxItem.Content.ToString() == selectedRoom.Rows[0]["building"].ToString())
-                {
-                    cbBuilding.SelectedItem = aComboBoxItem;
-                }
-            }
+
 
             tbStreet.Text = selectedRoom.Rows[0]["street"].ToString();
             tbCityCode.Text = selectedRoom.Rows[0]["citycode"].ToString();
@@ -111,7 +105,7 @@ namespace CourseManagement.Client.View
             bool validate = false;
 
             if (validateAndFillCapacity()
-                & validateAndFillBuilding()
+                
                 & validateAndFillAdress())
             {
                 validate = true;
@@ -147,22 +141,7 @@ namespace CourseManagement.Client.View
         /// and if he did it references the variable with selected entry
         /// </summary>
         /// <returns></returns>
-        private bool validateAndFillBuilding()
-        {
-            bool validate = false;
-            if(cbBuilding.SelectedIndex != -1)
-            {
-                building = ((ComboBoxItem)cbBuilding.SelectedItem).Content.ToString();
-                lblBuilding.Foreground = Brushes.Black;
-                validate = true;
-            }
-            else
-            {
-                lblBuilding.Foreground = Brushes.Red;
-                validate = false;
-            }
-            return validate;
-        }
+        
 
         /// <summary>
         /// Street, Zip Code and City are fields which aren't neccessary to be filled out from the user
