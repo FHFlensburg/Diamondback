@@ -29,7 +29,7 @@ namespace CourseManagement.Client.View
         public WndIndex()
         {
            InitializeComponent();
-            this.
+            
 
            spAppointmentsHeight = spAppointments.Height;
            dataGridHeight = dgSecondary.Height;
