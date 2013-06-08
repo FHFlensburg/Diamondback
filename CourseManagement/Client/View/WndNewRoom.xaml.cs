@@ -51,34 +51,29 @@ namespace CourseManagement.Client.View
         private void btnSaveRoom_Click(object sender, RoutedEventArgs e)
         {
             insertRoom();
-            this.Close();
         }
 
         private void insertRoom()
         {
-            if (validateDataFields())
+            fillingNonMandatoryDataFields();
+            try
             {
-                try
+                if (selectedRoom == null & roomNr == 0)
                 {
-                    if (selectedRoom != null && roomNr == 0)
-                    {
-                        RoomLogic.getInstance().create(building, capacity, city, cityCode, street);
-                    }
-                    else
-                    {
-                        RoomLogic.getInstance().changeProperties(roomNr, building, capacity, city, cityCode, street);
-                    }
+                    RoomLogic.getInstance().create(building, capacity, city, cityCode, street);
+                    this.DialogResult = true;
                 }
-                catch (Exception e)
+                else
                 {
-                    MessageBox.Show("Datenbankfehler. \nException " + e.Message);
+                    RoomLogic.getInstance().changeProperties(roomNr, building, capacity, city, cityCode, street);
+                    this.DialogResult = true;
                 }
-                lblWrongUserInput.Visibility = Visibility.Hidden;
             }
-            else
+            catch (Exception e)
             {
-                lblWrongUserInput.Visibility = Visibility.Visible;
+                MessageBox.Show("Datenbankfehler. /nException " + e.Message);
             }
+
         }
 
         private void setGuiElemntsToselectedCourseData(DataTable selectedRoom)
@@ -94,79 +89,26 @@ namespace CourseManagement.Client.View
             tbCity.Text = selectedRoom.Rows[0]["city"].ToString();
         }
 
-        #region validate and fill variables with the data from the datafields
+
 
         /// <summary>
-        /// Calls all validate methods and returns true if all user inputs were made correct
+        /// references submitted data from user to variables. 
+        /// No mandatory fields, so no check if user input was made
         /// </summary>
         /// <returns></returns>
-        private bool validateDataFields()
+        private void fillingNonMandatoryDataFields()
         {
-            bool validate = false;
-
-            if (validateAndFillCapacity()
-                
-                & validateAndFillAdress())
-            {
-                validate = true;
-            }
-
-            return validate;
-        }
-
-        /// <summary>
-        /// Checks if user has filled the capacity field 
-        /// and if he did references the capacity variable with the provided text
-        /// </summary>
-        /// <returns></returns>
-        private bool validateAndFillCapacity()
-        {
-            bool validate = false;
+            street = tbStreet.Text.ToString();
+            city = tbCity.Text.ToString();
+            cityCode = tbCityCode.Text.ToString();
             try
             {
                 capacity = Convert.ToInt32(tbCapacity.Text);
-                lblCapacity.Foreground = Brushes.Black;
-                validate = true;
             }
             catch
             {
-                lblCapacity.Foreground = Brushes.Red;
-                validate = false;
+                capacity = 0;
             }
-            return validate;
         }
-
-        /// <summary>
-        /// Checks if user has chosen a Building for the course 
-        /// and if he did it references the variable with selected entry
-        /// </summary>
-        /// <returns></returns>
-        
-
-        /// <summary>
-        /// Street, Zip Code and City are fields which aren't neccessary to be filled out from the user
-        /// no checks if data is provided by user, only referencing the variables
-        /// </summary>
-        /// <returns></returns>
-        private bool validateAndFillAdress()
-        {
-            bool validate = false;
-            try
-            {
-                street = tbStreet.Text.ToString();
-                cityCode = tbCityCode.Text.ToString();
-                city = tbCity.Text.ToString();
-                validate = true;
-            }
-            catch
-            {
-                validate = false;
-                MessageBox.Show("Adressfelder sind nicht richtig ausgefüllt");
-            }
-            return validate;
-        }
-
-
-        #endregion
     }
 }
