@@ -155,6 +155,8 @@ namespace CourseManagement.Client.View
 
             changeColumnTitles(datagrid);
 
+            datagrid.Columns[0].Visibility = Visibility.Hidden;
+
             datagrid.Columns[datagrid.Columns.Count - 1].Width = new DataGridLength(1, DataGridLengthUnitType.Star);
         }
 

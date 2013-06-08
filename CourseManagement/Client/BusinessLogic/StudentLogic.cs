@@ -100,8 +100,6 @@ namespace CourseManagement.Client.BusinessLogic
         {
             DataRow row = LogicUtils.getNewRow(table, student);
             row["Payments"] = student.Payments.Count;
-            if (row["Active"].ToString() == "True") row["Active"] = "ja";
-            else if (row["Active"].ToString() == "False") row["Active"] = "nein";
             return row;
         }
 

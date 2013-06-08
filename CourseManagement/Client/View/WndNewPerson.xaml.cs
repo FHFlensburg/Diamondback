@@ -324,7 +324,7 @@ namespace CourseManagement.Client.View
         {
             userNr = Convert.ToInt32(selectedPerson.Rows[0]["Id"]);
 
-            if (selectedPerson.Rows[0]["admin"].ToString() == "ja")
+            if (selectedPerson.Rows[0]["admin"].ToString() == "True")
             {
                 chbxAdmin.IsChecked = true;
             }
