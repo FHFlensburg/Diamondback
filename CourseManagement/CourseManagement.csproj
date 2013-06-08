@@ -227,6 +227,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DiamondbackModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Client\DB\Model\DiamondbackModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DiamondbackModel.edmx</DependentUpon>
