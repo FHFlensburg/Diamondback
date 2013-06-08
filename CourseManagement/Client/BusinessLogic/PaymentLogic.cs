@@ -36,7 +36,7 @@ namespace CourseManagement.Client.BusinessLogic
         {
             try
             {
-                return LogicUtils.getNewDataTable(new Payment(),"StudentNr","CourseNr");
+                return LogicUtils.getNewDataTable(new Payment(),"StudentNr","CourseName");
             }
             catch (Exception e)
             {
@@ -112,10 +112,10 @@ namespace CourseManagement.Client.BusinessLogic
         private DataRow getNewRow(DataTable table, Payment payment)
         {
             DataRow row = LogicUtils.getNewRow(table, payment);
-            row["Course"] = payment.Course.Title;
+            row["Course"] = payment.Course.CourseNr;
             row["Student"] = payment.Student.Forename + " " + payment.Student.Surname;
             row["StudentNr"] = payment.Student.Id;
-            row["CourseNr"] = payment.Course.CourseNr;
+            row["CourseName"] =payment.Course.Title ;
             return row;
 
         }

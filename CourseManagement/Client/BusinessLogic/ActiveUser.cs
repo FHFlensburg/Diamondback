@@ -118,5 +118,16 @@ namespace CourseManagement.Client.BusinessLogic
             return newPassword.Length >= 5;
         }
 
+
+        /// <summary>
+        /// check if the submitted password is the password of the active user
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public static bool correctPasswort(string password)
+        {
+            return currentUser.Password == password;
+        }
+
     }
 }

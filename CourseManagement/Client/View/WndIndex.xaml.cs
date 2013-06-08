@@ -951,6 +951,11 @@ namespace CourseManagement.Client.View
             Mouse.Capture(null);
         }
 
+        private void changePsw_Click(object sender, RoutedEventArgs e)
+        {
+            new WndChangePsw().ShowDialog();
+        }
+
         
 
    

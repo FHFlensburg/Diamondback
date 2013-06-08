@@ -24,6 +24,7 @@
                             <!--ToDo beta status, real buttons follow-->
                             <r:RibbonApplicationMenuItem Header="Hilfe" ImageSource="Images\help.ico" Click="ribbonHelpButton_Click" />
                             <r:RibbonApplicationMenuItem Header="Informationen" ImageSource="Images\logo.png" />
+                            <r:RibbonApplicationMenuItem Header="Passwort ändern" ImageSource="Images\logo.png" Click="changePsw_Click"/>
                             <r:RibbonApplicationMenuItem Header="Exit" ImageSource="Images\delete.ico" Click="mainWindowClose_Click" />
                         </r:RibbonApplicationMenu>
                     </r:Ribbon.ApplicationMenu>

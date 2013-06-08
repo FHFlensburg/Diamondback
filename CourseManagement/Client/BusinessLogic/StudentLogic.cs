@@ -99,6 +99,7 @@ namespace CourseManagement.Client.BusinessLogic
         private DataRow getNewRow(DataTable table, Student student)
         {
             DataRow row = LogicUtils.getNewRow(table, student);
+            row["Payments"] = student.Payments.Count;
             return row;
         }
 

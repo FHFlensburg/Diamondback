@@ -117,6 +117,9 @@
     <Compile Include="Client\DB\Model\PaymentActions.cs" />
     <Compile Include="Client\DB\PaymentQuery.cs" />
     <Compile Include="Client\View\SpecificGrids.cs" />
+    <Compile Include="Client\View\WndChangePsw.xaml.cs">
+      <DependentUpon>WndChangePsw.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Client\View\WndNewPayment.xaml.cs">
       <DependentUpon>WndNewPayment.xaml</DependentUpon>
     </Compile>
@@ -252,6 +255,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Client\View\WndChangePsw.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Client\View\WndNewCourse.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
