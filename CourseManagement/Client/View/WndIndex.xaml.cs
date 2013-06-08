@@ -491,6 +491,10 @@ namespace CourseManagement.Client.View
                         break;
                 }
 
+                pgValue.SelectedValue = "Kurse";
+                rgValue.SelectedValue = "Studenten";
+                rgCourse.SelectedValue = "Termine";
+                
             }
         }
 
