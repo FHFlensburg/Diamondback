@@ -74,7 +74,7 @@
                                 VerticalAlignment="Center" 
                                 IsEditable="FALSE"
                                 ToolTip="Auswahl um welche Art von Person es sich handelt">
-                                <r:RibbonGallery Name="rgValue" SelectedValue="Alle Personen" SelectedValuePath="Content" MaxColumnCount="1" SelectionChanged="ribbonGallery_SelectionChanged">
+                                <r:RibbonGallery Name="rgValue" SelectedValue="Studenten" SelectedValuePath="Content" MaxColumnCount="1" SelectionChanged="ribbonGallery_SelectionChanged">
                                     <r:RibbonGalleryCategory Name="cbValues">
                                     </r:RibbonGalleryCategory>
                                 </r:RibbonGallery>

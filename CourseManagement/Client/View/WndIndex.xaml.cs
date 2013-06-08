@@ -237,11 +237,22 @@ namespace CourseManagement.Client.View
             }
             else
             {
-                if (dgSecondary.SelectedIndex != -1)
+                if (dgSecondary.SelectedIndex != -1 && cbCourse.Text == "Termine")
                 {
                     deleteAppointment();
 
                 }
+                else if (dgSecondary.SelectedIndex != -1 && dgMainData.SelectedIndex != -1 && cbCourse.Text == "Teilnehmer")
+                {
+                    int index = dgMainData.SelectedIndex;
+                    int person = Convert.ToInt16(((DataRowView)dgSecondary.SelectedItem)["Id"]);
+                    int course = Convert.ToInt16(((DataRowView)dgMainData.SelectedItem)["CourseNr"]);
+                    PaymentLogic.getInstance().delete(course, person);
+                    SpecificTables.changeDgCourse(dgMainData, CourseLogic.getInstance().getAll());
+                    dgMainData.SelectedIndex = index;
+                    SpecificTables.changeDgStudent(dgSecondary, StudentLogic.getInstance().getByCourse(course));
+                }
+
             }
         }
         #endregion
@@ -285,7 +296,7 @@ namespace CourseManagement.Client.View
         private void ribbonButtonDeletePerson_Click(object sender, RoutedEventArgs e)
         {
 
-            if (dgSecondary.SelectedItems.Count == 1 && dgMainData.SelectedItems.Count == 1)
+            if (dgSecondary.SelectedItems.Count == 1 && dgMainData.SelectedItems.Count == 1 && lastfocusedDG==dgSecondary)
             {
                 int courseNr = Convert.ToInt32(((DataRowView)dgSecondary.SelectedItem)["CourseNr"]);
                 int studentNr = Convert.ToInt32(((DataRowView)dgMainData.SelectedItem)["Id"]);
@@ -293,7 +304,7 @@ namespace CourseManagement.Client.View
                 SpecificTables.changeDgCourse(dgSecondary, CourseLogic.getInstance().getByPerson(studentNr));
             }
 
-            else if (dgMainData.SelectedIndex != -1)
+            else if (dgMainData.SelectedIndex != -1 && lastfocusedDG==dgMainData)
             {
                 int id = Convert.ToInt32(((DataRowView)dgMainData.SelectedItem)["Id"]);
                 PersonLogic.getInstance().delete(id);
@@ -503,14 +514,14 @@ namespace CourseManagement.Client.View
 
         private void refreshPersons()
         {
-            SpecificTables.changeDgPerson(dgMainData, PersonLogic.getInstance().getAll());
+            SpecificTables.changeDgStudent(dgMainData, StudentLogic.getInstance().getAll());
             SpecificTables.changeDgCourse(dgSecondary,CourseLogic.getInstance().getAll());
             lblHeadline.Content = "Personenübersicht";
             cbValues.Items.Clear();
-            cbValues.Items.Add(new RibbonGalleryItem() { Content = "Alle Personen", Foreground = Brushes.Blue });
-            cbValues.Items.Add(new RibbonGalleryItem() { Content = "Tutoren", Foreground = Brushes.Green });
             cbValues.Items.Add(new RibbonGalleryItem() { Content = "Studenten", Foreground = Brushes.Red });
+            cbValues.Items.Add(new RibbonGalleryItem() { Content = "Tutoren", Foreground = Brushes.Green });
             if (ActiveUser.userIsAdmin()) cbValues.Items.Add(new RibbonGalleryItem() { Content = "Benutzer", Foreground = Brushes.Orange });
+            cbValues.Items.Add(new RibbonGalleryItem() { Content = "Alle Personen", Foreground = Brushes.Blue });
             spAppointments.Height = 0;
            
             lblAppointmentToCourse.Content = "Gebuchte Kurse";
