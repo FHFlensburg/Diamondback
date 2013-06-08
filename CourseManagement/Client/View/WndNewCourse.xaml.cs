@@ -108,7 +108,7 @@ namespace CourseManagement.Client.View
             }
             catch (Exception e)
             {
-                MessageBox.Show("Netzwerk oder Datenbankfehler /nException:" + e.Message);
+                MessageBox.Show("Netzwerk oder Datenbankfehler \nException:" + e.Message);
             }   
             }
             else { MessageBox.Show("Bitte Tutor auswählen"); }

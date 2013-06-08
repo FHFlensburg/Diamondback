@@ -48,23 +48,22 @@ namespace CourseManagement.Client.View
         public wndNewPerson()
         {
             InitializeComponent();
-            if (ActiveUser.userIsAdmin() == false) cbxRole.Items.RemoveAt(2) ;
-            lblPerson.Content = "Neue Person";
+            if (ActiveUser.userIsAdmin() == false) cbxRole.Items.RemoveAt(2);
+
         }
 
         public wndNewPerson(DataTable selectedPerson, int kindOfPerson)
         {
             InitializeComponent();
-
+            if (ActiveUser.userIsAdmin() == false) cbxRole.Items.RemoveAt(2);
             this.kindOfPerson = kindOfPerson;
             this.selectedPerson = selectedPerson;
-            //cbxRole.Items.
             fillingDataFieldsWithProvidedData();
 
             checkKindofPerson();
         }
 
-        
+
 
         private void wndPerson_Loaded(object sender, RoutedEventArgs e)
         {
@@ -81,14 +80,14 @@ namespace CourseManagement.Client.View
             fillingNonMandatoryFields();
             if (cbxRole.SelectedIndex != -1)
             {
-                try
+                if (surname != "")
                 {
-                    switch (((ComboBoxItem)cbxRole.SelectedItem).Content.ToString())
+                    try
                     {
-                        case "Student":
-                            if (validateDatafields())
-                            {
-                                if (selectedPerson == null && studentNr == 0)
+                        switch (((ComboBoxItem)cbxRole.SelectedItem).Content.ToString())
+                        {
+                            case "Student":
+                                if (selectedPerson == null & studentNr == 0)
                                 {
                                     StudentLogic.getInstance().create(surname,
                                         forename,
@@ -107,6 +106,7 @@ namespace CourseManagement.Client.View
                                         bic,
                                         depositor,
                                         nameOfBank);
+                                    this.DialogResult = true;
                                 }
                                 else
                                 {
@@ -128,12 +128,10 @@ namespace CourseManagement.Client.View
                                         bic,
                                         depositor,
                                         nameOfBank);
+                                    this.DialogResult = true;
                                 }
-                            }
-                            break;
-                        case "User":
-                            if (validateDatafields() & validateUsername())
-                            {
+                                break;
+                            case "User":
                                 if (selectedPerson == null & userNr == 0)
                                 {
                                     UserLogic.getInstance().create(surname,
@@ -152,6 +150,7 @@ namespace CourseManagement.Client.View
                                         username,
                                         password,
                                         isAdmin);
+                                    this.DialogResult = true;
                                 }
                                 else
                                 {
@@ -172,12 +171,10 @@ namespace CourseManagement.Client.View
                                         username,
                                         password,
                                         isAdmin);
+                                    this.DialogResult = true;
                                 }
-                            }
-                            break;
-                        case "Tutor":
-                            if (validateDatafields())
-                            {
+                                break;
+                            case "Tutor":
                                 if (selectedPerson == null & tutorNr == 0)
                                 {
                                     TutorLogic.getInstance().create(surname,
@@ -193,6 +190,7 @@ namespace CourseManagement.Client.View
                                         title,
                                         city,
                                         cityCode);
+                                    this.DialogResult = true;
                                 }
                                 else
                                 {
@@ -210,17 +208,19 @@ namespace CourseManagement.Client.View
                                         title,
                                         city,
                                         cityCode);
+                                    this.DialogResult = true;
                                 }
-                            }
-                            break;
+
+                                break;
+                        }
                     }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show("Netzwerk oder Datenbankfehler \nException: " + e.Message);
+                    }
+                    lblErrorKindOfPerson.Visibility = Visibility.Hidden;
                 }
-                catch (Exception e)
-                {
-                    MessageBox.Show("Netzwerk oder Datenbankfehler /nException: " + e.Message);
-                }
-                lblErrorKindOfPerson.Visibility = Visibility.Hidden;
-                this.Close();
+                else { MessageBox.Show("Bitte Nachnamen ausfüllen"); }
             }
             else
             {
@@ -235,6 +235,7 @@ namespace CourseManagement.Client.View
 
         private void checkKindofPerson()
         {
+
             switch (kindOfPerson)
             {
                 case 0:
@@ -245,21 +246,21 @@ namespace CourseManagement.Client.View
                     fillingdataFieldsWithStudentData();
                     break;
                 case 2:
-                    cbxRole.SelectedItem = (ComboBoxItem)cbxiUser;
-                    fillingdataFieldsWithUserData();
-                    break;
-                case 3:
                     if (ActiveUser.userIsAdmin() == true)
                     {
-                        cbxRole.SelectedItem = (ComboBoxItem)cbxiTutor;
-                        try
-                        {
-                            tutorNr = Convert.ToInt32(selectedPerson.Rows[0]["Id"]);
-                        }
-                        catch (Exception e)
-                        {
-                            MessageBox.Show(e.Message);
-                        }
+                        cbxRole.SelectedItem = (ComboBoxItem)cbxiUser;
+                        fillingdataFieldsWithUserData();
+                    }
+                    break;
+                case 3:
+                    cbxRole.SelectedItem = (ComboBoxItem)cbxiTutor;
+                    try
+                    {
+                        tutorNr = Convert.ToInt32(selectedPerson.Rows[0]["Id"]);
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show(e.Message);
                     }
                     break;
             }
@@ -269,7 +270,7 @@ namespace CourseManagement.Client.View
         private void fillingDataFieldsWithProvidedData()
         {
             lblPerson.Content = "Person bearbeiten";
-            
+
 
             try
             {
@@ -358,10 +359,11 @@ namespace CourseManagement.Client.View
             }
         }
 
-        #region filling variables and doing validation for mandatory fields. 
 
         private void fillingNonMandatoryFields()
         {
+            forename = tbForename.Text;
+            surname = tbSurname.Text;
             birthyear = tbBirthyear.Text.ToString();
             street = tbStreet.Text.ToString();
             mobilePhone = tbPhone.Text.ToString();
@@ -379,86 +381,9 @@ namespace CourseManagement.Client.View
             depositor = tbDepositor.Text.ToString();
             nameOfBank = tbBank.Text.ToString();
 
+            username = tbUsername.Text;
             password = pwbPassword.Password.ToString();
             isAdmin = (bool)chbxAdmin.IsChecked;
         }
-
-        private bool validateDatafields()
-        {
-            bool validate = false;
-
-            if (validateForename()
-                & validateSurname())
-            {
-                validate = true;
-            }
-
-            return validate;
-        }
-
-        
-
-        /// <summary>
-        /// At least for and surname shouls be mandatory, so we dont have empty user
-        /// </summary>
-        /// <returns></returns>
-        /// 
-        private bool validateForename()
-        {
-            bool validate = false;
-            if (tbForename.Text != null)
-            {
-                forename = tbForename.Text;
-                lblForename.Foreground = Brushes.Black;
-                validate = true;
-            }
-            else
-            {
-                tbForename.Foreground = Brushes.Red;
-                validate = false;
-            }
-            return validate;
-        }
-
-        private bool validateSurname()
-        {
-            bool validate = false;
-            if (tbSurname.Text != null)
-            {
-                surname = tbSurname.Text;
-                lblSurname.Foreground = Brushes.Black;
-                validate = true;
-            }
-            else
-            {
-                lblSurname.Foreground = Brushes.Red;
-                validate = false;
-            }
-            return validate;
-        }
-
-        private bool validateUsername()
-        {
-            bool validate = false;
-            if (tbUsername.Text != null)
-            {
-                username = tbUsername.Text;
-                lblUsername.Foreground = Brushes.Black;
-                validate = true;
-            }
-            else
-            {
-                lblUsername.Foreground = Brushes.Red;
-                validate = false;
-            }
-            return validate;
-        }
-
-        #endregion
-
-        
-
-
-
     }
 }
