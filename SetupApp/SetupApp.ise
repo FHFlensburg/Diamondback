@@ -342,6 +342,8 @@
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
 		<row><td>CourseManagement.Prim_re_Ausgabe</td><td>{8FB30E9B-B1E7-400D-8E2F-71890D0CD820}</td><td>INSTALLDIR</td><td>2</td><td/><td>coursemanagement.prim_re_aus</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>EntityFramework.dll</td><td>{332D68A7-4366-4161-B30B-956F6A45263F}</td><td>INSTALLDIR</td><td>2</td><td/><td>entityframework.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>Help_Kursverwaltung.chm</td><td>{D9F3DEE1-46B0-45A3-87A3-945796D8A3EF}</td><td>INSTALLDIR</td><td>2</td><td/><td>help_kursverwaltung.chm</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>ISX_DEFAULTCOMPONENT1</td><td>{6AC22CED-C1D3-4E4C-97AD-ECC35C15D9DF}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>Microsoft.Windows.Shell.dll</td><td>{4B99CC9D-E957-44F6-BCD6-B7CB62468275}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.windows.shell.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>RibbonControlsLibrary.dll</td><td>{EE7F201B-8F21-4578-895B-575F8CA5940F}</td><td>INSTALLDIR</td><td>2</td><td/><td>ribboncontrolslibrary.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>Xceed.Wpf.Toolkit.dll</td><td>{5F1909C0-7BF2-49E7-8A4E-0B5BCB5112FA}</td><td>INSTALLDIR</td><td>2</td><td/><td>xceed.wpf.toolkit.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
@@ -1053,6 +1055,7 @@
 	<table name="CreateFolder">
 		<col key="yes" def="s72">Directory_</col>
 		<col key="yes" def="s72">Component_</col>
+		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT1</td></row>
 	</table>
 
 	<table name="CustomAction">
@@ -1867,6 +1870,8 @@
 		<col key="yes" def="s72">Component_</col>
 		<row><td>AlwaysInstall</td><td>CourseManagement.Prim_re_Ausgabe</td></row>
 		<row><td>AlwaysInstall</td><td>EntityFramework.dll</td></row>
+		<row><td>AlwaysInstall</td><td>Help_Kursverwaltung.chm</td></row>
+		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT1</td></row>
 		<row><td>AlwaysInstall</td><td>Microsoft.Windows.Shell.dll</td></row>
 		<row><td>AlwaysInstall</td><td>RibbonControlsLibrary.dll</td></row>
 		<row><td>AlwaysInstall</td><td>Xceed.Wpf.Toolkit.dll</td></row>
@@ -1886,6 +1891,7 @@
 		<col def="S72">ISComponentSubFolder_</col>
 		<row><td>coursemanagement.prim_re_aus</td><td>CourseManagement.Prim_re_Ausgabe</td><td>CourseManagement.Primäre Ausgabe</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;CourseManagement&gt;|Built</td><td>3</td><td/></row>
 		<row><td>entityframework.dll</td><td>EntityFramework.dll</td><td>ENTITY~1.DLL|EntityFramework.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\chris_000\Documents\FH-Flensburg\6. Semester\Software-Projekt\Diamondback\Diamondback\CourseManagement\bin\Release\EntityFramework.dll</td><td>1</td><td/></row>
+		<row><td>help_kursverwaltung.chm</td><td>Help_Kursverwaltung.chm</td><td>HELP_K~1.CHM|Help_Kursverwaltung.chm</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\chris_000\Documents\FH-Flensburg\6. Semester\Software-Projekt\Diamondback\Diamondback\CourseManagement\Help_Kursverwaltung.chm</td><td>1</td><td/></row>
 		<row><td>microsoft.windows.shell.dll</td><td>Microsoft.Windows.Shell.dll</td><td>MICROS~1.DLL|Microsoft.Windows.Shell.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\chris_000\Documents\FH-Flensburg\6. Semester\Software-Projekt\Diamondback\Diamondback\CourseManagement\bin\Release\Microsoft.Windows.Shell.dll</td><td>1</td><td/></row>
 		<row><td>ribboncontrolslibrary.dll</td><td>RibbonControlsLibrary.dll</td><td>RIBBON~1.DLL|RibbonControlsLibrary.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\chris_000\Documents\FH-Flensburg\6. Semester\Software-Projekt\Diamondback\Diamondback\CourseManagement\bin\Release\RibbonControlsLibrary.dll</td><td>1</td><td/></row>
 		<row><td>xceed.wpf.toolkit.dll</td><td>Xceed.Wpf.Toolkit.dll</td><td>XCEEDW~1.DLL|Xceed.Wpf.Toolkit.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\chris_000\Documents\FH-Flensburg\6. Semester\Software-Projekt\Diamondback\Diamondback\CourseManagement\bin\Release\Xceed.Wpf.Toolkit.dll</td><td>1</td><td/></row>
@@ -1906,6 +1912,7 @@
 		<col def="S255">Data</col>
 		<row><td>PROJECT_ASSISTANT_DEFAULT_FEATURE</td><td>AlwaysInstall</td></row>
 		<row><td>PROJECT_ASSISTANT_FEATURES</td><td>NonSelectable</td></row>
+		<row><td>RegistryPageEnabled</td><td>Yes</td></row>
 	</table>
 
 	<table name="ISBillBoard">
@@ -2034,6 +2041,8 @@
 		<col def="S0">Miscellaneous</col>
 		<row><td>CourseManagement.Prim_re_Ausgabe</td><td/><td/><td>_475E8E8F_526D_418D_A200_7341161452A6_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>EntityFramework.dll</td><td/><td/><td>_F5A8FBFC_975E_498A_85C1_26203C383A6D_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>Help_Kursverwaltung.chm</td><td/><td/><td>_43CCBCAC_466C_4516_BE3F_13ECAAB25CFA_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>ISX_DEFAULTCOMPONENT1</td><td/><td/><td>_A7A9C448_2E6F_48AB_8465_8266611103FB_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>Microsoft.Windows.Shell.dll</td><td/><td/><td>_49B4974D_0641_4774_8F14_4F5F3175E0FE_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>RibbonControlsLibrary.dll</td><td/><td/><td>_75FC6786_79F7_4188_9E43_07D6B06F41E1_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>Xceed.Wpf.Toolkit.dll</td><td/><td/><td>_D9389D63_F141_42B8_A306_DCA71668B4AC_FILTER</td><td/><td/><td/><td/></row>
@@ -4442,6 +4451,10 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="S0">Value</col>
 		<col def="s72">Component_</col>
 		<col def="I4">ISAttributes</col>
+		<row><td>Registry1</td><td>2</td><td>Software\Microsoft\Windows\CurrentVersion\App Paths</td><td/><td/><td>CourseManagement.Prim_re_Ausgabe</td><td>1</td></row>
+		<row><td>Registry13</td><td>2</td><td>Software\Microsoft\Windows\CurrentVersion\App Paths\CourseManagement</td><td/><td/><td>CourseManagement.Prim_re_Ausgabe</td><td>1</td></row>
+		<row><td>Registry14</td><td>2</td><td>Software\Microsoft\Windows\CurrentVersion\App Paths\CourseManagement</td><td>Path</td><td>[INSTALLDIR]</td><td>CourseManagement.Prim_re_Ausgabe</td><td>0</td></row>
+		<row><td>Registry15</td><td>2</td><td>Software\Microsoft\Windows\CurrentVersion\App Paths\CourseManagement</td><td/><td>[!coursemanagement.prim_re_aus]</td><td>CourseManagement.Prim_re_Ausgabe</td><td>0</td></row>
 	</table>
 
 	<table name="RemoveFile">

@@ -6,6 +6,8 @@ using System.Data;
 using CourseManagement.Client.BusinessLogic;
 using System;
 using System.Windows.Media;
+using Microsoft.Win32;
+using System.Diagnostics;
 
 
 namespace CourseManagement.Client.View
@@ -358,7 +360,9 @@ namespace CourseManagement.Client.View
 
         private void ribbonButtonNewRoom_Click(object sender, RoutedEventArgs e)
         {
+
             WndNewRoom aNewRoom = new WndNewRoom();
+            aNewRoom.lblNewRoom.Content = "Neuer Raum";
             aNewRoom.ShowDialog();
         }
 
@@ -602,8 +606,13 @@ namespace CourseManagement.Client.View
             try
             {
                 this.mainRibbon.SelectedIndex = 0;
-
-                System.Diagnostics.Process.Start("..\\..\\Help_Kursverwaltung.chm");
+                RegistryKey key = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\App Paths\CourseManagement");
+                object objRegisteredValue = key.GetValue("Path");
+                Process openHelpFile = new Process();
+                openHelpFile.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
+                openHelpFile.StartInfo.FileName = "hh.exe";
+                openHelpFile.StartInfo.Arguments = "ms-its:" + objRegisteredValue.ToString() + @"\Help_Kursverwaltung.chm::/Kurse.htm";
+                openHelpFile.Start();
             }
             catch (System.Exception err)
             {
