@@ -11,7 +11,7 @@ namespace CourseManagement.Client.View
     /// <summary>
     /// Interaktionslogik für WndNewCourse.xaml
     /// </summary>
-    public partial class WndNewCourse : Window 
+    public partial class WndNewCourse : Window
     {
         private DataTable selectedCourse = null;
         private string titeL = "";
@@ -60,7 +60,7 @@ namespace CourseManagement.Client.View
 
             foreach (ComboBoxItem cbItem in cbTutor.Items)
             {
-                if(selectedCourse.Rows[0]["Tutor"].ToString()==cbItem.Content.ToString())
+                if (selectedCourse.Rows[0]["Tutor"].ToString() == cbItem.Content.ToString())
                 {
                     cbTutor.SelectedItem = cbItem;
                 }
@@ -72,7 +72,7 @@ namespace CourseManagement.Client.View
 
             lblCourse.Content = "Neuer Kurs";
 
-           // Values for Tutor
+            // Values for Tutor
             DataTable allTutors = TutorLogic.getInstance().getAll();
             foreach (DataRow aDataRow in allTutors.Rows)
             {
@@ -86,39 +86,38 @@ namespace CourseManagement.Client.View
 
 
 
-        private void insertNewCourseAndValidate()
+        private void insertCourse()
         {
+            fillingNonMandatoryDataFields();
+            if(cbTutor.SelectedItem != null)
+            {
+                tutor = Convert.ToInt32(((ComboBoxItem)cbTutor.SelectedItem).Tag);
             try
             {
-                titeL = tbCourseTitle.Text;
-                amountInEuro = Convert.ToDecimal(tbCosts.Text);
-                description = tbDescription.Text;
-                maxParticipants = Convert.ToInt32(tbMaxParticipants.Text);
-                minParticipants = Convert.ToInt32(tbMinParticipants.Text);
-                tutor = Convert.ToInt32(((ComboBoxItem)cbTutor.SelectedItem).Tag);
-                validInMonths = Convert.ToInt32(tbValidInMonth.Text);
-
                 if (selectedCourse == null)
                 {
                     CourseLogic.getInstance().create(titeL, amountInEuro, description, maxParticipants, minParticipants, tutor, validInMonths);
+                    this.DialogResult = true;
                 }
                 else
                 {
                     int CourseNr = Convert.ToInt32(selectedCourse.Rows[0]["CourseNr"]);
                     CourseLogic.getInstance().changeProperties(CourseNr, titeL, amountInEuro, description, maxParticipants, minParticipants, tutor, validInMonths);
+                    this.DialogResult = true;
                 }
             }
-            catch
+            catch (Exception e)
             {
-                MessageBox.Show("Eingaben haben nicht das richtige Format");
+                MessageBox.Show("Netzwerk oder Datenbankfehler /nException:" + e.Message);
+            }   
             }
+            else { MessageBox.Show("Bitte Tutor auswählen"); }
 
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            insertNewCourseAndValidate();
-            this.Close();
+            insertCourse();
         }
 
         private void btnAport_Click(object sender, RoutedEventArgs e)
@@ -126,43 +125,21 @@ namespace CourseManagement.Client.View
             this.Close();
         }
 
-        #region validate mandatory fields and filling variables of the none mandatory
+
 
         private void fillingNonMandatoryDataFields()
         {
             titeL = tbCourseTitle.Text;
-            amountInEuro = Convert.ToDecimal(tbCosts.Text);
+            try { amountInEuro = Convert.ToDecimal(tbCosts.Text); }
+            catch { amountInEuro = 0; }
             description = tbDescription.Text;
-            maxParticipants = Convert.ToInt32(tbMaxParticipants.Text);
-            minParticipants = Convert.ToInt32(tbMinParticipants.Text);
-            tutor = Convert.ToInt32(((ComboBoxItem)cbTutor.SelectedItem).Tag);
-            validInMonths = Convert.ToInt32(tbValidInMonth.Text);
+            try { maxParticipants = Convert.ToInt32(tbMaxParticipants.Text); }
+            catch { amountInEuro = 0; }
+            try { minParticipants = Convert.ToInt32(tbMinParticipants.Text); }
+            catch { minParticipants = 0; }
+            
+            try { validInMonths = Convert.ToInt32(tbValidInMonth.Text); }
+            catch { validInMonths = 0; }
         }
-
-        private bool validateAndFillTitle()
-        {
-            bool validate = false;
-            if (tbCosts.Text != null)
-            {
-                try
-                {
-                amountInEuro = Convert.ToInt32(tbCosts.Text);
-                lblCosts.Foreground = Brushes.Black;
-                validate = true;
-                }
-                catch
-                {
-                    validate = false;
-                    lblCosts.Foreground = Brushes.Red;
-                }
-            }
-            else
-            {
-                lblCosts.Foreground = Brushes.Red;
-                validate = false;
-            }
-            return validate;
-        }
-        #endregion
     }
 }
