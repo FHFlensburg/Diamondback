@@ -41,10 +41,10 @@ namespace CourseManagement.Client.View
             lblCourse.Content = "Kurs bearbeiten";
 
 
-            fillingDataFieldsWithProvidedData(selectedCourse);
+            fillingDataFieldsWithProvidedData();
         }
 
-        private void fillingDataFieldsWithProvidedData(DataTable selectedCourse)
+        private void fillingDataFieldsWithProvidedData()
         {
             tbMaxParticipants.Text = selectedCourse.Rows[0]["MaxMember"].ToString();
 
