@@ -1,8 +1,5 @@
 ﻿using System.Windows;
 using CourseManagement.Client.View;
-using System.Data;
-using CourseManagement.Client.BusinessLogic;
-using System.Windows.Controls;
 
 namespace CourseManagement.Client.Controller
 {
