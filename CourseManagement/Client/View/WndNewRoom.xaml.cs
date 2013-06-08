@@ -69,7 +69,7 @@ namespace CourseManagement.Client.View
             }
             catch (Exception e)
             {
-                MessageBox.Show("Datenbankfehler. /nException " + e.Message);
+                MessageBox.Show("Datenbankfehler. \nException " + e.Message);
             }
 
         }
