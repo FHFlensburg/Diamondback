@@ -7,7 +7,6 @@ namespace CourseManagement.Client.Controller
     {
         void App_Startup(object sender, StartupEventArgs e)
         {
-            //TestData.generateTestData();
             
             
             WndLogin startWindow = new WndLogin();
@@ -16,19 +15,7 @@ namespace CourseManagement.Client.Controller
             {
                 mainWindow.Show();
             }
-
-            //Form1 form1 = new Form1();
-            //form1.ShowDialog();
         }
-
-        
-        
-
-
-
-
-        //WndNewCourse secondWindow = new WndNewCourse();
-        //secondWindow.Show();
 
     }
 }

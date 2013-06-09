@@ -122,7 +122,6 @@
     </Compile>
     <Compile Include="Client\BusinessLogic\PersonLogic.cs" />
     <Compile Include="Client\BusinessLogic\StudentLogic.cs" />
-    <Compile Include="Client\BusinessLogic\TestData.cs" />
     <Compile Include="Client\BusinessLogic\TutorLogic.cs" />
     <Compile Include="Client\Controller\Start.cs" />
     <Compile Include="Client\DB\DBConfiguration.cs" />

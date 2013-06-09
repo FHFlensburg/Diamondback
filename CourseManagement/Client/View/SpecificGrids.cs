@@ -196,10 +196,7 @@ namespace CourseManagement.Client.View
         }
 
         /// <summary>
-        /// 
-        ///  
-        ///
-        /// 
+        /// Changes the header of the submitted datagrid the german, if the english header is in the englishGerman-Array
         /// </summary>
         public static void changeColumnTitles(DataGrid datagrid)
         {
