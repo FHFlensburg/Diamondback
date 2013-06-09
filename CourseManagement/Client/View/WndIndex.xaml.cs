@@ -253,6 +253,7 @@ namespace CourseManagement.Client.View
                     WndCourse editCourse = new WndCourse(selectedCourse);
                     editCourse.ShowDialog();
                     refreshCourses();
+                    showsInfosOfCourse();
                 }
                 catch (Exception err)
                 {
@@ -1169,6 +1170,14 @@ namespace CourseManagement.Client.View
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void cbCourse_SelectionChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            showsInfosOfCourse();
+        }
+
+        /// <summary>
+        /// fills secondary grid with either participants of course or appointments
+        /// </summary>
+        private void showsInfosOfCourse()
         {
             try
             {
