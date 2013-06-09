@@ -21,7 +21,6 @@
                     <!-- Application Menu, located at the left-hand side (down arrow) -->
                     <r:Ribbon.ApplicationMenu >
                         <r:RibbonApplicationMenu KeyTip="X" SmallImageSource="Images\ribbonapplicationmenuIcon.png">
-                            <!--ToDo beta status, real buttons follow-->
                             <r:RibbonApplicationMenuItem Header="Hilfe" ImageSource="Images\help.ico" Click="ribbonHelpButton_Click" />
                             <r:RibbonApplicationMenuItem Header="Informationen" ImageSource="Images\logo.png" />
                             <r:RibbonApplicationMenuItem Header="Passwort ändern" ImageSource="Images\change.ico" Click="changePsw_Click"/>
@@ -36,7 +35,7 @@
                         </r:RibbonGroup>
                         <r:RibbonGroup x:Name="ribbongroupCourseAdd" Header="Hinzufügen">
                             <r:RibbonButton x:Name="rbnButtonAddParticipant" LargeImageSource="Images\addParticipant.ico" Label="Teilnehmer hinzufügen" Click="ribbonButtonAddParticipant_Click" KeyTip="T" ToolTip="Teilnehmer zu Kurs hinzufügen" />
-                            <!--<r:RibbonButton SmallImageSource="Images\addRoom.ico" Label="Raum" /> -->
+          
                         </r:RibbonGroup>
                         <r:RibbonGroup x:Name="ribbonGroupCourseDelete" Header="Löschen">
                             <r:RibbonButton x:Name="rbnButtonDeleteCourse" LargeImageSource="Images\delete.ico" Label="Löschen" Click="ribbonButtonDeleteCourse_Click" KeyTip="D" ToolTip="Ausgewählten Eintrag löschen" />

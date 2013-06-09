@@ -19,8 +19,8 @@
                 </StackPanel>
             </StackPanel>
             <!--<DataGrid x:Name="dgParticipant" Margin="10" ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="True"/>-->
-            <Button x:Name="addPerson2Course" Content="Hinzufügen" Margin="10,5,10,0" Click="ButtonAddPerson2Course_CLick"/>
-            <Button x:Name="removePersonFromCourse" Content="Zuordnung entfernen" Margin="10,5,10,0" Click="ButtonRemovePersonFromCourse_CLick"/>
+            <Button x:Name="addPerson2Course" Content="Hinzufügen" Margin="10,5,10,0" Click="buttonAddPerson2Course_CLick"/>
+            <Button x:Name="removePersonFromCourse" Content="Zuordnung entfernen" Margin="10,5,10,0" Click="buttonRemovePersonFromCourse_CLick"/>
             <Button x:Name="close" Content="Abrechen" Margin="10,5,10,5" Click="close_Click"/>
         </StackPanel>
 

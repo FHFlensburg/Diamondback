@@ -8,7 +8,7 @@ using System.Windows.Media;
 namespace CourseManagement.Client.View
 {
     /// <summary>
-    /// Interaktionslogik für wndParticipant2Course.xaml
+    /// Interactionslogic for wndParticipant2Course.xaml
     /// </summary>
     public partial class WndParticipant2Course : Window
     {
@@ -16,36 +16,41 @@ namespace CourseManagement.Client.View
         /// Temporary Data Storage with either all courses or all students
         /// to fill the listboxes
         /// </summary>
-        DataTable temporaryData = null;
+        DataTable temporaryData = CourseLogic.getInstance().getAll();
         
         int selectedCourse = 0;
-        
-       
 
+        /// <summary>
+        /// Standard contructor 
+        /// </summary>
         public WndParticipant2Course()
         {
             InitializeComponent();
+            fillingListboxeswithData();
         }
 
+        /// <summary>
+        /// Custom contructor. Needed when a course was already chosen in main window
+        /// </summary>
+        /// <param name="selectedCourseFromMainWindow"></param>
         public WndParticipant2Course(int selectedCourseFromMainWindow)
         {
             InitializeComponent();
-            temporaryData = CourseLogic.getInstance().getAll();
 
             fillingListboxeswithData();
 
-            if(selectedCourseFromMainWindow != -1)
-            {
             foreach (ListBoxItem aListboxItem in lbxCourses.Items)
             {
-                if(Convert.ToInt32(aListboxItem.Tag) == selectedCourseFromMainWindow)
+                if (Convert.ToInt32(aListboxItem.Tag) == selectedCourseFromMainWindow)
                 {
                     lbxCourses.SelectedItem = aListboxItem;
                 }
             }
-            }
         }
 
+        /// <summary>
+        /// Fills left listbox with all courses and right listbox with all students
+        /// </summary>
         private void fillingListboxeswithData()
         {            
             foreach (DataRow aDataRow in temporaryData.Rows)
@@ -66,16 +71,18 @@ namespace CourseManagement.Client.View
             }
         }
 
+        /// <summary>
+        /// Closes the window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void close_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
-        
-
-
         /// <summary>
-        /// Idea? Slecting one Course Shows Students of this course in green color in the other listbox or something like this.
+        /// Shows every student which is in the course in green color
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -98,7 +105,12 @@ namespace CourseManagement.Client.View
             }
         }
 
-        private void ButtonAddPerson2Course_CLick(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Add selected student as participant to the course if not allready in the course
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonAddPerson2Course_CLick(object sender, RoutedEventArgs e)
         {
             if(lbxCourses.SelectedItem != null && lbxParticipants.SelectedItems != null)
             {
@@ -106,7 +118,6 @@ namespace CourseManagement.Client.View
                {
                    //Every student that has allready been added to the selected course is colored green. this 
                    //secures that if a student is allready in the course he will not be added again
-
                    if (aListBoxItem.Foreground != Brushes.Green)  
                    {
                        int i = Convert.ToInt32(((ListBoxItem)aListBoxItem).Tag);
@@ -118,8 +129,12 @@ namespace CourseManagement.Client.View
             }
         }
 
-
-        private void ButtonRemovePersonFromCourse_CLick(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Removes student from the course if he is listed as a participant
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonRemovePersonFromCourse_CLick(object sender, RoutedEventArgs e)
         {
             if (lbxCourses.SelectedItem != null && lbxParticipants.SelectedItems != null)
             {
