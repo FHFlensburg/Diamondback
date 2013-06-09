@@ -58,5 +58,22 @@ namespace CourseManagement.Client.View
             }
             return passwordOkay;
         }
+
+
+        /// <summary>
+        /// Finish the application if login-window is closed by user
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (DialogResult.HasValue == false || DialogResult.Value == false)
+            {
+                Application.Current.Shutdown();
+            }
+        }
+
+
+
     }
 }
