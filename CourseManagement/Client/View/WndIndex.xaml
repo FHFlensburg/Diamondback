@@ -115,6 +115,8 @@
                                 ToolTip="Zahlungen für Studenten oder Kurse auswählen">
                                 <r:RibbonGallery Name="pgValue" SelectedValue="Kurse" SelectedValuePath="Content" MaxColumnCount="1" SelectionChanged="pgValue_SelectionChanged">
                                     <r:RibbonGalleryCategory Name="cbPaymentGroupsValues">
+                                        <r:RibbonGalleryItem Content="Kurse" Foreground="Blue"></r:RibbonGalleryItem>
+                                        <r:RibbonGalleryItem Content="Studenten" Foreground="Green"></r:RibbonGalleryItem>
                                     </r:RibbonGalleryCategory>
                                 </r:RibbonGallery>
                             </r:RibbonComboBox>

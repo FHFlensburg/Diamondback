@@ -245,7 +245,8 @@ namespace CourseManagement.Client.BusinessLogic
         {
             try
             {
-                Student.getById(studentNr).delete();
+                Student student = Student.getById(studentNr);
+                if (student != null && student.Payments.Count == 0) student.delete();
             }
             catch (Exception e)
             {

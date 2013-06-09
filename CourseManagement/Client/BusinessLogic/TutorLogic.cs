@@ -231,7 +231,7 @@ namespace CourseManagement.Client.BusinessLogic
             try
             {
                 Tutor tutor = Tutor.getById(tutorNr);
-                if (tutor != null) tutor.delete();
+                if (tutor != null && tutor.Courses.Count==0) tutor.delete();
             }
             catch (Exception e)
             {

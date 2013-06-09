@@ -45,6 +45,13 @@ namespace CourseManagement.Client.View
                     refreshCourses();
                     refreshAppointments();
                     fillComboBoxRoomNumber();
+
+                    cbValues.Items.Clear();
+                    cbValues.Items.Add(new RibbonGalleryItem() { Content = "Studenten", Foreground = Brushes.Red });
+                    cbValues.Items.Add(new RibbonGalleryItem() { Content = "Tutoren", Foreground = Brushes.Green });
+                    if (ActiveUser.userIsAdmin()) cbValues.Items.Add(new RibbonGalleryItem() { Content = "Benutzer", Foreground = Brushes.Orange });
+                    cbValues.Items.Add(new RibbonGalleryItem() { Content = "Alle Personen", Foreground = Brushes.Blue });
+   
                 }
                 dgMainData.Columns[dgMainData.Columns.Count - 1].Width = new DataGridLength(1, DataGridLengthUnitType.Star);
             }
@@ -380,6 +387,7 @@ namespace CourseManagement.Client.View
                         wndPerson editPerson = new wndPerson(selectedPerson, kindOfPerson);
                         editPerson.ShowDialog();
                         refreshPersons();
+                        SpecificTables.changeDgCourse(dgSecondary, CourseLogic.getInstance().getByPerson(personID));
                     }
                 }
 
@@ -566,13 +574,17 @@ namespace CourseManagement.Client.View
                         case 0:
                             this.lblStudentHasToPay.Content = "";
                             this.lblStudentName.Content = "";
+                            rgCourse.SelectedValue = "Termine";
                             refreshCourses();
                             refreshAppointments();
+                            
                             break;
                         case 1:
                             this.lblStudentHasToPay.Content = "";
                             this.lblStudentName.Content = "";
+                            rgValue.SelectedValue = "Studenten";
                             refreshPersons();
+                            
                             break;
                         case 2:
                             this.lblStudentHasToPay.Content = "";
@@ -580,16 +592,18 @@ namespace CourseManagement.Client.View
                             refreshRooms();
                             break;
                         case 3:
+                            pgValue.SelectedValue = "Kurse";
                             refreshPayments();
+                            
                             break;
                         default:
                             dgMainData.DataContext = null;
                             break;
                     }
 
-                    pgValue.SelectedValue = "Kurse";
-                    rgValue.SelectedValue = "Studenten";
-                    rgCourse.SelectedValue = "Termine";
+                    
+                    
+                    
                 }
             }
 
@@ -628,14 +642,26 @@ namespace CourseManagement.Client.View
         {
             try
             {
-                SpecificTables.changeDgStudent(dgMainData, StudentLogic.getInstance().getAll());
+                switch (rgValue.SelectedValue.ToString())
+                {
+                    case "Studenten":
+                        SpecificTables.changeDgStudent(dgMainData, StudentLogic.getInstance().getAll());
+                        break;
+                    case "Benutzer":
+                        SpecificTables.changeDgUser(dgMainData, UserLogic.getInstance().getAll());
+                        break;
+                    case "Tutoren":
+                        SpecificTables.changeDgTutor(dgMainData, TutorLogic.getInstance().getAll());
+                        break;
+                    case "Alle Personen":
+                        SpecificTables.changeDgPerson(dgMainData, PersonLogic.getInstance().getAll());
+                        break;
+                }
+
                 SpecificTables.changeDgCourse(dgSecondary, CourseLogic.getInstance().getAll());
                 lblHeadline.Content = "Personenübersicht";
-                cbValues.Items.Clear();
-                cbValues.Items.Add(new RibbonGalleryItem() { Content = "Studenten", Foreground = Brushes.Red });
-                cbValues.Items.Add(new RibbonGalleryItem() { Content = "Tutoren", Foreground = Brushes.Green });
-                if (ActiveUser.userIsAdmin()) cbValues.Items.Add(new RibbonGalleryItem() { Content = "Benutzer", Foreground = Brushes.Orange });
-                cbValues.Items.Add(new RibbonGalleryItem() { Content = "Alle Personen", Foreground = Brushes.Blue });
+
+                
                 spAppointments.Height = 0;
 
                 lblAppointmentToCourse.Content = "Gebuchte Kurse";
@@ -679,9 +705,7 @@ namespace CourseManagement.Client.View
                 SpecificTables.changeDgCourse(dgMainData, CourseLogic.getInstance().getAll());
                 SpecificTables.changeDgPayment(dgSecondary, PaymentLogic.getInstance().getAll());
                 spAppointments.Height = 0;
-                cbPaymentGroupsValues.Items.Clear();
-                cbPaymentGroupsValues.Items.Add(new RibbonGalleryItem() { Content = "Kurse", Foreground = Brushes.Blue });
-                cbPaymentGroupsValues.Items.Add(new RibbonGalleryItem() { Content = "Studenten", Foreground = Brushes.Green });
+                
                 dgMainData.Height = dgSecondary.Height = dataGridHeight + 55;
             }
             catch (Exception err)
