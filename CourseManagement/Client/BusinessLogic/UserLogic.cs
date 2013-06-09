@@ -209,7 +209,8 @@ namespace CourseManagement.Client.BusinessLogic
                     user.UserName = username;
                 }
                 else throw new Exception("Username nicht zulässig");
-                user.Password = password;
+                if (password != null && password != "") user.Password = password;
+
                 user.Admin = admin;
 
                 user.update();

@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Neue Person" Width="450"
-        Icon="Images\Kursverwaltung.ico" SizeToContent="Height" Loaded="wndPerson_Loaded"  ResizeMode="NoResize">
+        Icon="Images\Kursverwaltung.ico" SizeToContent="Height" Loaded="wndPerson_Loaded"  ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <StackPanel ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
             <Label x:Name="lblPerson" Content="Neue Person" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
@@ -54,7 +54,7 @@
                     <Label x:Name="lblBirthyear" Content="Geburtsjahr" />
                     <TextBox x:Name="tbBirthyear" Width="120"/>
                     <Label x:Name="lblIsActive" Content="aktiv?" />
-                    <CheckBox x:Name="chbxIsActive" Height="22" Width="120"/>  
+                    <CheckBox x:Name="chbxIsActive" Height="22" Width="120" IsChecked="True"/>  
                 </StackPanel>
             </StackPanel>
             <StackPanel x:Name="spStudent" Height="0" Margin="10" Orientation="Horizontal">

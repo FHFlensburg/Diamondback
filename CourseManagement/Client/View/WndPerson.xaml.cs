@@ -152,45 +152,72 @@ namespace CourseManagement.Client.View
                                 }
                                 break;
                             case "User":
-                                if (selectedPerson == null & userNr == 0)
+                                if (selectedPerson == null && userNr == 0)
                                 {
-                                    UserLogic.getInstance().create(surname,
-                                        forename,
-                                        birthyear,
-                                        street,
-                                        mobilePhone,
-                                        mail,
-                                        fax,
-                                        privatePhone,
-                                        gender,
-                                        isActive,
-                                        title,
-                                        city,
-                                        cityCode,
-                                        username,
-                                        password,
-                                        isAdmin);
-                                    this.DialogResult = true;
+                                    if (password != "")
+                                    {
+                                        UserLogic.getInstance().create(surname,
+                                            forename,
+                                            birthyear,
+                                            street,
+                                            mobilePhone,
+                                            mail,
+                                            fax,
+                                            privatePhone,
+                                            gender,
+                                            isActive,
+                                            title,
+                                            city,
+                                            cityCode,
+                                            username,
+                                            password,
+                                            isAdmin);
+                                        this.DialogResult = true;
+                                    }
+                                    else MessageBox.Show("Es muss ein Passwort vergeben werden!");
                                 }
                                 else
                                 {
-                                    UserLogic.getInstance().changeProperties(userNr,
-                                        surname,
-                                        forename,
-                                        birthyear,
-                                        street,
-                                        mobilePhone,
-                                        mail,
-                                        fax,
-                                        privatePhone,
-                                        gender,
-                                        isActive,
-                                        title,
-                                        city,
-                                        cityCode,
-                                        username,
-                                        password,
-                                        isAdmin);
+                                    if (password != "")
+                                    {
+                                        UserLogic.getInstance().changeProperties(userNr,
+                                            surname,
+                                            forename,
+                                            birthyear,
+                                            street,
+                                            mobilePhone,
+                                            mail,
+                                            fax,
+                                            privatePhone,
+                                            gender,
+                                            isActive,
+                                            title,
+                                            city,
+                                            cityCode,
+                                            username,
+                                            password,
+                                            isAdmin);
+                                    }
+                                    else
+                                    {
+                                        UserLogic.getInstance().changeProperties(userNr,
+                                            surname,
+                                            forename,
+                                            birthyear,
+                                            street,
+                                            mobilePhone,
+                                            mail,
+                                            fax,
+                                            privatePhone,
+                                            gender,
+                                            isActive,
+                                            title,
+                                            city,
+                                            cityCode,
+                                            username,
+                                            null,
+                                            isAdmin);
+                                    }
                                     this.DialogResult = true;
                                 }
                                 break;
@@ -322,10 +349,11 @@ namespace CourseManagement.Client.View
                 tbPhone.Text = selectedPerson.Rows[0]["privatePhone"].ToString();
                 tbGender.Text = selectedPerson.Rows[0]["gender"].ToString();
 
-                if (selectedPerson.Rows[0]["Active"].ToString() == "True")
+                if (selectedPerson.Rows[0]["Active"].ToString() == "False" || selectedPerson.Rows[0]["Active"].ToString()=="")
                 {
-                    chbxIsActive.IsChecked = true;
+                    chbxIsActive.IsChecked = false;
                 }
+ 
 
                 switch (selectedPerson.Rows[0]["Title"].ToString())
                 {
@@ -438,7 +466,7 @@ namespace CourseManagement.Client.View
             nameOfBank = tbBank.Text.ToString();
 
             username = tbUsername.Text;
-            password = pwbPassword.Password.ToString();
+            if (pwbPassword.Password != "") password = pwbPassword.Password.ToString();
             isAdmin = (bool)chbxAdmin.IsChecked;
         }
     }
