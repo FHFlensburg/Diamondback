@@ -74,7 +74,7 @@ namespace CourseManagement.Client.View
             this.Close();
         }
 
-        #region Office Ribbon Button pressed Eevents
+        #region Office Ribbon Button pressed Events
 
         #region Office Ribbon tab Course
         /// <summary>
@@ -273,27 +273,60 @@ namespace CourseManagement.Client.View
             {
                 if (dgMainData.SelectedIndex != -1 && lastfocusedDG == dgMainData)
                 {
-
                     DataRowView selectedCourseRow = (DataRowView)dgMainData.SelectedItems[0];
                     int selectedIndex = Convert.ToInt32((selectedCourseRow["CourseNr"]));
-                    CourseLogic.getInstance().delete(selectedIndex);
-                    refreshCourses();
+                    string message = "Möchten Sie den Kurs " + selectedCourseRow["Title"] + " wirklich löschen ?";
+                    string caption = "Löschen bestätigen";
+                    MessageBoxButton buttons = MessageBoxButton.YesNo;
+                    MessageBoxImage icon = MessageBoxImage.Warning;
+                    if (MessageBox.Show(message, caption, buttons, icon) == MessageBoxResult.Yes)
+                    {
+                        CourseLogic.getInstance().delete(selectedIndex);
+                        refreshCourses();
+                    }
+                    else
+                    {
+                        // Cancel code here
+                    } 
                 }
                 else
                 {
                     if (dgSecondary.SelectedIndex != -1 && cbCourse.Text == "Termine")
                     {
-                        deleteAppointment();
+                        DataRowView selectedAppointmentRow = (DataRowView)dgSecondary.SelectedItems[0];
+                        string message = "Möchten Sie den Termin für den Kurs " + selectedAppointmentRow["CourseName"] + " wirklich löschen ?";
+                        string caption = "Löschen bestätigen";
+                        MessageBoxButton buttons = MessageBoxButton.YesNo;
+                        MessageBoxImage icon = MessageBoxImage.Warning;
+                        if (MessageBox.Show(message, caption, buttons, icon) == MessageBoxResult.Yes)
+                        {
+                            deleteAppointment();
+                        }
+                        else
+                        {
+                            // Cancel code here
+                        } 
                     }
                     else if (dgSecondary.SelectedIndex != -1 && dgMainData.SelectedIndex != -1 && cbCourse.Text == "Teilnehmer")
                     {
                         int index = dgMainData.SelectedIndex;
                         int person = Convert.ToInt16(((DataRowView)dgSecondary.SelectedItem)["Id"]);
                         int course = Convert.ToInt16(((DataRowView)dgMainData.SelectedItem)["CourseNr"]);
-                        PaymentLogic.getInstance().delete(course, person);
-                        SpecificTables.changeDgCourse(dgMainData, CourseLogic.getInstance().getAll());
-                        dgMainData.SelectedIndex = index;
-                        SpecificTables.changeDgStudent(dgSecondary, StudentLogic.getInstance().getByCourse(course));
+                        string message = "Möchten Sie die Zahlung für die Person " + ((DataRowView)dgSecondary.SelectedItem)["Surname"] + " wirklich löschen ?";
+                        string caption = "Löschen bestätigen";
+                        MessageBoxButton buttons = MessageBoxButton.YesNo;
+                        MessageBoxImage icon = MessageBoxImage.Warning;
+                        if (MessageBox.Show(message, caption, buttons, icon) == MessageBoxResult.Yes)
+                        {
+                            PaymentLogic.getInstance().delete(course, person);
+                            SpecificTables.changeDgCourse(dgMainData, CourseLogic.getInstance().getAll());
+                            dgMainData.SelectedIndex = index;
+                            SpecificTables.changeDgStudent(dgSecondary, StudentLogic.getInstance().getByCourse(course));
+                        }
+                        else
+                        {
+                            // Cancel code here
+                        } 
                     }
                 }
             }
@@ -364,15 +397,39 @@ namespace CourseManagement.Client.View
                 {
                     int courseNr = Convert.ToInt32(((DataRowView)dgSecondary.SelectedItem)["CourseNr"]);
                     int studentNr = Convert.ToInt32(((DataRowView)dgMainData.SelectedItem)["Id"]);
-                    PaymentLogic.getInstance().delete(courseNr, studentNr);
-                    SpecificTables.changeDgCourse(dgSecondary, CourseLogic.getInstance().getByPerson(studentNr));
+                    string message = "Möchten Sie die Zuordnung zu dem Kurs " + ((DataRowView)dgSecondary.SelectedItem)["Title"] +
+                        " für den Studenten " + ((DataRowView)dgMainData.SelectedItem)["Surname"] + " wirklich löschen ?";
+                    string caption = "Löschen bestätigen";
+                    MessageBoxButton buttons = MessageBoxButton.YesNo;
+                    MessageBoxImage icon = MessageBoxImage.Warning;
+                    if (MessageBox.Show(message, caption, buttons, icon) == MessageBoxResult.Yes)
+                    {
+                        PaymentLogic.getInstance().delete(courseNr, studentNr);
+                        SpecificTables.changeDgCourse(dgSecondary, CourseLogic.getInstance().getByPerson(studentNr));
+                    }
+                    else
+                    {
+                        // Cancel code here
+                    } 
+                    
                 }
 
                 else if (dgMainData.SelectedIndex != -1 && lastfocusedDG == dgMainData)
                 {
-                    int id = Convert.ToInt32(((DataRowView)dgMainData.SelectedItem)["Id"]);
-                    PersonLogic.getInstance().delete(id);
-                    ribbonGallery_SelectionChanged(null, null);
+                    string message = "Möchten Sie die Person " + ((DataRowView)dgMainData.SelectedItem)["Surname"] + " wirklich löschen ?";
+                    string caption = "Löschen bestätigen";
+                    MessageBoxButton buttons = MessageBoxButton.YesNo;
+                    MessageBoxImage icon = MessageBoxImage.Warning;
+                    if (MessageBox.Show(message, caption, buttons, icon) == MessageBoxResult.Yes)
+                    {
+                        int id = Convert.ToInt32(((DataRowView)dgMainData.SelectedItem)["Id"]);
+                        PersonLogic.getInstance().delete(id);
+                        ribbonGallery_SelectionChanged(null, null);
+                    }
+                    else
+                    {
+                        // Cancel code here
+                    } 
                 }
             }
             catch (Exception err)
@@ -463,15 +520,38 @@ namespace CourseManagement.Client.View
         {
             try
             {
-                if (dgMainData.SelectedItems.Count == 1)
+                if (dgMainData.SelectedItems.Count == 1 && dgSecondary.SelectedIndex == -1)
                 {
                     DataRowView selectedRoomRow = (DataRowView)dgMainData.SelectedItems[0];
-                    RoomLogic.getInstance().delete(Convert.ToInt32(selectedRoomRow["roomNr"]));
-                    refreshRooms();
+                    string message = "Möchten Sie den Raum mit der Nr. " + selectedRoomRow["roomNr"] + " wirklich löschen ?";
+                    string caption = "Löschen bestätigen";
+                    MessageBoxButton buttons = MessageBoxButton.YesNo;
+                    MessageBoxImage icon = MessageBoxImage.Warning;
+                    if (MessageBox.Show(message, caption, buttons, icon) == MessageBoxResult.Yes)
+                    {
+                        RoomLogic.getInstance().delete(Convert.ToInt32(selectedRoomRow["roomNr"]));
+                        refreshRooms();
+                    }
+                    else
+                    {
+                        // Cancel code here
+                    } 
                 }
                 if (dgSecondary.SelectedIndex != -1)
                 {
-                    deleteAppointment();
+                    DataRowView selectedRoomRow = (DataRowView)dgMainData.SelectedItems[0];
+                    string message = "Möchten Sie den Termin für den Raum mit der Nr. " + selectedRoomRow["roomNr"] + " wirklich löschen ?";
+                    string caption = "Löschen bestätigen";
+                    MessageBoxButton buttons = MessageBoxButton.YesNo;
+                    MessageBoxImage icon = MessageBoxImage.Warning;
+                    if (MessageBox.Show(message, caption, buttons, icon) == MessageBoxResult.Yes)
+                    {
+                        deleteAppointment();
+                    }
+                    else
+                    {
+                        // Cancel code here
+                    } 
                 }
             }
             catch (Exception err)
