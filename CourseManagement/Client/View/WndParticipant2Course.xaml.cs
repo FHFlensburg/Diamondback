@@ -78,7 +78,7 @@ namespace CourseManagement.Client.View
         /// <param name="e"></param>
         private void close_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            this.DialogResult = false;
         }
 
         /// <summary>

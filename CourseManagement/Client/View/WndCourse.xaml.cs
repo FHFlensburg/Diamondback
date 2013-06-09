@@ -138,7 +138,7 @@ namespace CourseManagement.Client.View
         /// <param name="e"></param>
         private void btnAport_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            this.DialogResult = false;
         }
 
 
