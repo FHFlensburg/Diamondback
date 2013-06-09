@@ -530,7 +530,7 @@ namespace CourseManagement.Client.View
         {
             try
             {
-                if (dgMainData.SelectedItems.Count == 1 && dgSecondary.SelectedIndex == -1)
+                if (dgMainData.SelectedIndex != -1 && lastfocusedDG == dgMainData && !dgSecondary.HasItems)
                 {
                     DataRowView selectedRoomRow = (DataRowView)dgMainData.SelectedItems[0];
                     string message = "Möchten Sie den Raum mit der Nr. " + selectedRoomRow["roomNr"] + " wirklich löschen ?";
@@ -547,7 +547,11 @@ namespace CourseManagement.Client.View
                         // Cancel code here
                     } 
                 }
-                if (dgSecondary.SelectedIndex != -1)
+                else if (dgMainData.SelectedIndex != -1 && lastfocusedDG == dgMainData && dgSecondary.HasItems)
+                {
+                    MessageBox.Show("Ein Raum mit Termin(e) kann nicht gelöscht werden.", "Fehler beim löschen eines Raumes", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
                 {
                     DataRowView selectedRoomRow = (DataRowView)dgMainData.SelectedItems[0];
                     string message = "Möchten Sie den Termin für den Raum mit der Nr. " + selectedRoomRow["roomNr"] + " wirklich löschen ?";
