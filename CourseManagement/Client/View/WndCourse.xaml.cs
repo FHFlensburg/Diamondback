@@ -22,7 +22,7 @@ namespace CourseManagement.Client.View
         private decimal amountInEuro = 0;
 
         /// <summary>
-        /// standard constructor for window newCourse
+        /// Standard constructor for window newCourse
         /// </summary>
         public WndCourse()
         {
@@ -48,7 +48,7 @@ namespace CourseManagement.Client.View
         }
 
         /// <summary>
-        /// fills the data fields of this window with the data of the course that should be changed
+        /// Fills the data fields of this window with the data of the course that should be changed
         /// </summary>
         private void fillingDataFieldsWithProvidedData()
         {
@@ -74,7 +74,7 @@ namespace CourseManagement.Client.View
         }
 
         /// <summary>
-        /// fills the Combobox with all tutors
+        /// Fills the Combobox with all tutors
         /// </summary>
         private void setGuiValues()
         {
@@ -90,7 +90,7 @@ namespace CourseManagement.Client.View
         }
 
         /// <summary>
-        /// saves course in db if a tutor is selected
+        /// Saves course in db if a tutor is selected
         /// </summary>
         private void insertCourse()
         {
@@ -122,7 +122,7 @@ namespace CourseManagement.Client.View
         }
 
         /// <summary>
-        /// runs method to insert course in db
+        /// Runs method to insert course in db
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -132,7 +132,7 @@ namespace CourseManagement.Client.View
         }
 
         /// <summary>
-        /// closes window
+        /// Closes window
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -143,7 +143,7 @@ namespace CourseManagement.Client.View
 
 
         /// <summary>
-        /// referencing local variables with data from the textboxes
+        /// Referencing local variables with data from the textboxes
         /// </summary>
         private void referencingLocalVariables()
         {

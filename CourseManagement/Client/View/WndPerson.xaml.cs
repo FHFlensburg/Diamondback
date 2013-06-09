@@ -43,7 +43,7 @@ namespace CourseManagement.Client.View
 
 
         /// <summary>
-        /// standard constructor for window newPerson
+        /// Standard constructor for window newPerson
         /// </summary>
         public wndPerson()
         {
@@ -80,7 +80,7 @@ namespace CourseManagement.Client.View
         }
 
         /// <summary>
-        /// runs method which saves person in DB
+        /// Runs method which saves person in DB
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -90,9 +90,9 @@ namespace CourseManagement.Client.View
         }
 
         /// <summary>
-        /// runs business logic to save person to database 
+        /// Runs business logic to save person to database.
         /// 
-        /// first setting variables with data from textboxes, cheking if the only mandatory field
+        /// First setting variables with data from textboxes, cheking if the only mandatory field
         /// surname has been filled and then saving person in DB
         /// </summary>
         private void insertPerson()
@@ -286,7 +286,7 @@ namespace CourseManagement.Client.View
         }
 
         /// <summary>
-        /// depending of what type of person was selected to be changed 
+        /// Depending of what type of person was selected to be changed 
         /// the upper combobox has to be set right. 
         /// 
         /// 1 stands for student
@@ -328,7 +328,7 @@ namespace CourseManagement.Client.View
         }
 
         /// <summary>
-        ///fills the textboxes of the window with previous general data
+        ///Fills the textboxes of the window with previous general data
         ///of the person that should be changed
         /// </summary>
         private void fillingDataFieldsWithProvidedData()
@@ -378,7 +378,7 @@ namespace CourseManagement.Client.View
         }
 
         /// <summary>
-        /// fills the textboxes of the window with previous student data
+        /// Fills the textboxes of the window with previous student data
         ///of the person that should be changed
         /// </summary>
         private void fillingdataFieldsWithStudentData()
@@ -392,7 +392,7 @@ namespace CourseManagement.Client.View
         }
 
         /// <summary>
-        /// fills the textboxes of the window with previous user data
+        /// Fills the textboxes of the window with previous user data
         ///of the person that should be changed
         /// </summary>
         private void fillingdataFieldsWithUserData()
@@ -407,7 +407,7 @@ namespace CourseManagement.Client.View
         }
 
         /// <summary>
-        /// when combobox for the type of person changesthis event runs the method 
+        /// When combobox for the type of person changesthis event runs the method 
         /// to change the shown data field of this window
         /// </summary>
         /// <param name="sender"></param>
@@ -418,7 +418,7 @@ namespace CourseManagement.Client.View
         }
 
         /// <summary>
-        /// hides/shows kind of person specific data fields
+        /// Hides/shows kind of person specific data fields
         /// </summary>
         private void changingRole()
         {
@@ -443,7 +443,7 @@ namespace CourseManagement.Client.View
         }
 
         /// <summary>
-        /// referencing local variables with data from the textboxes
+        /// Referencing local variables with data from the textboxes
         /// </summary>
         private void referencingLocalVariables()
         {
