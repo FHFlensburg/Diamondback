@@ -59,7 +59,7 @@ namespace CourseManagement.Client.View
             this.Close();
         }
 
-        #region Office Ribbin Button pressed Eevents
+        #region Office Ribbon Button pressed Eevents
 
         #region Office Ribbon tab Course
         /// <summary>
@@ -276,7 +276,7 @@ namespace CourseManagement.Client.View
 
         private void ribbonButtonNewPerson_Click(object sender, RoutedEventArgs e)
         {
-            wndNewPerson aNewPerson = new wndNewPerson();
+            wndPerson aNewPerson = new wndPerson();
             aNewPerson.ShowDialog();
         }
 
@@ -377,13 +377,14 @@ namespace CourseManagement.Client.View
                                 else { MessageBox.Show("Error: Keine gültige Person"); }
                             }
                         }
-                        wndNewPerson editPerson = new wndNewPerson(selectedPerson, kindOfPerson);
+                        wndPerson editPerson = new wndPerson(selectedPerson, kindOfPerson);
                         editPerson.ShowDialog();
+                        refreshPersons();
                     }
                 }
 
 
-                refreshPersons();
+               
             }
             catch (Exception err)
             {

@@ -193,8 +193,8 @@
     <Compile Include="Client\View\WndLogin.xaml.cs">
       <DependentUpon>WndLogin.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Client\View\WndNewPerson.xaml.cs">
-      <DependentUpon>WndNewPerson.xaml</DependentUpon>
+    <Compile Include="Client\View\WndPerson.xaml.cs">
+      <DependentUpon>WndPerson.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -270,7 +270,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Client\View\WndNewPerson.xaml">
+    <Page Include="Client\View\WndPerson.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

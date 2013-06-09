@@ -5,11 +5,11 @@
         Icon="Images\Kursverwaltung.ico" WindowStartupLocation="CenterScreen">
     <Grid>
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Orientation="Horizontal" Margin="30">
-            <StackPanel  Margin="10" Width="100">
+            <StackPanel  Margin="10" MinWidth="100" FocusManager.FocusedElement="{Binding ElementName=tbUsername}">
                 <Label x:Name="lblUser" Content="Benutzername" Foreground="White" Opacity="0.5"/>
                 <TextBox x:Name="tbUsername" Margin="2" />
             </StackPanel>
-            <StackPanel Margin="10" Width="100">
+            <StackPanel Margin="10" MinWidth="100">
                 <Label x:Name="lblPassword" Content="Passwort" Background="#FF2D2D30" Foreground="White" Opacity="0.5"  />
                 <PasswordBox x:Name="pwbPassword" Margin="2"/>
                 <Button x:Name="btnLogin" Content="Login" Click="btnLogin_Click" Margin="10" IsDefault="True"/>

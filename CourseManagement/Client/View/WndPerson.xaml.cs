@@ -8,9 +8,9 @@ using System.Windows.Media;
 namespace CourseManagement.Client.View
 {
     /// <summary>
-    /// Interaktionslogik für wndNewPerson.xaml
+    /// Interactionlogic for wndNewPerson.xaml
     /// </summary>
-    public partial class wndNewPerson : Window
+    public partial class wndPerson : Window
     {
         private DataTable selectedPerson = null;
         private int studentNr = 0;
@@ -45,14 +45,19 @@ namespace CourseManagement.Client.View
         /// <summary>
         /// standard constructor for window newPerson
         /// </summary>
-        public wndNewPerson()
+        public wndPerson()
         {
             InitializeComponent();
             if (ActiveUser.userIsAdmin() == false) cbxRole.Items.RemoveAt(2);
 
         }
 
-        public wndNewPerson(DataTable selectedPerson, int kindOfPerson)
+        /// <summary>
+        /// Custom construktor for changing a person
+        /// </summary>
+        /// <param name="selectedPerson"></param>
+        /// <param name="kindOfPerson"></param>
+        public wndPerson(DataTable selectedPerson, int kindOfPerson)
         {
             InitializeComponent();
             if (ActiveUser.userIsAdmin() == false) cbxRole.Items.RemoveAt(2);
@@ -64,20 +69,35 @@ namespace CourseManagement.Client.View
         }
 
 
-
+        /// <summary>
+        /// Setting the right type of person in upper combobox when window is loaded
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void wndPerson_Loaded(object sender, RoutedEventArgs e)
         {
             changingRole();
         }
 
-        private void ButtonSavePerson_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// runs method which saves person in DB
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonSavePerson_Click(object sender, RoutedEventArgs e)
         {
             insertPerson();
         }
 
+        /// <summary>
+        /// runs business logic to save person to database 
+        /// 
+        /// first setting variables with data from textboxes, cheking if the only mandatory field
+        /// surname has been filled and then saving person in DB
+        /// </summary>
         private void insertPerson()
         {
-            fillingNonMandatoryFields();
+            referencingLocalVariables();
             if (cbxRole.SelectedIndex != -1)
             {
                 if (surname != "")
@@ -228,11 +248,24 @@ namespace CourseManagement.Client.View
             }
         }
 
-        private void ButtonApoprtPerson_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Closing window if abort button is pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonCancelPerson_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// depending of what type of person was selected to be changed 
+        /// the upper combobox has to be set right. 
+        /// 
+        /// 1 stands for student
+        /// 2 stands for user
+        /// 3 stands for tutor
+        /// </summary>
         private void checkKindofPerson()
         {
 
@@ -267,9 +300,14 @@ namespace CourseManagement.Client.View
             cbxRole.IsEnabled = false;
         }
 
+        /// <summary>
+        ///fills the textboxes of the window with previous general data
+        ///of the person that should be changed
+        /// </summary>
         private void fillingDataFieldsWithProvidedData()
         {
             lblPerson.Content = "Person bearbeiten";
+            this.Title = "Person bearbeiten";
 
 
             try
@@ -311,6 +349,10 @@ namespace CourseManagement.Client.View
             }
         }
 
+        /// <summary>
+        /// fills the textboxes of the window with previous student data
+        ///of the person that should be changed
+        /// </summary>
         private void fillingdataFieldsWithStudentData()
         {
             studentNr = Convert.ToInt32(selectedPerson.Rows[0]["Id"]);
@@ -321,6 +363,10 @@ namespace CourseManagement.Client.View
             tbBank.Text = selectedPerson.Rows[0]["nameofBank"].ToString();
         }
 
+        /// <summary>
+        /// fills the textboxes of the window with previous user data
+        ///of the person that should be changed
+        /// </summary>
         private void fillingdataFieldsWithUserData()
         {
             userNr = Convert.ToInt32(selectedPerson.Rows[0]["Id"]);
@@ -332,11 +378,19 @@ namespace CourseManagement.Client.View
             tbUsername.Text = selectedPerson.Rows[0]["username"].ToString();
         }
 
-        private void ComboBoxRole_SelectonChanged(object sender, SelectionChangedEventArgs e)
+        /// <summary>
+        /// when combobox selection changed it runs method to change the shown data field of window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBoxRole_SelectonChanged(object sender, SelectionChangedEventArgs e)
         {
             changingRole();
         }
 
+        /// <summary>
+        /// hides/shows kind of person specific data fields
+        /// </summary>
         private void changingRole()
         {
             if (this.IsLoaded)
@@ -359,8 +413,10 @@ namespace CourseManagement.Client.View
             }
         }
 
-
-        private void fillingNonMandatoryFields()
+        /// <summary>
+        /// referencing local variables with data from the textboxes
+        /// </summary>
+        private void referencingLocalVariables()
         {
             forename = tbForename.Text;
             surname = tbSurname.Text;
