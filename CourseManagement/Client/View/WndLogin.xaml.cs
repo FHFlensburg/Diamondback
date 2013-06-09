@@ -9,6 +9,8 @@ namespace CourseManagement.Client.View
     /// </summary>
     public partial class WndLogin : Window
     {
+        private int countLoginAttempts = 0;
+
         /// <summary>
         /// Default Constructor
         /// </summary>
@@ -17,9 +19,13 @@ namespace CourseManagement.Client.View
             InitializeComponent(); 
         }
 
-        //Zusammen mit checkPassword auszulagern
-        private int countLoginAttempts = 0; 
-
+        /// <summary>
+        /// Opens main window if password and username is correct
+        /// in feature releases there could the function, that the user
+        /// will be deactivated after a certain amount of attempts
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             
@@ -29,11 +35,16 @@ namespace CourseManagement.Client.View
             }
             else
             {
-                
                 tbPasswordStatus.Text = "Passwort falsch(" + ++countLoginAttempts + ". Versuch)";
             }
         }
 
+        /// <summary>
+        /// checks if submitted username and password are correct
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         private bool checkPassword(string userName, string password)
         {
             bool passwordOkay = false;

@@ -8,9 +8,9 @@ using System.Windows.Controls;
 namespace CourseManagement.Client.View
 {
     /// <summary>
-    /// Interaktionslogik für WndNewCourse.xaml
+    /// Interactionlogic for WndCourse.xaml
     /// </summary>
-    public partial class WndNewCourse : Window
+    public partial class WndCourse : Window
     {
         private DataTable selectedCourse = null;
         private string titeL = "";
@@ -24,25 +24,32 @@ namespace CourseManagement.Client.View
         /// <summary>
         /// standard constructor for window newCourse
         /// </summary>
-        public WndNewCourse()
+        public WndCourse()
         {
             InitializeComponent();
             setGuiValues();
         }
 
-
-        public WndNewCourse(DataTable selectedCourse)
+        /// <summary>
+        /// Custom constructor for changing a course
+        /// </summary>
+        /// <param name="selectedCourse"></param>
+        public WndCourse(DataTable selectedCourse)
         {
             InitializeComponent();
             setGuiValues();
 
             this.selectedCourse = selectedCourse;
             lblCourse.Content = "Kurs bearbeiten";
+            this.Title = "Kurs bearbeiten";
 
 
             fillingDataFieldsWithProvidedData();
         }
 
+        /// <summary>
+        /// fills the data fields of this window with the data of the course that should be changed
+        /// </summary>
         private void fillingDataFieldsWithProvidedData()
         {
             tbMaxParticipants.Text = selectedCourse.Rows[0]["MaxMember"].ToString();
@@ -66,12 +73,11 @@ namespace CourseManagement.Client.View
             }
         }
 
+        /// <summary>
+        /// fills the Combobox with all tutors
+        /// </summary>
         private void setGuiValues()
         {
-
-            lblCourse.Content = "Neuer Kurs";
-
-            // Values for Tutor
             DataTable allTutors = TutorLogic.getInstance().getAll();
             foreach (DataRow aDataRow in allTutors.Rows)
             {
@@ -83,11 +89,12 @@ namespace CourseManagement.Client.View
             }
         }
 
-
-
+        /// <summary>
+        /// saves course in db if a tutor is selected
+        /// </summary>
         private void insertCourse()
         {
-            fillingNonMandatoryDataFields();
+            referencingLocalVariables();
             if(cbTutor.SelectedItem != null)
             {
                 tutor = Convert.ToInt32(((ComboBoxItem)cbTutor.SelectedItem).Tag);
@@ -114,19 +121,31 @@ namespace CourseManagement.Client.View
 
         }
 
+        /// <summary>
+        /// runs method to insert course in db
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             insertCourse();
         }
 
+        /// <summary>
+        /// closes window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAport_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
 
-
-        private void fillingNonMandatoryDataFields()
+        /// <summary>
+        /// referencing local variables with data from the textboxes
+        /// </summary>
+        private void referencingLocalVariables()
         {
             titeL = tbCourseTitle.Text;
             try { amountInEuro = Convert.ToDecimal(tbCosts.Text); }

@@ -170,7 +170,7 @@ namespace CourseManagement.Client.View
         {
             try
             {
-                WndNewCourse aNewCourse = new WndNewCourse();
+                WndCourse aNewCourse = new WndCourse();
                 aNewCourse.ShowDialog();
                 refreshCourses();
             }
@@ -215,7 +215,7 @@ namespace CourseManagement.Client.View
                     DataTable tempDataTable = CourseLogic.getInstance().getAll();
                     int selectedIndex = Convert.ToInt32(tempDataTable.Rows[dgMainData.SelectedIndex]["CourseNr"]);
                     DataTable selectedCourse = CourseLogic.getInstance().getById(selectedIndex);
-                    WndNewCourse editCourse = new WndNewCourse(selectedCourse);
+                    WndCourse editCourse = new WndCourse(selectedCourse);
                     editCourse.ShowDialog();
                     refreshCourses();
                 }
@@ -407,7 +407,7 @@ namespace CourseManagement.Client.View
         private void ribbonButtonNewRoom_Click(object sender, RoutedEventArgs e)
         {
 
-            WndNewRoom aNewRoom = new WndNewRoom();
+            WndRoom aNewRoom = new WndRoom();
             aNewRoom.lblNewRoom.Content = "Neuer Raum";
             aNewRoom.ShowDialog();
         }
@@ -444,7 +444,7 @@ namespace CourseManagement.Client.View
                     DataRowView selectedRoomRow = (DataRowView)dgMainData.SelectedItems[0];
                     int selectedIndex = Convert.ToInt32((selectedRoomRow["roomNr"]));
                     DataTable selectedRoom = RoomLogic.getInstance().getById(selectedIndex);
-                    WndNewRoom editCourse = new WndNewRoom(selectedRoom);
+                    WndRoom editCourse = new WndRoom(selectedRoom);
                     editCourse.ShowDialog();
                 }
 

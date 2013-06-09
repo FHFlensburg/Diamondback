@@ -1,4 +1,4 @@
-﻿<Window x:Class="CourseManagement.Client.View.WndNewCourse"
+﻿<Window x:Class="CourseManagement.Client.View.WndCourse"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Neuer Kurs" Height="350" Width="320"

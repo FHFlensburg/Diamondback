@@ -181,11 +181,11 @@
     </Compile>
     <Compile Include="Client\DB\Model\UserActions.cs" />
     <Compile Include="Client\DB\UserQuery.cs" />
-    <Compile Include="Client\View\WndNewCourse.xaml.cs">
-      <DependentUpon>WndNewCourse.xaml</DependentUpon>
+    <Compile Include="Client\View\WndCourse.xaml.cs">
+      <DependentUpon>WndCourse.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Client\View\WndNewRoom.xaml.cs">
-      <DependentUpon>WndNewRoom.xaml</DependentUpon>
+    <Compile Include="Client\View\WndRoom.xaml.cs">
+      <DependentUpon>WndRoom.xaml</DependentUpon>
     </Compile>
     <Compile Include="Client\View\WndIndex.xaml.cs">
       <DependentUpon>WndIndex.xaml</DependentUpon>
@@ -250,7 +250,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Client\View\WndNewCourse.xaml">
+    <Page Include="Client\View\WndCourse.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -258,7 +258,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Client\View\WndNewRoom.xaml">
+    <Page Include="Client\View\WndRoom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

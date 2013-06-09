@@ -8,7 +8,7 @@ using System.Windows.Media;
 namespace CourseManagement.Client.View
 {
     /// <summary>
-    /// Interactionlogic for wndNewPerson.xaml
+    /// Interactionlogic for wndPerson.xaml
     /// </summary>
     public partial class wndPerson : Window
     {
@@ -407,7 +407,8 @@ namespace CourseManagement.Client.View
         }
 
         /// <summary>
-        /// when combobox selection changed it runs method to change the shown data field of window
+        /// when combobox for the type of person changesthis event runs the method 
+        /// to change the shown data field of this window
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
