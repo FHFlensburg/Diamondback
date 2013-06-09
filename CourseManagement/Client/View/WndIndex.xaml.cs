@@ -982,7 +982,15 @@ namespace CourseManagement.Client.View
                         SpecificTables.changeDgRoom(dgMainData, RoomLogic.getInstance().search(tbSearch.Text));
                         break;
                     case 3:
-                        SpecificTables.changeDgStudent(dgMainData, StudentLogic.getInstance().search(tbSearch.Text));
+                        switch(cbxPaymentGroups.Text)
+                        {
+                            case "Kurse":
+                                SpecificTables.changeDgCourse(dgMainData, CourseLogic.getInstance().search(tbSearch.Text));
+                                break;
+                            case "Studenten":
+                                SpecificTables.changeDgStudent(dgMainData, StudentLogic.getInstance().search(tbSearch.Text));
+                                break;
+                        }
                         break;
                     default:
                         dgMainData.DataContext = null;
