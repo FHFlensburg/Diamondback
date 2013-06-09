@@ -1224,5 +1224,15 @@ namespace CourseManagement.Client.View
         {
             new WndChangePsw().ShowDialog();
         }
+
+        /// <summary>
+        /// Shows Information of the creators of this software
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnInfo_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Software Projekt 2013\n\nGruppe Diamondback\n\nMitglieder:\n\tChristoph Süßens\n\tJan Greve\n\tChristian Hapke\n\tJanne Tjark Krüger\n\tAndre Schiemann\n\tSebastian Gorr\n\tStefan Siemsen");
+        }
     }
 }
