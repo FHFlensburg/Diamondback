@@ -33,6 +33,7 @@ namespace CourseManagement.Client.View
                 else
                 {
                     ActiveUser.changePassword(pswBxNew.Password);
+                    MessageBox.Show("Passwort wurde geändert");
                     this.Close();
                 }
             }

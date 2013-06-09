@@ -1323,5 +1323,18 @@ namespace CourseManagement.Client.View
         {
             MessageBox.Show("Software Projekt 2013\n\nGruppe Diamondback\n\nMitglieder:\n\tChristoph Süßens\n\tJan Greve\n\tChristian Hapke\n\tJanne Tjark Krüger\n\tAndre Schiemann\n\tSebastian Gorr\n\tStefan Siemsen");
         }
+
+
+        /// <summary>
+        /// Logout the current User
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void logout_Click(object sender, RoutedEventArgs e)
+        {
+            ActiveUser.logout();
+            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+            Application.Current.Shutdown();
+        }
     }
 }
