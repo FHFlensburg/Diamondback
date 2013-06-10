@@ -4,7 +4,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:r="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
         Height="700" Width="900" WindowStartupLocation="CenterScreen" Activated="mainWindow_IsLoaded"  SizeChanged="mainWindow_SizeChanged" KeyDown="mainWindow_KeyDown" SizeToContent="Height" MinHeight="700"
-        Icon="Images\Kursverwaltung.ico" Name="mainWindow"
+        Icon="Images\Kursverwaltung.ico" Name="mainWindow" Closing="mainWindowClose"
         Title="Kursverwaltung Version 1.0">
     <Grid>
         <Grid.RowDefinitions>

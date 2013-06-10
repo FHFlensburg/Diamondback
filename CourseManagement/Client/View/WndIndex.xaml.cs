@@ -71,7 +71,7 @@ namespace CourseManagement.Client.View
         /// <param name="e"></param>
         private void mainWindowClose_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+           this.Close();
         }
 
         #region Office Ribbon Button pressed Events
@@ -287,6 +287,9 @@ namespace CourseManagement.Client.View
                     MessageBoxImage icon = MessageBoxImage.Warning;
                     if (MessageBox.Show(message, caption, buttons, icon) == MessageBoxResult.Yes)
                     {
+                        int studenten = PaymentLogic.getInstance().getByCourse(selectedIndex).Rows.Count;
+                        if(studenten==0||MessageBox.Show("Der Kurs wurde bereits von "+studenten + " Studenten gebucht.\nTrotzdem löschen?", 
+                                         "Warnung", buttons, MessageBoxImage.Error) == MessageBoxResult.Yes)
                         CourseLogic.getInstance().delete(selectedIndex);
                         refreshCourses();
                     }
@@ -402,24 +405,26 @@ namespace CourseManagement.Client.View
             {
                 if (dgSecondary.SelectedItems.Count == 1 && dgMainData.SelectedItems.Count == 1 && lastfocusedDG == dgSecondary)
                 {
+                   
                     int courseNr = Convert.ToInt32(((DataRowView)dgSecondary.SelectedItem)["CourseNr"]);
                     int studentNr = Convert.ToInt32(((DataRowView)dgMainData.SelectedItem)["Id"]);
-                    string message = "Möchten Sie die Zuordnung zu dem Kurs " + ((DataRowView)dgSecondary.SelectedItem)["Title"] +
-                        " für den Studenten " + ((DataRowView)dgMainData.SelectedItem)["Surname"] + " wirklich löschen ?";
-                    string caption = "Löschen bestätigen";
-                    MessageBoxButton buttons = MessageBoxButton.YesNo;
-                    MessageBoxImage icon = MessageBoxImage.Warning;
-                    if (MessageBox.Show(message, caption, buttons, icon) == MessageBoxResult.Yes)
+                    if (!PersonLogic.getInstance().isTutor(studentNr))
                     {
-                        PaymentLogic.getInstance().delete(courseNr, studentNr);
-                        SpecificTables.changeDgCourse(dgSecondary, CourseLogic.getInstance().getByPerson(studentNr));
+                        string message = "Möchten Sie die Zuordnung zu dem Kurs " + ((DataRowView)dgSecondary.SelectedItem)["Title"] +
+                            " für den Studenten " + ((DataRowView)dgMainData.SelectedItem)["Surname"] + " wirklich löschen ?";
+                        string caption = "Löschen bestätigen";
+                        MessageBoxButton buttons = MessageBoxButton.YesNo;
+                        MessageBoxImage icon = MessageBoxImage.Warning;
+                        if (MessageBox.Show(message, caption, buttons, icon) == MessageBoxResult.Yes)
+                        {
+                            PaymentLogic.getInstance().delete(courseNr, studentNr);
+                            SpecificTables.changeDgCourse(dgSecondary, CourseLogic.getInstance().getByPerson(studentNr));
+                        }
                     }
-                    else
-                    {
-                        // Cancel code here
-                    } 
+                    else MessageBox.Show("Die Zuordnung eines Tutors zu einem Kurs kann nur im Reiter Kurse(Bearbeiten/Löschen) aufgehoben werden.","Fehler",MessageBoxButton.OK,MessageBoxImage.Error);
                     
                 }
+ 
 
                 else if (dgMainData.SelectedIndex != -1 && lastfocusedDG == dgMainData)
                 {
@@ -427,16 +432,17 @@ namespace CourseManagement.Client.View
                     string caption = "Löschen bestätigen";
                     MessageBoxButton buttons = MessageBoxButton.YesNo;
                     MessageBoxImage icon = MessageBoxImage.Warning;
-                    if (MessageBox.Show(message, caption, buttons, icon) == MessageBoxResult.Yes)
+                    int id = Convert.ToInt32(((DataRowView)dgMainData.SelectedItem)["Id"]);
+                    if (CourseLogic.getInstance().getByPerson(id).Rows.Count == 0)
                     {
-                        int id = Convert.ToInt32(((DataRowView)dgMainData.SelectedItem)["Id"]);
-                        PersonLogic.getInstance().delete(id);
-                        ribbonGallery_SelectionChanged(null, null);
+                        if (MessageBox.Show(message, caption, buttons, icon) == MessageBoxResult.Yes)
+                        {
+
+                            PersonLogic.getInstance().delete(id);
+                            ribbonGallery_SelectionChanged(null, null);
+                        }
                     }
-                    else
-                    {
-                        // Cancel code here
-                    } 
+                    else MessageBox.Show("Eine Person die einem oder mehreren Kursen zugeordnet ist, kann nicht gelöscht werden!","Fehler",MessageBoxButton.OK,MessageBoxImage.Error);
                 }
             }
             catch (Exception err)
@@ -1354,9 +1360,28 @@ namespace CourseManagement.Client.View
         /// <param name="e"></param>
         private void logout_Click(object sender, RoutedEventArgs e)
         {
-            ActiveUser.logout();
-            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
-            Application.Current.Shutdown();
+            if (MessageBox.Show("Wirklich ausloggen?", "Benutzer wechseln", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                ActiveUser.logout();
+                this.Visibility = Visibility.Hidden;
+                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                Application.Current.Shutdown();
+            }
+        }
+
+
+        /// <summary>
+        /// manage the behaviour, when pressing close button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mainWindowClose(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (this.Visibility==Visibility.Visible)
+            {
+                if (MessageBox.Show("Wirklich Schließen?", "Schließen bestätigen", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No) e.Cancel = true;
+            }
+            
         }
     }
 }
