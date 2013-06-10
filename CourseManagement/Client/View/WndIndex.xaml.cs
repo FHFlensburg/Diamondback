@@ -202,6 +202,7 @@ namespace CourseManagement.Client.View
         private void ribbonButtonAddParticipant_Click(object sender, RoutedEventArgs e)
         {
             openWindow2AddParticpant();
+            refreshCourses();
         }
 
         /// <summary>
