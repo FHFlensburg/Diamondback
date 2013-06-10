@@ -129,7 +129,7 @@
                 </r:Ribbon>
 
             </StackPanel>
-
+            <!--Row between Office Ribbon and Datagrid -->
             <StackPanel Grid.Row="2" Orientation="Vertical" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" >
                 <UniformGrid Margin="10">
                     <UniformGrid Rows="1">
@@ -140,6 +140,8 @@
                     </UniformGrid>
                 </UniformGrid>
                 <UniformGrid>
+                    <!-- Upper Datagrid -->
+
                     <DataGrid Height ="175" x:Name="dgMainData" Margin="10" ItemsSource="{Binding}" SelectionChanged="element_SelectCourse" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ColumnWidth="Auto" CanUserAddRows="False"  GotFocus="dg_Selected">
                         <DataGrid.ItemContainerStyle>
                             <Style TargetType="DataGridRow">
