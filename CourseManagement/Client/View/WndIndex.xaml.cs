@@ -60,7 +60,7 @@ namespace CourseManagement.Client.View
             }
             catch (Exception err)
             {
-                MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
+                MessageBox.Show("Exception: " + err.Message,"Netzwerk oder Dantenbankfehler",MessageBoxButton.OK,MessageBoxImage.Error);
             }
         }
 
@@ -165,7 +165,7 @@ namespace CourseManagement.Client.View
                 }
                 catch (Exception err)
                 {
-                    System.Windows.MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
+                    MessageBox.Show("Exception: " + err.Message, "Netzwerk oder Dantenbankfehler", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             else
@@ -189,7 +189,7 @@ namespace CourseManagement.Client.View
             }
             catch (Exception err)
             {
-                System.Windows.MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
+                MessageBox.Show("Exception: " + err.Message, "Netzwerk oder Dantenbankfehler", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -257,7 +257,7 @@ namespace CourseManagement.Client.View
                 }
                 catch (Exception err)
                 {
-                    System.Windows.MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
+                    MessageBox.Show("Exception: " + err.Message, "Netzwerk oder Dantenbankfehler", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
@@ -332,7 +332,7 @@ namespace CourseManagement.Client.View
             }
             catch (Exception err)
             {
-                System.Windows.MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
+                MessageBox.Show("Exception: " + err.Message, "Netzwerk oder Dantenbankfehler", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         #endregion
@@ -380,7 +380,7 @@ namespace CourseManagement.Client.View
             }
             catch (Exception err)
             {
-                System.Windows.MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
+                MessageBox.Show("Exception: " + err.Message, "Netzwerk oder Dantenbankfehler", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -434,7 +434,7 @@ namespace CourseManagement.Client.View
             }
             catch (Exception err)
             {
-                System.Windows.MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
+                MessageBox.Show("Exception: " + err.Message, "Netzwerk oder Dantenbankfehler", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         }
@@ -479,7 +479,10 @@ namespace CourseManagement.Client.View
                                     selectedPerson = TutorLogic.getInstance().getById(personID);
                                     kindOfPerson = 3;
                                 }
-                                else { MessageBox.Show("Error: Keine gültige Person"); }
+                                else
+                                {
+                                    MessageBox.Show("Keine gültige Person", "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+                                }
                             }
                         }
                         wndPerson editPerson = new wndPerson(selectedPerson, kindOfPerson);
@@ -491,7 +494,7 @@ namespace CourseManagement.Client.View
             }
             catch (Exception err)
             {
-                System.Windows.MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
+                MessageBox.Show("Exception: " + err.Message, "Netzwerk oder Dantenbankfehler", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -560,7 +563,7 @@ namespace CourseManagement.Client.View
             }
             catch (Exception err)
             {
-                System.Windows.MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
+                MessageBox.Show("Exception: " + err.Message, "Netzwerk oder Dantenbankfehler", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -585,7 +588,7 @@ namespace CourseManagement.Client.View
             }
             catch (Exception err)
             {
-                System.Windows.MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
+                MessageBox.Show("Exception: " + err.Message, "Netzwerk oder Dantenbankfehler", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -652,7 +655,7 @@ namespace CourseManagement.Client.View
             }
             catch (Exception err)
             {
-                System.Windows.MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
+                MessageBox.Show("Exception: " + err.Message, "Netzwerk oder Dantenbankfehler", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -693,7 +696,7 @@ namespace CourseManagement.Client.View
             }
             catch (Exception err)
             {
-                System.Windows.MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
+                MessageBox.Show("Exception: " + err.Message, "Netzwerk oder Dantenbankfehler", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -746,7 +749,7 @@ namespace CourseManagement.Client.View
 
             catch (Exception err)
             {
-                MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
+                MessageBox.Show("Exception: " + err.Message, "Netzwerk oder Dantenbankfehler", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -986,7 +989,7 @@ namespace CourseManagement.Client.View
             }
             catch (Exception err)
             {
-                MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
+                MessageBox.Show("Exception: " + err.Message, "Netzwerk oder Dantenbankfehler", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -1091,7 +1094,7 @@ namespace CourseManagement.Client.View
             }
             catch (Exception err)
             {
-                MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
+                MessageBox.Show("Exception: " + err.Message, "Netzwerk oder Dantenbankfehler", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -1180,7 +1183,7 @@ namespace CourseManagement.Client.View
             }
             catch (Exception err)
             {
-                MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
+                MessageBox.Show("Exception: " + err.Message, "Netzwerk oder Dantenbankfehler", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -1221,7 +1224,7 @@ namespace CourseManagement.Client.View
             }
             catch (Exception err)
             {
-                MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
+                MessageBox.Show("Exception: " + err.Message, "Netzwerk oder Dantenbankfehler", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -1304,7 +1307,7 @@ namespace CourseManagement.Client.View
             }
             catch (Exception err)
             {
-                MessageBox.Show("Netzwerk oder Datenbankfehler\n Exception: " + err.Message);
+                MessageBox.Show("Exception: " + err.Message, "Netzwerk oder Dantenbankfehler", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
