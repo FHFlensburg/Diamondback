@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyTitle("Kursverwaltung")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Diamondback")]
 [assembly: AssemblyProduct("Kursverwaltung")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
