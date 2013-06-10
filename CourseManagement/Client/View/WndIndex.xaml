@@ -4,13 +4,17 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:r="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
         Height="700" Width="900" WindowStartupLocation="CenterScreen" Activated="mainWindow_IsLoaded"  SizeChanged="mainWindow_SizeChanged" KeyDown="mainWindow_KeyDown" SizeToContent="Height" MinHeight="700"
-        Icon="Images\Kursverwaltung.ico"
+        Icon="Images\Kursverwaltung.ico" Name="mainWindow"
         Title="Kursverwaltung Version 1.0">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        <Popup Name="popUp" PlacementTarget="{Binding ElementName=mainWindow}" Placement="Relative" VerticalOffset="30" HorizontalOffset="400"
+   PopupAnimation="Slide" AllowsTransparency="True" StaysOpen="False">
+            <TextBlock Text="Erfolgreich gespeichert" Foreground="Green" FontWeight="Bold"/>
+        </Popup>
         <StackPanel ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
             <StackPanel>
                 <r:Ribbon x:Name="mainRibbon"  SelectedIndex="0" SelectionChanged="ribbon_SelectionChanged">
@@ -125,7 +129,7 @@
                 </r:Ribbon>
 
             </StackPanel>
-
+            <!--Row between Office Ribbon and Datagrid -->
             <StackPanel Grid.Row="2" Orientation="Vertical" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" >
                 <UniformGrid Margin="10">
                     <UniformGrid Rows="1">
@@ -136,6 +140,8 @@
                     </UniformGrid>
                 </UniformGrid>
                 <UniformGrid>
+                    <!-- Upper Datagrid -->
+
                     <DataGrid Height ="175" x:Name="dgMainData" Margin="10" ItemsSource="{Binding}" SelectionChanged="element_SelectCourse" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ColumnWidth="Auto" CanUserAddRows="False"  GotFocus="dg_Selected">
                         <DataGrid.ItemContainerStyle>
                             <Style TargetType="DataGridRow">

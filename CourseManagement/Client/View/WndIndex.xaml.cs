@@ -183,8 +183,9 @@ namespace CourseManagement.Client.View
         {
             try
             {
-                WndCourse aNewCourse = new WndCourse();
-                aNewCourse.ShowDialog();
+                WndCourse aNewCourseWindow = new WndCourse();
+                aNewCourseWindow.ShowDialog();
+                if (aNewCourseWindow.DialogResult.HasValue && aNewCourseWindow.DialogResult.Value){popUp.IsOpen = true;}
                 refreshCourses();
             }
             catch (Exception err)
@@ -219,6 +220,7 @@ namespace CourseManagement.Client.View
                     aNewAllocation = new WndParticipant2Course();
                 }
                 aNewAllocation.ShowDialog();
+                if (aNewAllocation.DialogResult.HasValue && aNewAllocation.DialogResult.Value){popUp.IsOpen = true;}
         }
 
         /// <summary>
@@ -252,6 +254,10 @@ namespace CourseManagement.Client.View
                     DataTable selectedCourse = CourseLogic.getInstance().getById(selectedIndex);
                     WndCourse editCourse = new WndCourse(selectedCourse);
                     editCourse.ShowDialog();
+                    if (editCourse.DialogResult.HasValue && editCourse.DialogResult.Value)
+                    {
+                        popUp.IsOpen = true;
+                    }
                     refreshCourses();
                     showsInfosOfCourse();
                 }
@@ -346,8 +352,9 @@ namespace CourseManagement.Client.View
         /// <param name="e"></param>
         private void ribbonButtonNewPerson_Click(object sender, RoutedEventArgs e)
         {
-            wndPerson aNewPerson = new wndPerson();
-            aNewPerson.ShowDialog();
+            wndPerson aNewPersonWindow = new wndPerson();
+            aNewPersonWindow.ShowDialog();
+            if (aNewPersonWindow.DialogResult.HasValue && aNewPersonWindow.DialogResult.Value){popUp.IsOpen = true;}
         }
 
         /// <summary>
@@ -487,6 +494,7 @@ namespace CourseManagement.Client.View
                         }
                         wndPerson editPerson = new wndPerson(selectedPerson, kindOfPerson);
                         editPerson.ShowDialog();
+                        if (editPerson.DialogResult.HasValue && editPerson.DialogResult.Value){popUp.IsOpen = true;}
                         refreshPersons();
                         SpecificTables.changeDgCourse(dgSecondary, CourseLogic.getInstance().getByPerson(personID));
                     }
@@ -509,9 +517,11 @@ namespace CourseManagement.Client.View
         /// <param name="e"></param>
         private void ribbonButtonNewRoom_Click(object sender, RoutedEventArgs e)
         {
-            WndRoom aNewRoom = new WndRoom();
-            aNewRoom.lblNewRoom.Content = "Neuer Raum";
-            aNewRoom.ShowDialog();
+            WndRoom aNewRoomWindow = new WndRoom();
+            aNewRoomWindow.lblNewRoom.Content = "Neuer Raum";
+            aNewRoomWindow.ShowDialog();
+            if (aNewRoomWindow.DialogResult.HasValue && aNewRoomWindow.DialogResult.Value){popUp.IsOpen = true;}
+            refreshRooms();
         }
 
         /// <summary>
@@ -583,8 +593,10 @@ namespace CourseManagement.Client.View
                     DataTable selectedRoom = RoomLogic.getInstance().getById(selectedIndex);
                     WndRoom editCourse = new WndRoom(selectedRoom);
                     editCourse.ShowDialog();
+                    if (editCourse.DialogResult.HasValue && editCourse.DialogResult.Value){popUp.IsOpen = true;}
+                    refreshRooms();
                 }
-                refreshRooms();
+                
             }
             catch (Exception err)
             {
@@ -650,6 +662,7 @@ namespace CourseManagement.Client.View
                             chosenCourseNr = Convert.ToInt32(row["CourseNr"]);
                             getCourseBalance(row);
                         }
+                        popUp.IsOpen = true;
                     }
                 }
             }
@@ -1318,7 +1331,9 @@ namespace CourseManagement.Client.View
         /// <param name="e"></param>
         private void changePsw_Click(object sender, RoutedEventArgs e)
         {
-            new WndChangePsw().ShowDialog();
+            WndChangePsw aChangePasswordWindow = new WndChangePsw();
+            aChangePasswordWindow.ShowDialog();
+            if (aChangePasswordWindow.DialogResult.HasValue && aChangePasswordWindow.DialogResult.Value){popUp.IsOpen = true;}
         }
 
         /// <summary>

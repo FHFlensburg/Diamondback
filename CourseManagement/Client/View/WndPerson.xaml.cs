@@ -282,7 +282,7 @@ namespace CourseManagement.Client.View
         /// <param name="e"></param>
         private void buttonCancelPerson_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            this.DialogResult = false;
         }
 
         /// <summary>
