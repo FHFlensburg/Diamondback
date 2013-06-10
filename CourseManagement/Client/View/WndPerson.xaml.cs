@@ -197,6 +197,7 @@ namespace CourseManagement.Client.View
                                             username,
                                             password,
                                             isAdmin);
+                                        this.DialogResult = true;
                                     }
                                     else
                                     {

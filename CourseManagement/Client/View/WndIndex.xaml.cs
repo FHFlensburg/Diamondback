@@ -54,6 +54,7 @@ namespace CourseManagement.Client.View
                     cbValues.Items.Add(new RibbonGalleryItem() { Content = "Tutoren", Foreground = Brushes.Green });
                     if (ActiveUser.userIsAdmin()) cbValues.Items.Add(new RibbonGalleryItem() { Content = "Benutzer", Foreground = Brushes.Orange });
                     cbValues.Items.Add(new RibbonGalleryItem() { Content = "Alle Personen", Foreground = Brushes.Blue });
+                    
    
                 }
                 dgMainData.Columns[dgMainData.Columns.Count - 1].Width = new DataGridLength(1, DataGridLengthUnitType.Star);
@@ -202,7 +203,7 @@ namespace CourseManagement.Client.View
         private void ribbonButtonAddParticipant_Click(object sender, RoutedEventArgs e)
         {
             openWindow2AddParticpant();
-            refreshCourses();
+       
         }
 
         /// <summary>
@@ -221,7 +222,15 @@ namespace CourseManagement.Client.View
                     aNewAllocation = new WndParticipant2Course();
                 }
                 aNewAllocation.ShowDialog();
-                if (aNewAllocation.DialogResult.HasValue && aNewAllocation.DialogResult.Value){popUp.IsOpen = true;}
+                int selIndex = dgMainData.SelectedIndex;
+                SpecificTables.changeDgCourse(dgMainData, CourseLogic.getInstance().getAll());
+                dgMainData.SelectedIndex = selIndex;
+                if ((string)rgCourse.SelectedValue == "Teilnehmer")
+                {
+                 if(selIndex!=-1)   SpecificTables.changeDgStudent(dgSecondary, StudentLogic.getInstance().getByCourse(chosenCourseNr));
+                 else SpecificTables.changeDgStudent(dgSecondary, StudentLogic.getInstance().getAll());
+                }
+
         }
 
         /// <summary>
@@ -359,6 +368,8 @@ namespace CourseManagement.Client.View
             wndPerson aNewPersonWindow = new wndPerson();
             aNewPersonWindow.ShowDialog();
             if (aNewPersonWindow.DialogResult.HasValue && aNewPersonWindow.DialogResult.Value){popUp.IsOpen = true;}
+            refreshPersons();
+            
         }
 
         /// <summary>
