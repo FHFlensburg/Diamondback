@@ -121,13 +121,12 @@ namespace CourseManagement.Client.View
         public static void changeDgCourse(DataGrid datagrid, DataTable table)
         {
             table.Columns["MinMember"].SetOrdinal(4);
-
+            table.Columns["Description"].SetOrdinal(2);
             datagrid.DataContext = table;
 
             changeColumnTitles(datagrid);
 
             datagrid.Columns[8].Header = "Teilnehmer";
-            datagrid.Columns[3].Visibility = Visibility.Hidden;
 
             datagrid.Columns[datagrid.Columns.Count - 1].Width = new DataGridLength(1, DataGridLengthUnitType.Star);
         }

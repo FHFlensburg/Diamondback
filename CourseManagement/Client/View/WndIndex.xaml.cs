@@ -558,7 +558,7 @@ namespace CourseManagement.Client.View
                 }
                 else if (dgMainData.SelectedIndex != -1 && lastfocusedDG == dgMainData && dgSecondary.HasItems)
                 {
-                    MessageBox.Show("Ein Raum mit Termin(e) kann nicht gelöscht werden.", "Fehler beim löschen eines Raumes", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Ein Raum mit Termin(en) kann nicht gelöscht werden.", "Fehler beim löschen eines Raumes", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {
@@ -1349,7 +1349,7 @@ namespace CourseManagement.Client.View
         /// <param name="e"></param>
         private void btnInfo_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Software Projekt 2013\n\nGruppe Diamondback\n\nMitglieder:\n\tChristoph Süßens\n\tJan Greve\n\tChristian Hapke\n\tJanne Tjark Krüger\n\tAndre Schiemann\n\tSebastian Gorr\n\tStefan Siemsen");
+            MessageBox.Show("Software Projekt 2013\n\nGruppe Diamondback\n\nMitglieder:\n\tChristoph Süßens\n\tJan Greve\n\tChristian Hapke\n\tJanne Tjark Krüger\n\tAndre Schiemann\n\tSebastian Gorr\n\tStefan Siemssen");
         }
 
 

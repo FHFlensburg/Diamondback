@@ -345,7 +345,7 @@
 		<row><td>Help_Kursverwaltung.chm</td><td>{D9F3DEE1-46B0-45A3-87A3-945796D8A3EF}</td><td>INSTALLDIR</td><td>2</td><td/><td>help_kursverwaltung.chm</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT1</td><td>{6AC22CED-C1D3-4E4C-97AD-ECC35C15D9DF}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>Microsoft.Windows.Shell.dll</td><td>{99FF7559-79F2-4D73-8B79-89213A38E206}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.windows.shell.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>RibbonControlsLibrary.dll</td><td>{0AF4C800-6AFD-4A9A-8E12-321758B5103C}</td><td>INSTALLDIR</td><td>2</td><td/><td>ribboncontrolslibrary.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>RibbonControlsLibrary.dll</td><td>{D1A6D6DC-E4AF-4B7E-93B6-EC7DD3FF3BAD}</td><td>INSTALLDIR</td><td>2</td><td/><td>ribboncontrolslibrary.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>WPFToolkit.Extended.dll</td><td>{8A89888B-0890-426D-AD65-8EE6E880DE02}</td><td>INSTALLDIR</td><td>2</td><td/><td>wpftoolkit.extended.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
@@ -1893,7 +1893,7 @@
 		<row><td>entityframework.dll</td><td>EntityFramework.dll</td><td>ENTITY~1.DLL|EntityFramework.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\chris_000\Documents\FH-Flensburg\6. Semester\Software-Projekt\Diamondback\Diamondback\CourseManagement\bin\Debug\EntityFramework.dll</td><td>1</td><td/></row>
 		<row><td>help_kursverwaltung.chm</td><td>Help_Kursverwaltung.chm</td><td>HELP_K~1.CHM|Help_Kursverwaltung.chm</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\chris_000\Documents\FH-Flensburg\6. Semester\Software-Projekt\Diamondback\Diamondback\CourseManagement\Help_Kursverwaltung.chm</td><td>1</td><td/></row>
 		<row><td>microsoft.windows.shell.dll</td><td>Microsoft.Windows.Shell.dll</td><td>MICROS~1.DLL|Microsoft.Windows.Shell.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\chris_000\Documents\FH-Flensburg\6. Semester\Software-Projekt\Diamondback\Diamondback\CourseManagement\bin\Debug\Microsoft.Windows.Shell.dll</td><td>1</td><td/></row>
-		<row><td>ribboncontrolslibrary.dll</td><td>RibbonControlsLibrary.dll</td><td>RIBBON~1.DLL|RibbonControlsLibrary.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\chris_000\Documents\FH-Flensburg\6. Semester\Software-Projekt\Diamondback\Diamondback\CourseManagement\bin\Debug\RibbonControlsLibrary.dll</td><td>1</td><td/></row>
+		<row><td>ribboncontrolslibrary.dll</td><td>RibbonControlsLibrary.dll</td><td>RIBBON~1.DLL|RibbonControlsLibrary.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\chris_000\Documents\FH-Flensburg\6. Semester\Software-Projekt\Diamondback\Diamondback\packages\RibbonControlsLibrary.dll</td><td>1</td><td/></row>
 		<row><td>wpftoolkit.extended.dll</td><td>WPFToolkit.Extended.dll</td><td>WPFTOO~1.DLL|WPFToolkit.Extended.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\chris_000\Documents\FH-Flensburg\6. Semester\Software-Projekt\Diamondback\Diamondback\CourseManagement\bin\Debug\WPFToolkit.Extended.dll</td><td>1</td><td/></row>
 	</table>
 
@@ -2044,7 +2044,7 @@
 		<row><td>Help_Kursverwaltung.chm</td><td/><td/><td>_43CCBCAC_466C_4516_BE3F_13ECAAB25CFA_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT1</td><td/><td/><td>_A7A9C448_2E6F_48AB_8465_8266611103FB_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>Microsoft.Windows.Shell.dll</td><td/><td/><td>_B4C75AC3_6CC4_4274_B048_26AF6AB51D45_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>RibbonControlsLibrary.dll</td><td/><td/><td>_165E3706_CA52_498B_B3B3_3831A9071D05_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>RibbonControlsLibrary.dll</td><td/><td/><td>_E3F0656C_6448_4AEF_AED1_D965F6B1F483_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>WPFToolkit.Extended.dll</td><td/><td/><td>_88828F23_39D4_43E9_B9D4_6C181E9BB4F3_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 
